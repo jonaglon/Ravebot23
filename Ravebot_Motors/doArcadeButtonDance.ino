@@ -1,11 +1,7 @@
-int thisArcadeBtnDance = 6;
-int numArcardButtonDances = 6;
+int thisArcadeBtnDance = 0;
+int numArcardButtonDances = 9;
 
 void doArcadeButtonDance(int beatNumber) {
-
-  // TODO - TEST CODE!!!!!!"!
-  thisArcadeBtnDance = 6;
-  
   for (int btnNum = 0; btnNum < 14; btnNum++) {
     switch (thisArcadeBtnDance) {
        case 0: setArcadeButton(btnNum, arcadeButtonDance0[beatNumber][btnNum]); break;
@@ -16,6 +12,7 @@ void doArcadeButtonDance(int beatNumber) {
        case 5: setArcadeButton(btnNum, arcadeButtonDance5[beatNumber][btnNum]); break;
        case 6: setArcadeButton(btnNum, arcadeButtonDance6[beatNumber][btnNum]); break;
        case 7: setArcadeButton(btnNum, arcadeButtonDance7[beatNumber][btnNum]); break;
+       case 8: setArcadeButton(btnNum, arcadeButtonDance8[beatNumber][btnNum]); break;
     }
   }
 }
