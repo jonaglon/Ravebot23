@@ -18,11 +18,12 @@
 /*
  * Arduino Mega to do listy - tesat changey
  * 
+ * 
  * Figure out how to test the new stuffs
  * 
  */
 
-const bool testoMode = true;
+const bool testoMode = false;
 
 bool robotSwitchedOn = false;
 bool robotManualMode = true;
