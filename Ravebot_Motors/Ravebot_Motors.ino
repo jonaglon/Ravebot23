@@ -224,10 +224,10 @@ servoInfo servos[13] = {
   { 200, 500, 3, 350, 350, 320, 380, 0 }  // 12 - l new shake
 };
 
-int rightArmUpRightElbowUpPos = 350;
-int rightArmUpRightElbowDownPos = 350;
-int rightArmDownRightElbowUpPos = 350;
-int rightArmDownRightElbowDownPos = 350;
+int rightArmUpRightElbowUpPos = 370;
+int rightArmUpRightElbowDownPos = 370;
+int rightArmDownRightElbowUpPos = 330;
+int rightArmDownRightElbowDownPos = 330;
 
 int leftArmUpLeftElbowUpPos = 350;
 int leftArmUpLeftElbowDownPos = 350;
