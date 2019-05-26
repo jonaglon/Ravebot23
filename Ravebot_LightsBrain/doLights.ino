@@ -202,15 +202,17 @@ void eyeController() {
 int eyePrimaryR = 110;
 int eyePrimaryG = 150;
 int eyePrimaryB = 150;
-int eyeRValues[6] = {255,0,  0,  110, 0, 255};
-int eyeGValues[6] = {0,  255,0,  150, 0, 0  };
-int eyeBValues[6] = {0,  0,  255,150, 0, 210};
+int eyeRColours[9] = {255,  0,   0,  255, 255,   0, 110, 0, 255 };
+int eyeGColours[9] = {0,  255,   0,  255,   0, 255, 150, 0,   6 };
+int eyeBColours[9] = {0,    0, 255,    0, 255, 255, 150, 0,  80 };
+int numEyeColors = 9;
+
 int currentEyePrimaryPos = 3;
 void changePrimaryEyeColour() {
-  currentEyePrimaryPos = (currentEyePrimaryPos+1)%6;
-  eyePrimaryR = eyeRValues[currentEyePrimaryPos];
-  eyePrimaryG = eyeGValues[currentEyePrimaryPos];
-  eyePrimaryB = eyeBValues[currentEyePrimaryPos];
+  currentEyePrimaryPos = (currentEyePrimaryPos+1)%numEyeColors;
+  eyePrimaryR = eyeRColours[currentEyePrimaryPos];
+  eyePrimaryG = eyeGColours[currentEyePrimaryPos];
+  eyePrimaryB = eyeBColours[currentEyePrimaryPos];
 }
 
 int eyeSecondaryR = 0;
@@ -218,10 +220,10 @@ int eyeSecondaryG = 0;
 int eyeSecondaryB = 0;
 int currentEyeSecondaryPos = 4;
 void changeSecondaryEyeColour() {
-  currentEyeSecondaryPos = (currentEyeSecondaryPos+1)%6;
-  eyeSecondaryR = eyeRValues[currentEyeSecondaryPos];
-  eyeSecondaryG = eyeGValues[currentEyeSecondaryPos];
-  eyeSecondaryB = eyeBValues[currentEyeSecondaryPos];
+  currentEyeSecondaryPos = (currentEyeSecondaryPos+1)%numEyeColors;
+  eyeSecondaryR = eyeRColours[currentEyeSecondaryPos];
+  eyeSecondaryG = eyeGColours[currentEyeSecondaryPos];
+  eyeSecondaryB = eyeBColours[currentEyeSecondaryPos];
 }
 
 void doNormalEyes() {
@@ -311,7 +313,7 @@ void smileyEyes() {
     setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   }
-  for(int j = 0; j < 26; j++) {
+  for(int j = 0; j < 24; j++) {
     setSectionLed(5, eyeSmileyLeds[j], eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
     setSectionLed(6, eyeSmileyLeds[j], eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
   }

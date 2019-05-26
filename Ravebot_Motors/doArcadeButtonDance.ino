@@ -2,6 +2,9 @@ int thisArcadeBtnDance = 0;
 int numArcardButtonDances = 9;
 
 void doArcadeButtonDance(int beatNumber) {
+  if (!robotSwitchedOn)
+    return;
+  
   for (int btnNum = 0; btnNum < 14; btnNum++) {
     switch (thisArcadeBtnDance) {
        case 0: setArcadeButton(btnNum, arcadeButtonDance0[beatNumber][btnNum]); break;

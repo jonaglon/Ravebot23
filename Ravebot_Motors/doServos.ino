@@ -12,7 +12,12 @@ void initServos() {
   }
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
-    moveServoToPos(servoNum, servos[servoNum].servoCenter);
+    if (servoNum == 4 || servoNum == 8) {
+      moveServoToPos(4, servos[servoNum].leftDancePos);    
+      moveServoToPos(8, servos[servoNum].leftDancePos);    
+    } else {
+      moveServoToPos(servoNum, servos[servoNum].servoCenter+range);    
+    }
   }
 }
 

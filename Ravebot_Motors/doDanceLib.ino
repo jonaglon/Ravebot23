@@ -40,10 +40,21 @@ void changeDance() {
   
   while (newDanceNumber != currentDance)
     newDanceNumber = random(1, numDances);
-    
+
   currentDance = newDanceNumber;
   sendDanceNumberToLights(currentDance);
+
+  // JR TODO - remove me! Hardcodes the dance
+  currentDance = 1;
+  
 }
+
+void putAllServosInStartPosition() {
+  for (int servoNum = 0; servoNum < 13; servoNum++) {
+    moveServoToPos(servoNum, servos[servoNum].servoCenter);
+  }
+}
+
 
 /* ******************************************* Constant Dance Functions *************************** */
 
@@ -160,31 +171,31 @@ void nodHead(bool headUp) {
 }
 
 void rightArmUpRightElbowUp() {
-  moveServoToPos(4, rightArmUpRightElbowUpPos);
+  moveServoToPos(4, servos[4].rightDancePos);
 }
 void rightArmUpRightElbowDown() {
-  moveServoToPos(4, rightArmUpRightElbowDownPos);
+  moveServoToPos(4, servos[4].rightDancePos2);
 }
 
 void leftArmUpLeftElbowUp() {
-  moveServoToPos(8, leftArmUpLeftElbowUpPos);
+  moveServoToPos(8, servos[4].leftDancePos);
 }
 void leftArmUpLeftElbowDown() {
-  moveServoToPos(8, leftArmUpLeftElbowDownPos);
+  moveServoToPos(8, servos[4].leftDancePos2);
 }
 
 void rightArmDownRightElbowUp() {
-  moveServoToPos(4, rightArmDownRightElbowUpPos);
+  moveServoToPos(4, servos[4].rightDancePos2);
 }
 void rightArmDownRightElbowDown() {
-  moveServoToPos(4, rightArmDownRightElbowDownPos);
+  moveServoToPos(4, servos[4].rightDancePos);
 }
 
 void leftArmDownLeftElbowUp() {
-  moveServoToPos(8, leftArmDownLeftElbowUpPos);
+  moveServoToPos(8, servos[4].leftDancePos2);
 }
 void leftArmDownLeftElbowDown() {
-  moveServoToPos(8, leftArmDownLeftElbowDownPos);
+  moveServoToPos(8, servos[4].leftDancePos);
 }
 
 

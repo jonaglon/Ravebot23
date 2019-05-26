@@ -15,7 +15,6 @@ const bool megaAttached = true;   // JR TODO - attach this or the due won't talk
 bool robotSwitchedOn = true;
 bool robotManualMode = true;
 
-
 unsigned long timey;
 unsigned int lastBeatTime = 0;
 unsigned int timeyInTime; // This is like timey but in time, counting 16384 per beat
@@ -611,9 +610,9 @@ int ledPosOffset[19][2] = {
   { 490, 555},    // 18 port right
 };
 
-int eyeSmileyLeds[26] = {
-  34, 35, 39, 40, 41, 42, 43, 44, 45, 46,
-  47, 48, 49, 53, 54, 57, 58, 61, 62, 63,
+int eyeSmileyLeds[24] = {
+  34, 35, 40, 41, 42, 43, 44, 45, 46,
+  47, 48, 53, 54, 57, 58, 61, 62, 63,
   64, 65, 66, 67, 70, 71
 };
 int eyeHeartLeds[56] = {
