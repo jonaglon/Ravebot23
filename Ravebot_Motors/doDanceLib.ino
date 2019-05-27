@@ -115,19 +115,19 @@ void openCloseClaw(int speedy) {
 void leftWristPos (int ServoPos) {
   switch (ServoPos) {
   case 0:
-    moveServoToPos(9, servos[9].leftDancePos2);
+    moveServoToPos(9, servos[9].rightDancePos2);
     break;
   case 1:
-    moveServoToPos(9, servos[9].leftDancePos);
+    moveServoToPos(9, servos[9].rightDancePos);
     break;
   case 2:
     moveServoToPos(9, servos[9].servoCenter);
     break;
   case 3:
-    moveServoToPos(9, servos[9].rightDancePos);
+    moveServoToPos(9, servos[9].leftDancePos);
     break;
   default:
-    moveServoToPos(9, servos[9].rightDancePos2);
+    moveServoToPos(9, servos[9].leftDancePos2);
     break;
   }
 }

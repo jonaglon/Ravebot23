@@ -94,7 +94,7 @@ void checkLedIntensitySendChangeToLights() {
       ledIntensity = newIntensity;
       sendSerialToLights(3, ledIntensity);
     }
-    nextAnalogRead = timey+300;
+    nextAnalogRead = timey+500;
   }  
 }
 

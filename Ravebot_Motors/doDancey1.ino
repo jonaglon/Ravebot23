@@ -1,18 +1,44 @@
 /* ***************************** Dance 1 Beat Moves *********************************** */
+
 void doDance1BeatMoves() {
+  //rightArmUpRightElbowDown();
+  //leftArmUpLeftElbowDown();
+  
+  if ((currentBar % 8) == 0) {
+    leftWristPos(0);
+  } else if ((currentBar % 8) == 1) {
+    leftWristPos(1);
+  } else if ((currentBar % 8) == 2) {
+    leftWristPos(2);
+  } else if ((currentBar % 8) == 3) {
+    leftWristPos(3);
+  } else if ((currentBar % 8) == 4) {
+    leftWristPos(4);
+  } else if ((currentBar % 8) == 5) {
+    leftWristPos(3);
+  } else if ((currentBar % 8) == 6) {
+    leftWristPos(2);
+  } else if ((currentBar % 8) == 7) {
+    leftWristPos(1);
+  }; 
+}
+
+
+
+// JR TODO next - the wrists dont have nearly as much movement as the array says, maybe make dance pos 1 the extreme and do the middle, see if that makes all this work like you'd want.
+
+
+
+void doDance1BeatMovesHELP() {
   if ((currentBar % 32) < 8) {
-    dance1ElbowDownBeatMoves1();
+    dance1ElbowUpBeatMoves1();
   } else if ((currentBar % 32) < 16) {
-    /*if ((currentBar % 32) == 8 && currentBeat == 0) {
-      // go to move 2 initial positions - don't know if this'll work
-      //moveLArm(-120);
-      //moveRArm(-120);
-    }*/
-    dance1ElbowUpBeatMoves1();
+    /*if ((currentBar % 32) == 8 && currentBeat == 0) { //moveLArm(-120); etc might work  */
+    dance1ElbowUpBeatMoves2();
   } else if ((currentBar % 32) < 24) {
-    dance1ElbowDownBeatMoves1();
+    dance1ElbowUpBeatMoves1 ();
   } else {
-    dance1ElbowUpBeatMoves1();
+    dance1ElbowUpBeatMoves2();
   }
 }
 
@@ -31,6 +57,24 @@ void dance1ElbowUpBeatMoves1() {
   } else if ((currentBeat % 8) == 6) {
     leftWristPos (3);
     rightWristPos(3);
+  }
+}
+
+void dance1ElbowUpBeatMoves2() {
+  rightArmUpRightElbowUp();
+  leftArmUpLeftElbowUp();
+  if ((currentBeat % 8) == 0) {
+    leftWristPos (4);
+    rightWristPos (4);
+  } else if ((currentBeat % 8) == 2) {
+    leftWristPos (3);
+    rightWristPos (2);
+  } else if ((currentBeat % 8) == 4) {
+    leftWristPos (2);
+    rightWristPos (2);
+  } else if ((currentBeat % 8) == 6) {
+    leftWristPos (1);
+    rightWristPos(1);
   }
 }
 
