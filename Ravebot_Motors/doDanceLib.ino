@@ -112,7 +112,7 @@ void openCloseClaw(int speedy) {
 }
 
 
-void leftWristPos (byte ServoPos) {
+void leftWristPos (int ServoPos) {
   switch (ServoPos) {
   case 0:
     moveServoToPos(9, servos[9].leftDancePos2);
@@ -132,7 +132,7 @@ void leftWristPos (byte ServoPos) {
   }
 }
 
-void rightWristPos (byte ServoPos) {
+void rightWristPos (int ServoPos) {
   switch (ServoPos) {
   case 0:
     moveServoToPos(5, servos[5].leftDancePos2);
@@ -153,7 +153,7 @@ void rightWristPos (byte ServoPos) {
 }
 
 /*  Elbow    */
-void rightElbowPos (byte ServoPos) {
+void rightElbowPos (int ServoPos) {
   switch (ServoPos) {
   case 0:
     moveServoToPos(4, servos[4].leftDancePos2);
@@ -241,17 +241,17 @@ void nodHead(bool headUp) {
 
 // Right Arm Up Elbow positions
 void rightArmUpRightElbowUp() {
-  moveServoToPos(4, 414 /*servos[4].rightDancePos*/);
+  moveServoToPos(4, 414);
 }
 void rightArmUpRightElbowDown() {
-  moveServoToPos(4, 170/*servos[4].rightDancePos2*/);
+  moveServoToPos(4, 175);
 }
 // Left Arm Up Elbow positions
 void leftArmUpLeftElbowUp() {
-  moveServoToPos(8, 288 /*servos[8].leftDancePos*/);
+  moveServoToPos(8, 295);
 }
 void leftArmUpLeftElbowDown() {
-  moveServoToPos(8, 530/*servos[8].leftDancePos2*/);
+  moveServoToPos(8, 520);
 }
 
 // Right Arm Down Elbow positions

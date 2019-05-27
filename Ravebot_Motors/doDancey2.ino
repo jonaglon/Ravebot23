@@ -36,17 +36,17 @@ void doDance2BeatMoves() {
 
 void dance2BeatMoves1() {
   if ((currentBeat % 8) == 0) {
-    leftWristPos (true);
-    rightWristPos (false);
+    leftWristPos (2);
+    rightWristPos (2);
   } else if ((currentBeat % 8) == 2) {
-    leftWristPos (false);
-    rightWristPos (true);
+    leftWristPos (2);
+    rightWristPos (2);
   } else if ((currentBeat % 8) == 4) {
-    leftWristPos (true);
-    rightWristPos (false);
+    leftWristPos (2);
+    rightWristPos (2);
   } else if ((currentBeat % 8) == 6) {
-    leftWristPos(false);
-    rightWristPos(true);
+    leftWristPos(2);
+    rightWristPos(2);
   }
 }
 
