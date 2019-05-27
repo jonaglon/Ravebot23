@@ -4,8 +4,7 @@
   |  _  // _` \ \ / / _ \ '_ \ / _ \| __| |______| | |\/| |/ _ \| __/ _ \| '__/ __|
   | | \ \ (_| |\ V /  __/ |_) | (_) | |_           | |  | | (_) | || (_) | |  \__ \
   |_|  \_\__,_| \_/ \___|_.__/ \___/ \__|          |_|  |_|\___/ \__\___/|_|  |___/            */
-
-  
+ 
 #include<Arduino.h>
 #include<Keypad.h>
 #include<Wire.h>
@@ -15,14 +14,6 @@
 #include<SabertoothSimplified.h>
 #include<Cytron_PS2Shield.h>
 #include<avr/wdt.h>
-
-/*
- * Arduino Mega to do listy - tesat changey
- * 
- * 
- * Figure out how to test the new stuffs
- * 
- */
 
 const bool testoMode = true;
 
@@ -151,8 +142,10 @@ void loop()
     if (robotManualMode) {
       doServos();
     } else {
-      if (currentBar != 0)
-        doDancing();
+      if (currentBar != 0) {
+        // JR TODO - this disables the constant dance moves, put me back
+        // doDancing();
+      }
     }
     doKeypad();
     doArcadeBtn();
@@ -199,13 +192,13 @@ struct servoInfo {
   int servoSpeed;
   int servoCenter;
   int servoPos;
+  int leftDancePos2;
   int leftDancePos;
   int rightDancePos;
-  int leftDancePos2;
   int rightDancePos2;
   unsigned long servoMoveTime;
-  servoInfo(int aMinPosition, int aMaxPosition, int aServoSpeed, int aServoCenter, int aServoPos, int aLeftDancePos, int aRightDancePos, int aLeftDancePos2, int aRightDancePos2, unsigned long aServoMoveTime) :
-    minPosition(aMinPosition), maxPosition(aMaxPosition), servoSpeed(aServoSpeed), servoCenter(aServoCenter), servoPos(aServoPos), leftDancePos(aLeftDancePos), rightDancePos(aRightDancePos), leftDancePos2(aLeftDancePos2), rightDancePos2(aRightDancePos2), servoMoveTime(aServoMoveTime) {
+  servoInfo(int aMinPosition, int aMaxPosition, int aServoSpeed, int aServoCenter, int aServoPos, int aLeftDancePos2, int aLeftDancePos, int aRightDancePos, int aRightDancePos2, unsigned long aServoMoveTime) :
+    minPosition(aMinPosition), maxPosition(aMaxPosition), servoSpeed(aServoSpeed), servoCenter(aServoCenter), servoPos(aServoPos), leftDancePos2(aLeftDancePos2), leftDancePos(aLeftDancePos), rightDancePos(aRightDancePos), rightDancePos2(aRightDancePos2), servoMoveTime(aServoMoveTime) {
   }
 };
 
@@ -215,27 +208,17 @@ servoInfo servos[13] = {
   { 360, 485, 2, 450, 450, 0, 0, 0, 0, 0 }, // 1 - Unused
   { 180, 330, 5, 240, 240, 180, 210, 285, 330, 0 }, // 2 - L claw
   { 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 3 - l wrist ud
-  { 140, 560, 4, 350, 350, 140, 245, 455, 560, 0 }, // 4 - R elbow
+  /* { 140, 560, 4, 350, 350, 140, 245, 455, 560, 0 }, // 4 - R elbow  */
+  { 140, 560, 4, 350, 402, 560, 455, 245, 140, 0 }, // 4 - R elbow
   { 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 5 - R wrist lr
   { 290, 445, 5, 350, 350, 290, 320, 455, 560, 0 }, // 6 - R claw increase to grab
   { 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 7 - r wrist ud
-  { 140, 560, 4, 350, 350, 140, 245, 455, 560, 0 }, // 8 - l elbow
+  { 140, 560, 4, 350, 298, 140, 245, 455, 560, 0 }, // 8 - l elbow
   { 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 9 - l wrist lr
   { 202, 330, 2, 330, 330, 202, 240, 300, 330, 0 }, // 10 - l new nod
   { 375, 455, 1, 400, 400, 375, 387, 425, 450, 0 }, // 11 - l new tilt
   { 200, 500, 3, 350, 350, 200, 240, 410, 495, 0 }  // 12 - l new shake
 };
-
-int rightArmUpRightElbowUpPos = 370;
-int rightArmUpRightElbowDownPos = 370;
-int rightArmDownRightElbowUpPos = 330;
-int rightArmDownRightElbowDownPos = 330;
-
-int leftArmUpLeftElbowUpPos = 350;
-int leftArmUpLeftElbowDownPos = 350;
-int leftArmDownLeftElbowUpPos = 350;
-int leftArmDownLeftElbowDownPos = 350;
-
 
 int arcadeButtonDance0[16][14] = {
   { 256, 0, 256, 0, 256, 0, 256, 0, 256, 0, 256, 256, 0, 256 },

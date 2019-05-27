@@ -1,7 +1,7 @@
 
 /* ***************************** Dance 2 Beat Moves *********************************** */
 void doDance2BeatMoves() {
-  if ((currentBar % 32) < 8) {
+  /*if ((currentBar % 32) < 8) {
     if (currentBar == 0 && currentBeat == 0) {
       // go to move 1 initial positions0
       moveLArm(100);
@@ -31,22 +31,22 @@ void doDance2BeatMoves() {
       leftArmUpLeftElbowDown();
     }
     openCloseClaw(32);
-  }
+  }*/
 }
 
 void dance2BeatMoves1() {
   if ((currentBeat % 8) == 0) {
-    leftWristLR (true);
-    rightWristLR (false);
+    leftWristPos (true);
+    rightWristPos (false);
   } else if ((currentBeat % 8) == 2) {
-    leftWristLR (false);
-    rightWristLR (true);
+    leftWristPos (false);
+    rightWristPos (true);
   } else if ((currentBeat % 8) == 4) {
-    leftWristLR (true);
-    rightWristLR (false);
+    leftWristPos (true);
+    rightWristPos (false);
   } else if ((currentBeat % 8) == 6) {
-    leftWristLR(false);
-    rightWristLR(true);
+    leftWristPos(false);
+    rightWristPos(true);
   }
 }
 
