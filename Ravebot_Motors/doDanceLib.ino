@@ -101,6 +101,8 @@ void tiltHead (bool tiltLeft, int delayo) {
 
 
 /************************** Dance beat move functions **************************/
+
+/* CLAW */
 void openCloseClaw(int speedy) {
   if ((currentBeat % 4) == 0) {
     leftClaw (false, speedy);
@@ -109,6 +111,77 @@ void openCloseClaw(int speedy) {
     leftClaw (true, speedy);
     rightClaw (true, speedy);
   }
+}
+
+void leftClaw(bool moveLeft, int delayo) {
+  if (moveLeft)
+    moveServoToPos(2, servos[2].leftDancePos);
+  else
+    moveServoToPos(2, servos[2].rightDancePos);
+}
+
+void rightClaw(bool moveLeft, int delayo) {
+  if (moveLeft)
+    moveServoToPos(6, servos[6].leftDancePos);
+  else
+    moveServoToPos(6, servos[6].rightDancePos);
+}
+
+/* Wristy */
+void leftWristLRStepsPer8Beat() {
+  if ((currentBar % 8) == 0) {
+    leftWristPos(0);
+  } else if ((currentBar % 8) == 1) {
+    leftWristPos(1);
+  } else if ((currentBar % 8) == 2) {
+    leftWristPos(2);
+  } else if ((currentBar % 8) == 3) {
+    leftWristPos(3);
+  } else if ((currentBar % 8) == 4) {
+    leftWristPos(4);
+  } else if ((currentBar % 8) == 5) {
+    leftWristPos(3);
+  } else if ((currentBar % 8) == 6) {
+    leftWristPos(2);
+  } else if ((currentBar % 8) == 7) {
+    leftWristPos(1);
+  }; 
+}
+
+void rightWristLRStepsPer8Beat() {
+  if ((currentBar % 8) == 0) {
+    rightWristPos(0);
+  } else if ((currentBar % 8) == 1) {
+    rightWristPos(1);
+  } else if ((currentBar % 8) == 2) {
+    rightWristPos(2);
+  } else if ((currentBar % 8) == 3) {
+    rightWristPos(3);
+  } else if ((currentBar % 8) == 4) {
+    rightWristPos(4);
+  } else if ((currentBar % 8) == 5) {
+    rightWristPos(3);
+  } else if ((currentBar % 8) == 6) {
+    rightWristPos(2);
+  } else if ((currentBar % 8) == 7) {
+    rightWristPos(1);
+  }; 
+}
+
+void leftWristLRPer4Beat() {
+  if ((currentBar % 4) < 2) {
+    leftWristPos(1);
+  } else {
+    leftWristPos(3);
+  }; 
+}
+
+void rightWristLRPer4Beat() {
+  if ((currentBar % 4) < 2) {
+    rightWristPos(1);
+  } else {
+    rightWristPos(3);
+  }; 
 }
 
 
@@ -152,6 +225,21 @@ void rightWristPos (int ServoPos) {
   }
 }
 
+void leftWristUD (bool moveLeft) {
+  if (moveLeft)
+    moveServoToPos(3, servos[3].leftDancePos);
+  else
+    moveServoToPos(3, servos[3].rightDancePos);
+}
+
+void rightWristUD (bool moveLeft) {
+  if (moveLeft)
+    moveServoToPos(7, servos[7].leftDancePos);
+  else
+    moveServoToPos(7, servos[7].rightDancePos);
+}
+
+
 /*  Elbow    */
 void rightElbowPos (int ServoPos) {
   switch (ServoPos) {
@@ -193,34 +281,6 @@ void leftElbowPos (byte ServoPos) {
   }
 }
 
-
-void leftWristUD (bool moveLeft) {
-  if (moveLeft)
-    moveServoToPos(3, servos[3].leftDancePos);
-  else
-    moveServoToPos(3, servos[3].rightDancePos);
-}
-
-void rightWristUD (bool moveLeft) {
-  if (moveLeft)
-    moveServoToPos(7, servos[7].leftDancePos);
-  else
-    moveServoToPos(7, servos[7].rightDancePos);
-}
-
-void leftClaw (bool moveLeft, int delayo) {
-  if (moveLeft)
-    moveServoToPos(2, servos[2].leftDancePos);
-  else
-    moveServoToPos(2, servos[2].rightDancePos);
-}
-
-void rightClaw (bool moveLeft, int delayo) {
-  if (moveLeft)
-    moveServoToPos(6, servos[6].leftDancePos);
-  else
-    moveServoToPos(6, servos[6].rightDancePos);
-}
 
 void beatShake (bool moveLeft, int delayo) {
   if (moveLeft)

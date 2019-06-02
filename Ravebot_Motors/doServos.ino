@@ -39,12 +39,12 @@ void doServos() {
 
   // dont do the wrists if any mod button is pressed
   if (ps2.readButton(PS2_LEFT_1) == 0) {
-    leftWrist();
-    rightWrist();
-    leftClaw();
-    rightClaw();
-    rightElbow();
-    leftElbow();
+    ps2LeftWrist();
+    ps2RightWrist();
+    ps2LeftClaw();
+    ps2RightClaw();
+    ps2RightElbow();
+    ps2LeftElbow();
   }
 }
 
@@ -133,7 +133,7 @@ void doTilt() {
   }
 }
 
-void leftClaw() {
+void ps2LeftClaw() {
   if (ps2.readButton(PS2_SQUARE) == 0) {
     moveServo(2, servos[2].servoSpeed);
   }
@@ -142,7 +142,7 @@ void leftClaw() {
   }
 }
 
-void rightClaw() {
+void ps2RightClaw() {
   if (ps2.readButton(PS2_RIGHT) == 0) {
     moveServo(6, servos[6].servoSpeed);
   }
@@ -151,18 +151,18 @@ void rightClaw() {
   }
 }
 
-void leftWrist() {
+void ps2LeftWrist() {
   moveServoToPos(9, (-(ps2.readButton(PS2_JOYSTICK_RIGHT_X_AXIS)-128))+servos[9].servoCenter);
   moveServoToPos(3, (-(ps2.readButton(PS2_JOYSTICK_RIGHT_Y_AXIS)-128))+servos[3].servoCenter);
 }
 
-void rightWrist() {
+void ps2RightWrist() {
   moveServoToPos(5, (ps2.readButton(PS2_JOYSTICK_LEFT_X_AXIS)-128)+servos[5].servoCenter);
   moveServoToPos(7, (-(ps2.readButton(PS2_JOYSTICK_LEFT_Y_AXIS)-128))+servos[7].servoCenter);
 }
 
 
-void leftElbow() {
+void ps2LeftElbow() {
   if (ps2.readButton(PS2_CROSS) == 0) {
     moveServo(8, servos[8].servoSpeed);
   }
@@ -171,7 +171,7 @@ void leftElbow() {
   }
 }
 
-void rightElbow() {
+void ps2RightElbow() {
   if (ps2.readButton(PS2_DOWN) == 0) {
     moveServo(4, -servos[4].servoSpeed);
   }

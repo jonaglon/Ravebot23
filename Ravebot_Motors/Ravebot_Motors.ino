@@ -72,16 +72,6 @@ void setup() {
 
   ps2.begin(57600);
 
-  // The relays which control the arms - todo - there are no relays controlling the arms any more
-  pinMode(22, OUTPUT);
-  pinMode(24, OUTPUT);
-  pinMode(26, OUTPUT);
-  pinMode(28, OUTPUT);
-  digitalWrite(22, HIGH);
-  digitalWrite(24, HIGH);
-  digitalWrite(26, HIGH);
-  digitalWrite(28, HIGH);
-
   SabretoothSerial.begin(9600); // Set the same as the baud pins on the sabretooth.
   SabretoothSerial2.begin(9600); // Set the same as the baud pins on the sabretooth.
 
@@ -103,7 +93,7 @@ void setup() {
   pinMode(A4, INPUT_PULLUP);
   pinMode(A5, INPUT_PULLUP);
   // led intensity
-  pinMode(A8, INPUT_PULLUP);  //todo - change this
+  pinMode(A8, INPUT_PULLUP);  //todo - change this - test if it's working for real when out of test mode!
 
   // Arcade switch
   pinMode(switchPins[0], INPUT_PULLUP);
@@ -207,18 +197,18 @@ servoInfo servos[13] = {
   { 130, 530, 3, 330, 330, 0, 0, 0, 0, 0 }, // 0 - Unused
   { 360, 485, 2, 450, 450, 0, 0, 0, 0, 0 }, // 1 - Unused
   { 180, 330, 5, 240, 240, 180, 210, 285, 330, 0 }, // 2 - L claw
-  { 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 3 - l wrist ud
+  { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 3 - l wrist ud *
   /* { 140, 560, 4, 350, 350, 140, 245, 455, 560, 0 }, // 4 - R elbow  */
-  { 140, 560, 4, 350, 402, 560, 455, 245, 140, 0 }, // 4 - R elbow
+  { 150, 550, 4, 350, 402, 560, 455, 245, 140, 0 }, // 4 - R elbow
   
-  { 140, 550, 3, 350, 350, 140, 245, 455, 550, 0 }, // 5 - R wrist lr
+  { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 5 - R wrist lr *
 
   { 290, 445, 5, 350, 350, 290, 320, 455, 560, 0 }, // 6 - R claw increase to grab
-  { 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 7 - r wrist ud
-  { 140, 560, 4, 350, 298, 140, 245, 455, 560, 0 }, // 8 - l elbow
+  { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 7 - r wrist ud *
+  { 150, 550, 4, 350, 298, 140, 245, 455, 560, 0 }, // 8 - l elbow
   /*{ 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 9 - l wrist lr*/
 
-  { 200, 480, 3, 350, 350, 470, 410, 280, 210, 0 }, // 9 - l wrist lr     // JR TODO NEXT, you just fixed this so it has good values, you need to do the same for the rest of the wrist values here x
+  { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 9 - l wrist lr **    // JR TODO NEXT, you just fixed this so it has good values, you need to do the same for the rest of the wrist values here x
   
   { 202, 330, 2, 330, 330, 202, 240, 300, 330, 0 }, // 10 - l new nod
   { 375, 455, 1, 400, 400, 375, 387, 425, 450, 0 }, // 11 - l new tilt

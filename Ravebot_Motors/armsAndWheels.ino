@@ -79,7 +79,7 @@ void moveLArm(int velocity) {
     }
   } else if (velocity > 0) {
     if (!leftArmDown) {
-      sendLArmMotorValue(-velocity);    // JR TODO  - TEST this, you've kinna guessed.
+      sendLArmMotorValue(-velocity);
     }
   } else {
     sendLArmMotorValue(0);
