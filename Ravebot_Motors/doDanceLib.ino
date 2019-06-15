@@ -7,7 +7,6 @@
 7 - r wrist ud
 8 - l elbow
 9 - l wrist lr
-
 10 - l new nod
 11 - l new tilt
 12 - l new shake  */
@@ -39,7 +38,7 @@ void changeDance() {
   int newDanceNumber;
   
   while (newDanceNumber != currentDance)
-    newDanceNumber = random(1, numDances);
+    newDanceNumber = random(1, numDances+1);
 
   currentDance = newDanceNumber;
   sendDanceNumberToLights(currentDance);
@@ -175,9 +174,22 @@ void leftWristLRPer4Beat() {
     leftWristPos(3);
   }; 
 }
-
 void rightWristLRPer4Beat() {
   if ((currentBar % 4) < 2) {
+    rightWristPos(1);
+  } else {
+    rightWristPos(3);
+  }; 
+}
+void leftWristLRPer2Beat() {
+  if ((currentBar % 2) < 1) {
+    leftWristPos(1);
+  } else {
+    leftWristPos(3);
+  }; 
+}
+void rightWristLRPer2Beat() {
+  if ((currentBar % 2) < 1) {
     rightWristPos(1);
   } else {
     rightWristPos(3);

@@ -49,9 +49,13 @@ void doSomethingWithMessageFromLights(int messageFromLights) {
     currentBeat=requestMessage%16;
     if (currentBeat%4 == 0)
       currentBar++;
-
-    doBeatDanceMove();
-    doArcadeButtonDance(requestMessage);
+    
+    if (robotSwitchedOn) {
+      doArcadeButtonDance(requestMessage);
+      if (!robotManualMode) {
+        doBeatDanceMove();
+      }
+    }
 
     if (currentBeat == 0) {
       changeArcadeButtonDance();
@@ -73,7 +77,7 @@ void doSomethingWithMessageFromLights(int messageFromLights) {
     currentBeat=0;
     currentBar=0;
 
-    doBeatDanceMove(); // todo - don't forget you added this so you can go to the initial position
+    doBeatDanceMove();
 
     currentSegmentNum = requestMessage;
     if (robotSwitchedOn)

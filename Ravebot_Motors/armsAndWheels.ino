@@ -38,19 +38,19 @@ void doMyArms() {
   if (leftUp==0 && leftDown==0) {
     sendLArmMotorValue(0);
   } else if (leftUp==0) {
-    sendLArmMotorValue(80);
+    sendLArmMotorValue(-80);
     delay(100);
     sendLArmMotorValue(0);
     leftArmUp = true;
   } else if (leftDown==0) {
-    sendLArmMotorValue(-80);
+    sendLArmMotorValue(80);
     delay(100);
     sendLArmMotorValue(0);
     leftArmDown = true;
   } else if ((ps2.readButton(PS2_LEFT_2) == 0) && robotSwitchedOn && robotManualMode) {
-    if (ps2.readButton(PS2_CROSS) == 0) {
+    if (ps2.readButton(PS2_TRIANGLE) == 0) {
       sendLArmMotorValue(120);
-    } else if (ps2.readButton(PS2_TRIANGLE) == 0) {
+    } else if (ps2.readButton(PS2_CROSS) == 0) {
       sendLArmMotorValue(-120);
     } else {
       sendLArmMotorValue(0);
@@ -75,11 +75,11 @@ void moveRArm(int velocity) {
 void moveLArm(int velocity) {
   if (velocity < 0) {
     if (!leftArmUp) {
-      sendLArmMotorValue(-velocity);
+      sendLArmMotorValue(velocity);
     }
   } else if (velocity > 0) {
     if (!leftArmDown) {
-      sendLArmMotorValue(-velocity);
+      sendLArmMotorValue(velocity);
     }
   } else {
     sendLArmMotorValue(0);
@@ -102,7 +102,7 @@ void sendLArmMotorValue(int newValue) {
   if (newValue != lArmMotorValue)
   {
     lArmMotorValue = newValue;
-    ST1.motor(1, lArmMotorValue);
+    ST1.motor(1, -lArmMotorValue);
     leftArmUp = false;
     leftArmDown = false;
   }
