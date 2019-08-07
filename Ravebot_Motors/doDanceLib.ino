@@ -11,8 +11,8 @@
 11 - l new tilt
 12 - l new shake  */
 
-int numDances = 2;
-int currentDance = 2;
+int numDances = 3;
+int currentDance = 3;
 
 /* ************** Dance Move Functions - Called Every Cycle ********************* */
 void doDancing() {
@@ -32,6 +32,8 @@ void doBeatDanceMove() {
     doDance1BeatMoves();
   else if (currentDance == 2)
     doDance2BeatMoves();
+  else if (currentDance == 3)
+    doDance3BeatMoves();
 }
 
 void changeDance() {
@@ -44,7 +46,7 @@ void changeDance() {
   sendDanceNumberToLights(currentDance);
 
   // JR TODO - remove me! Hardcodes the dance
-  currentDance = 2;
+  currentDance = 3;
   
 }
 
@@ -103,10 +105,10 @@ void tiltHead (bool tiltLeft, int delayo) {
 
 /* CLAW */
 void openCloseClaw(int speedy) {
-  if ((currentBeat % 4) == 0) {
+  if ((currentBeat % 2) == 0) {
     leftClaw (false, speedy);
     rightClaw (false, speedy);
-  } else if ((currentBeat % 4) == 2) {
+  } else {
     leftClaw (true, speedy);
     rightClaw (true, speedy);
   }
@@ -334,17 +336,17 @@ void leftArmUpLeftElbowDown() {
 
 // Right Arm Down Elbow positions
 void rightArmDownRightElbowUp() {
-  moveServoToPos(4, servos[4].rightDancePos2);
+  moveServoToPos(4, 510);
 }
 void rightArmDownRightElbowDown() {
-  moveServoToPos(4, servos[4].rightDancePos);
+  moveServoToPos(4, 275);
 }
 // Left Arm Down Elbow positions
 void leftArmDownLeftElbowUp() {
-  moveServoToPos(8, servos[4].leftDancePos2);
+  moveServoToPos(8, 200);
 }
 void leftArmDownLeftElbowDown() {
-  moveServoToPos(8, servos[4].leftDancePos);
+  moveServoToPos(8, 395);
 }
 
 

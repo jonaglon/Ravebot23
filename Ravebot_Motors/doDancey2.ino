@@ -1,5 +1,8 @@
 
 /* ***************************** Dance 2 Beat Moves *********************************** */
+
+/* If you come back to this there are bugs, look at dance 3 - we moveLArm to 0 in the else and lifts are too short */
+
 void doDance2BeatMoves() {
   if ((currentBar % 32) < 8) {
     if ((currentBar % 32) < 2) {
@@ -12,10 +15,10 @@ void doDance2BeatMoves() {
       leftArmUpLeftElbowUp();
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
-  } else {
+    } else {
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
-      openCloseClaw(32);
+      // openCloseClaw(32);
     }
   } else if ((currentBar % 32) < 16) {
     if ((currentBar % 32) < 10) {
@@ -31,7 +34,7 @@ void doDance2BeatMoves() {
     } else {
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
-      openCloseClaw(32);
+      // openCloseClaw(32);
     }
   } else if ((currentBar % 32) < 24) {
     if ((currentBar % 32) < 18) {
@@ -47,7 +50,7 @@ void doDance2BeatMoves() {
     } else {
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
-      openCloseClaw(32);
+      // openCloseClaw(32);
     }
   } else {
     if ((currentBar % 32) < 26) {
@@ -63,7 +66,7 @@ void doDance2BeatMoves() {
     } else {
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
-      openCloseClaw(32);
+      // openCloseClaw(32);
     }
   }
 }

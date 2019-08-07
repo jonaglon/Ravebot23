@@ -5,8 +5,8 @@ void initServos() {
   
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      rightArmUpRightElbowDown();
-      leftArmUpLeftElbowDown();    
+      rightArmUpRightElbowUp();
+      leftArmUpLeftElbowUp();    
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter+range);
     }
@@ -14,8 +14,8 @@ void initServos() {
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      moveServoToPos(4, servos[4].servoCenter-range);
-      moveServoToPos(4, servos[4].servoCenter-range);
+      rightArmUpRightElbowUp();
+      leftArmUpLeftElbowUp();    
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter-range);
     }
@@ -23,8 +23,8 @@ void initServos() {
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      rightArmUpRightElbowDown();
-      leftArmUpLeftElbowDown();    
+      rightArmUpRightElbowUp();
+      leftArmUpLeftElbowUp();    
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter+range);    
     }

@@ -52,25 +52,21 @@ void dance2Movements() {
 }
 
 void dance2Moves1() {
-  if ((currentBar % 4) == 0) {
+  if ((currentBar % 2) == 0) {
     moveLeftWristUD(true, 32);
-  } else if ((currentBar % 4) == 1) {
-    moveLeftWristUD(false, 32);
-  } else if ((currentBar % 4) == 2) {
     moveRightWristUD(true, 32);
   } else {
+    moveLeftWristUD(false, 32);
     moveRightWristUD(false, 32);
   }
 }
 void dance2Moves2() {
-  if ((currentBar % 4) == 0) {
+  if ((currentBar % 4) < 2) {
     moveLeftClaw(true, 32);
-  } else if ((currentBar % 4) == 1) {
-    moveLeftClaw(false, 32);
-  } else if ((currentBar % 4) == 2) {
-    moveLeftClaw(true, 32);
+    moveRightClaw(true, 32);
   } else {
     moveLeftClaw(false, 32);
-  }
+    moveRightClaw(false, 32);
+  } 
 }
 

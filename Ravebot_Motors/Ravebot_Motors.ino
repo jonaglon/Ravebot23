@@ -4,7 +4,7 @@
   |  _  // _` \ \ / / _ \ '_ \ / _ \| __| |______| | |\/| |/ _ \| __/ _ \| '__/ __|
   | | \ \ (_| |\ V /  __/ |_) | (_) | |_           | |  | | (_) | || (_) | |  \__ \
   |_|  \_\__,_| \_/ \___|_.__/ \___/ \__|          |_|  |_|\___/ \__\___/|_|  |___/            */
- 
+
 #include<Arduino.h>
 #include<Keypad.h>
 #include<Wire.h>
@@ -113,9 +113,9 @@ void setup() {
 
   timey = millis();
 
-  currentSegmentNum=0;
+  currentSegmentNum = 0;
 
-  nextAnalogRead = timey+500;
+  nextAnalogRead = timey + 500;
 
   ST1.motor(1, 0);
   ST1.motor(2, 0);
@@ -126,7 +126,7 @@ void setup() {
 void loop()
 {
   wdt_reset(); // this checks if the board crashed and resets
-  
+
   timey = millis();
 
   checkForOnOffChange();
@@ -175,8 +175,13 @@ void checkForManualAutoChange() {
   if (!selectButtonPressed && (ps2.readButton(PS2_SELECT) == 0)) {
     selectButtonPressed = true;
     robotManualMode = !robotManualMode;
-    int numToSend = 11 + (robotManualMode ? 0 : 1);
-    sendSerialToLights(1, numToSend);
+    if (robotManualMode) {
+      sendSerialToLights(1, 11);
+    } else {
+      sendSerialToLights(1, 12);
+    }
+    sendRArmMotorValue(0);
+    sendLArmMotorValue(0);
   } else if (ps2.readButton(PS2_SELECT) == 1) {
     selectButtonPressed = false;
   }
@@ -208,17 +213,17 @@ servoInfo servos[13] = {
   { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 3 - l wrist ud
   /* { 140, 560, 4, 350, 350, 140, 245, 455, 560, 0 }, // 4 - R elbow  */
   { 150, 550, 4, 350, 402, 560, 455, 245, 140, 0 }, // 4 - R elbow
-  
+
   { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 5 - R wrist lr
 
-//{ 180, 330, 5, 240, 240, 180, 210, 285, 330, 0 }, // 2 - L claw
+  //{ 180, 330, 5, 240, 240, 180, 210, 285, 330, 0 }, // 2 - L claw
   { 290, 445, 5, 350, 350, 290, 320, 455, 560, 0 }, // 6 - R claw increase to grab
   { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 7 - r wrist ud
   { 150, 550, 4, 350, 298, 140, 245, 455, 560, 0 }, // 8 - l elbow
   /*{ 140, 560, 3, 350, 350, 140, 245, 455, 560, 0 }, // 9 - l wrist lr*/
 
   { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 9 - l wrist lr
-  
+
   { 202, 330, 2, 330, 330, 202, 240, 300, 330, 0 }, // 10 - l new nod
   { 375, 455, 1, 400, 400, 375, 387, 425, 450, 0 }, // 11 - l new tilt
   { 200, 500, 3, 350, 350, 200, 240, 410, 495, 0 }  // 12 - l new shake
@@ -348,7 +353,7 @@ int arcadeButtonDance6[16][14] = {
   { 149, 171, 192, 213, 235, 256, 0, 21,  128, 107, 256,  85, 64, 43 },
   { 128, 149, 171, 192, 213, 235, 256, 0,  107, 85, 256,  64, 43, 21 },
   { 107, 128, 149, 171, 192, 213, 235, 256,  85, 64,  256,  43, 21, 0 },
-  { 85, 107, 128, 149, 171, 192, 213, 235,  64,43,  256,  21, 0, 256 },
+  { 85, 107, 128, 149, 171, 192, 213, 235,  64, 43,  256,  21, 0, 256 },
   { 64, 85, 107, 128, 149, 171, 192, 213,  43, 21,  256,  0, 256, 235 },
   { 43, 64, 85, 107, 128, 149, 171, 192,    21, 0,  256, 256, 235, 213 },
   { 21, 43, 64, 85, 107, 128, 149, 171,  0, 256,  256, 235, 213, 192  },
