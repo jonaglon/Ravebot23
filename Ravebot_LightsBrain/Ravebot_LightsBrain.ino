@@ -9,10 +9,10 @@
 #include<FastLED.h>
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
-const bool beatTestMode = true;
+const bool beatTestMode = false;
 const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega oooh
 
-bool robotSwitchedOn = true;
+bool robotSwitchedOn = false;
 bool robotManualMode = true;
 
 unsigned long timey;

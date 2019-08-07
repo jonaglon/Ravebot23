@@ -12,7 +12,7 @@
 12 - l new shake  */
 
 int numDances = 2;
-int currentDance = 1;
+int currentDance = 2;
 
 /* ************** Dance Move Functions - Called Every Cycle ********************* */
 void doDancing() {
@@ -44,7 +44,7 @@ void changeDance() {
   sendDanceNumberToLights(currentDance);
 
   // JR TODO - remove me! Hardcodes the dance
-  currentDance = 1;
+  currentDance = 2;
   
 }
 
@@ -310,6 +310,12 @@ void nodHead(bool headUp) {
   }
 }
 
+void moveWristsToCenter() {
+  moveServoToPos(3, servos[3].servoCenter);
+  moveServoToPos(5, servos[5].servoCenter);
+  moveServoToPos(7, servos[7].servoCenter);
+  moveServoToPos(9, servos[9].servoCenter);
+}
 
 // Right Arm Up Elbow positions
 void rightArmUpRightElbowUp() {

@@ -63,24 +63,28 @@ void moveRArm(int velocity) {
     if (!rightArmUp) {
       sendRArmMotorValue(velocity);
     }
+    rightArmDown = false;
   } else if (velocity < 0) {
     if (!rightArmDown) {
       sendRArmMotorValue(velocity);
     }
+    rightArmUp = false;
   } else {
     sendRArmMotorValue(0);
   }
 }
 
 void moveLArm(int velocity) {
-  if (velocity < 0) {
+  if (velocity > 0) {
     if (!leftArmUp) {
       sendLArmMotorValue(velocity);
     }
-  } else if (velocity > 0) {
+    leftArmDown = false;
+  } else if (velocity < 0) {
     if (!leftArmDown) {
       sendLArmMotorValue(velocity);
     }
+    leftArmUp = false;
   } else {
     sendLArmMotorValue(0);
   }
@@ -92,8 +96,6 @@ void sendRArmMotorValue(int newValue) {
   {
     rArmMotorValue = newValue;
     ST1.motor(2, rArmMotorValue);
-    rightArmUp = false;
-    rightArmDown = false;
   }
 }
 
@@ -103,8 +105,6 @@ void sendLArmMotorValue(int newValue) {
   {
     lArmMotorValue = newValue;
     ST1.motor(1, -lArmMotorValue);
-    leftArmUp = false;
-    leftArmDown = false;
   }
 }
 

@@ -15,10 +15,10 @@
 #include<Cytron_PS2Shield.h>
 #include<avr/wdt.h>
 
-const bool testoMode = true;
+const bool testoMode = false;
 
 bool robotSwitchedOn = false;
-bool robotManualMode = false;
+bool robotManualMode = true;
 
 unsigned long timey;
 unsigned long nextAnalogRead;
@@ -116,6 +116,11 @@ void setup() {
   currentSegmentNum=0;
 
   nextAnalogRead = timey+500;
+
+  ST1.motor(1, 0);
+  ST1.motor(2, 0);
+  ST2.motor(1, 0);
+  ST2.motor(2, 0);
 }
 
 void loop()
@@ -128,20 +133,21 @@ void loop()
   checkForManualAutoChange();
   talkToLights();
 
+  doMyArms();
+  doMyWheels();
+
   if (robotSwitchedOn) {
     if (robotManualMode) {
       doServos();
     } else {
       if (currentBar != 0) {
         // JR TODO - this disables the constant dance moves, put me back
-        // doDancing();
+        doDancing();
       }
     }
     doKeypad();
     doArcadeBtn();
   }
-  doMyArms();
-  doMyWheels();
 }
 
 bool startButtonPressed = false;
@@ -155,7 +161,6 @@ void checkForOnOffChange() {
       switchOffArcadeButtons();
       switchOffDisplay();
       sendRArmMotorValue(0);
-      sendLArmMotorValue(0);
       sendLArmMotorValue(0);
     } else {
       showNumber();
@@ -206,6 +211,7 @@ servoInfo servos[13] = {
   
   { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 5 - R wrist lr
 
+//{ 180, 330, 5, 240, 240, 180, 210, 285, 330, 0 }, // 2 - L claw
   { 290, 445, 5, 350, 350, 290, 320, 455, 560, 0 }, // 6 - R claw increase to grab
   { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 7 - r wrist ud
   { 150, 550, 4, 350, 298, 140, 245, 455, 560, 0 }, // 8 - l elbow
