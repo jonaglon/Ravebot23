@@ -185,12 +185,12 @@ void moveServo(int servoNum, int velocity) {
   if (newPosition < servos[servoNum].maxPosition && newPosition > servos[servoNum].minPosition && newPosition != servos[servoNum].servoPos) {
     servoPwm.setPWM(servoNum, 0, newPosition);
     servos[servoNum].servoPos = newPosition;
-    if (testoMode && nextAnalogRead == timey+500) {
+    /*if (testoMode && (timey%5 == 1)) {
       Serial.print("Moved servo ");
       Serial.print(servoNum);
       Serial.print(" to ");
       Serial.println(newPosition);
-    }
+    }*/
   }
 }
 

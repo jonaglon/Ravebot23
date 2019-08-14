@@ -317,57 +317,68 @@ void moveWristsToCenter() {
   moveServoToPosSoft(9, servos[9].servoCenter);
 }
 
-// ******************************************************
-// ******************************************************
-// ******************************************************
-// JR TODO ADD SOME DEBUG CODE HERE AND SET THESE PROPERLY!!!!!!!
-// DO WRISTS AND SHIT WHILE YOU'RE AT IT
-
-
 // Right Arm / Elbow positions
 void rightArmUpRightElbowUp() {
   moveServoToPosSoft(4, 420);
+}
+void rightArmUpRightElbowMiddle() {
+  moveServoToPosSoft(4, 280);
 }
 void rightArmUpRightElbowDown() {
   moveServoToPosSoft(4, 190);
 }
 
 void rightArmMiddleRightElbowUp() {
-  moveServoToPosSoft(4, 380);
+  moveServoToPosSoft(4, 485);
+}
+void rightArmMiddleRightElbowMiddle() {
+  moveServoToPosSoft(4, 350);
 }
 void rightArmMiddleRightElbowDown() {
-  moveServoToPosSoft(4, 225);
+  moveServoToPosSoft(4, 200);
 }
 
 void rightArmDownRightElbowUp() {
-  moveServoToPosSoft(4, 520);
+  moveServoToPosSoft(4, 510);
+}
+void rightArmDownRightElbowMiddle() {
+  moveServoToPosSoft(4, 395);
 }
 void rightArmDownRightElbowDown() {
-  moveServoToPosSoft(4, 275);
+  moveServoToPosSoft(4, 235);
 }
 
 
 
 // Left Arm / Elbow positions
 void leftArmUpLeftElbowUp() {
-  moveServoToPosSoft(8, 300);
+  moveServoToPosSoft(8, 290);
+}
+void leftArmUpLeftElbowMiddle() {
+  moveServoToPosSoft(8, 430);
 }
 void leftArmUpLeftElbowDown() {
-  moveServoToPosSoft(8, 520);
+  moveServoToPosSoft(8, 510);
 }
 
 void leftArmMiddleLeftElbowUp() {
-  moveServoToPosSoft(8, 250);
+  moveServoToPosSoft(8, 210);
+}
+void leftArmMiddleLeftElbowMiddle() {
+  moveServoToPosSoft(8, 340);
 }
 void leftArmMiddleLeftElbowDown() {
-  moveServoToPosSoft(8, 450);
+  moveServoToPosSoft(8, 495);
 }
 
 void leftArmDownLeftElbowUp() {
-  moveServoToPosSoft(8, 200);
+  moveServoToPosSoft(8, 180);
+}
+void leftArmDownLeftElbowMiddle() {
+  moveServoToPosSoft(8, 265);
 }
 void leftArmDownLeftElbowDown() {
-  moveServoToPosSoft(8, 380);
+  moveServoToPosSoft(8, 430);
 }
 
 

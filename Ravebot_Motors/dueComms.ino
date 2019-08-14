@@ -36,12 +36,12 @@ void doSomethingWithMessageFromLights(int messageFromLights) {
   int requestFunction = messageFromLights / 1000;
   int requestMessage = messageFromLights % 1000;
   
-  if (testoMode) {
+  /*if (testoMode) {
     Serial.print("Received Serial 2 Func:");
     Serial.print(requestFunction);
     Serial.print("   Received message:");
     Serial.println(requestMessage);
-  }
+  }*/
 
   if (requestFunction == 1) // this is a beat message
   {

@@ -10,7 +10,7 @@
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
 const bool beatTestMode = false;
-const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega oooh
+const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega
 
 bool robotSwitchedOn = false;
 bool robotManualMode = true;
