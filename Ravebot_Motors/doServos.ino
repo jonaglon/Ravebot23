@@ -4,27 +4,21 @@ void initServos() {
   int range=3;
   
   for (int servoNum = 0; servoNum < 13; servoNum++) {
-    if (servoNum == 4 || servoNum == 8) {
-      rightArmMiddleRightElbowDown();
-      leftArmMiddleLeftElbowDown();
-    } else {
+    if (servoNum != 4 && servoNum != 8) {
       moveServoToPos(servoNum, servos[servoNum].servoCenter+range);
     }
   }
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
-    if (servoNum == 4 || servoNum == 8) {
-      rightArmMiddleRightElbowDown();
-      leftArmMiddleLeftElbowDown();
-    } else {
+    if (servoNum != 4 && servoNum != 8) {
       moveServoToPos(servoNum, servos[servoNum].servoCenter-range);
     }
   }
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      rightArmMiddleRightElbowDown();
-      leftArmMiddleLeftElbowDown();
+      moveServoToPos(4, 485);
+      moveServoToPos(8, 210);
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter+range);    
     }

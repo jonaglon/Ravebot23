@@ -57,7 +57,6 @@ byte colPins[3] = {2, 3, 4}; //connect to the column pinouts of the keypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, 4, 3);
 
 void setup() {
-  delay(500);
   wdt_enable(WDTO_2S);
 
   if (testoMode)

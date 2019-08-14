@@ -56,8 +56,8 @@ void dance3Movements() {
       leftWristPos(2);
       rightWristPos(2);
     } else if ((currentBar % 64) < 4) {
-      rightArmMiddleRightElbowDown();
-      leftArmMiddleLeftElbowDown();
+      rightArmMiddleRightElbowUp();
+      leftArmMiddleLeftElbowUp();
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
     } else {
@@ -69,10 +69,8 @@ void dance3Movements() {
       leftWristPos(2);
       rightWristPos(2);
     } else if ((currentBar % 64) < 20) {
-      // rightArmMiddleRightElbowUp();
-      // leftArmMiddleLeftElbowUp();
-      rightArmMiddleRightElbowDown();
-      leftArmMiddleLeftElbowDown();
+      rightArmMiddleRightElbowUp();
+      leftArmMiddleLeftElbowUp();
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
     } else {
@@ -84,8 +82,8 @@ void dance3Movements() {
       leftWristPos(2);
       rightWristPos(2);
     } else if ((currentBar % 64) < 36) {
-      rightArmMiddleRightElbowDown();
-      leftArmMiddleLeftElbowDown();
+      rightArmMiddleRightElbowUp();
+      leftArmMiddleLeftElbowUp();
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
     } else {
@@ -97,10 +95,8 @@ void dance3Movements() {
       leftWristPos(2);
       rightWristPos(2);
     } else if ((currentBar % 64) < 52) {
-      // rightArmMiddleRightElbowUp();
-      // leftArmMiddleLeftElbowUp();
-      rightArmMiddleRightElbowDown();
-      leftArmMiddleLeftElbowDown();
+      rightArmMiddleRightElbowUp();
+      leftArmMiddleLeftElbowUp();
       leftWristLRPer2Beat();
       rightWristLRPer2Beat();
     } else {
