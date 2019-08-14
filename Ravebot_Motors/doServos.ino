@@ -5,8 +5,8 @@ void initServos() {
   
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      rightArmUpRightElbowUp();
-      leftArmUpLeftElbowUp();    
+      rightArmMiddleRightElbowDown();
+      leftArmMiddleLeftElbowDown();
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter+range);
     }
@@ -14,8 +14,8 @@ void initServos() {
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      rightArmUpRightElbowUp();
-      leftArmUpLeftElbowUp();    
+      rightArmMiddleRightElbowDown();
+      leftArmMiddleLeftElbowDown();
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter-range);
     }
@@ -23,8 +23,8 @@ void initServos() {
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      rightArmUpRightElbowUp();
-      leftArmUpLeftElbowUp();    
+      rightArmMiddleRightElbowDown();
+      leftArmMiddleLeftElbowDown();
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter+range);    
     }
@@ -185,10 +185,12 @@ void moveServo(int servoNum, int velocity) {
   if (newPosition < servos[servoNum].maxPosition && newPosition > servos[servoNum].minPosition && newPosition != servos[servoNum].servoPos) {
     servoPwm.setPWM(servoNum, 0, newPosition);
     servos[servoNum].servoPos = newPosition;
-    /*Serial.print("moving ");
-    Serial.print(servoNum);
-    Serial.print("to ");
-    Serial.println(newPosition);*/
+    if (testoMode && nextAnalogRead == timey+500) {
+      Serial.print("Moved servo ");
+      Serial.print(servoNum);
+      Serial.print(" to ");
+      Serial.println(newPosition);
+    }
   }
 }
 
@@ -207,6 +209,22 @@ void moveServoToPos(int servoNum, int newPosition) {
   if (newPosition < servos[servoNum].maxPosition && newPosition > servos[servoNum].minPosition && newPosition != servos[servoNum].servoPos) {
     servoPwm.setPWM(servoNum, 0, newPosition);
     servos[servoNum].servoPos = newPosition;
+  }
+}
+
+void moveServoToPosSoft(int servoNum, int newPosition) {
+  if (newPosition < servos[servoNum].maxPosition && newPosition > servos[servoNum].minPosition && newPosition != servos[servoNum].servoPos) {
+    if (timey > (servos[servoNum].servoMoveTime + 0)) {
+      int posToMoveTo;
+      if (newPosition > servos[servoNum].servoPos) {
+        posToMoveTo = servos[servoNum].servoPos + 1;
+      } else {
+        posToMoveTo = servos[servoNum].servoPos - 1;
+      }
+      servoPwm.setPWM(servoNum, 0, posToMoveTo);
+      servos[servoNum].servoPos = posToMoveTo;
+      servos[servoNum].servoMoveTime = timey;
+    }
   }
 }
 
