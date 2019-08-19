@@ -9,10 +9,10 @@
 #include<FastLED.h>
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
-const bool beatTestMode = false;
+const bool beatTestMode = true;
 const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega
 
-bool robotSwitchedOn = false;
+bool robotSwitchedOn = true;
 bool robotManualMode = true;
 
 unsigned long timey;
@@ -54,11 +54,18 @@ int ledIntensity = 10;
 byte wheelR;
 byte wheelG;
 byte wheelB;
+int currentLightPattern = 4;
 
 int leftEyeX = 0;
 int leftEyeY = 0;
 int rightEyeX = 0;
 int rightEyeY = 0;
+int eyePrimaryR = 110;
+int eyePrimaryG = 150;
+int eyePrimaryB = 150;
+int eyeSecondaryR = 0;
+int eyeSecondaryG = 0;
+int eyeSecondaryB = 0;
 
 // MIXING VARS
 int nextTrack = 0;
@@ -124,9 +131,6 @@ void setTimes() {
 
   // this is a number to be used in animations, it counts up from the start of a tune, 16384 per beat.
   timeyInTime = (sixteenBeats * 16384) + percentThroughBeat; // Note: this wont work for anim lengths > 262144, you'll need to use bar.
-
-  if (timeyInTime > animLength)
-    timeyInTime = animLength;
 
   if (testMode) {
     Serial.print("tit:");
@@ -435,9 +439,11 @@ struct twinkle {
   byte rCol;
   byte gCol;
   byte bCol;
+  byte wCol;
   byte rToCol;
   byte gToCol;
   byte bToCol;
+  byte wToCol;
   int start;
   int lengthy;
   short widthy;
@@ -447,16 +453,16 @@ struct twinkle {
   short sideFade;
   bool hasTwinked;
 
-  twinkle(short aLedNum, byte aRCol, byte aGCol, byte aBCol, byte aToRCol, byte aToGCol, byte aToBCol, int aStart, int aLengthy, short aWidthy, int aFadeIn, int aFadeOut, short aSpeedy, short aSideFade, bool aHasTwinked) :
-    ledNum(aLedNum), rCol(aRCol), gCol(aGCol), bCol(aBCol), rToCol(aToRCol), gToCol(aToGCol), bToCol(aToBCol), start(aStart), lengthy(aLengthy), widthy(aWidthy), fadeIn(aFadeIn), fadeOut(aFadeOut), speedy(aSpeedy), sideFade(aSideFade), hasTwinked(aHasTwinked) {  }
+  twinkle(short aLedNum, byte aRCol, byte aGCol, byte aBCol, byte aWCol, byte aToRCol, byte aToGCol, byte aToBCol, byte aToWCol, int aStart, int aLengthy, short aWidthy, int aFadeIn, int aFadeOut, short aSpeedy, short aSideFade, bool aHasTwinked) :
+    ledNum(aLedNum), rCol(aRCol), gCol(aGCol), bCol(aBCol), wCol(aWCol), rToCol(aToRCol), gToCol(aToGCol), bToCol(aToBCol), wToCol(aToWCol), start(aStart), lengthy(aLengthy), widthy(aWidthy), fadeIn(aFadeIn), fadeOut(aFadeOut), speedy(aSpeedy), sideFade(aSideFade), hasTwinked(aHasTwinked) {  }
 
-  twinkle() : ledNum(0), rCol(0), gCol(0), bCol(0), start(0), lengthy(0), widthy(0), fadeIn(0), fadeOut(0), speedy(0), sideFade(0), hasTwinked(0) { }
+  twinkle() : ledNum(0), rCol(0), gCol(0), bCol(0), wCol(0), rToCol(0), gToCol(0), bToCol(0), wToCol(0), start(0), lengthy(0), widthy(0), fadeIn(0), fadeOut(0), speedy(0), sideFade(0), hasTwinked(0) { }
 
 };
 
-const int numTwinks = 2000;
+const int numTwinks = 1600;
 twinkle myTwinkles[numTwinks];
-const int usedTwinkleCount[] = {0, 0, 0, 0, 0, 2000, 600, 600, 660, 660, 1000, 700}; // might be a bit wrong
+const int usedTwinkleCount[7] = {1600, 200, 400, 1600, 1600, 1000, 60};
 
 int eyeCoords[93][2] = {
   { 55, 107}, { 64, 106}, { 75, 104}, { 84, 98}, { 92, 93}, { 98, 85}, {103, 76}, {107, 66}, {108, 56}, {107, 45},

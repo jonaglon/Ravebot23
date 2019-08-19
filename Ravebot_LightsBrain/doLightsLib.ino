@@ -1,3 +1,4 @@
+
   
 void SetRgbwWheel(int pixNum, byte WheelPos, short whiteVal) {
   WheelPos = 255 - WheelPos;
@@ -120,14 +121,12 @@ int getCoord(int ledNum, int xOrY) {
     return portRCoords[(ledNum-1302)%19][xOrY]+ledPosOffset[18][xOrY];
 }
 
-
 int quickAbsolute(int number) {
   if (number < 0)
     return number * (-1);
   else
     return number;
 }
-
 
 void drawEyeSquare(int offSet, int xCoord, int  yCoord, int radius, int r, int g, int b, int w) {
   for(int j = 0; j < 93; j++) { 
@@ -302,34 +301,43 @@ void setRgbwLed(int ledNumber, int rVal, int gVal, int bVal, int wVal) {
 }
 
 void setRgbwLedAfterEyes(int ledNumber, int rVal, int gVal, int bVal, int wVal) {
+  if (rVal < 0)
+    rVal = 0;
+  if (gVal < 0)
+    gVal = 0;
+  if (bVal < 0)
+    bVal = 0;
+  if (wVal < 0)
+    wVal = 0;
+  
   int newNumber = (ledNumber * 4) / 3;
   short mod = ledNumber % 3;
   
-  rVal = rVal/ledIntensity;
-  gVal = gVal/ledIntensity;
-  bVal = bVal/ledIntensity;
-  wVal = wVal/ledIntensity;
+  rVal = rVal/ledIntensity > 255 ? 255 : rVal/ledIntensity;
+  gVal = gVal/ledIntensity > 255 ? 255 : gVal/ledIntensity;
+  bVal = bVal/ledIntensity > 255 ? 255 : bVal/ledIntensity;
+  wVal = wVal/ledIntensity > 255 ? 255 : wVal/ledIntensity;
 
   if (mod == 0)
   {
-    rgbwLeds[newNumber-1].b = rVal % 256;
-    rgbwLeds[newNumber-1].r = gVal % 256;
-    rgbwLeds[newNumber].g = bVal % 256;
-    rgbwLeds[newNumber].r = wVal % 256;
+    rgbwLeds[newNumber-1].b = rVal;
+    rgbwLeds[newNumber-1].r = gVal;
+    rgbwLeds[newNumber].g = bVal;
+    rgbwLeds[newNumber].r = wVal;
   }
   else if (mod == 1)
   {
-    rgbwLeds[newNumber].g = rVal % 256;
-    rgbwLeds[newNumber-1].b = gVal % 256;
-    rgbwLeds[newNumber].r = bVal % 256;
-    rgbwLeds[newNumber].b = wVal % 256;
+    rgbwLeds[newNumber].g = rVal;
+    rgbwLeds[newNumber-1].b = gVal;
+    rgbwLeds[newNumber].r = bVal;
+    rgbwLeds[newNumber].b = wVal;
   }
   else 
   {
-    rgbwLeds[newNumber].r = rVal % 256;
-    rgbwLeds[newNumber].g = gVal % 256;
-    rgbwLeds[newNumber].b = bVal % 256;
-    rgbwLeds[newNumber+1].g = wVal % 256;
+    rgbwLeds[newNumber].r = rVal;
+    rgbwLeds[newNumber].g = gVal;
+    rgbwLeds[newNumber].b = bVal;
+    rgbwLeds[newNumber+1].g = wVal;
   }
 }
 

@@ -329,7 +329,7 @@ void rightArmUpRightElbowDown() {
 }
 
 void rightArmMiddleRightElbowUp() {
-  moveServoToPosSoft(4, 485);
+  moveServoToPosSoft(4, 486);
 }
 void rightArmMiddleRightElbowMiddle() {
   moveServoToPosSoft(4, 350);
@@ -342,10 +342,10 @@ void rightArmDownRightElbowUp() {
   moveServoToPosSoft(4, 510);
 }
 void rightArmDownRightElbowMiddle() {
-  moveServoToPosSoft(4, 395);
+  moveServoToPosSoft(4, 396);
 }
 void rightArmDownRightElbowDown() {
-  moveServoToPosSoft(4, 235);
+  moveServoToPosSoft(4, 236);
 }
 
 
@@ -368,14 +368,14 @@ void leftArmMiddleLeftElbowMiddle() {
   moveServoToPosSoft(8, 340);
 }
 void leftArmMiddleLeftElbowDown() {
-  moveServoToPosSoft(8, 495);
+  moveServoToPosSoft(8, 496);
 }
 
 void leftArmDownLeftElbowUp() {
   moveServoToPosSoft(8, 180);
 }
 void leftArmDownLeftElbowMiddle() {
-  moveServoToPosSoft(8, 265);
+  moveServoToPosSoft(8, 266);
 }
 void leftArmDownLeftElbowDown() {
   moveServoToPosSoft(8, 430);

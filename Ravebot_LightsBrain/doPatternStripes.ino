@@ -2,30 +2,30 @@
 
 void doPatternStripes() {
 
-  leftRightStripes();
-  sectionsInTime();
-  
+  if (currentLightPattern == 7) {
+    stripesPattern1();
+  } else if (currentLightPattern == 8) {
+    stripesPattern2();
+  } 
 }
 
 
 
-int stripeBeatPos=0;
-int xyCord=0;
-void leftRightStripes() {
+void stripesPattern1() {
 
-  SetRgbwWheelVars((timeyInTime / 400)%256);
+  SetRgbwWheelVars((timeyInTime / 512)%256);
 
   int sixteenBeatPos = (sixteenBeats/4) % 4;
+  int stripeBeatPos=0;
+  int xyCord=0;
   
   if (sixteenBeatPos == 0) {
     stripeBeatPos = (timeyInTime / 32)%1024;
-    xyCord=0;
   } else if (sixteenBeatPos == 1) {
     stripeBeatPos = 2048-((timeyInTime / 32)%2048);
     xyCord=1;
   } else if (sixteenBeatPos == 2) {
     stripeBeatPos = 615-((timeyInTime / 32)%1024);
-    xyCord=0;
   } else if (sixteenBeatPos == 3) {
     stripeBeatPos = (timeyInTime / 32)%2048;
     xyCord=1;
@@ -37,6 +37,35 @@ void leftRightStripes() {
       setLedDirect(j, 0, 0, 0, 0, false);
     else if (yCoord < stripeBeatPos+200)
       setLedDirect(j, wheelR, wheelG, wheelB, 0, false);
+    else
+      setLedDirect(j, 0, 0, 0, 0, false);      
+  }
+}
+
+void stripesPattern2() {
+
+  int rVal = 0;
+  int gVal = 0;
+  int bVal = 0;
+  int wVal = 0;
+  int fourBeatPos = (sixteenBeats/4) % 4;
+  if (fourBeatPos == 0) {
+    rVal = 255;
+  } else if (fourBeatPos == 1) {
+    gVal = 255;
+  } else if (fourBeatPos == 2) {
+    bVal = 255;
+  } else {
+    wVal = 255;
+  } 
+
+  int stripeBeatPos = ((timeyInTime / 32)%2048)-1024;
+  for(int j = 0; j < numLeds; j++) {
+    int yCoord = getCoord(j,0);
+    if (yCoord < stripeBeatPos)
+      setLedDirect(j, 0, 0, 0, 0, false);
+    else if (yCoord < stripeBeatPos+400)
+      setLedDirect(j, rVal, gVal, bVal, wVal, false);
     else
       setLedDirect(j, 0, 0, 0, 0, false);      
   }

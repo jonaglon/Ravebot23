@@ -1,134 +1,52 @@
-int currentPattern = 1;
 int numPatterns = 11;
 
 void doLights() {
 
   allOff();
-  //allOffBySection();
+  // allOffBySection();
 
-  if (currentPattern == 1) {
-    horizontalRainbow(false, false, 20);
-  } else if (currentPattern == 2) {
-    doPatternStripes();
-  } else if (currentPattern == 3) {
-    doPatternTrains();
-  } else if (currentPattern == 4) {
-    horizontalRainbow(false, false, 80);
-    sectionsInTime();
-  } else if (currentPattern == 4) {
-    doPatternBlobs();
-  } else  {
+  if (currentLightPattern < 7) {
     doTwinkles();
-    //sectionsInTime();
+  } else if (currentLightPattern < 9) {
+    doPatternStripes();
+  } else if (currentLightPattern == 9) {
+    horizontalRainbow(false, false, 80);
+  } else if (currentLightPattern == 10) {
+    doPatternBlobs();
+    //     doPatternTrains();
+  } else  {
+    horizontalRainbow(false, false, 20);
   }
+
+  // ***************************************************************************************
+  // JR TODO - find a way of deciding which light extras should be happening at the moment.
+  // * ************************ Write a load of exciting extras!  ***************************
+  // knigtRiderAms();
+  // circleInTime();
+  // sectionsInTime();
+
   doFace();
   LEDS.show();
 }
 
 void changeLightPattern() {
   // choose a new pattern, different from the current one
-  int newPattern = currentPattern;
-  while (newPattern == currentPattern) {
+  int newPattern = currentLightPattern;
+  while (newPattern == currentLightPattern) {
     newPattern = random(numPatterns);
   }
-  currentPattern = newPattern;
+
+  // JR TODO - this is the cheat setting the lights pattern ******************
+  newPattern = 4;
+  
+  currentLightPattern = newPattern;
 
   // if it's a twinkle call the setup code
-  if (currentPattern > 4) {
-    setupNewTwinklePattern(currentPattern);
+  if (newPattern < 7) {
+    setupNewTwinklePattern(currentLightPattern);
   }
-}
 
-/////////////////////
-// Generic patters //
-/////////////////////
-
-void circleInTime() {
-  int numToLight = percentThroughBeat / 182;
-
-  for(int j = 0; j < 90; j++) {
-    setSectionLed(14, j, 0, 0, 0, 0);
-  }
   
-  for(int j = 0; j < numToLight; j++) {
-    setSectionLed(14, j, 0, 0, 255, 0);
-  }
-  
-}
-
-void heartInTime() {
-  // we want a heartbeat
-  int ledValue1 = currentHeartBeatValue(0, 255, 4);
-  int ledValue2 = currentHeartBeatValue(7, 170, 2);
-
-  if (ledValue1 > ledValue2)
-    setSection(1, ledValue1, 0, 0, 0);
-  else
-    setSection(1, ledValue2, 0, 0, 0);
-}
-
-// the shorter dropoff divisor the longer the trail
-int currentHeartBeatValue(int sixteenBeatShift, int maxValue, int dropoffLengthDivisor) {
-  int sixteenBeatVal = (sixteenBeats + sixteenBeatShift) % 8;
-  int returnVal = 0;
-  
-  if (sixteenBeatVal < 1) {
-    returnVal = (((percentThroughBeat * 100) / 8192)*255)/100;
-  } else if (sixteenBeatVal < 5) {
-    returnVal = 255-(((((((sixteenBeatVal-1)*8192)+percentThroughBeat)*100)/(65536/dropoffLengthDivisor))*255)/100);
-  }
-  return returnVal;
-}
-
-
-
-void horizontalRainbow(bool includeEyes, bool includeMouth, int speedFactor) {
-  int ticko = (timey / speedFactor) % 1024;
-  
-  for(int j = 0; j < numLeds; j++) {
-    int xCoord = (getCoord(j,0)+ticko)%1024;
-    SetRgbwWheelVars(xCoord/4);
-    setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
-  }
-}
-
-
-void sectionsInTime() {
-  int beat4 = sixteenBeats % 4;  
-  if (beat4 == 0) {
-    setSection(13, 255, 0, 0, 0);
-    setSection(14, 0, 255, 0, 0);
-    setSection(15, 0, 0, 255, 0);
-    setSection(16, 0, 0, 0, 255);
-  } else if (beat4 == 1) {
-    setSection(14, 255, 0, 0, 0);
-    setSection(15, 0, 255, 0, 0);
-    setSection(16, 0, 0, 255, 0);
-    setSection(13, 0, 0, 0, 255);  
-  } else if (beat4 == 2) {
-    setSection(15, 255, 0, 0, 0);
-    setSection(16, 0, 255, 0, 0);
-    setSection(13, 0, 0, 255, 0);
-    setSection(14, 0, 0, 0, 255);  
-  } else if (beat4 == 3) {
-    setSection(16, 255, 0, 0, 0);
-    setSection(13, 0, 255, 0, 0);
-    setSection(14, 0, 0, 255, 0);
-    setSection(15, 0, 0, 0, 255);  
-  };
-}
-
-void sectionsInTime2() {
-  int beat16 = sixteenBeats % 16;  
-  if (beat16 < 5) {
-    setSection(13, 0, 0, 0, 0);
-  } else if (beat16 < 9) {
-    setSection(14, 0, 0, 0, 0);
-  } else if (beat16 < 13) {
-    setSection(15, 0, 0, 0, 0);
-  } else {
-    setSection(16, 0, 0, 0, 0);
-  };
 }
 
 
@@ -137,12 +55,8 @@ void sectionsInTime2() {
 // Eye types are used when the robot is in manual mode, in auto eye dances are used
 int currentEyeType = 0;
 void changeEyeType() {
+  resetEyes();
   currentEyeType = (currentEyeType+1)%5;
-}
-
-int currentEyeDance = 0;
-void changeEyeDance() {
-  currentEyeDance = (currentEyeDance+1)%4;
 }
 
 void doFace() {
@@ -154,7 +68,8 @@ void eyeController() {
 
   if (robotManualMode) {
     switch (currentEyeType) {
-      case 0: doNormalEyes();
+      case 0:
+        doNormalEyes();
         break;
       case 1: doStonerEyes();
         break;
@@ -166,42 +81,50 @@ void eyeController() {
         break;
     }
   } else {
-    switch (currentEyeDance) {
-      case 0: 
+    switch (currentBar%8) {
+      case 0:
+      case 1:
         doNormalEyes();
         break;
-      case 1: 
+      case 2:
+      case 3:
         leftEyeX = (sixteenBeats * 10)-80;
         rightEyeX = (sixteenBeats * 10)-80;
         break;
-      case 2: 
-        if ((currentBar%4) == 0) {
-          int eyePrimaryR = 255;
-          int eyePrimaryG = 0;
-          int eyePrimaryB = 0;
-          heartEyes();
-        } else {
-          int eyePrimaryR = 110;
-          int eyePrimaryG = 150;
-          int eyePrimaryB = 150;
-          doNormalEyes();
-        }
+      case 4: 
+        eyePrimaryR = 255;
+        eyePrimaryG = 0;
+        eyePrimaryB = 0;
+        heartEyes();
         break;
-      case 3: 
-        if ((currentBar%4) == 0) {
-          pacManEyes();
-        } else {
-          doNormalEyes();
-        }
+      case 5:
+        eyePrimaryR = 0;
+        eyePrimaryG = 255;
+        eyePrimaryB = 0;
+        doNormalEyes();
+        break;
+      case 6:
+      case 7:
+        pacManEyes();
         break;
     }
   }
   
 }
 
-int eyePrimaryR = 110;
-int eyePrimaryG = 150;
-int eyePrimaryB = 150;
+void resetEyes() {
+  eyePrimaryR = 110;
+  eyePrimaryG = 150;
+  eyePrimaryB = 150;
+  eyeSecondaryR = 0;
+  eyeSecondaryG = 0;
+  eyeSecondaryB = 0;
+  leftEyeX = 0;
+  leftEyeY = 0;
+  rightEyeX = 0;
+  rightEyeY = 0;
+}
+
 int eyeRColours[9] = {255,  0,   0,  255, 255,   0, 110, 0, 255 };
 int eyeGColours[9] = {0,  255,   0,  255,   0, 255, 150, 0,   6 };
 int eyeBColours[9] = {0,    0, 255,    0, 255, 255, 150, 0,  80 };
@@ -215,9 +138,6 @@ void changePrimaryEyeColour() {
   eyePrimaryB = eyeBColours[currentEyePrimaryPos];
 }
 
-int eyeSecondaryR = 0;
-int eyeSecondaryG = 0;
-int eyeSecondaryB = 0;
 int currentEyeSecondaryPos = 4;
 void changeSecondaryEyeColour() {
   currentEyeSecondaryPos = (currentEyeSecondaryPos+1)%numEyeColors;
@@ -491,6 +411,10 @@ void winkRightMessage(int blinkOnOffMessage) {
 
 void doTalkingLights() {
 
+  for(int j = 0; j < numLedsInSection(7); j++) {
+    setSectionLed(7, j, 0, 0, 0, 0);
+  }
+  
   if (robotTalking) {
     setLedDirect(ledSections[7]+8, 255, 60, 60, 100, true);
     setLedDirect(ledSections[7]+9, 255, 60, 60, 100, true);

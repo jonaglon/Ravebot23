@@ -1,7 +1,7 @@
 
 // called from init, set all servos to their initial position
 void initServos() {
-  int range=3;
+  int range=4;
   
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum != 4 && servoNum != 8) {
@@ -17,7 +17,7 @@ void initServos() {
   delay(200);
   for (int servoNum = 0; servoNum < 13; servoNum++) {
     if (servoNum == 4 || servoNum == 8) {
-      moveServoToPos(4, 485);
+      moveServoToPos(4, 486);
       moveServoToPos(8, 210);
     } else {
       moveServoToPos(servoNum, servos[servoNum].servoCenter+range);    
@@ -208,17 +208,14 @@ void moveServoToPos(int servoNum, int newPosition) {
 
 void moveServoToPosSoft(int servoNum, int newPosition) {
   if (newPosition < servos[servoNum].maxPosition && newPosition > servos[servoNum].minPosition && newPosition != servos[servoNum].servoPos) {
-    if (timey > (servos[servoNum].servoMoveTime + 0)) {
-      int posToMoveTo;
-      if (newPosition > servos[servoNum].servoPos) {
-        posToMoveTo = servos[servoNum].servoPos + 1;
-      } else {
-        posToMoveTo = servos[servoNum].servoPos - 1;
-      }
-      servoPwm.setPWM(servoNum, 0, posToMoveTo);
-      servos[servoNum].servoPos = posToMoveTo;
-      servos[servoNum].servoMoveTime = timey;
+    int posToMoveTo;
+    if (newPosition > servos[servoNum].servoPos) {
+      posToMoveTo = servos[servoNum].servoPos + 2;
+    } else {
+      posToMoveTo = servos[servoNum].servoPos - 2;
     }
+    servoPwm.setPWM(servoNum, 0, posToMoveTo);
+    servos[servoNum].servoPos = posToMoveTo;
   }
 }
 

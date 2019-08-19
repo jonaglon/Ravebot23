@@ -61,7 +61,6 @@ void playTune(int genre, int track, bool alterHistory) {
  
   chooseNextTrack();
   calculateMixDurationAndStart();
-  changeEyeDance();
 
   if (testMode)
     showLast20Tracks();
