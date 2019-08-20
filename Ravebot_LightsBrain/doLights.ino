@@ -5,6 +5,7 @@ void doLights() {
   allOff();
   // allOffBySection();
 
+/*
   if (currentLightPattern < 7) {
     doTwinkles();
   } else if (currentLightPattern < 9) {
@@ -16,18 +17,20 @@ void doLights() {
     //     doPatternTrains();
   } else  {
     horizontalRainbow(false, false, 20);
-  }
+  }   */
+
+  stripesPattern3();
+
 
   // ***************************************************************************************
   // JR TODO - find a way of deciding which light extras should be happening at the moment.
   // * ************************ Write a load of exciting extras!  ***************************
-  // knigtRiderAms();
+  // knigtRiderArms();
   // sectionsInTime();
   // bodyCirclesInTime();
   // heartInTime();
-  stripesPattern2();
+  // circleSquiggle();
 
-  circleSquiggle();
 
   doFace();
   LEDS.show();

@@ -2,7 +2,7 @@
 ///////////////////// Knight Rider Armies //////////////////
 const int knigtRiderLightTimes[24] = {80, 112, 140, 182, 216, 256, 304, 370, 440, 526, 660, 810,
                                       810, 660, 526, 440, 370, 304, 256, 216, 182, 140, 112, 80};
-void knigtRiderAms() {
+void knigtRiderArms() {
   int pixNum = 0;
   int currTime = 0;
   for (pixNum = 0; pixNum < 24; pixNum++) {

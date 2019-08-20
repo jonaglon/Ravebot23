@@ -70,3 +70,30 @@ void stripesPattern2() {
   }
 }
 
+void stripesPattern3() {
+
+// int percentThroughPattern = (timeyInTime % 32768)/364;     // 0-90 hopefully 
+
+  int stripeBeatPos = (timeyInTime / 32) % 2048;
+  for(int j = 0; j < numLeds; j++) {
+    int yCoord = getCoord(j,0);
+    if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+400))
+      setLedDirect(j, 148, 0, 211, 0, false);
+    else if ((yCoord > stripeBeatPos+400) && (yCoord < stripeBeatPos+800))
+      setLedDirect(j, 75, 0, 130, 0, false);
+    else if ((yCoord > stripeBeatPos+800) && (yCoord < stripeBeatPos+1200))
+      setLedDirect(j, 0, 0, 255, 0, false);
+    else if ((yCoord > stripeBeatPos+1200) && (yCoord < stripeBeatPos+1600))
+      setLedDirect(j, 0, 255, 0, 0, false);
+    else if ((yCoord > stripeBeatPos+1600) && (yCoord < stripeBeatPos+2000))
+      setLedDirect(j, 255, 255, 0, 0, false);
+    else if ((yCoord > stripeBeatPos+2000) && (yCoord < stripeBeatPos+2400))
+      setLedDirect(j, 255, 122, 0, 0, false);
+    else if ((yCoord > stripeBeatPos+2400) && (yCoord < stripeBeatPos+2800))
+      setLedDirect(j, 255, 0, 0, 0, false);
+
+  }
+}
+
+
+
