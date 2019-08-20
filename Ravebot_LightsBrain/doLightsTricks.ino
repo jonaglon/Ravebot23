@@ -1,3 +1,5 @@
+
+///////////////////// Knight Rider Armies //////////////////
 const int knigtRiderLightTimes[24] = {80, 112, 140, 182, 216, 256, 304, 370, 440, 526, 660, 810,
                                       810, 660, 526, 440, 370, 304, 256, 216, 182, 140, 112, 80};
 void knigtRiderAms() {
@@ -28,10 +30,118 @@ void knigtRiderAms() {
   }
 }
 
-/////////////////////
-// Generic patters //
-/////////////////////
+///////////////// Circles in time //////////////////////////////
+void bodyCirclesInTime() {
 
+  int percentThroughPattern = (timeyInTime % 32768)/364;     // 0-90 hopefully
+
+  int beat4 = sixteenBeats % 4;  
+  if (beat4 == 0) {
+    setSectionLed(13, (percentThroughPattern + 32) % 90, 0, 0, 0, 255);
+    setSectionLed(13, (percentThroughPattern + 33) % 90, 0, 0, 0, 255);
+    setSectionLed(13, (percentThroughPattern + 34) % 90, 0, 0, 0, 255);
+    setSectionLed(14, (percentThroughPattern + 54) % 90, 100, 50, 90, 0);
+    setSectionLed(14, (percentThroughPattern + 55) % 90, 100, 50, 90, 0);
+    setSectionLed(14, (percentThroughPattern + 56) % 90, 100, 50, 90, 0);
+    setSectionLed(15, (percentThroughPattern + 76) % 90, 0, 130, 130, 0);
+    setSectionLed(15, (percentThroughPattern + 77) % 90, 0, 130, 130, 0);
+    setSectionLed(15, (percentThroughPattern + 78) % 90, 0, 130, 130, 0);
+    setSectionLed(16, (percentThroughPattern + 9) % 90, 130, 0, 130, 0);
+    setSectionLed(16, (percentThroughPattern + 10) % 90, 130, 0, 130, 0);
+    setSectionLed(16, (percentThroughPattern + 11) % 90, 130, 0, 130, 0);
+  } else if (beat4 == 1) {
+    setSectionLed(13, (percentThroughPattern + 32) % 90, 130, 0, 130, 0);
+    setSectionLed(13, (percentThroughPattern + 33) % 90, 130, 0, 130, 0);
+    setSectionLed(13, (percentThroughPattern + 34) % 90, 130, 0, 130, 0);
+    setSectionLed(14, (percentThroughPattern + 54) % 90, 0, 0, 0, 255);
+    setSectionLed(14, (percentThroughPattern + 55) % 90, 0, 0, 0, 255);
+    setSectionLed(14, (percentThroughPattern + 56) % 90, 0, 0, 0, 255);
+    setSectionLed(15, (percentThroughPattern + 76) % 90, 100, 50, 90, 0);
+    setSectionLed(15, (percentThroughPattern + 77) % 90, 100, 50, 90, 0);
+    setSectionLed(15, (percentThroughPattern + 78) % 90, 100, 50, 90, 0);
+    setSectionLed(16, (percentThroughPattern + 9) % 90, 0, 130, 130, 0);
+    setSectionLed(16, (percentThroughPattern + 10) % 90, 0, 130, 130, 0);
+    setSectionLed(16, (percentThroughPattern + 11) % 90, 0, 130, 130, 0);
+  } else if (beat4 == 2) {
+    setSectionLed(13, (percentThroughPattern + 32) % 90, 0, 130, 130, 0);
+    setSectionLed(13, (percentThroughPattern + 33) % 90, 0, 130, 130, 0);
+    setSectionLed(13, (percentThroughPattern + 34) % 90, 0, 130, 130, 0);
+    setSectionLed(14, (percentThroughPattern + 54) % 90, 130, 0, 130, 0);
+    setSectionLed(14, (percentThroughPattern + 55) % 90, 130, 0, 130, 0);
+    setSectionLed(14, (percentThroughPattern + 56) % 90, 130, 0, 130, 0);
+    setSectionLed(15, (percentThroughPattern + 76) % 90, 0, 0, 0, 255);
+    setSectionLed(15, (percentThroughPattern + 77) % 90, 0, 0, 0, 255);
+    setSectionLed(15, (percentThroughPattern + 78) % 90, 0, 0, 0, 255);
+    setSectionLed(16, (percentThroughPattern + 9) % 90, 100, 50, 90, 0);
+    setSectionLed(16, (percentThroughPattern + 10) % 90, 100, 50, 90, 0);
+    setSectionLed(16, (percentThroughPattern + 11) % 90, 100, 50, 90, 0);
+  } else if (beat4 == 3) {
+    setSectionLed(13, (percentThroughPattern + 32) % 90, 100, 50, 90, 0);
+    setSectionLed(13, (percentThroughPattern + 33) % 90, 100, 50, 90, 0);
+    setSectionLed(13, (percentThroughPattern + 34) % 90, 100, 50, 90, 0);
+    setSectionLed(14, (percentThroughPattern + 54) % 90, 0, 130, 130, 0);
+    setSectionLed(14, (percentThroughPattern + 55) % 90, 0, 130, 130, 0);
+    setSectionLed(14, (percentThroughPattern + 56) % 90, 0, 130, 130, 0);
+    setSectionLed(15, (percentThroughPattern + 76) % 90, 130, 0, 130, 0);
+    setSectionLed(15, (percentThroughPattern + 77) % 90, 130, 0, 130, 0);
+    setSectionLed(15, (percentThroughPattern + 78) % 90, 130, 0, 130, 0);
+    setSectionLed(16, (percentThroughPattern + 9) % 90, 0, 0, 0, 255);
+    setSectionLed(16, (percentThroughPattern + 10) % 90, 0, 0, 0, 255);
+    setSectionLed(16, (percentThroughPattern + 11) % 90, 0, 0, 0, 255);
+  }
+}
+
+////////////////////////// Circle Squiggles //////////////////////////
+byte squigglePattern[10][17][2] {
+    //   0         1         2         3        4        5          6         7         8         9        10       11        12        13        14       15     
+    {{15, 22}, {15, 44}, {15, 66}, {15,  0}, {15, 22}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {16, 44}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {15, 44}, {15, 66}, {15,  0}, {15, 22}, {15, 44}, {15, 66}, {15,  0}, {15, 22}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {15, 44}, {15, 66}, {15,  0}, {15, 22}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {13,  0}, {13, 22}, {13, 44}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {13,  0}, {13, 22}, {13, 44}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {16, 44}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {13,  0}, {13, 22}, {13, 44}, {13, 67}, {13,  0}, {13, 22}, {13, 44}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {14,  0}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {16, 44}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {14,  0}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {13,  0}, {13, 22}, {13, 44}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {16, 44}, {16, 22}, {16,  0}, {16, 66}, {16, 44}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {14,  0}, {14, 67}, {14, 44}, {14, 22}, {14,  0}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {15, 22}},
+    {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {14,  0}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {13,  0}, {13, 22}, {13, 44}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {15, 22}}
+};
+
+// bool moveForwards = true;
+
+void circleSquiggle() {
+  circleSquiggle(0, 0, 0, 255);
+}
+
+void circleSquiggle(int r, int g, int b, int w) {
+  int placeInQueue = (timeyInTime % 262144) / 16384;
+  int thisPattern = (timeyInTime % 2621440) / 262144;
+
+  byte tube = squigglePattern[thisPattern][placeInQueue][0];
+  byte startLed = squigglePattern[thisPattern][placeInQueue][1];
+  int percentThroughPattern = percentThroughBeat/712;
+
+  // if (((tube == 0 || tube == 3) && moveForwards) || ((tube == 1 || tube == 2) && !moveForwards)) {
+
+  for(int j = 0; j < 5; j++) {
+    if (tube == 13 || tube == 15) {
+      lightNext(percentThroughPattern, thisPattern, startLed + percentThroughPattern, j, tube, placeInQueue, r, g, b, w);
+    } else {
+      lightNext(percentThroughPattern, thisPattern, startLed + (23 - percentThroughPattern), j, tube, placeInQueue, r, g, b, w);
+    }
+  }
+}
+
+ 
+
+int lightNext(int percentThroughPattern, int currentPattern, int currentLed, int numToAdd, int tube, int placeInQueue, int r, int g, int b, int w) {
+  if (tube == 13 || tube == 15) {
+    setSectionLed(tube, currentLed + numToAdd, r, g, b, w);
+  } else {
+    setSectionLed(tube, (currentLed - numToAdd), r, g, b, w);
+  }
+}
+
+///////////////////// Big Circle //////////////////
 void circleInTime() {
   int numToLight = percentThroughBeat / 182;
 
@@ -45,43 +155,21 @@ void circleInTime() {
   
 }
 
+//////////////////////////// Me Hearties /////////////////
+
 void heartInTime() {
-  // we want a heartbeat
-  int ledValue1 = currentHeartBeatValue(0, 255, 4);
-  int ledValue2 = currentHeartBeatValue(7, 170, 2);
-
-  if (ledValue1 > ledValue2)
-    setSection(1, ledValue1, 0, 0, 0);
-  else
-    setSection(1, ledValue2, 0, 0, 0);
-}
-
-// the shorter dropoff divisor the longer the trail
-int currentHeartBeatValue(int sixteenBeatShift, int maxValue, int dropoffLengthDivisor) {
-  int sixteenBeatVal = (sixteenBeats + sixteenBeatShift) % 8;
-  int returnVal = 0;
-  
-  if (sixteenBeatVal < 1) {
-    returnVal = (((percentThroughBeat * 100) / 8192)*255)/100;
-  } else if (sixteenBeatVal < 5) {
-    returnVal = 255-(((((((sixteenBeatVal-1)*8192)+percentThroughBeat)*100)/(65536/dropoffLengthDivisor))*255)/100);
-  }
-  return returnVal;
+  int percentThroughPattern = ((timeyInTime+24576) % 32768);
+  if (percentThroughPattern > 0 && percentThroughPattern < 6000) {
+    setSection(1, 255 - (percentThroughPattern/23), 0, 0, 0);
+    setSection(2, 255 - (percentThroughPattern/23), 0, 0, 0);
+  } else if (percentThroughPattern > 8192 && percentThroughPattern < 14192) {
+    setSection(1, 255 - (percentThroughPattern/23), 0, 0, 0);
+    setSection(2, 255 - (percentThroughPattern/23), 0, 0, 0);
+  } 
 }
 
 
-
-void horizontalRainbow(bool includeEyes, bool includeMouth, int speedFactor) {
-  int ticko = (timey / speedFactor) % 1024;
-  
-  for(int j = 0; j < numLeds; j++) {
-    int xCoord = (getCoord(j,0)+ticko)%1024;
-    SetRgbwWheelVars(xCoord/4);
-    setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
-  }
-}
-
-
+//////////////// Sections in time, BORING //////////////////
 void sectionsInTime() {
   int beat4 = sixteenBeats % 4;  
   if (beat4 == 0) {

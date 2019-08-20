@@ -33,6 +33,7 @@ int fakeBeatLengh = 420;
 
 // Set by midi in to be 1-16 with beat.
 int sixteenBeats = 0;
+int totalBeats = 0;
 
 int mainVolume = 40; // 127 actual max but we won't exceed 100.
 int tempMainVolume = 40; // 127 actual max but we won't exceed 100.
@@ -130,8 +131,9 @@ void setTimes() {
   }
 
   // this is a number to be used in animations, it counts up from the start of a tune, 16384 per beat.
-  timeyInTime = (sixteenBeats * 16384) + percentThroughBeat; // Note: this wont work for anim lengths > 262144, you'll need to use bar.
+  timeyInTime = (totalBeats * 16384) + percentThroughBeat; // Note: this wont work for anim lengths > 262144, you'll need to use bar.
 
+  /*
   if (testMode) {
     Serial.print("tit:");
     Serial.print(timeyInTime);
@@ -141,7 +143,7 @@ void setTimes() {
     Serial.print(percentThroughBeat);
     Serial.print("  currentBar:");
     Serial.println(currentBar);
-  }
+  }  */
     
 }
 
@@ -581,7 +583,7 @@ int ledSections[20] = {
   770,   // 10 indiciator *
   774,   // 11 underarm right
   797,   // 12 overarm right
-  821,   // 13 tube bottomright *
+  825,   // 13 tube bottomright *
   911,   // 14 tube bottomleft *
   1001,  // 15 tube topleft *
   1090,  // 16 tube topright * starred sections are shifted and / or reversed

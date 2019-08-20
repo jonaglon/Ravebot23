@@ -52,6 +52,7 @@ void listenToAbleton() {
 void setBeatTimes() {
   lastBeatLength = timey-lastBeatTime; 
   lastBeatTime = timey;
+  totalBeats++;
 }
 
 /* int sixteenBeatWatch = 0;

@@ -1,3 +1,5 @@
+// JR TODO - what the actual f is going on in here??! 
+
 void doPatternTrains() {
   tubesInTime();
   bigSpeakerInTime();

@@ -35,6 +35,7 @@ void playTune(int genre, int track, bool alterHistory) {
   currentBar = 0;
   fakeBeatCount = 0;
   sixteenBeats = 0;
+  totalBeats = 0;
   lastBeatTime = 0;
   timeyInTime = 0;
 

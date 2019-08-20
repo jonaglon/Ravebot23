@@ -101,6 +101,7 @@ void startNewMix() {
   mixCurrentBar = -1;
   currentlyMixing = true;
   sixteenBeats = 0;
+  totalBeats = 0;
   lastBeatTime = 0;
   timeyInTime = 0;
 

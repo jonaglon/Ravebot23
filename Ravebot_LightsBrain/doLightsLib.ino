@@ -163,6 +163,9 @@ void setSection(int section, int r, int g, int b, int w) {
 }
 
 void setSectionLed(int section, int ledNum, int r, int g, int b, int w) {
+  if (ledNum < 0)
+    return;
+    
   int j = ledSections[section] + ledNum;
   if (j < ledSections[section+1])
     setLedDirect(j, r, g, b, w, true);
@@ -237,7 +240,7 @@ void setLedDirect(int ledNum, int rVal, int gVal, int bVal, int wVal, bool showM
     // Body tube bottomright - 
     // setRgbwLed(ledNum+282, rVal, gVal, bVal, wVal); - 
     if (ledNum < 866)
-      setRgbwLed(1968-ledNum, rVal, gVal, bVal, wVal);
+      setRgbwLed(1972-ledNum, rVal, gVal, bVal, wVal);
     else
       setRgbwLed(2058-ledNum, rVal, gVal, bVal, wVal);
   }
@@ -255,7 +258,7 @@ void setLedDirect(int ledNum, int rVal, int gVal, int bVal, int wVal, bool showM
     else
       setRgbwLed(2413-ledNum, rVal, gVal, bVal, wVal);
   }
-  else if (ledNum < 1179) {
+  else if (ledNum < 1180) {
     // Body tube topright
     if (ledNum < 1160)
       setRgbwLed(2531-ledNum, rVal, gVal, bVal, wVal);
