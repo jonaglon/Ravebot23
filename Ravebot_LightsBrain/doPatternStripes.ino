@@ -13,7 +13,7 @@ void doPatternStripes() {
 
 void stripesPattern1() {
 
-  SetRgbwWheelVars((timeyInTime / 512)%256);
+  SetRgbwWheelVars((timeyInTime/512)%256);
 
   int sixteenBeatPos = (sixteenBeats/4) % 4;
   int stripeBeatPos=0;
@@ -33,12 +33,15 @@ void stripesPattern1() {
     
   for(int j = 0; j < numLeds; j++) {
     int yCoord = getCoord(j,xyCord);
-    if (yCoord < stripeBeatPos)
+    /* if (yCoord < stripeBeatPos)
       setLedDirect(j, 0, 0, 0, 0, false);
     else if (yCoord < stripeBeatPos+200)
       setLedDirect(j, wheelR, wheelG, wheelB, 0, false);
     else
-      setLedDirect(j, 0, 0, 0, 0, false);      
+      setLedDirect(j, 0, 0, 0, 0, false);  */
+    if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+200)) {
+      setLedDirect(j, wheelR, wheelG, wheelB, 0, false);
+    }
   }
 }
 
@@ -62,12 +65,8 @@ void stripesPattern2() {
   int stripeBeatPos = ((timeyInTime / 32)%2048)-1024;
   for(int j = 0; j < numLeds; j++) {
     int yCoord = getCoord(j,0);
-    if (yCoord < stripeBeatPos)
-      setLedDirect(j, 0, 0, 0, 0, false);
-    else if (yCoord < stripeBeatPos+400)
+    if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+400))
       setLedDirect(j, rVal, gVal, bVal, wVal, false);
-    else
-      setLedDirect(j, 0, 0, 0, 0, false);      
   }
 }
 
