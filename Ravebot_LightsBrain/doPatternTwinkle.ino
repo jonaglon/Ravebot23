@@ -11,9 +11,9 @@ void doTwinkles() {
     {
         int ticky = (timeyInTime%animLength / speedDivisor)/quickAbsolute(myTwinkles[twinky].speedy);
         if (myTwinkles[twinky].speedy < 0) {
-          newLedNum = numLedsStrip-((myTwinkles[twinky].ledNum + ticky)%numLedsStrip);
+          newLedNum = numLeds-((myTwinkles[twinky].ledNum + ticky)%numLeds);
         } else {
-          newLedNum = (myTwinkles[twinky].ledNum + ticky)%numLedsStrip;
+          newLedNum = (myTwinkles[twinky].ledNum + ticky)%numLeds;
         }
     }
    
