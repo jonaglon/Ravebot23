@@ -1,4 +1,5 @@
-//int currentTwinklePattern = 0;
+const short speedDivisor = 64;  /* small numbers equals faster strips! */
+
 int ledToLight;
 
 void doTwinkles() {
@@ -6,11 +7,14 @@ void doTwinkles() {
   for (int twinky = 0; twinky < usedTwinkleCount[currentLightPattern]; twinky++) {
 
     int newLedNum = myTwinkles[twinky].ledNum;
-
-    if (myTwinkles[twinky].speedy != 0) {
-      newLedNum = (numLeds-myTwinkles[twinky].ledNum) % numLeds; // JR TODO 0 should be ticky, what the ficl is that?
-    } else {
-      newLedNum = myTwinkles[twinky].ledNum % numLeds;
+    if (myTwinkles[twinky].speedy != 0)
+    {
+        int ticky = (timeyInTime%animLength / speedDivisor)/quickAbsolute(myTwinkles[twinky].speedy);
+        if (myTwinkles[twinky].speedy < 0) {
+          newLedNum = numLedsStrip-((myTwinkles[twinky].ledNum + ticky)%numLedsStrip);
+        } else {
+          newLedNum = (myTwinkles[twinky].ledNum + ticky)%numLedsStrip;
+        }
     }
    
     int twinkLength = myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy + myTwinkles[twinky].fadeOut;

@@ -44,7 +44,7 @@ void changeLightPattern() {
   }
 
   // JR TODO - this is the cheat setting the lights pattern ******************
-  newPattern = 4;
+  newPattern = 1;
   
   currentLightPattern = newPattern;
 

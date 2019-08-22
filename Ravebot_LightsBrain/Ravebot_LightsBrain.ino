@@ -22,12 +22,11 @@ int lastBeatLength = 1;
 int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
 unsigned long fakeBeatCount = 0;
 
-int animLength=262144; // used by the twinkle patterns
+const int animLength=262144; // used by the twinkle patterns
 //int timeyInTime;
 bool rainbowTwinkleMode = false;
-int speedDivisor = 64;
 
-int currentDance = 0;
+int currentDance = 1;
 
 int fakeBeatLengh = 420;
 
