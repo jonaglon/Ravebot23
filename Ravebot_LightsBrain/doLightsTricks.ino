@@ -33,7 +33,7 @@ void knigtRiderArms() {
 ///////////////// Circles in time //////////////////////////////
 void bodyCirclesInTime() {
 
-  int percentThroughPattern = (timeyInTime % 32768)/364;     // 0-90 hopefully
+  int percentThroughPattern = (timeyInTime % 32768)/364;     // 0-90 over 2 bars
 
   int beat4 = sixteenBeats % 4;  
   if (beat4 == 0) {
@@ -109,10 +109,26 @@ byte squigglePattern[10][17][2] {
 // bool moveForwards = true;
 
 void circleSquiggle() {
-  circleSquiggle(0, 0, 0, 255);
+  circleSquiggle(0, 0, 0, 0, 255);
+  circleSquiggle(728, 0, 0, 0, 255);
+  circleSquiggle(1456, 0, 0, 0, 255);
+  circleSquiggle(2185, 0, 0, 0, 255);
+  circleSquiggle(2913, 0, 0, 0, 255);
+  circleSquiggle(3641, 0, 0, 0, 255);
+  circleSquiggle(4369, 0, 0, 0, 255);
+  circleSquiggle(5097, 0, 0, 0, 255);
+  circleSquiggle(5825, 0, 0, 0, 255);
+  circleSquiggle(6554, 0, 0, 0, 255);
+  circleSquiggle(7282, 0, 0, 0, 255);
+  circleSquiggle(8010, 0, 0, 0, 255);
+  circleSquiggle(8738, 0, 0, 0, 255);
+  circleSquiggle(9466, 0, 0, 0, 255);
+  circleSquiggle(10194, 0, 0, 0, 255);
+  circleSquiggle(10923, 0, 0, 0, 255);
+  circleSquiggle(11651, 0, 0, 0, 255);
 }
 
-void circleSquiggle(int r, int g, int b, int w) {
+void circleSquiggle(int offset, int r, int g, int b, int w) {
   int placeInQueue = (timeyInTime % 262144) / 16384;
   int thisPattern = (timeyInTime % 2621440) / 262144;
 
@@ -122,24 +138,13 @@ void circleSquiggle(int r, int g, int b, int w) {
 
   // if (((tube == 0 || tube == 3) && moveForwards) || ((tube == 1 || tube == 2) && !moveForwards)) {
 
-  for(int j = 0; j < 5; j++) {
-    if (tube == 13 || tube == 15) {
-      lightNext(percentThroughPattern, thisPattern, startLed + percentThroughPattern, j, tube, placeInQueue, r, g, b, w);
-    } else {
-      lightNext(percentThroughPattern, thisPattern, startLed + (23 - percentThroughPattern), j, tube, placeInQueue, r, g, b, w);
-    }
-  }
-}
-
- 
-
-int lightNext(int percentThroughPattern, int currentPattern, int currentLed, int numToAdd, int tube, int placeInQueue, int r, int g, int b, int w) {
   if (tube == 13 || tube == 15) {
-    setSectionLed(tube, currentLed + numToAdd, r, g, b, w);
+    setSectionLed(tube, startLed + percentThroughPattern, r, g, b, w);
   } else {
-    setSectionLed(tube, (currentLed - numToAdd), r, g, b, w);
+    setSectionLed(tube, startLed + (23 - percentThroughPattern), r, g, b, w);
   }
 }
+
 
 ///////////////////// Big Circle //////////////////
 void circleInTime() {
