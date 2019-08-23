@@ -1,4 +1,4 @@
-const short speedDivisor = 64;  /* small numbers equals faster strips! */
+const short speedDivisor = 256;  /* small numbers equals faster strips! */
 
 int ledToLight;
 
@@ -367,7 +367,7 @@ void setupTwinkle6(int twinky) {
   myTwinkles[twinky].fadeOut = 65536;
   myTwinkles[twinky].start = findNewStart2(myTwinkles[twinky].fadeIn); 
   myTwinkles[twinky].widthy =  random(30);
-  myTwinkles[twinky].speedy = 300;
+  myTwinkles[twinky].speedy = 30;
   myTwinkles[twinky].sideFade = 0;
   myTwinkles[twinky].hasTwinked = false;
 

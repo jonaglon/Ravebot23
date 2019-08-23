@@ -5,7 +5,7 @@ void doLights() {
   allOff();
   // allOffBySection();
 
-/*
+  /*
   if (currentLightPattern < 7) {
     doTwinkles();
   } else if (currentLightPattern < 9) {
@@ -17,9 +17,9 @@ void doLights() {
     //     doPatternTrains();
   } else  {
     horizontalRainbow(false, false, 20);
-  }   */
+  }*/
 
-  stripesPattern3();
+  //stripesPattern3();
 
 
   // ***************************************************************************************
@@ -29,7 +29,7 @@ void doLights() {
   // sectionsInTime();
   // bodyCirclesInTime();
   // heartInTime();
-  // circleSquiggle();
+  circleSquiggleController();
 
 
   doFace();
@@ -44,7 +44,7 @@ void changeLightPattern() {
   }
 
   // JR TODO - this is the cheat setting the lights pattern ******************
-  newPattern = 1;
+  newPattern = 2;
   
   currentLightPattern = newPattern;
 

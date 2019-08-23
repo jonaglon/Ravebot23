@@ -54,7 +54,7 @@ int ledIntensity = 10;
 byte wheelR;
 byte wheelG;
 byte wheelB;
-int currentLightPattern = 4;
+int currentLightPattern = 2;
 
 int leftEyeX = 0;
 int leftEyeY = 0;
@@ -130,7 +130,7 @@ void setTimes() {
   }
 
   // this is a number to be used in animations, it counts up from the start of a tune, 16384 per beat.
-  timeyInTime = (totalBeats * 16384) + percentThroughBeat; // Note: this wont work for anim lengths > 262144, you'll need to use bar.
+  timeyInTime = (totalBeats * 16384) + percentThroughBeat;
 
   /*
   if (testMode) {

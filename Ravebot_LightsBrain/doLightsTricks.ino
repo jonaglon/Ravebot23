@@ -107,34 +107,85 @@ byte squigglePattern[10][17][2] {
 };
 
 // bool moveForwards = true;
+int squiggleLedDistance[17] {0, 728, 1456, 2185, 2913, 3641, 4369, 5097, 5825, 6554, 7282, 8010, 8738, 9466, 10194, 10923, 11651};
 
-void circleSquiggle() {
-  circleSquiggle(0, 0, 0, 0, 255);
-  circleSquiggle(728, 0, 0, 0, 255);
-  circleSquiggle(1456, 0, 0, 0, 255);
-  circleSquiggle(2185, 0, 0, 0, 255);
-  circleSquiggle(2913, 0, 0, 0, 255);
-  circleSquiggle(3641, 0, 0, 0, 255);
-  circleSquiggle(4369, 0, 0, 0, 255);
-  circleSquiggle(5097, 0, 0, 0, 255);
-  circleSquiggle(5825, 0, 0, 0, 255);
-  circleSquiggle(6554, 0, 0, 0, 255);
-  circleSquiggle(7282, 0, 0, 0, 255);
-  circleSquiggle(8010, 0, 0, 0, 255);
-  circleSquiggle(8738, 0, 0, 0, 255);
-  circleSquiggle(9466, 0, 0, 0, 255);
-  circleSquiggle(10194, 0, 0, 0, 255);
-  circleSquiggle(10923, 0, 0, 0, 255);
-  circleSquiggle(11651, 0, 0, 0, 255);
+void circleSquiggleController() {
+  circleSquiggleWhiteEight();
+}
+
+void circleSquiggleRainbow1() {
+  for (int arrayNum=0; arrayNum < 11; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+98304, 80, 0, 200, 0);
+  }
+  for (int arrayNum=0; arrayNum < 11; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+81920, 35, 0, 65, 0);
+  }
+  for (int arrayNum=0; arrayNum < 11; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+65536, 0, 0, 255, 0);
+  }
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+49152, 0, 255, 0, 0);
+  }
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+32768, 255, 255, 0, 0);
+  }
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+16384, 255, 65, 0, 0);
+  }
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum], 255, 0, 0, 0);
+  }
+}
+
+void circleSquiggleWhiteEight() {
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+114688, 0, 0, 0, 255);
+  }
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+98304, 0, 0, 0, 255);
+  }
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+81920, 0, 0, 0, 255);
+  }
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+65536, 0, 0, 0, 255);
+  }
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+49152, 0, 0, 0, 255);
+  }
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+32768, 0, 0, 0, 255);
+  }
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+16384, 0, 0, 0, 255);
+  }
+  for (int arrayNum=0; arrayNum < 10; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum], 0, 0, 0, 255);
+  }
+}
+
+void circleSquiggleGood() {
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum], 100, 50, 100, 0);
+  }
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+16384, 150, 0, 100, 5);
+  }
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+32768, 0, 100, 150, 0);
+  }
+  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+49152, 50, 0, 200, 0);
+  }
 }
 
 void circleSquiggle(int offset, int r, int g, int b, int w) {
-  int placeInQueue = (timeyInTime % 262144) / 16384;
-  int thisPattern = (timeyInTime % 2621440) / 262144;
+  int placeInQueue = ((timeyInTime+offset) % 262144) / 16384;
+  int thisPattern = ((timeyInTime+offset) % 2621440) / 262144;
 
   byte tube = squigglePattern[thisPattern][placeInQueue][0];
   byte startLed = squigglePattern[thisPattern][placeInQueue][1];
-  int percentThroughPattern = percentThroughBeat/712;
+  int percentThroughPattern = ((percentThroughBeat+offset)%16384)/712;
 
   // if (((tube == 0 || tube == 3) && moveForwards) || ((tube == 1 || tube == 2) && !moveForwards)) {
 

@@ -145,7 +145,7 @@ void drawEyeSquare(int offSet, int xCoord, int  yCoord, int radius, int r, int g
 
 //const int pupilRadius=26;
 //const int maxRadius=42;
-void drawHexagon(int ledNumOffSet, int xCoord, int  yCoord, int pupilRadius, int maxRadius, int r, int g, int b, int w) {
+void drawEyeHexagon(int ledNumOffSet, int xCoord, int  yCoord, int pupilRadius, int maxRadius, int r, int g, int b, int w) {
   for (int j = 0; j < 93; j++) { 
     if ((eyeCoords[j][0] < (xCoord+pupilRadius)) && (eyeCoords[j][1] < (yCoord+pupilRadius))) {
       if ((eyeCoords[j][0] > (xCoord-pupilRadius)) && (eyeCoords[j][1] > (yCoord-pupilRadius))) {
@@ -280,31 +280,36 @@ void setRgbwLed(int ledNumber, int rVal, int gVal, int bVal, int wVal) {
   int newNumber = (ledNumber * 4) / 3;
   short mod = ledNumber % 3;
 
-  rVal = rVal/ledIntensity;
-  gVal = gVal/ledIntensity;
-  bVal = bVal/ledIntensity;
-  wVal = wVal/ledIntensity;
+  // JR TODO - test and add me laters
+  /*
+  rVal = (rVal/ledIntensity)+rgbwLeds[newNumber].r > 255 ? 255 : (rVal/ledIntensity)+rgbwLeds[newNumber].r;
+  gVal = (gVal/ledIntensity)+rgbwLeds[newNumber].g > 255 ? 255 : (gVal/ledIntensity)+rgbwLeds[newNumber].g;
+  bVal = (bVal/ledIntensity)+rgbwLeds[newNumber].b > 255 ? 255 : (bVal/ledIntensity)+rgbwLeds[newNumber].b;   */
+  rVal = rVal/ledIntensity > 255 ? 255 : rVal/ledIntensity;
+  gVal = gVal/ledIntensity > 255 ? 255 : gVal/ledIntensity;
+  bVal = bVal/ledIntensity > 255 ? 255 : bVal/ledIntensity;
+  wVal = wVal/ledIntensity > 255 ? 255 : wVal/ledIntensity;
 
   if (mod == 0)
   {
-    rgbwLeds[newNumber].r = rVal % 256;
-    rgbwLeds[newNumber].g = gVal % 256;
-    rgbwLeds[newNumber].b = bVal % 256;
-    rgbwLeds[newNumber+1].g =wVal % 256;
+    rgbwLeds[newNumber].r = rVal;
+    rgbwLeds[newNumber].g = gVal;
+    rgbwLeds[newNumber].b = bVal;
+    rgbwLeds[newNumber+1].g =wVal;
   }
   else if (mod == 1)
   {
-    rgbwLeds[newNumber].r = gVal % 256;
-    rgbwLeds[newNumber].b = rVal % 256;
-    rgbwLeds[newNumber+1].r =wVal % 256;
-    rgbwLeds[newNumber+1].g =bVal % 256;
+    rgbwLeds[newNumber].r = gVal;
+    rgbwLeds[newNumber].b = rVal;
+    rgbwLeds[newNumber+1].r =wVal;
+    rgbwLeds[newNumber+1].g =bVal;
   }
   else 
   {
-    rgbwLeds[newNumber].b = gVal % 256;
-    rgbwLeds[newNumber+1].r =bVal % 256;
-    rgbwLeds[newNumber+1].g =rVal % 256;
-    rgbwLeds[newNumber+1].b =wVal % 256;
+    rgbwLeds[newNumber].b = gVal;
+    rgbwLeds[newNumber+1].r =bVal;
+    rgbwLeds[newNumber+1].g =rVal;
+    rgbwLeds[newNumber+1].b =wVal;
   }
 }
 
