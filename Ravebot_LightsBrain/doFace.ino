@@ -10,7 +10,18 @@ void changeEyeType() {
 
 void doFace() {
   eyeController();
+  doDialRainbow();
   doTalkingLights();
+}
+
+void doDialRainbow() {
+  int percentThroughPattern = timeyInTime/1024;     // 0-255 over 2 bars
+  
+  // 26 ligths in the dial
+  for(int j = 0; j < 26; j++) {
+    SetRgbwWheelVars((percentThroughPattern+(j*6))%256);
+    setSectionLed(9, 26-j, wheelR, wheelG, wheelB, 0);   
+  }
 }
 
 void eyeController() {

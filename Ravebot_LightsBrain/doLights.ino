@@ -5,11 +5,10 @@ void doLights() {
   allOff();
   // allOffBySection();
 
-  /*
   if (currentLightPattern < 7) {
     doTwinkles();
   } else if (currentLightPattern < 9) {
-    doPatternStripes();
+    doPatternStripes();   // TODO - there are more than two stripe patterns
   } else if (currentLightPattern == 9) {
     horizontalRainbow(false, false, 80);
   } else if (currentLightPattern == 10) {
@@ -17,9 +16,7 @@ void doLights() {
     //     doPatternTrains();
   } else  {
     horizontalRainbow(false, false, 20);
-  }*/
-
-  //stripesPattern3();
+  }
 
 
   // ***************************************************************************************
@@ -29,7 +26,7 @@ void doLights() {
   // sectionsInTime();
   // bodyCirclesInTime();
   // heartInTime();
-  circleSquiggleController();
+  // circleSquiggleController(); - three patterns here, different ones better with different backgrounds.
 
 
   doFace();
@@ -44,7 +41,7 @@ void changeLightPattern() {
   }
 
   // JR TODO - this is the cheat setting the lights pattern ******************
-  newPattern = 2;
+  // newPattern = 2;
   
   currentLightPattern = newPattern;
 

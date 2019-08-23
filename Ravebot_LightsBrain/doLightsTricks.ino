@@ -110,7 +110,7 @@ byte squigglePattern[10][17][2] {
 int squiggleLedDistance[17] {0, 728, 1456, 2185, 2913, 3641, 4369, 5097, 5825, 6554, 7282, 8010, 8738, 9466, 10194, 10923, 11651};
 
 void circleSquiggleController() {
-  circleSquiggleWhiteEight();
+  circleSquiggleGood();
 }
 
 void circleSquiggleRainbow1() {
@@ -165,17 +165,43 @@ void circleSquiggleWhiteEight() {
 }
 
 void circleSquiggleGood() {
-  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
-    circleSquiggle(squiggleLedDistance[arrayNum], 100, 50, 100, 0);
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+180224, 50, 0, 240, 0);
   }
-  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
-    circleSquiggle(squiggleLedDistance[arrayNum]+16384, 150, 0, 100, 5);
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+163840, 0, 100, 150, 0);
   }
-  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+147456, 150, 0, 100, 0);
+  }
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+131072, 80, 40, 110, 0);
+  }
+  
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+114688, 50, 0, 240, 0);
+  }
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+98304, 0, 100, 150, 0);
+  }
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+81920, 150, 0, 100, 0);
+  }
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+65536, 80, 40, 110, 0);
+  }
+
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+49152, 50, 0, 240, 0);
+  }
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
     circleSquiggle(squiggleLedDistance[arrayNum]+32768, 0, 100, 150, 0);
   }
-  for (int arrayNum=0; arrayNum < 9; arrayNum++) {
-    circleSquiggle(squiggleLedDistance[arrayNum]+49152, 50, 0, 200, 0);
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum]+16384, 150, 0, 100, 0);
+  }
+  for (int arrayNum=0; arrayNum < 12; arrayNum++) {
+    circleSquiggle(squiggleLedDistance[arrayNum], 80, 40, 110, 0);
   }
 }
 
@@ -204,7 +230,6 @@ void circleInTime() {
   for(int j = 0; j < 90; j++) {
     setSectionLed(14, j, 0, 0, 0, 0);
   }
-  
   for(int j = 0; j < numToLight; j++) {
     setSectionLed(14, j, 0, 0, 255, 0);
   }

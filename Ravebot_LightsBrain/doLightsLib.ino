@@ -4,11 +4,11 @@
 // TODO - if you use this one below with set rgbwWheelVars to set in time speeds
 /////////////////////////////////////////////  here:
 void rgbwRainbow(int speedFactor) {
-  int ticky = (timey / speedFactor);
+  int ticky = (timeyInTime / speedFactor);
 
   // forward
   for (int pixNum = 0; pixNum < numLeds; pixNum++) {
-    SetRgbwWheel(pixNum, (pixNum + ticky) % 255, 0);
+    SetRgbwWheelVars((pixNum + ticky) % 255);
   }
 }
   
