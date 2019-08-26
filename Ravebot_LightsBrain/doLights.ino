@@ -19,7 +19,8 @@ void doLights() {
     horizontalRainbow(false, false, 20);
   }*/
 
-  doPatternStripes();
+  // doPatternStripes();
+  doRainbowPatterns();
 
   // ***************************************************************************************
   // JR TODO - find a way of deciding which light extras should be happening at the moment.

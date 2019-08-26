@@ -1,13 +1,11 @@
 
 
 void doPatternStripes() {
-
   if (currentLightPattern == 7) {
     stripesPattern1();
   } else if (currentLightPattern == 8) {
     stripesPattern2();
-  }
-  
+  }  
 }
 
 
@@ -64,6 +62,4 @@ void stripesPattern2() {
       setLedDirect(j, rVal, gVal, bVal, wVal, false);
   }
 }
-
-
 

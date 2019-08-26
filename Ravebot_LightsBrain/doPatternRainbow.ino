@@ -1,13 +1,43 @@
 
+void doRainbowPatterns() {
+  allOverRainbow2();
+}
 
 
-void horizontalRainbow(bool includeEyes, bool includeMouth, int speedFactor) {
-  // TODO - timey in time maybe
-  int ticko = (timey / speedFactor) % 1024;
-  
+void horizontalRainbow() {
   for(int j = 0; j < numLeds; j++) {
-    int xCoord = (getCoord(j,0)+ticko)%1024;
-    SetRgbwWheelVars(xCoord/4);
+    int xCoord = 614-getCoord(j,0);
+    SetRgbwWheelVars((xCoord+(timeyInTime/512))%256);
+    setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
+  }
+}
+
+void horizontalRainbowJoin() {
+  for(int j = 0; j < numLeds; j++) {
+    int xCoord = getCoord(j,0);
+    if (xCoord < 307) {
+      xCoord = 600-xCoord;
+      SetRgbwWheelVars((xCoord+(timeyInTime/512))%256);
+      setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
+    } else {
+      SetRgbwWheelVars((xCoord+(timeyInTime/512))%256);
+      setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
+    }
+  }
+}
+
+void allOverRainbow1() {
+  for(int j = 0; j < numLeds; j++) {
+    int xCoord = 614-getCoord(j,0);
+    int yCoord = getCoord(j,1);
+    SetRgbwWheelVars((xCoord+yCoord+(timeyInTime/256))%256);
+    setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
+  }
+}
+
+void allOverRainbow2() {
+  for(int j = 0; j < numLeds; j++) {
+    SetRgbwWheelVars((j*3)+(timeyInTime/512));
     setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
   }
 }
