@@ -5,7 +5,7 @@
 int currentEyeType = 0;
 void changeEyeType() {
   resetEyes();
-  currentEyeType = (currentEyeType+1)%5;
+  currentEyeType = (currentEyeType+1)%6;
 }
 
 void doFace() {

@@ -5,7 +5,7 @@ void doLights() {
   allOff();
   // allOffBySection();
 
-  if (currentLightPattern < 7) {
+  /*if (currentLightPattern < 7) {
     doTwinkles();
   } else if (currentLightPattern < 9) {
     doPatternStripes();   // TODO - there are more than two stripe patterns
@@ -16,8 +16,9 @@ void doLights() {
     //     doPatternTrains();
   } else  {
     horizontalRainbow(false, false, 20);
-  }
+  }*/
 
+  doPatternDonuts();
 
   // ***************************************************************************************
   // JR TODO - find a way of deciding which light extras should be happening at the moment.

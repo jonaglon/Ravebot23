@@ -245,7 +245,7 @@ void setLedDirect(int ledNum, int rVal, int gVal, int bVal, int wVal, bool showM
     // Body tube bottomright - 
     // setRgbwLed(ledNum+282, rVal, gVal, bVal, wVal); - 
     if (ledNum < 866)
-      setRgbwLed(1972-ledNum, rVal, gVal, bVal, wVal);
+      setRgbwLed(1972-ledNum, rVal, gVal, bVal, wVal);  // was 1968
     else
       setRgbwLed(2058-ledNum, rVal, gVal, bVal, wVal);
   }

@@ -33,12 +33,6 @@ void stripesPattern1() {
     
   for(int j = 0; j < numLeds; j++) {
     int yCoord = getCoord(j,xyCord);
-    /* if (yCoord < stripeBeatPos)
-      setLedDirect(j, 0, 0, 0, 0, false);
-    else if (yCoord < stripeBeatPos+200)
-      setLedDirect(j, wheelR, wheelG, wheelB, 0, false);
-    else
-      setLedDirect(j, 0, 0, 0, 0, false);  */
     if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+200)) {
       setLedDirect(j, wheelR, wheelG, wheelB, 0, false);
     }
@@ -73,6 +67,8 @@ void stripesPattern2() {
 void stripesPattern3() {
 
 // int percentThroughPattern = (timeyInTime % 32768)/364;     // 0-90 hopefully 
+
+// this didn't work.
 
   int stripeBeatPos = (timeyInTime / 32) % 2048;
   for(int j = 0; j < numLeds; j++) {
