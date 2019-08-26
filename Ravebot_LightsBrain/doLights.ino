@@ -13,12 +13,13 @@ void doLights() {
     horizontalRainbow(false, false, 80);
   } else if (currentLightPattern == 10) {
     doPatternBlobs();
-    //     doPatternTrains();
-  } else  {
+    //    doPatternTrains();
+    //    doPatternDonuts();
+  } else {
     horizontalRainbow(false, false, 20);
   }*/
 
-  doPatternDonuts();
+  doPatternStripes();
 
   // ***************************************************************************************
   // JR TODO - find a way of deciding which light extras should be happening at the moment.
