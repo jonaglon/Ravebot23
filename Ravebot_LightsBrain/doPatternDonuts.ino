@@ -1,34 +1,47 @@
 
 
 void doPatternDonuts() {
+  //drawWhiteHexagons();
 
-  drawHexagon();
-  
+  coOdrinTits();
 }
 
-void drawHexagon() {
-  int stripeBeatPos = (timeyInTime % 32768)/328; 
-  
-  for(int j = 0; j < numLeds; j++) {
+void coOdrinTits() {
+  for (int j = 0; j < numLeds; j++) { 
     int xCoord = getCoord(j,0);
     int yCoord = getCoord(j,1);
-    if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+200)) {
-      if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+200)) {
-        setLedDirect(j, 255, 0, 0, 0, false);
-      }
+
+    if (xCoord < 490) {
+      setLedDirect(j, 0, 0, 255, 0, false);
     }
-  }
+
+  }  
 }
 
+void drawRGBHexagons() {
+  int yStripeBeatPos = (timeyInTime % 65536)/60; // 0-958
+  drawHexagon(yStripeBeatPos+500, 0, 255, 0, 0);
+  drawHexagon(yStripeBeatPos, 255, 0, 0, 0);
+  drawHexagon(yStripeBeatPos-500, 0, 0, 255, 0);
+}
 
-void drawHexagon(int squareRadius, int xCoord, int  yCoord, int r, int g, int b, int w) {
-  int diamondRadius=(squareRadius*1000)/1615;
+void drawWhiteHexagons() {
+  int yStripeBeatPos = (timeyInTime % 32768)/32;
+  drawHexagon(yStripeBeatPos+50, 0, 0, 0, 255);
+  drawHexagon(yStripeBeatPos, 0, 0, 0, 255);
+  drawHexagon(yStripeBeatPos-50, 0, 0, 0, 0);
+}
+
+void drawHexagon(int squareRadius, int r, int g, int b, int w) {
+  int xCoord = 307;
+  int yCoord = 758;
+  int diamondRadius=(squareRadius*4)/3;
   for (int j = 0; j < numLeds; j++) { 
-    if ((getCoord(j,0) < (xCoord+diamondRadius)) && (getCoord(j,1) < (yCoord+diamondRadius))) {
-      if ((getCoord(j,0) > (xCoord-diamondRadius)) && (getCoord(j,1) > (yCoord-diamondRadius))) {
-        int x = quickAbsolute(xCoord-eyeCoords[j][0]);
-        int y = quickAbsolute(yCoord-eyeCoords[j][1]);
-        if (x + y < squareRadius) {
+    if (getCoord(j,0) < (xCoord+(squareRadius/2)) && (getCoord(j,1) < (yCoord+squareRadius))) {
+      if (getCoord(j,0) > (xCoord-(squareRadius/2)) && (getCoord(j,1) > (yCoord-squareRadius))) {
+        int x = quickAbsolute(xCoord-getCoord(j,0));
+        int y = quickAbsolute(yCoord-getCoord(j,1));
+        if ((x/2) + y < diamondRadius) {
           setLedDirect(j, r, g, b, w, false);
         }
       }
