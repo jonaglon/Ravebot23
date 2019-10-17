@@ -8,7 +8,7 @@
 #include<Wire.h>
 #include<FastLED.h>
 
-const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
+const bool testMode = true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
 const bool beatTestMode = true;
 const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega
 
@@ -17,14 +17,12 @@ bool robotManualMode = true;
 
 unsigned long timey;
 unsigned int lastBeatTime = 0;
-unsigned int timeyInTime; // This is like timey but in time, counting 16384 per beat
+unsigned int timeyInTime, twinkleTime; // This is like timey but in time, counting 16384 per beat
 int lastBeatLength = 1;
 int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
 unsigned long fakeBeatCount = 0;
 
-const int animLength=262144; // used by the twinkle patterns
-//int timeyInTime;
-bool rainbowTwinkleMode = false;
+const int animLength=65536; // used by the twinkle patterns
 
 int currentDance = 1;
 
@@ -131,6 +129,8 @@ void setTimes() {
 
   // this is a number to be used in animations, it counts up from the start of a tune, 16384 per beat.
   timeyInTime = (totalBeats * 16384) + percentThroughBeat;
+
+  twinkleTime = timeyInTime % animLength;
 
   /*
   if (testMode) {
