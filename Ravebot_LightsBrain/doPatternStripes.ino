@@ -1,9 +1,9 @@
 
 
 void doPatternStripes() {
-  if (currentLightPattern == 7) {
+  if (currentLightPattern == 14) {
     stripesPattern1();
-  } else if (currentLightPattern == 8) {
+  } else if (currentLightPattern == 15) {
     stripesPattern2();
   }  
 }

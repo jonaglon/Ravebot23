@@ -5,12 +5,12 @@ void doLights() {
   allOff();
   // allOffBySection();
 
-  /*if (currentLightPattern < 7) {
+  /*if (currentLightPattern < 14) {
     doTwinkles();
-  } else if (currentLightPattern < 9) {
-    doPatternStripes();   // TODO - there are more than two stripe patterns
-  } else if (currentLightPattern == 9) {
-    horizontalRainbow(false, false, 80);
+  } else if (currentLightPattern < 16) {
+    doPatternStripes();
+  } else if (currentLightPattern < 20) {
+    doRainbowPatterns();
   } else if (currentLightPattern == 10) {
     doPatternBlobs();
     //    doPatternTrains();
@@ -49,7 +49,7 @@ void changeLightPattern() {
   currentLightPattern = newPattern;
 
   // if it's a twinkle call the setup code
-  if (newPattern < 7) {
+  if (newPattern < 14) {
     setupNewTwinklePattern(currentLightPattern);
   }
 }
