@@ -3,7 +3,6 @@ int numPatterns = 11;
 void doLights() {
 
   allOff();
-  // allOffBySection();
 
   /*if (currentLightPattern < 14) {
     doTwinkles();
@@ -20,7 +19,8 @@ void doLights() {
   }*/
 
   // doPatternStripes();
-  doRainbowPatterns();
+  // doRainbowPatterns();
+  doTwinkles();
 
   // ***************************************************************************************
   // JR TODO - find a way of deciding which light extras should be happening at the moment.

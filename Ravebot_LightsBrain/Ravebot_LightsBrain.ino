@@ -12,7 +12,7 @@ const bool testMode = true;                                                     
 const bool beatTestMode = true;
 const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega
 
-bool robotSwitchedOn = true;
+bool robotSwitchedOn = false;
 bool robotManualMode = true;
 
 unsigned long timey;
@@ -22,9 +22,11 @@ int lastBeatLength = 1;
 int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
 unsigned long fakeBeatCount = 0;
 
-const int animLength=65536; // used by the twinkle patterns
+const int animLength=262144; // 65536 would be good. used by the twinkle patterns
+const int animLength16th=16384;  //  4096. This has to be a 16th of above
 
 int currentDance = 1;
+int currentLightPattern = 1;
 
 int fakeBeatLengh = 420;
 
@@ -52,7 +54,6 @@ int ledIntensity = 10;
 byte wheelR;
 byte wheelG;
 byte wheelB;
-int currentLightPattern = 2;
 
 int leftEyeX = 0;
 int leftEyeY = 0;
@@ -97,7 +98,13 @@ void setup() {
   LEDS.setBrightness(128); // 128 good max, 255 actual /max
 
   setMainVolume(mainVolume);
+  
+  if (currentLightPattern < 14)
+    setupNewTwinklePattern(currentLightPattern);
 
+  if (!robotSwitchedOn)
+    changeOnOff(0);
+    
   // JR TODO remove me
   playTune(0, 0, true);
 }
@@ -427,7 +434,7 @@ tuneInfo tuneLibHipHop[28] = {
   {134,  0, 124,  8,  0,  8,  8, true},   //25 ForgotAboutDre-DreEminem
   { 93,  0, 104,  8,  0,  8,  8, false},  //26 StillDRE-DrDre
   { 98,  0, 102,  4,  0,  8,  8, true},   //27 X-Xzibit
-  { 98,  0, 100,  4,  0,  8,  8, true},   //27 X-Xzibit
+  { 98,  0, 100,  4,  0,  8,  8, true},   //2x X-Xzibit
 };
 
 
@@ -461,9 +468,9 @@ struct twinkle {
 
 };
 
-const int numTwinks = 1600;
+const int numTwinks = 1024;
 twinkle myTwinkles[numTwinks];
-const int usedTwinkleCount[7] = {1600, 200, 400, 1600, 1600, 1000, 60};
+const int usedTwinkleCount[14] = {1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024};
 
 int eyeCoords[93][2] = {
   { 55, 107}, { 64, 106}, { 75, 104}, { 84, 98}, { 92, 93}, { 98, 85}, {103, 76}, {107, 66}, {108, 56}, {107, 45},
