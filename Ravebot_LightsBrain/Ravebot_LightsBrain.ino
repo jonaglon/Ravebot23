@@ -22,11 +22,11 @@ int lastBeatLength = 1;
 int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
 unsigned long fakeBeatCount = 0;
 
-const int animLength=262144; // 65536 would be good. used by the twinkle patterns
-const int animLength16th=16384;  //  4096. This has to be a 16th of above  16383
+const int animLength=524288; // 65536 would be good. used by the twinkle patterns
+const int animLength32th=16384;  //  4096. This has to be a 16th of above  16383
 
 int currentDance = 1;
-int currentLightPattern = 6;
+int currentLightPattern = 9;    // JR Where you're up to - this is pattern 9, it's a bit like 8 but shit, totally change.
 
 int fakeBeatLengh = 420;
 
@@ -179,7 +179,7 @@ struct twinkle {
 
 const int numTwinks = 1024;
 twinkle myTwinkles[numTwinks];
-const int usedTwinkleCount[14] = {1024, 512, 750, 1024, 1024, 512, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024};
+const int usedTwinkleCount[14] = {1024, 512, 750, 1024, 1024, 512, 750, 600, 256, 1024, 1024, 1024, 1024, 1024};
 
 
 struct tuneInfo {
