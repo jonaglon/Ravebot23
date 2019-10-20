@@ -21,30 +21,74 @@ void doTwinkles() {
 
     if ((twinkleTime > (myTwinkles[twinky].start)) && (twinkleTime < (myTwinkles[twinky].start + myTwinkles[twinky].fadeIn))) {
       setLedsFadeIn(newLedNum, twinky, false);
+      if (testMode && twinky < 3) {
+        Serial.print("Doing: ");
+        Serial.print(twinky);
+        Serial.print("  in, not rolled:");
+        Serial.println("");
+      }
       if (!myTwinkles[twinky].hasTwinked)
         myTwinkles[twinky].hasTwinked = true;
     } else if (((myTwinkles[twinky].start + myTwinkles[twinky].fadeIn) > animLength) && (twinkleTime < ((myTwinkles[twinky].start + myTwinkles[twinky].fadeIn) % animLength))) {
       setLedsFadeIn(newLedNum, twinky, true);
+      if (testMode && twinky < 3) {
+        Serial.print("Doing: ");
+        Serial.print(twinky);
+        Serial.print("  in, rolled:");
+        Serial.println("");
+      }
       if (!myTwinkles[twinky].hasTwinked)
         myTwinkles[twinky].hasTwinked = true;
     } else if ((twinkleTime >= (myTwinkles[twinky].start + myTwinkles[twinky].fadeIn)) && (twinkleTime < (myTwinkles[twinky].start + myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy))) {
       setLedsOnFull(newLedNum, twinky, false);
+      if (testMode && twinky < 3) {
+        Serial.print("Doing: ");
+        Serial.print(twinky);
+        Serial.print("  full, not rolled:");
+        Serial.println("");
+      }
       if (!myTwinkles[twinky].hasTwinked)
         myTwinkles[twinky].hasTwinked = true;
     } else if (((myTwinkles[twinky].start + myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy) > animLength) && (twinkleTime < ((myTwinkles[twinky].start + myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy) % animLength))) {
       setLedsOnFull(newLedNum, twinky, true);
+      if (testMode && twinky < 3) {
+        Serial.print("Doing: ");
+        Serial.print(twinky);
+        Serial.print("  full, rolled:");
+        Serial.println("");
+      }
       if (!myTwinkles[twinky].hasTwinked)
         myTwinkles[twinky].hasTwinked = true;
     } else if ((twinkleTime >= (myTwinkles[twinky].start + myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy)) && (twinkleTime < (myTwinkles[twinky].start + twinkLength)) ) {
       setLedsFadeOut(newLedNum, twinky, false);
+      if (testMode && twinky < 3) {
+        Serial.print("Doing: ");
+        Serial.print(twinky);
+        Serial.print("  out, not rolled:");
+        Serial.println("");
+      }
       if (!myTwinkles[twinky].hasTwinked)
         myTwinkles[twinky].hasTwinked = true;
     } else if (((myTwinkles[twinky].start + myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy + myTwinkles[twinky].fadeOut) > animLength) && (twinkleTime < ((myTwinkles[twinky].start + myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy + myTwinkles[twinky].fadeOut) % animLength))) {
       setLedsFadeOut(newLedNum, twinky, true);
+      if (testMode && twinky < 3) {
+        Serial.print("Doing: ");
+        Serial.print(twinky);
+        Serial.print("  out, rolled:");
+        Serial.println("");
+      }
       if (!myTwinkles[twinky].hasTwinked)
         myTwinkles[twinky].hasTwinked = true;
     } else if ((twinkleTime >= (((myTwinkles[twinky].start + myTwinkles[twinky].fadeIn + myTwinkles[twinky].lengthy + myTwinkles[twinky].fadeOut) % animLength))) && myTwinkles[twinky].hasTwinked) {
       resetTwink(twinky);
+      if (testMode && twinky < 3) {
+        Serial.print("RESET: ");
+        Serial.print(twinky);
+        Serial.print("  st:");
+        Serial.println(myTwinkles[twinky].start);
+        Serial.print("  tt:");
+        Serial.println(twinkleTime);
+      }
     }
   }
 }
@@ -430,24 +474,31 @@ void setupTwinkle5(int twinky) {
 }
 
 void setupTwinkle6(int twinky) {
-  setGoodRandomColorVars();
   myTwinkles[twinky].ledNum = random(numLeds);
+  setGoodRandomColorVars();
   myTwinkles[twinky].rCol =  goodColR;
   myTwinkles[twinky].gCol =  goodColG;
   myTwinkles[twinky].bCol =  goodColB;
   myTwinkles[twinky].wCol =  0;
+  setGoodRandomColorVars();
   myTwinkles[twinky].rToCol =  goodColR;
   myTwinkles[twinky].gToCol =  goodColG;
   myTwinkles[twinky].bToCol =  goodColB;
   myTwinkles[twinky].wToCol =  0;
-  myTwinkles[twinky].lengthy = findNewLength();
+  myTwinkles[twinky].lengthy = findNewShortLength();
   myTwinkles[twinky].fadeIn =  0;
-  myTwinkles[twinky].fadeOut = 65536;
-  myTwinkles[twinky].start = findNewStart(myTwinkles[twinky].fadeIn); 
-  myTwinkles[twinky].widthy =  random(30);
+  myTwinkles[twinky].fadeOut = 0;
+  myTwinkles[twinky].start = findNewStart(0); 
+  myTwinkles[twinky].widthy =  random(5,15);
   myTwinkles[twinky].speedy = 0;
   myTwinkles[twinky].sideFade = 0;
   myTwinkles[twinky].hasTwinked = false;
+  /*  if (testMode) {
+        Serial.print("ResetTwink: ");
+        Serial.print(twinky);
+        Serial.print("  to:");
+        Serial.println(myTwinkles[twinky].ledNum);
+  }    */
 }
 
 
