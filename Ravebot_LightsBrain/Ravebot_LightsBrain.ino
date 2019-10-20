@@ -23,10 +23,10 @@ int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 pa
 unsigned long fakeBeatCount = 0;
 
 const int animLength=262144; // 65536 would be good. used by the twinkle patterns
-const int animLength16th=16384;  //  4096. This has to be a 16th of above
+const int animLength16th=16384;  //  4096. This has to be a 16th of above  16383
 
 int currentDance = 1;
-int currentLightPattern = 1;
+int currentLightPattern = 0;
 
 int fakeBeatLengh = 420;
 
