@@ -12,7 +12,7 @@ const bool testMode = true;                                                     
 const bool beatTestMode = true;
 const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega
 
-bool robotSwitchedOn = false;
+bool robotSwitchedOn = true; // JR TODO change this to false later on;
 bool robotManualMode = true;
 
 unsigned long timey;
@@ -26,7 +26,7 @@ const int animLength=262144; // 65536 would be good. used by the twinkle pattern
 const int animLength16th=16384;  //  4096. This has to be a 16th of above  16383
 
 int currentDance = 1;
-int currentLightPattern = 0;
+int currentLightPattern = 6;
 
 int fakeBeatLengh = 420;
 
@@ -51,9 +51,9 @@ CRGB rgbwLeds[2440]; // 488 * 5
 
 // LED Intensity
 int ledIntensity = 10;
-byte wheelR;
-byte wheelG;
-byte wheelB;
+byte wheelR, wheelG, wheelB;
+byte goodColR, goodColG, goodColB, goodColW;
+
 
 int leftEyeX = 0;
 int leftEyeY = 0;
@@ -150,8 +150,37 @@ void setTimes() {
     Serial.print("  currentBar:");
     Serial.println(currentBar);
   }  */
-    
 }
+
+struct twinkle {
+  short ledNum;
+  byte rCol;
+  byte gCol;
+  byte bCol;
+  byte wCol;
+  byte rToCol;
+  byte gToCol;
+  byte bToCol;
+  byte wToCol;
+  int start;
+  int lengthy;
+  short widthy;
+  int fadeIn;
+  int fadeOut;
+  short speedy;
+  short sideFade;
+  bool hasTwinked;
+
+  twinkle(short aLedNum, byte aRCol, byte aGCol, byte aBCol, byte aWCol, byte aToRCol, byte aToGCol, byte aToBCol, byte aToWCol, int aStart, int aLengthy, short aWidthy, int aFadeIn, int aFadeOut, short aSpeedy, short aSideFade, bool aHasTwinked) :
+    ledNum(aLedNum), rCol(aRCol), gCol(aGCol), bCol(aBCol), wCol(aWCol), rToCol(aToRCol), gToCol(aToGCol), bToCol(aToBCol), wToCol(aToWCol), start(aStart), lengthy(aLengthy), widthy(aWidthy), fadeIn(aFadeIn), fadeOut(aFadeOut), speedy(aSpeedy), sideFade(aSideFade), hasTwinked(aHasTwinked) {  }
+
+  twinkle() : ledNum(0), rCol(0), gCol(0), bCol(0), wCol(0), rToCol(0), gToCol(0), bToCol(0), wToCol(0), start(0), lengthy(0), widthy(0), fadeIn(0), fadeOut(0), speedy(0), sideFade(0), hasTwinked(0) { }
+};
+
+const int numTwinks = 1024;
+twinkle myTwinkles[numTwinks];
+const int usedTwinkleCount[14] = {1024, 512, 750, 1024, 1024, 512, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024};
+
 
 struct tuneInfo {
   byte bpm;
@@ -437,40 +466,9 @@ tuneInfo tuneLibHipHop[28] = {
   { 98,  0, 100,  4,  0,  8,  8, true},   //2x X-Xzibit
 };
 
-
 tuneInfo currentTune = tuneLibHipHop[0];
 tuneInfo nextTune = tuneLibHipHop[0];
 
-
-struct twinkle {
-  short ledNum;
-  byte rCol;
-  byte gCol;
-  byte bCol;
-  byte wCol;
-  byte rToCol;
-  byte gToCol;
-  byte bToCol;
-  byte wToCol;
-  int start;
-  int lengthy;
-  short widthy;
-  int fadeIn;
-  int fadeOut;
-  short speedy;
-  short sideFade;
-  bool hasTwinked;
-
-  twinkle(short aLedNum, byte aRCol, byte aGCol, byte aBCol, byte aWCol, byte aToRCol, byte aToGCol, byte aToBCol, byte aToWCol, int aStart, int aLengthy, short aWidthy, int aFadeIn, int aFadeOut, short aSpeedy, short aSideFade, bool aHasTwinked) :
-    ledNum(aLedNum), rCol(aRCol), gCol(aGCol), bCol(aBCol), wCol(aWCol), rToCol(aToRCol), gToCol(aToGCol), bToCol(aToBCol), wToCol(aToWCol), start(aStart), lengthy(aLengthy), widthy(aWidthy), fadeIn(aFadeIn), fadeOut(aFadeOut), speedy(aSpeedy), sideFade(aSideFade), hasTwinked(aHasTwinked) {  }
-
-  twinkle() : ledNum(0), rCol(0), gCol(0), bCol(0), wCol(0), rToCol(0), gToCol(0), bToCol(0), wToCol(0), start(0), lengthy(0), widthy(0), fadeIn(0), fadeOut(0), speedy(0), sideFade(0), hasTwinked(0) { }
-
-};
-
-const int numTwinks = 1024;
-twinkle myTwinkles[numTwinks];
-const int usedTwinkleCount[14] = {1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024};
 
 int eyeCoords[93][2] = {
   { 55, 107}, { 64, 106}, { 75, 104}, { 84, 98}, { 92, 93}, { 98, 85}, {103, 76}, {107, 66}, {108, 56}, {107, 45},

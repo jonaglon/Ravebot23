@@ -51,9 +51,8 @@ void SetRgbwWheelVars(byte WheelPos) {
   return;
 }
 
-int goodColR, goodColG, goodColB, goodColW;
 void setGoodRandomColorVars() {
-  int randomNum = random(4);
+  int randomNum = random(20);
   switch (randomNum) {
     case 0: 
       goodColR = 255;
@@ -78,6 +77,49 @@ void setGoodRandomColorVars() {
       goodColG = 0;
       goodColB = 0;
       goodColW = 255;
+      break;
+    case 4: 
+      goodColR = 245;
+      goodColG = 7;
+      goodColB = 225;
+      goodColW = 0;
+      break;
+    case 5: 
+      goodColR = 245;
+      goodColG = 140;
+      goodColB = 7;
+      goodColW = 0;
+      break;
+    case 6: 
+      goodColR = 2;
+      goodColG = 133;
+      goodColB = 142;
+      goodColW = 0;
+      break;
+    case 7: 
+      goodColR = 0;
+      goodColG = 40;
+      goodColB = 160;
+      goodColW = 255;
+      break;
+    case 8: 
+      goodColR = 82;
+      goodColG = 104;
+      goodColB = 4;
+      goodColW = 0;
+      break;
+    case 9: 
+      goodColR = 120;
+      goodColG = 50;
+      goodColB = 130;
+      goodColW = 0;
+      break;
+    default: 
+      SetRgbwWheelVars(random(255));
+      goodColR = wheelR;
+      goodColG = wheelG;
+      goodColB = wheelB;
+      goodColW = 0;
       break;
   }
 }
