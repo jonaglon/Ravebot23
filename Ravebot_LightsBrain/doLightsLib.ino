@@ -242,6 +242,12 @@ void allOffBySection() {
   }
 }
 
+void turnOffTubes() {
+  setSection(13, 0, 0, 0, 0);
+  setSection(14, 0, 0, 0, 0);
+  setSection(15, 0, 0, 0, 0);
+  setSection(16, 0, 0, 0, 0);
+}
 
 void setLedDirect(int ledNum, int rVal, int gVal, int bVal, int wVal, bool showMouth) {
   if (ledNum < 0)

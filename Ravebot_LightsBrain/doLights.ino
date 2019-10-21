@@ -1,4 +1,3 @@
-int numPatterns = 11;
 
 void doLights() {
 
@@ -24,12 +23,15 @@ void doLights() {
 
   // ***************************************************************************************
   // JR TODO - find a way of deciding which light extras should be happening at the moment.
+  // Some should be for the whole duration of the song, say 1 in 10 that turnOffTubes, and randomly one of the 3 circleSquiggle for the whole tune
+  // Some should be every x bars do knightRiderArms for x bars for the duration of the tune
   // * ************************ Write a load of exciting extras!  ***************************
   // knigtRiderArms();
   // sectionsInTime();
   // bodyCirclesInTime();
   // heartInTime();
-  // circleSquiggleController(); - three patterns here, different ones better with different backgrounds.
+  // turnOffTubes();
+  // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
 
 
   doFace();
@@ -44,7 +46,7 @@ void changeLightPattern() {
   }
 
   // JR TODO - this is the cheat setting the lights pattern ******************
-  newPattern = 11;
+  newPattern = 13;
   
   currentLightPattern = newPattern;
 

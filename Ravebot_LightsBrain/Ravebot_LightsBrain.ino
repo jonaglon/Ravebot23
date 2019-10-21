@@ -26,7 +26,8 @@ const int animLength=524288;
 const int animLength32th=16384;
 
 int currentDance = 1;
-int currentLightPattern = 11;    // JR Where you're up to - this is pattern 11, it's a bit like ? but shit, totally change.
+int numPatterns = 14;
+int currentLightPattern = 13;
 
 int fakeBeatLengh = 420;
 
@@ -179,7 +180,7 @@ struct twinkle {
 
 const int numTwinks = 1024;
 twinkle myTwinkles[numTwinks];
-const int usedTwinkleCount[14] = {1024, 512, 750, 1024, 1024, 512, 750, 600, 256, 512, 512, 1024, 1024, 1024};
+const int usedTwinkleCount[14] = {1024, 512, 750, 1024, 1024, 512, 750, 600, 256, 512, 512, 300, 20, 1024};
 
 
 struct tuneInfo {
