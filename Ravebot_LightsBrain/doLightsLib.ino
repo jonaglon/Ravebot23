@@ -124,9 +124,6 @@ void setGoodRandomColorVars() {
   }
 }
 
-
-
-
 int getCoord(int ledNum, int xOrY) {
   if (ledNum < 203)
      return binCoords[ledNum][xOrY]+ledPosOffset[0][xOrY];
@@ -152,18 +149,18 @@ int getCoord(int ledNum, int xOrY) {
     return horizCoords[ledNum-770][xOrY]+ledPosOffset[10][xOrY];
   else if (ledNum < 797)
     return armCoords[ledNum-774][xOrY]+ledPosOffset[11][xOrY];
-  else if (ledNum < 821)
+  else if (ledNum < 825)
     return armCoords[ledNum-797][xOrY]+ledPosOffset[12][xOrY];
   else if (ledNum < 911)
-    return tubeCoords[ledNum-821][xOrY]+ledPosOffset[13][xOrY];
+    return tubeCoords[ledNum-825][xOrY]+ledPosOffset[13][xOrY];
   else if (ledNum < 1001)
     return tubeCoords[ledNum-911][xOrY]+ledPosOffset[14][xOrY];
   else if (ledNum < 1090)
     return tubeCoords[ledNum-1001][xOrY]+ledPosOffset[15][xOrY];
-  else if (ledNum < 1179)
+  else if (ledNum < 1180)
     return tubeCoords[ledNum-1090][xOrY]+ledPosOffset[16][xOrY];
   else if (ledNum < 1302)
-    return portLCoords[(ledNum-1179)%19][xOrY]+ledPosOffset[17][xOrY];
+    return portLCoords[(ledNum-1180)%19][xOrY]+ledPosOffset[17][xOrY];
   else if (ledNum < 1441)
     return portRCoords[(ledNum-1302)%19][xOrY]+ledPosOffset[18][xOrY];
 }
@@ -202,7 +199,7 @@ void drawEyeHexagon(int ledNumOffSet, int xCoord, int  yCoord, int pupilRadius, 
 }
 
 
-
+// ledSections[17] needs 1 adding to it
 void setSection(int section, int r, int g, int b, int w) {
   for(int j = ledSections[section]; j < ledSections[section+1]; j++) { 
     setLedDirect(j, r, g, b, w, true);
@@ -318,7 +315,7 @@ void setLedDirect(int ledNum, int rVal, int gVal, int bVal, int wVal, bool showM
     else
       setRgbwLed(2620-ledNum, rVal, gVal, bVal, wVal);
   }
-  else if (ledNum < 1442) {
+  else if (ledNum < 1443) {
     // Bass holes!
     setRgbwLed(ledNum+285, rVal, gVal, bVal, wVal);
   }
@@ -328,11 +325,6 @@ void setRgbwLed(int ledNumber, int rVal, int gVal, int bVal, int wVal) {
   int newNumber = (ledNumber * 4) / 3;
   short mod = ledNumber % 3;
 
-  // JR TODO - test and add me laters
-  /*
-  rVal = (rVal/ledIntensity)+rgbwLeds[newNumber].r > 255 ? 255 : (rVal/ledIntensity)+rgbwLeds[newNumber].r;
-  gVal = (gVal/ledIntensity)+rgbwLeds[newNumber].g > 255 ? 255 : (gVal/ledIntensity)+rgbwLeds[newNumber].g;
-  bVal = (bVal/ledIntensity)+rgbwLeds[newNumber].b > 255 ? 255 : (bVal/ledIntensity)+rgbwLeds[newNumber].b;   */
   rVal = rVal/ledIntensity > 255 ? 255 : rVal/ledIntensity;
   gVal = gVal/ledIntensity > 255 ? 255 : gVal/ledIntensity;
   bVal = bVal/ledIntensity > 255 ? 255 : bVal/ledIntensity;

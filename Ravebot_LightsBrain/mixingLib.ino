@@ -144,9 +144,9 @@ void calculateMixDurationAndStart() {
   nextMixDuration = (currentTune.maxFadeOut > nextTune.maxFadeIn) ? nextTune.maxFadeIn : currentTune.maxFadeOut;
 
   if (nextMixDuration < 8) {
-    nextMixStart =  currentTune.tuneLength - currentTune.maxFadeOut + currentTune.shortMixEnd - nextMixDuration;
+    nextMixStart = currentTune.tuneLength - currentTune.maxFadeOut + currentTune.shortMixEnd - nextMixDuration;
   } else {
-    nextMixStart =  currentTune.tuneLength - nextMixDuration;
+    nextMixStart = currentTune.tuneLength - nextMixDuration;
   }
 
   if (testMode)

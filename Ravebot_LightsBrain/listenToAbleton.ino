@@ -72,6 +72,8 @@ void processMessageFromAbleton(byte note, byte velocity, int down) {
     setBeatTimes();
     
     sendBeatToMega();
+
+    beatCycle = true;
     
     if (dropCountdown != 0)
       dropCountdown--;
@@ -114,10 +116,10 @@ void checkForMixEnd() {
 }
 
 void checkForDropCountdownStart() {
-  if (currentBar+4 ==  currentTune.drop)
+  if (currentBar+4 == currentTune.drop)
     dropCountdown = 16;
   
-  if (currentBar+2 ==  currentTune.drop)
+  if (currentBar+2 == currentTune.drop)
     dropCountdown = 8;
 }
 

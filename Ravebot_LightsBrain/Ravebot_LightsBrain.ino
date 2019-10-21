@@ -34,6 +34,7 @@ int fakeBeatLengh = 420;
 // Set by midi in to be 1-16 with beat.
 int sixteenBeats = 0;
 int totalBeats = 0;
+bool beatCycle = false;
 
 int mainVolume = 40; // 127 actual max but we won't exceed 100.
 int tempMainVolume = 40; // 127 actual max but we won't exceed 100.
@@ -113,6 +114,7 @@ void setup() {
 void loop() {
   timey = millis();
 
+  beatCycle = false;
   listenToAbleton();
 
   setTimes();
@@ -592,9 +594,9 @@ int ledSections[20] = {
   911,   // 14 tube bottomleft *
   1001,  // 15 tube topleft *
   1090,  // 16 tube topright * starred sections are shifted and / or reversed
-  1179,  // 17 port left
+  1180,  // 17 port left
   1302,  // 18 port right
-  1441
+  1442
 };
 
 int numLedsInSection(int sectionNum) {

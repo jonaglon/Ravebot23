@@ -3,23 +3,20 @@ void doLights() {
 
   allOff();
 
-  /*if (currentLightPattern < 14) {
+  /*
+  if (currentLightPattern < 14) {
     doTwinkles();
   } else if (currentLightPattern < 16) {
     doPatternStripes();
   } else if (currentLightPattern < 20) {
     doRainbowPatterns();
-  } else if (currentLightPattern == 10) {
-    doPatternBlobs();
+  } else if (currentLightPattern == 10000) {
+    //    doPatternBlobs();
     //    doPatternTrains();
     //    doPatternDonuts();
-  } else {
-    horizontalRainbow(false, false, 20);
-  }*/
-
-  // doPatternStripes();
-  // doRainbowPatterns();
-  doTwinkles();
+  }    */
+  // allOverRainbow1(); - is AMaZing!
+  doPatternStripes();
 
   // ***************************************************************************************
   // JR TODO - find a way of deciding which light extras should be happening at the moment.
@@ -46,7 +43,7 @@ void changeLightPattern() {
   }
 
   // JR TODO - this is the cheat setting the lights pattern ******************
-  newPattern = 13;
+  newPattern = 14;
   
   currentLightPattern = newPattern;
 
