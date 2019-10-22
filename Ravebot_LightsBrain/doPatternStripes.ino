@@ -2,34 +2,54 @@
 
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    stripesPattern1(32);
+    stripesPattern1();
   } else if (currentLightPattern == 15) {
     stripesPattern2Old();
   }  
 }
 
-byte stripe1r, stripe1g, stripe1b, stripe1w;
-void stripesPattern1(int speedyo) {
-
-  int stripeBeatPos1 = 4096-((timeyInTime / speedyo) % 4096);
-  int stripeBeatPos2 = (stripeBeatPos1 + 512) % 4096;
-
-  if (beatCycle && stripeBeatPos1 > 3000) {
-    setGoodRandomColorVars();
-    stripe1r = goodColR;
-    stripe1g = goodColG;
-    stripe1b = goodColB;
-    stripe1w = goodColW;
+struct stripies {
+  byte stripeR;
+  byte stripeG;
+  byte stripeB;
+  byte stripeW;
+  int width;
+  int offset;
+  int speedDivisor;
+  stripies(byte aStripeR, byte aStripeG, byte aStripeB, byte aStripeW, int aWidth, int aOffset, int aSpeedDivisor) :
+    stripeR(aStripeR), stripeG(aStripeG), stripeB(aStripeB), stripeW(aStripeW), width(aWidth), offset(aOffset), speedDivisor(aSpeedDivisor) {
   }
+};
 
-  for(int j = 0; j < numLeds; j++) {
-    int xCoord = getCoord(j,1);
-    if ((xCoord > stripeBeatPos1) && (xCoord < stripeBeatPos1+256)) {
-      setLedDirect(j, stripe1r, stripe1g, stripe1b, stripe1w, false);
+const byte numStripesPattern1 = 4;
+stripies stripePattern1[numStripesPattern1] = {
+  {255, 0, 0, 0, 256, 0, 32 },
+  {255, 0, 0, 0, 256, 512, 32 },
+  {255, 0, 0, 0, 256, 1024, 32 },
+  {255, 0, 0, 0, 256, 1536, 32 }
+};
+
+void stripesPattern1() {
+
+  for(int x = 0; x < numStripesPattern1; x++) {
+    int stripeBeatBassline = 4096-((timeyInTime / stripePattern1[x].speedDivisor) % 4096);
+    int stripeBeatPos = (stripeBeatBassline + stripePattern1[x].offset) % 4096;
+  
+    if (beatCycle && stripeBeatPos > 3000) {
+      setGoodRandomColorVars();
+      stripePattern1[x].stripeR = goodColR;
+      stripePattern1[x].stripeG = goodColG;
+      stripePattern1[x].stripeB = goodColB;
+      stripePattern1[x].stripeW = goodColW;
     }
-    /* if ((xCoord > stripeBeatPos2) && (xCoord < stripeBeatPos2+200)) {
-      setLedDirect(j, 0, 255, 0, 0, false);
-    } */
+  
+    for(int j = 0; j < numLeds; j++) {
+      int xCoord = getCoord(j,1);
+      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePattern1[x].width)) {
+        setLedDirect(j, stripePattern1[x].stripeR, stripePattern1[x].stripeG, stripePattern1[x].stripeB, stripePattern1[x].stripeW, false);
+      }
+    }
+    
   }
 }
 
@@ -42,35 +62,6 @@ void stripesPattern1(int speedyo) {
 //  3 KinghtRider with big-ish LUT
 //  The stripe based rainbows probly belong here.
 
-
-
-void stripesPattern1Old() {
-
-  SetRgbwWheelVars((timeyInTime / 512) % 256);
-
-  int sixteenBeatPos = (sixteenBeats / 4) % 4;
-  int stripeBeatPos=0;
-  int xyCord=0;
-  
-  if (sixteenBeatPos == 0) {
-    stripeBeatPos = (timeyInTime / 32) % 1024;
-  } else if (sixteenBeatPos == 1) {
-    stripeBeatPos = 2048-((timeyInTime / 32) % 2048);
-    xyCord=1;
-  } else if (sixteenBeatPos == 2) {
-    stripeBeatPos = 615-((timeyInTime / 32) % 1024);
-  } else if (sixteenBeatPos == 3) {
-    stripeBeatPos = (timeyInTime / 32) % 2048;
-    xyCord=1;
-  }
-
-  for(int j = 0; j < numLeds; j++) {
-    int yCoord = getCoord(j,xyCord);
-    if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+200)) {
-      setLedDirect(j, wheelR, wheelG, wheelB, 0, false);
-    }
-  }
-}
 
 void stripesPattern2Old() {
 

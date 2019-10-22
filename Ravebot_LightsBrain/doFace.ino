@@ -41,6 +41,8 @@ void eyeController() {
         break;
     }
   } else {
+    // JR TODO - This is where the eyes are on automatic and is too simple.
+    // I think maybe remove the code below and trigger these animations 
     switch (currentBar%8) {
       case 0:
       case 1:
