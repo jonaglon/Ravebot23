@@ -1,10 +1,9 @@
 
-
 void doPatternStripes() {
   if (currentLightPattern == 14) {
     stripesPattern1();
   } else if (currentLightPattern == 15) {
-    stripesPattern2Old();
+    stripesPattern1();
   }  
 }
 
@@ -13,46 +12,67 @@ struct stripies {
   byte stripeG;
   byte stripeB;
   byte stripeW;
+  byte colorPattern;
   int width;
   int offset;
   int speedDivisor;
-  stripies(byte aStripeR, byte aStripeG, byte aStripeB, byte aStripeW, int aWidth, int aOffset, int aSpeedDivisor) :
-    stripeR(aStripeR), stripeG(aStripeG), stripeB(aStripeB), stripeW(aStripeW), width(aWidth), offset(aOffset), speedDivisor(aSpeedDivisor) {
+  bool xOrY;
+  bool forwardOrBack;
+  stripies(byte aStripeR, byte aStripeG, byte aStripeB, byte aStripeW, byte aColorPattern, int aWidth, int aOffset, int aSpeedDivisor, bool aXOrY, bool aForwardOrBack) :
+    stripeR(aStripeR), stripeG(aStripeG), stripeB(aStripeB), stripeW(aStripeW), colorPattern(aColorPattern), width(aWidth), offset(aOffset), speedDivisor(aSpeedDivisor), xOrY(aXOrY), forwardOrBack(aForwardOrBack) {
   }
 };
 
 const byte numStripesPattern1 = 4;
 stripies stripePattern1[numStripesPattern1] = {
-  {255, 0, 0, 0, 256, 0, 32 },
-  {255, 0, 0, 0, 256, 512, 32 },
-  {255, 0, 0, 0, 256, 1024, 32 },
-  {255, 0, 0, 0, 256, 1536, 32 }
+  {0, 0, 0, 0, 0, 256, -512, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 512, 32, true, true },
+  {0, 0, 0, 0, 0, 256, 1536, 32, true, false },
+  {0, 0, 0, 0, 1, 256, 2560, 32, true, true },
 };
 
 void stripesPattern1() {
+  for(int stripeNum = 0; stripeNum < numStripesPattern1; stripeNum++) {
+    int stripeBeatBassline = ((timeyInTime / stripePattern1[stripeNum].speedDivisor) % 4096);
+    if (stripePattern1[stripeNum].xOrY) {
+      stripeBeatBassline = 4096-stripeBeatBassline;
+    }
 
-  for(int x = 0; x < numStripesPattern1; x++) {
-    int stripeBeatBassline = 4096-((timeyInTime / stripePattern1[x].speedDivisor) % 4096);
-    int stripeBeatPos = (stripeBeatBassline + stripePattern1[x].offset) % 4096;
+    int stripeBeatPos = (stripeBeatBassline + stripePattern1[stripeNum].offset) % 4096;
   
-    if (beatCycle && stripeBeatPos > 3000) {
-      setGoodRandomColorVars();
-      stripePattern1[x].stripeR = goodColR;
-      stripePattern1[x].stripeG = goodColG;
-      stripePattern1[x].stripeB = goodColB;
-      stripePattern1[x].stripeW = goodColW;
+    if (beatCycle && stripeBeatPos > 3100) {
+      setNewColorForStripe(stripeNum);
     }
   
     for(int j = 0; j < numLeds; j++) {
-      int xCoord = getCoord(j,1);
-      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePattern1[x].width)) {
-        setLedDirect(j, stripePattern1[x].stripeR, stripePattern1[x].stripeG, stripePattern1[x].stripeB, stripePattern1[x].stripeW, false);
+      int xCoord = getCoord(j,0);
+      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePattern1[stripeNum].width)) {
+        setLedDirect(j, stripePattern1[stripeNum].stripeR, stripePattern1[stripeNum].stripeG, stripePattern1[stripeNum].stripeB, stripePattern1[stripeNum].stripeW, false);
       }
-    }
-    
+    }   
   }
 }
 
+void setNewColorForStripe(int stripeNum) {
+  if (stripePattern1[stripeNum].colorPattern == 0) {
+    setGoodRandomColorVars();
+    stripePattern1[stripeNum].stripeR = goodColR;
+    stripePattern1[stripeNum].stripeG = goodColG;
+    stripePattern1[stripeNum].stripeB = goodColB;
+    stripePattern1[stripeNum].stripeW = goodColW;
+  } else if (stripePattern1[stripeNum].colorPattern == 1) {
+    stripePattern1[stripeNum].stripeR = 0;
+    stripePattern1[stripeNum].stripeG = 0;
+    stripePattern1[stripeNum].stripeB = 0;
+    stripePattern1[stripeNum].stripeW = 100;
+  } else {
+    setGoodRandomColorVars();
+    stripePattern1[stripeNum].stripeR = goodColR;
+    stripePattern1[stripeNum].stripeG = goodColG;
+    stripePattern1[stripeNum].stripeB = goodColB;
+    stripePattern1[stripeNum].stripeW = goodColW;
+  }
+}
 
 // JR TODO: ...
 // OK. These patterns are both shit and need deleting. What might be good? Use below to implement above.
@@ -63,32 +83,4 @@ void stripesPattern1() {
 //  The stripe based rainbows probly belong here.
 
 
-void stripesPattern2Old() {
-
-  int rVal = 0;
-  int gVal = 0;
-  int bVal = 0;
-  int wVal = 0;
-  int fourBeatPos = (sixteenBeats/4) % 4;
-  if (fourBeatPos == 0) {
-    rVal = 255;
-  } else if (fourBeatPos == 1) {
-    gVal = 255;
-  } else if (fourBeatPos == 2) {
-    bVal = 255;
-  } else {
-    wVal = 255;
-  } 
-
-  int stripeBeatPos = ((timeyInTime / 32)%2048)-1024;
-  for(int j = 0; j < numLeds; j++) {
-    int yCoord = getCoord(j,0);
-    if ((yCoord > stripeBeatPos) && (yCoord < stripeBeatPos+400))
-      setLedDirect(j, 255, 0, 0, 0, false);
-
-    if ((yCoord < 1024-stripeBeatPos) && (yCoord > 1024-stripeBeatPos-400))
-      setLedDirect(j, rVal, gVal, bVal, wVal, false);
-      
-  }
-}
 

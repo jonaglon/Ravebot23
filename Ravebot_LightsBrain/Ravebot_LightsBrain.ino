@@ -12,7 +12,7 @@ const bool testMode = false;                                                    
 const bool beatTestMode = true;
 const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega
 
-bool robotSwitchedOn = true; // JR TODO change this to false later on;
+bool robotSwitchedOn = false;
 bool robotManualMode = true;
 
 unsigned long timey;
@@ -27,7 +27,7 @@ const int animLength32th=16384;
 
 int currentDance = 1;
 int numPatterns = 14;
-int currentLightPattern = 13;
+int currentLightPattern = 14;
 
 int fakeBeatLengh = 420;
 
@@ -218,7 +218,7 @@ tuneInfo tuneLibRave[31] = {
   {120, 16, 128, 16,  0, 16, 16, false},  //15 KillerFeatTopCat-BoozooBajou
   {136, 60, 128, 16,  8, 16, 16, false},  //16 LivingLegends-RaggaTwins
   {135, 48, 132, 16,  0, 16,  0, false},  //17 FeelingForYou-Cassius
-  {138,128, 206, 0,  0, 16, 16, true},    //18 DidIt-Sticky
+  {138,128, 206, 8,   0, 16, 16, true},   //18 DidIt-Sticky            // This is too long, mix earlier.
   {135, 72, 106, 16,  0, 16,  8, false},  //19 HowLoveBegins-HighContrastDizee
   {130, 80, 122, 16,  0, 16,  0, false},  //20 StringsOfLife-DerrickMay
   {137, 80, 112, 16,  0, 16, 16, false},  //21 SweetHarmony-Liquid

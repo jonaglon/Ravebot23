@@ -16,6 +16,7 @@ void doLights() {
     //    doPatternDonuts();
   }    */
   // allOverRainbow1(); - is AMaZing!
+  //doTwinkles();
   doPatternStripes();
 
   // ***************************************************************************************
