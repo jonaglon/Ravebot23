@@ -1,7 +1,7 @@
 
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    stripesPattern(1);
+    stripesPattern(0);
   } else if (currentLightPattern == 15) {
     stripesPattern(1);
   }  
@@ -35,10 +35,10 @@ struct stripies {
 // 2 - 
 const byte numStripesPattern1 = 4;
 stripies stripePatterns[2][4] = {
-{ {0, 0, 0, 0, 0, 256, -512, 64, true, true },
-  {0, 0, 0, 0, 0, 256, 512, 64, true, true }, 
-  {0, 0, 0, 0, 0, 256, 1536, 64, true, true },
-  {0, 0, 0, 0, 0, 256, 2560, 64, true, true } },
+{ {0, 0, 0, 0, 1, 256, 512, 32, true, true },
+  {0, 0, 0, 0, 2, 256, 1536, 32, true, true }, 
+  {0, 0, 0, 0, 3, 256, 2560, 32, true, true },
+  {0, 0, 0, 0, 4, 256, -512, 32, true, true } },
 { {0, 0, 0, 0, 1, 256, 1536, 32, false, false },
   {0, 0, 0, 0, 2, 256, 512, 32, false, false },
   {0, 0, 0, 0, 3, 256, 3584, 32, false, false },
@@ -46,10 +46,10 @@ stripies stripePatterns[2][4] = {
 };
 
 /*
-{ {0, 0, 0, 0, 1, 256, 512, 32, false, false },
-  {0, 0, 0, 0, 2, 256, 1536, 32, false, false },
-  {0, 0, 0, 0, 3, 256, 2560, 32, false, false },
-  {0, 0, 0, 0, 4, 256, 3584, 32, false, false } },
+{ {0, 0, 0, 0, 1, 256, -512, 32, true, true },
+  {0, 0, 0, 0, 2, 256, 512, 32, true, true }, 
+  {0, 0, 0, 0, 3, 256, 1536, 32, true, true },
+  {0, 0, 0, 0, 4, 256, 2560, 32, true, true } },
  */
 
 void stripesPattern(byte pattern) {
