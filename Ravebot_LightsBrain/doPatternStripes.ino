@@ -36,14 +36,21 @@ struct stripies {
 const byte numStripesPattern1 = 4;
 stripies stripePatterns[2][4] = {
 { {0, 0, 0, 0, 0, 256, -512, 64, true, true },
-  {0, 0, 0, 0, 0, 256, 512, 64, true, true },
+  {0, 0, 0, 0, 0, 256, 512, 64, true, true }, 
   {0, 0, 0, 0, 0, 256, 1536, 64, true, true },
   {0, 0, 0, 0, 0, 256, 2560, 64, true, true } },
+{ {0, 0, 0, 0, 1, 256, 1536, 32, false, false },
+  {0, 0, 0, 0, 2, 256, 512, 32, false, false },
+  {0, 0, 0, 0, 3, 256, 3584, 32, false, false },
+  {0, 0, 0, 0, 4, 256, 2560, 32, false, false } },
+};
+
+/*
 { {0, 0, 0, 0, 1, 256, 512, 32, false, false },
   {0, 0, 0, 0, 2, 256, 1536, 32, false, false },
   {0, 0, 0, 0, 3, 256, 2560, 32, false, false },
   {0, 0, 0, 0, 4, 256, 3584, 32, false, false } },
-};
+ */
 
 void stripesPattern(byte pattern) {
   for(int stripeNum = 0; stripeNum < numStripesPattern1; stripeNum++) {
