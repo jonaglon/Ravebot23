@@ -1,7 +1,8 @@
 
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    stripesPattern(0);
+    int currentStripePattern = (timeyInTime/524288)%2;
+    stripesPattern(currentStripePattern+2);
   } else if (currentLightPattern == 15) {
     stripesPattern(1);
   }  
@@ -34,27 +35,36 @@ struct stripies {
 // 1 - Random good colors moving slowly top to bottom
 // 2 - 
 const byte numStripesPattern1 = 4;
-stripies stripePatterns[2][4] = {
+stripies stripePatterns[4][4] = {
 { {0, 0, 0, 0, 1, 256, 512, 32, true, true },
   {0, 0, 0, 0, 2, 256, 1536, 32, true, true }, 
   {0, 0, 0, 0, 3, 256, 2560, 32, true, true },
-  {0, 0, 0, 0, 4, 256, -512, 32, true, true } },
+  {0, 0, 0, 0, 4, 256, 3584, 32, true, true } },
 { {0, 0, 0, 0, 1, 256, 1536, 32, false, false },
   {0, 0, 0, 0, 2, 256, 512, 32, false, false },
   {0, 0, 0, 0, 3, 256, 3584, 32, false, false },
   {0, 0, 0, 0, 4, 256, 2560, 32, false, false } },
+{ {0, 0, 0, 0, 1, 256, 2560, 32, true, false },
+  {0, 0, 0, 0, 2, 256, 3584, 32, true, false },
+  {0, 0, 0, 0, 3, 256, 512, 32, true, false },
+  {0, 0, 0, 0, 4, 256, 1536, 32, true, false } },
+{ {0, 0, 0, 0, 1, 256, 2304, 32, false, true },
+  {0, 0, 0, 0, 2, 256, 3328, 32, false, true },
+  {0, 0, 0, 0, 3, 256, 256, 32, false, true },
+  {0, 0, 0, 0, 4, 256, 1280, 32, false, true } },
 };
 
 /*
-{ {0, 0, 0, 0, 1, 256, -512, 32, true, true },
-  {0, 0, 0, 0, 2, 256, 512, 32, true, true }, 
-  {0, 0, 0, 0, 3, 256, 1536, 32, true, true },
-  {0, 0, 0, 0, 4, 256, 2560, 32, true, true } },
+{ {0, 0, 0, 0, 1, 256, 3328, 32, false, true },
+  {0, 0, 0, 0, 2, 256, 256, 32, false, true },
+  {0, 0, 0, 0, 3, 256, 1280, 32, false, true },
+  {0, 0, 0, 0, 4, 256, 2304, 32, false, true } },
  */
 
 void stripesPattern(byte pattern) {
   for(int stripeNum = 0; stripeNum < numStripesPattern1; stripeNum++) {
-    int stripeBeatBassline = ((timeyInTime / stripePatterns[pattern][stripeNum].speedDivisor) % 4096);
+    // I think beat stripe bassline has to start below zero 
+    int stripeBeatBassline = ((timeyInTime / stripePatterns[pattern][stripeNum].speedDivisor) % 4096)-512;
     if (stripePatterns[pattern][stripeNum].forwardOrBack) {
       stripeBeatBassline = 4096-stripeBeatBassline;
     }

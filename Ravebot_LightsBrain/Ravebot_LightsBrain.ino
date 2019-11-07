@@ -209,7 +209,7 @@ tuneInfo tuneLibRave[31] = {
   {122,  0, 132,  8,  0, 16, 12, true},   //6  Break4Love-Raze
   {124, 44,  96, 16,  0, 16, 12, true},   //7  IsThereAnybodyOutThere-Bassheads.
   {128,  0, 119,  8,  4, 16, 16, false},  //8  PacificState-808State.
-  {150,  0, 163,  0,  0, 16, 16, false},  //9  OutOfSpace-Prodigy.
+  {150,  0, 156, 16,  0, 16, 16, false},  //9  OutOfSpace-Prodigy.
   {132,  0, 122,  8,  0, 16, 16, true},   //10 Breathe-Prodigy.
   {138,  0, 148, 16,  0, 16,  8, false},  //11 SmackMyBitchUp-Prodigy.
   {128,  0, 116, 16,  0, 16, 16, false},  //12 BreakOfDawn-RhythmOnTheLoose.
@@ -301,7 +301,7 @@ tuneInfo tuneLibReggae[28] = {
   {161,  0, 124,  8,  0,  8,  8, true},   //23 DoubleBarrel-DaveAndAnsellCollins
   {102,  0, 124,  0,  0,  4,  4, true},   //24 LoveOfTheCommonPeople-NickyThomas
   {178,  0, 156,  8,  4,  8,  8, false},  //25 DayIntoNight-Katalyst
-  {143,  0, 156,  8,  0,  8,  8, true},   //26 ThatVeryNight-HollieCook
+  {143,  0, 116,  8,  4,  8,  8, true},   //26 ThatVeryNight-HollieCook
   {144,  0, 126,  4,  4,  8,  8, true},   //27 PoliceInHelicopter-JohnHolt
   {142,  0, 132,  4,  4,  8,  8, true},   //28 GanjaSmuggling-EekAMouse
 };
@@ -315,7 +315,7 @@ tuneInfo tuneLibRockAndPop[28] = {
   {122, 44, 102,  4,  4, 12,  8, true},  //5 GrooveIsInTheHeart-DeeLite
   {128,  0, 110,  4,  0,  8,  8, true},  //6 SweetDreams-Euritmics
   {126, 37, 100,  4,  0,  8,  8, true},  //7 StuckInTheMiddle-SteelersWheel
-  {164,  0,  68,  4,  0,  4,  8, true},  //8 Martha&Muffins Echo Beach
+  { 82,  0,  68,  4,  0,  4,  8, true},  //8 Martha&Muffins Echo Beach
   {103,  0,  58,  2,  0,  2,  2, true},  //9 DreamingOfYou-TheCoral
   {100,  0,  58,  0,  0,  2,  2, true},  //10 BlisterInTheSun-VoilentFemmes
   {116,  0,  99,  4,  4,  8,  4, true},  //11 ALittleRespect-Erasure
@@ -604,6 +604,29 @@ int numLedsInSection(int sectionNum) {
 }
 
 int ledPosOffset[19][2] = {
+  { 470, 90},    // 00 bottomRing
+  { 400, 945},    // 01 bigHeart
+  { 550, 1224},    // 02 smallHeart
+  {1012, 1400},    // 03 underarm left
+  {1012, 1210},    // 04 overarm left
+  { 784, 1550},    // 05 eyeLeft
+  { 510, 1550},    // 06 rightEye
+  { 646, 1536},    // 07 mouth
+  { 650, 1600},    // 08 tape
+  { 639, 1710},    // 09 tuner
+  { 580, 1714},    // 10 indicator
+  { 401, 1400},    // 11 underArm right
+  { 401, 1240},    // 12 overArm right
+  { 715, 800},    // 13 tubeBottomright
+  { 480, 800},    // 14 tubeBottomleft
+  { 480, 1020},    // 15 tubeTopleft
+  { 715, 1020},    // 16 tubeTopright
+  { 450, 555},    // 17 port left
+  { 800, 555},    // 18 port right
+};
+
+/*
+int ledPosOffset[19][2] = {
   { 70, 90},    // 00 bottomRing
   { 0, 945},    // 01 bigHeart
   { 150, 1224},    // 02 smallHeart
@@ -623,7 +646,7 @@ int ledPosOffset[19][2] = {
   { 315, 1020},    // 16 tubeTopright
   { 50, 555},    // 17 port left
   { 400, 555},    // 18 port right
-};
+};*/
 
 int eyeSmileyLeds[24] = {
   34, 35, 40, 41, 42, 43, 44, 45, 46,
