@@ -9,10 +9,10 @@
 #include<FastLED.h>
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
-const bool beatTestMode = true;
+const bool beatTestMode = false;
 const bool megaAttached = true;   // JR TODO - attach this or the due won't talk to mega
 
-bool robotSwitchedOn = false;
+bool robotSwitchedOn = true;    // JR TODO - set to false when not testing
 bool robotManualMode = true;
 
 unsigned long timey;
@@ -26,8 +26,8 @@ const int animLength=524288;
 const int animLength32th=16384;
 
 int currentDance = 1;
-int numPatterns = 14;
-int currentLightPattern = 14;
+int numPatterns = 23;
+int currentLightPattern = 0;
 
 int fakeBeatLengh = 420;
 

@@ -161,7 +161,7 @@ int getCoord(int ledNum, int xOrY) {
     return tubeCoords[ledNum-1090][xOrY]+ledPosOffset[16][xOrY];
   else if (ledNum < 1302)
     return portLCoords[(ledNum-1180)%19][xOrY]+ledPosOffset[17][xOrY];
-  else if (ledNum < 1441)
+  else if (ledNum < 1442)
     return portRCoords[(ledNum-1302)%19][xOrY]+ledPosOffset[18][xOrY];
 }
 

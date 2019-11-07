@@ -1,11 +1,18 @@
 
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    stripesPattern1();
+    stripesPattern(1);
   } else if (currentLightPattern == 15) {
-    stripesPattern1();
+    stripesPattern(1);
   }  
 }
+
+// JR TODO: ...
+//  1 Get good timings for the 1-2-3-4 for each of the four directions
+//  2 Wipes, on the beat l-r, top-bot, r-l, bot-top, repeat. Use good colours.
+//  3 KinghtRider with big-ish LUT?
+//  The stripe based rainbows probly belong here.
+
 
 struct stripies {
   byte stripeR;
@@ -23,64 +30,88 @@ struct stripies {
   }
 };
 
+// Stripe patterns - 
+// 1 - Random good colors moving slowly top to bottom
+// 2 - 
 const byte numStripesPattern1 = 4;
-stripies stripePattern1[numStripesPattern1] = {
-  {0, 0, 0, 0, 0, 256, -512, 32, false, false },
-  {0, 0, 0, 0, 0, 256, 512, 32, true, true },
-  {0, 0, 0, 0, 0, 256, 1536, 32, true, false },
-  {0, 0, 0, 0, 1, 256, 2560, 32, true, true },
+stripies stripePatterns[2][4] = {
+{ {0, 0, 0, 0, 0, 256, -512, 64, true, true },
+  {0, 0, 0, 0, 0, 256, 512, 64, true, true },
+  {0, 0, 0, 0, 0, 256, 1536, 64, true, true },
+  {0, 0, 0, 0, 0, 256, 2560, 64, true, true } },
+{ {0, 0, 0, 0, 1, 256, 512, 32, false, false },
+  {0, 0, 0, 0, 2, 256, 1536, 32, false, false },
+  {0, 0, 0, 0, 3, 256, 2560, 32, false, false },
+  {0, 0, 0, 0, 4, 256, 3584, 32, false, false } },
 };
 
-void stripesPattern1() {
+void stripesPattern(byte pattern) {
   for(int stripeNum = 0; stripeNum < numStripesPattern1; stripeNum++) {
-    int stripeBeatBassline = ((timeyInTime / stripePattern1[stripeNum].speedDivisor) % 4096);
-    if (stripePattern1[stripeNum].xOrY) {
+    int stripeBeatBassline = ((timeyInTime / stripePatterns[pattern][stripeNum].speedDivisor) % 4096);
+    if (stripePatterns[pattern][stripeNum].forwardOrBack) {
       stripeBeatBassline = 4096-stripeBeatBassline;
     }
-
-    int stripeBeatPos = (stripeBeatBassline + stripePattern1[stripeNum].offset) % 4096;
+    int stripeBeatPos = (stripeBeatBassline + stripePatterns[pattern][stripeNum].offset) % 4096;
   
     if (beatCycle && stripeBeatPos > 3100) {
-      setNewColorForStripe(stripeNum);
+      setNewColorForStripe(pattern, stripeNum);
     }
   
     for(int j = 0; j < numLeds; j++) {
-      int xCoord = getCoord(j,0);
-      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePattern1[stripeNum].width)) {
-        setLedDirect(j, stripePattern1[stripeNum].stripeR, stripePattern1[stripeNum].stripeG, stripePattern1[stripeNum].stripeB, stripePattern1[stripeNum].stripeW, false);
+      byte xOrY = 0;
+      if (stripePatterns[pattern][stripeNum].xOrY)
+        xOrY = 1;
+      int xCoord = getCoord(j,xOrY);
+      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePatterns[pattern][stripeNum].width)) {
+        setLedDirect(j, stripePatterns[pattern][stripeNum].stripeR, stripePatterns[pattern][stripeNum].stripeG, stripePatterns[pattern][stripeNum].stripeB, stripePatterns[pattern][stripeNum].stripeW, false);
       }
     }   
   }
 }
 
-void setNewColorForStripe(int stripeNum) {
-  if (stripePattern1[stripeNum].colorPattern == 0) {
+// Stripe color setter, stripe color pattern is the colorPattern in the stripe array
+// 0 = good random color
+// 1 = 255 red
+// 2 = 255 green
+// 3 = 255 blue
+// 4 = 100 white
+// 5 = Red, gold and green? TODO!
+void setNewColorForStripe(byte pattern, byte stripeNum) {
+  if (stripePatterns[pattern][stripeNum].colorPattern == 0) {
     setGoodRandomColorVars();
-    stripePattern1[stripeNum].stripeR = goodColR;
-    stripePattern1[stripeNum].stripeG = goodColG;
-    stripePattern1[stripeNum].stripeB = goodColB;
-    stripePattern1[stripeNum].stripeW = goodColW;
-  } else if (stripePattern1[stripeNum].colorPattern == 1) {
-    stripePattern1[stripeNum].stripeR = 0;
-    stripePattern1[stripeNum].stripeG = 0;
-    stripePattern1[stripeNum].stripeB = 0;
-    stripePattern1[stripeNum].stripeW = 100;
+    stripePatterns[pattern][stripeNum].stripeR = goodColR;
+    stripePatterns[pattern][stripeNum].stripeG = goodColG;
+    stripePatterns[pattern][stripeNum].stripeB = goodColB;
+    stripePatterns[pattern][stripeNum].stripeW = goodColW;
+  } else if (stripePatterns[pattern][stripeNum].colorPattern == 1) {
+    stripePatterns[pattern][stripeNum].stripeR = 255;
+    stripePatterns[pattern][stripeNum].stripeG = 0;
+    stripePatterns[pattern][stripeNum].stripeB = 0;
+    stripePatterns[pattern][stripeNum].stripeW = 0;
+  } else if (stripePatterns[pattern][stripeNum].colorPattern == 2) {
+    stripePatterns[pattern][stripeNum].stripeR = 0;
+    stripePatterns[pattern][stripeNum].stripeG = 255;
+    stripePatterns[pattern][stripeNum].stripeB = 0;
+    stripePatterns[pattern][stripeNum].stripeW = 0;
+  } else if (stripePatterns[pattern][stripeNum].colorPattern == 3) {
+    stripePatterns[pattern][stripeNum].stripeR = 0;
+    stripePatterns[pattern][stripeNum].stripeG = 0;
+    stripePatterns[pattern][stripeNum].stripeB = 255;
+    stripePatterns[pattern][stripeNum].stripeW = 0;
+  } else if (stripePatterns[pattern][stripeNum].colorPattern == 4) {
+    stripePatterns[pattern][stripeNum].stripeR = 0;
+    stripePatterns[pattern][stripeNum].stripeG = 0;
+    stripePatterns[pattern][stripeNum].stripeB = 0;
+    stripePatterns[pattern][stripeNum].stripeW = 100;
   } else {
     setGoodRandomColorVars();
-    stripePattern1[stripeNum].stripeR = goodColR;
-    stripePattern1[stripeNum].stripeG = goodColG;
-    stripePattern1[stripeNum].stripeB = goodColB;
-    stripePattern1[stripeNum].stripeW = goodColW;
+    stripePatterns[pattern][stripeNum].stripeR = goodColR;
+    stripePatterns[pattern][stripeNum].stripeG = goodColG;
+    stripePatterns[pattern][stripeNum].stripeB = goodColB;
+    stripePatterns[pattern][stripeNum].stripeW = goodColW;
   }
 }
 
-// JR TODO: ...
-// OK. These patterns are both shit and need deleting. What might be good? Use below to implement above.
-// Herm. 
-//  1 Wipes, on the beat top-bot, r-l, bot-top, l-r, repeat. Use good colours.
-//  2 Constant stripes. l-r good colours non stop would be nice.
-//  3 KinghtRider with big-ish LUT
-//  The stripe based rainbows probly belong here.
 
 
 

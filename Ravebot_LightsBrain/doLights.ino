@@ -10,13 +10,17 @@ void doLights() {
     doPatternStripes();
   } else if (currentLightPattern < 20) {
     doRainbowPatterns();
-  } else if (currentLightPattern == 10000) {
-    //    doPatternBlobs();
-    //    doPatternTrains();
-    //    doPatternDonuts();
-  }    */
+  } else if (currentLightPattern < 21) {
+    doPatternBlobs();
+  } else if (currentLightPattern < 22) {
+    doPatternTrains();
+  } else if (currentLightPattern < 23) {
+    doPatternDonuts();
+  }
+  */
+ 
   // allOverRainbow1(); - is AMaZing!
-  //doTwinkles();
+  // doTwinkles();
   doPatternStripes();
 
   // ***************************************************************************************
@@ -30,7 +34,6 @@ void doLights() {
   // heartInTime();
   // turnOffTubes();
   // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
-
 
   doFace();
   LEDS.show();
