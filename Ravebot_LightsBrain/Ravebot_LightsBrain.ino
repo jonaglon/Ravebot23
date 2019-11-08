@@ -40,8 +40,8 @@ int mainVolume = 40; // 127 actual max but we won't exceed 100.
 int tempMainVolume = 40; // 127 actual max but we won't exceed 100.
 int currentBar = 0;
 int mixCurrentBar = 0; // This counts from the start of a mix
-int currentGenre = 3;
-int currentTrack = 6;
+int currentGenre = 0;
+int currentTrack = 0;
 int dropCountdown = 0;
 
 bool robotTalking = false;
