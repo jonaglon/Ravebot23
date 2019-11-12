@@ -3,9 +3,9 @@ void doPatternStripes() {
   if (currentLightPattern == 14) {
     // int currentStripePattern = (timeyInTime/524288)%4;
     int currentStripePattern = 1;
-    stripesPattern(currentStripePattern);
+    stripesPattern();
   } else if (currentLightPattern == 15) {
-    stripesPattern(1);
+    stripesPattern();
   }  
 }
 
@@ -35,25 +35,25 @@ struct stripies {
 // Stripe patterns - 
 // 1 - Random good colors moving slowly top to bottom - TODO next, consider if lots of little array patterns like below are best way to handle stipes.
 // 2 - 
-const byte numStripesPatterns = 4;
+const byte numStripesPatterns = 16;
 
-stripies stripePatterns[4][4] = {
-{ {0, 0, 0, 0, 1, 256, 1024, 32, true, true },
-  {0, 0, 0, 0, 2, 256, 2048, 32, true, true }, 
-  {0, 0, 0, 0, 3, 256, 3072, 32, true, true },
-  {0, 0, 0, 0, 4, 256,    0, 32, true, true } },
-{ {0, 0, 0, 0, 1, 256,  512, 32, false, false },
-  {0, 0, 0, 0, 2, 256, 1536, 32, false, false },
-  {0, 0, 0, 0, 3, 256, 2560, 32, false, false },
-  {0, 0, 0, 0, 4, 256, 3584, 32, false, false } },
-{ {0, 0, 0, 0, 1, 256,  256, 32, true, false },
-  {0, 0, 0, 0, 2, 256, 3328, 32, true, false },
-  {0, 0, 0, 0, 3, 256, 2304, 32, true, false },
-  {0, 0, 0, 0, 4, 256, 1280, 32, true, false } },
-{ {0, 0, 0, 0, 1, 256, 3328, 32, false, true },
-  {0, 0, 0, 0, 2, 256,  256, 32, false, true },
-  {0, 0, 0, 0, 3, 256, 1280, 32, false, true },
-  {0, 0, 0, 0, 4, 256, 2304, 32, false, true } },
+stripies stripePatterns[16] = {
+  {0, 0, 0, 0, 1, 256,    0, 32, true, true },
+  {0, 0, 0, 0, 2, 256, 1024, 32, true, true }, 
+  {0, 0, 0, 0, 3, 256, 2048, 32, true, true },
+  {0, 0, 0, 0, 4, 256, 3072, 32, true, true },
+  {0, 0, 0, 0, 1, 256, 4096, 32, false, false },
+  {0, 0, 0, 0, 2, 256, 5120, 32, false, false },
+  {0, 0, 0, 0, 3, 256, 6144, 32, false, false },
+  {0, 0, 0, 0, 4, 256, 7168, 32, false, false },
+  {0, 0, 0, 0, 1, 256, 8192, 32, true, false },
+  {0, 0, 0, 0, 2, 256, 9216, 32, true, false },
+  {0, 0, 0, 0, 3, 256,10240, 32, true, false },
+  {0, 0, 0, 0, 4, 256,11264, 32, true, false },
+  {0, 0, 0, 0, 1, 256,12288, 32, false, true },
+  {0, 0, 0, 0, 2, 256,13312, 32, false, true },
+  {0, 0, 0, 0, 3, 256,14336, 32, false, true },
+  {0, 0, 0, 0, 4, 256,15360, 32, false, true },
 };
 
 /*
@@ -65,26 +65,35 @@ stripies stripePatterns[4][4] = {
 //    JR TODO - next we're going to try and pass a pointer to the array and the nubmer of elements to iterate through. and change 4096 to 4 * 4096
 //    Also we'er thinking of having a start point and + or - depending on the forwardOrBack value.
 
-void stripesPattern(byte pattern) {
+void stripesPattern() {
   for(int stripeNum = 0; stripeNum < numStripesPatterns; stripeNum++) {
     // I think beat stripe bassline has to start below zero 
-    int stripeBeatBassline = ((timeyInTime / stripePatterns[pattern][stripeNum].speedDivisor) % 4096);
-    if (stripePatterns[pattern][stripeNum].forwardOrBack) {
-      stripeBeatBassline = 4096-stripeBeatBassline;
+    int stripeBeatBassline = ((timeyInTime / stripePatterns[stripeNum].speedDivisor) % 16384);
+    if (stripePatterns[stripeNum].forwardOrBack) {
+      if (stripePatterns[stripeNum].xOrY)
+        stripeBeatBassline = 16384-stripeBeatBassline+1024;
+      else
+        stripeBeatBassline = 16384-stripeBeatBassline-768;
+    } else {
+      if (stripePatterns[stripeNum].xOrY)
+        stripeBeatBassline = stripeBeatBassline+256;
+      else
+        stripeBeatBassline = stripeBeatBassline+512;      
     }
-    int stripeBeatPos = (stripeBeatBassline + stripePatterns[pattern][stripeNum].offset) % 4096;
+    
+    int stripeBeatPos = (stripeBeatBassline + stripePatterns[stripeNum].offset) % 16384;
   
     if (beatCycle && stripeBeatPos > 3100) {
-      setNewColorForStripe(pattern, stripeNum);
+      setNewColorForStripe(stripeNum);
     }
   
     for(int j = 0; j < numLeds; j++) {
       byte xOrY = 0;
-      if (stripePatterns[pattern][stripeNum].xOrY)
+      if (stripePatterns[stripeNum].xOrY)
         xOrY = 1;
       int xCoord = getCoord(j,xOrY);
-      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePatterns[pattern][stripeNum].width)) {
-        setLedDirect(j, stripePatterns[pattern][stripeNum].stripeR, stripePatterns[pattern][stripeNum].stripeG, stripePatterns[pattern][stripeNum].stripeB, stripePatterns[pattern][stripeNum].stripeW, false);
+      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePatterns[stripeNum].width)) {
+        setLedDirect(j, stripePatterns[stripeNum].stripeR, stripePatterns[stripeNum].stripeG, stripePatterns[stripeNum].stripeB, stripePatterns[stripeNum].stripeW, false);
       }
     }   
   }
@@ -97,39 +106,39 @@ void stripesPattern(byte pattern) {
 // 3 = 255 blue
 // 4 = 100 white
 // 5 = Red, gold and green? TODO!
-void setNewColorForStripe(byte pattern, byte stripeNum) {
-  if (stripePatterns[pattern][stripeNum].colorPattern == 0) {
+void setNewColorForStripe(byte stripeNum) {
+  if (stripePatterns[stripeNum].colorPattern == 0) {
     setGoodRandomColorVars();
-    stripePatterns[pattern][stripeNum].stripeR = goodColR;
-    stripePatterns[pattern][stripeNum].stripeG = goodColG;
-    stripePatterns[pattern][stripeNum].stripeB = goodColB;
-    stripePatterns[pattern][stripeNum].stripeW = goodColW;
-  } else if (stripePatterns[pattern][stripeNum].colorPattern == 1) {
-    stripePatterns[pattern][stripeNum].stripeR = 255;
-    stripePatterns[pattern][stripeNum].stripeG = 0;
-    stripePatterns[pattern][stripeNum].stripeB = 0;
-    stripePatterns[pattern][stripeNum].stripeW = 0;
-  } else if (stripePatterns[pattern][stripeNum].colorPattern == 2) {
-    stripePatterns[pattern][stripeNum].stripeR = 0;
-    stripePatterns[pattern][stripeNum].stripeG = 255;
-    stripePatterns[pattern][stripeNum].stripeB = 0;
-    stripePatterns[pattern][stripeNum].stripeW = 0;
-  } else if (stripePatterns[pattern][stripeNum].colorPattern == 3) {
-    stripePatterns[pattern][stripeNum].stripeR = 0;
-    stripePatterns[pattern][stripeNum].stripeG = 0;
-    stripePatterns[pattern][stripeNum].stripeB = 255;
-    stripePatterns[pattern][stripeNum].stripeW = 0;
-  } else if (stripePatterns[pattern][stripeNum].colorPattern == 4) {
-    stripePatterns[pattern][stripeNum].stripeR = 0;
-    stripePatterns[pattern][stripeNum].stripeG = 0;
-    stripePatterns[pattern][stripeNum].stripeB = 0;
-    stripePatterns[pattern][stripeNum].stripeW = 100;
+    stripePatterns[stripeNum].stripeR = goodColR;
+    stripePatterns[stripeNum].stripeG = goodColG;
+    stripePatterns[stripeNum].stripeB = goodColB;
+    stripePatterns[stripeNum].stripeW = goodColW;
+  } else if (stripePatterns[stripeNum].colorPattern == 1) {
+    stripePatterns[stripeNum].stripeR = 255;
+    stripePatterns[stripeNum].stripeG = 0;
+    stripePatterns[stripeNum].stripeB = 0;
+    stripePatterns[stripeNum].stripeW = 0;
+  } else if (stripePatterns[stripeNum].colorPattern == 2) {
+    stripePatterns[stripeNum].stripeR = 0;
+    stripePatterns[stripeNum].stripeG = 255;
+    stripePatterns[stripeNum].stripeB = 0;
+    stripePatterns[stripeNum].stripeW = 0;
+  } else if (stripePatterns[stripeNum].colorPattern == 3) {
+    stripePatterns[stripeNum].stripeR = 0;
+    stripePatterns[stripeNum].stripeG = 0;
+    stripePatterns[stripeNum].stripeB = 255;
+    stripePatterns[stripeNum].stripeW = 0;
+  } else if (stripePatterns[stripeNum].colorPattern == 4) {
+    stripePatterns[stripeNum].stripeR = 0;
+    stripePatterns[stripeNum].stripeG = 0;
+    stripePatterns[stripeNum].stripeB = 0;
+    stripePatterns[stripeNum].stripeW = 100;
   } else {
     setGoodRandomColorVars();
-    stripePatterns[pattern][stripeNum].stripeR = goodColR;
-    stripePatterns[pattern][stripeNum].stripeG = goodColG;
-    stripePatterns[pattern][stripeNum].stripeB = goodColB;
-    stripePatterns[pattern][stripeNum].stripeW = goodColW;
+    stripePatterns[stripeNum].stripeR = goodColR;
+    stripePatterns[stripeNum].stripeG = goodColG;
+    stripePatterns[stripeNum].stripeB = goodColB;
+    stripePatterns[stripeNum].stripeW = goodColW;
   }
 }
 
