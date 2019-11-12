@@ -604,25 +604,25 @@ int numLedsInSection(int sectionNum) {
 }
 
 int ledPosOffset[19][2] = {
-  { 470, 90},    // 00 bottomRing
-  { 400, 945},    // 01 bigHeart
-  { 550, 1224},    // 02 smallHeart
-  {1012, 1400},    // 03 underarm left
-  {1012, 1210},    // 04 overarm left
-  { 784, 1550},    // 05 eyeLeft
-  { 510, 1550},    // 06 rightEye
-  { 646, 1536},    // 07 mouth
-  { 650, 1600},    // 08 tape
-  { 639, 1710},    // 09 tuner
-  { 580, 1714},    // 10 indicator
-  { 401, 1400},    // 11 underArm right
-  { 401, 1240},    // 12 overArm right
-  { 715, 800},    // 13 tubeBottomright
-  { 480, 800},    // 14 tubeBottomleft
-  { 480, 1020},    // 15 tubeTopleft
-  { 715, 1020},    // 16 tubeTopright
-  { 450, 555},    // 17 port left
-  { 800, 555},    // 18 port right
+  { 470, 490},    // 00 bottomRing
+  { 400, 1345},    // 01 bigHeart
+  { 550, 1624},    // 02 smallHeart
+  {1012, 1800},    // 03 underarm left
+  {1012, 1610},    // 04 overarm left
+  { 784, 1950},    // 05 eyeLeft
+  { 510, 1950},    // 06 rightEye
+  { 646, 1936},    // 07 mouth
+  { 650, 2000},    // 08 tape
+  { 639, 2110},    // 09 tuner
+  { 580, 2114},    // 10 indicator
+  { 401, 1800},    // 11 underArm right
+  { 401, 1640},    // 12 overArm right
+  { 715, 1200},    // 13 tubeBottomright
+  { 480, 1200},    // 14 tubeBottomleft
+  { 480, 1420},    // 15 tubeTopleft
+  { 715, 1420},    // 16 tubeTopright
+  { 450, 955},    // 17 port left
+  { 800, 955},    // 18 port right
 };
 
 /*

@@ -1,7 +1,8 @@
 
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    int currentStripePattern = (timeyInTime/524288)%4;
+    // int currentStripePattern = (timeyInTime/524288)%4;
+    int currentStripePattern = 0;
     stripesPattern(currentStripePattern);
   } else if (currentLightPattern == 15) {
     stripesPattern(1);
@@ -55,6 +56,14 @@ stripies stripePatterns[4][4] = {
   {0, 0, 0, 0, 4, 256, 2304, 32, false, true } },
 };
 
+/*
+{ {0, 0, 0, 0, 1, 256, 256, 32, true, false },
+  {0, 0, 0, 0, 2, 256, 3328, 32, true, false },
+  {0, 0, 0, 0, 3, 256, 2304, 32, true, false },
+  {0, 0, 0, 0, 4, 256, 1280, 32, true, false } },
+ */
+//    JR TODO - next we're going to try and pass a pointer to the array and the nubmer of elements to iterate through. and change 4096 to 4 * 4096
+//    Also we'er thinking of having a start point and + or - depending on the forwardOrBack value.
 
 void stripesPattern(byte pattern) {
   for(int stripeNum = 0; stripeNum < numStripesPatterns; stripeNum++) {
