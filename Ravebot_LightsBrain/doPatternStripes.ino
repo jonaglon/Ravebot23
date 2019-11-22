@@ -53,10 +53,10 @@ stripies stripePatterns[16] = {
  
 const byte numStripesPatterns = 4;
 stripies stripePatterns[4] = {
-  {0, 0, 0, 0, 4, 256,    0, 32, false, false },    // Left to right
-  {0, 0, 0, 0, 3, 256, 1024, 32, false, false },
-  {0, 0, 0, 0, 2, 256, 2048, 32, false, false },
-  {0, 0, 0, 0, 1, 256, 3072, 32, false, false },
+  {0, 0, 0, 0, 1, 256, 8192, 32, false, true },     // Right to left
+  {0, 0, 0, 0, 2, 256, 9216, 32, false, true },
+  {0, 0, 0, 0, 3, 256,10240, 32, false, true },
+  {0, 0, 0, 0, 4, 256,11264, 32, false, true },
 };
  
 
@@ -68,12 +68,12 @@ void stripesPattern(byte numStripesInPattern) {
       if (stripePatterns[stripeNum].xOrY)
         stripeBeatBassline = 16384-stripeBeatBassline+2048;   // Top to bottom
       else
-        stripeBeatBassline = 16384-stripeBeatBassline;   // Bottom to top
+        stripeBeatBassline = 18432-stripeBeatBassline;   // Right to left 
     } else {
       if (stripePatterns[stripeNum].xOrY)
-        stripeBeatBassline = stripeBeatBassline+256;       // Right to left
+        stripeBeatBassline = stripeBeatBassline+512;       // Bottom to top
       else
-        stripeBeatBassline = stripeBeatBassline+11520;      // Left to right    // ud du are broken as they go r g b w up from the bassline when they should go down
+        stripeBeatBassline = stripeBeatBassline+11520;      // Left to right - ok    // ud du are broken as they go r g b w up from the bassline when they should go down
     }
     
     int stripeBeatPos = (stripeBeatBassline + stripePatterns[stripeNum].offset) % 16384;
