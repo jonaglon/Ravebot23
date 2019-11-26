@@ -57,6 +57,8 @@ byte colPins[3] = {2, 3, 4}; //connect to the column pinouts of the keypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, 4, 3);
 
 void setup() {
+  delay(500);
+  
   wdt_enable(WDTO_2S);
 
   if (testoMode)
@@ -216,9 +218,9 @@ servoInfo servos[13] = {
   { 200, 480, 2, 350, 350, 210, 280, 410, 470, 0 }, // 7 - r wrist ud
   { 170, 530, 3, 350, 350, 180, 290, 410, 480, 0 }, // 8 - l elbow
   { 170, 520, 3, 350, 350, 210, 280, 410, 470, 0 }, // 9 - l wrist lr
-  { 202, 330, 2, 330, 330, 202, 240, 300, 330, 0 }, // 10 - l new nod
-  { 376, 456, 1, 400, 400, 376, 388, 426, 450, 0 }, // 11 - l new tilt
-  { 200, 500, 3, 350, 350, 200, 240, 410, 496, 0 }  // 12 - l new shake
+  { 202, 330, 2, 330, 330, 202, 240, 300, 330, 0 }, // 10 - new nod
+  { 376, 456, 1, 400, 400, 376, 388, 426, 450, 0 }, // 11 - new tilt
+  { 200, 500, 3, 350, 350, 200, 240, 410, 496, 0 }  // 12 - new shake
 };
 
 int arcadeButtonDance0[16][14] = {

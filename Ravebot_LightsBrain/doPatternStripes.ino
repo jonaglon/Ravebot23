@@ -1,8 +1,8 @@
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    stripesPattern(4);
+    stripesPattern(16);
   } else if (currentLightPattern == 15) {
-    stripesPattern(4);
+    stripesPattern(16);
   }
 }
 
@@ -31,62 +31,62 @@ struct stripies {
 // Stripe patterns - 
 // 1 - Random good colors moving slowly top to bottom - TODO next, consider if lots of little array patterns like below are best way to handle stipes.
 // 2 - 
-/*const byte numStripesPatterns = 16;
+
+const byte numStripesPatterns = 16;
 stripies stripePatterns[16] = {
-  {0, 0, 0, 0, 1, 256,    0, 32, true, true },      // Top to bottom
-  {0, 0, 0, 0, 2, 256, 1024, 32, true, true }, 
-  {0, 0, 0, 0, 3, 256, 2048, 32, true, true },
-  {0, 0, 0, 0, 4, 256, 3072, 32, true, true },
-  {0, 0, 0, 0, 1, 256, 4096, 32, false, false },    // Left to right
-  {0, 0, 0, 0, 2, 256, 5120, 32, false, false },
-  {0, 0, 0, 0, 3, 256, 6144, 32, false, false },
-  {0, 0, 0, 0, 4, 256, 7168, 32, false, false },
-  {0, 0, 0, 0, 1, 256, 8192, 32, true, false },     // Bottom to top
-  {0, 0, 0, 0, 2, 256, 9216, 32, true, false },
-  {0, 0, 0, 0, 3, 256,10240, 32, true, false },
-  {0, 0, 0, 0, 4, 256,11264, 32, true, false },
-  {0, 0, 0, 0, 1, 256,12288, 32, false, true },     // Right to left
-  {0, 0, 0, 0, 2, 256,13312, 32, false, true },
-  {0, 0, 0, 0, 3, 256,14336, 32, false, true },
-  {0, 0, 0, 0, 4, 256,15360, 32, false, true },
-};*/
- 
-const byte numStripesPatterns = 4;
-stripies stripePatterns[4] = {
-  {0, 0, 0, 0, 1, 256, 8192, 32, false, true },     // Right to left
-  {0, 0, 0, 0, 2, 256, 9216, 32, false, true },
-  {0, 0, 0, 0, 3, 256,10240, 32, false, true },
-  {0, 0, 0, 0, 4, 256,11264, 32, false, true },
+  {0, 0, 0, 0, 4, 256,    0, 32, true, true },      // Top to bottom
+  {0, 0, 0, 0, 3, 256, 1024, 32, true, true }, 
+  {0, 0, 0, 0, 2, 256, 2048, 32, true, true },
+  {0, 0, 0, 0, 1, 256, 3072, 32, true, true },
+  {0, 0, 0, 0, 4, 256, 4096, 32, false, false },    // Left to right
+  {0, 0, 0, 0, 3, 256, 5120, 32, false, false },
+  {0, 0, 0, 0, 2, 256, 6144, 32, false, false },
+  {0, 0, 0, 0, 1, 256, 7168, 32, false, false },
+  {0, 0, 0, 0, 4, 256, 8192, 32, true, false },     // Bottom to top
+  {0, 0, 0, 0, 3, 256, 9216, 32, true, false },
+  {0, 0, 0, 0, 2, 256,10240, 32, true, false },
+  {0, 0, 0, 0, 1, 256,11264, 32, true, false },
+  {0, 0, 0, 0, 4, 256,12288, 32, false, true },     // Right to left
+  {0, 0, 0, 0, 3, 256,13312, 32, false, true },
+  {0, 0, 0, 0, 2, 256,14336, 32, false, true },
+  {0, 0, 0, 0, 1, 256,15360, 32, false, true },
 };
  
-
 void stripesPattern(byte numStripesInPattern) {
   for(int stripeNum = 0; stripeNum < numStripesInPattern; stripeNum++) {
-    int stripeBeatBassline = (((timeyInTime / stripePatterns[stripeNum].speedDivisor) + stripePatterns[stripeNum].offset) % 16384);
+    int stripeBeatPos = (((timeyInTime / stripePatterns[stripeNum].speedDivisor) + stripePatterns[stripeNum].offset) % 16384);
+    
+    if (beatCycle && stripeBeatPos > 14336) {
+      setNewColorForStripe(stripeNum);
+    }
     
     if (stripePatterns[stripeNum].forwardOrBack) {
       if (stripePatterns[stripeNum].xOrY)
-        stripeBeatBassline = 16384-stripeBeatBassline+2048;   // Top to bottom
+        stripeBeatPos = 16384-stripeBeatPos+3840;  // Top to bottom
       else
-        stripeBeatBassline = 18432-stripeBeatBassline;   // Right to left 
+        stripeBeatPos = 16384-stripeBeatPos+2560;  // Right to left 
     } else {
       if (stripePatterns[stripeNum].xOrY)
-        stripeBeatBassline = stripeBeatBassline+512;       // Bottom to top
+        stripeBeatPos = stripeBeatPos+15360;       // Bottom to top
       else
-        stripeBeatBassline = stripeBeatBassline+11520;      // Left to right - ok    // ud du are broken as they go r g b w up from the bassline when they should go down
+        stripeBeatPos = stripeBeatPos+15014;       // Left to right
     }
     
-    int stripeBeatPos = (stripeBeatBassline + stripePatterns[stripeNum].offset) % 16384;
-  
-    if (beatCycle && stripeBeatPos > 14336) {  // JR TODO - this number is now questionable, should be low / high so not too many unneeded changes.
-      setNewColorForStripe(stripeNum);
-    }
-  
+    stripeBeatPos = stripeBeatPos % 16384;
+    
     for(int j = 0; j < numLeds; j++) {
       byte xOrY = 0;
       if (stripePatterns[stripeNum].xOrY)
         xOrY = 1;
       int xCoord = getCoord(j,xOrY);
+
+      if (testMode && j == 0 && beatCycle) {
+        Serial.print("xCoord:");
+        Serial.print(xCoord);
+        Serial.print("   stripeBeatPos:");
+        Serial.println(stripeBeatPos);
+      }
+      
       if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePatterns[stripeNum].width)) {
         setLedDirect(j, stripePatterns[stripeNum].stripeR, stripePatterns[stripeNum].stripeG, stripePatterns[stripeNum].stripeB, stripePatterns[stripeNum].stripeW, false);
       }
