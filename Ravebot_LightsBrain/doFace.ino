@@ -24,9 +24,14 @@ void doDialRainbow() {
   }
 }
 
+bool eyesAutomatic = false;
 void eyeController() {
 
-  if (robotManualMode) {
+  if (lastEyeMoveTime+20000 > timey) {
+    if (eyesAutomatic) {
+      resetEyes();
+      eyesAutomatic = false;
+    }
     switch (currentEyeType) {
       case 0:
         doNormalEyes();
@@ -41,13 +46,12 @@ void eyeController() {
         break;
     }
   } else {
+    eyesAutomatic = true;
     // JR TODO - This is where the eyes are on automatic and is too simple.
     // I think maybe remove the code below and trigger these animations 
     switch (currentBar%8) {
       case 0:
       case 1:
-        doNormalEyes();
-        break;
       case 2:
       case 3:
         leftEyeX = (sixteenBeats * 10)-80;

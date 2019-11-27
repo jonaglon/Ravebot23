@@ -1,17 +1,3 @@
-void doPatternStripes() {
-  if (currentLightPattern == 14) {
-    stripesPattern(16);
-  } else if (currentLightPattern == 15) {
-    stripesPattern(16);
-  }
-}
-
-// JR TODO: ...
-//  x 1 Get good timings for the 1-2-3-4 for each of the four directions
-//  2 Wipes, on the beat l-r, top-bot, r-l, bot-top, repeat. Use good colours.
-//  3 KinghtRider with big-ish LUT?
-//  The stripe based rainbows probly belong here.
-
 struct stripies {
   byte stripeR;
   byte stripeG;
@@ -28,29 +14,35 @@ struct stripies {
   }
 };
 
-// Stripe patterns - 
-// 1 - Random good colors moving slowly top to bottom - TODO next, consider if lots of little array patterns like below are best way to handle stipes.
-// 2 - 
-
-const byte numStripesPatterns = 16;
-stripies stripePatterns[16] = {
-  {0, 0, 0, 0, 4, 256,    0, 32, true, true },      // Top to bottom
-  {0, 0, 0, 0, 3, 256, 1024, 32, true, true }, 
-  {0, 0, 0, 0, 2, 256, 2048, 32, true, true },
-  {0, 0, 0, 0, 1, 256, 3072, 32, true, true },
-  {0, 0, 0, 0, 4, 256, 4096, 32, false, false },    // Left to right
-  {0, 0, 0, 0, 3, 256, 5120, 32, false, false },
-  {0, 0, 0, 0, 2, 256, 6144, 32, false, false },
-  {0, 0, 0, 0, 1, 256, 7168, 32, false, false },
-  {0, 0, 0, 0, 4, 256, 8192, 32, true, false },     // Bottom to top
-  {0, 0, 0, 0, 3, 256, 9216, 32, true, false },
-  {0, 0, 0, 0, 2, 256,10240, 32, true, false },
-  {0, 0, 0, 0, 1, 256,11264, 32, true, false },
-  {0, 0, 0, 0, 4, 256,12288, 32, false, true },     // Right to left
-  {0, 0, 0, 0, 3, 256,13312, 32, false, true },
-  {0, 0, 0, 0, 2, 256,14336, 32, false, true },
-  {0, 0, 0, 0, 1, 256,15360, 32, false, true },
+const byte numStripesPattern1 = 16;
+stripies stripePattern1[16] = {
+  {0, 0, 0, 0, 0, 256,    0, 16, true, true },      // Top to bottom
+  {0, 0, 0, 0, 0, 256, 1024, 16, true, true }, 
+  {0, 0, 0, 0, 0, 256, 2048, 16, true, true },
+  {0, 0, 0, 0, 0, 256, 3072, 16, true, true },
+  {0, 0, 0, 0, 0, 256, 4096, 16, false, false },    // Left to right
+  {0, 0, 0, 0, 0, 256, 5120, 16, false, false },
+  {0, 0, 0, 0, 0, 256, 6144, 16, false, false },
+  {0, 0, 0, 0, 0, 256, 7168, 16, false, false },
+  {0, 0, 0, 0, 0, 256, 8192, 16, true, false },     // Bottom to top
+  {0, 0, 0, 0, 0, 256, 9216, 16, true, false },
+  {0, 0, 0, 0, 0, 256,10240, 16, true, false },
+  {0, 0, 0, 0, 0, 256,11264, 16, true, false },
+  {0, 0, 0, 0, 0, 256,12288, 16, false, true },     // Right to left
+  {0, 0, 0, 0, 0, 256,13312, 16, false, true },
+  {0, 0, 0, 0, 0, 256,14336, 16, false, true },
+  {0, 0, 0, 0, 0, 256,15360, 16, false, true },
 };
+
+
+void doPatternStripes() {
+  if (currentLightPattern == 14) {
+    stripesPattern(numStripesPattern1, );
+  } else if (currentLightPattern == 15) {
+    stripesPattern(16);
+  }
+}
+
  
 void stripesPattern(byte numStripesInPattern) {
   for(int stripeNum = 0; stripeNum < numStripesInPattern; stripeNum++) {
@@ -62,7 +54,7 @@ void stripesPattern(byte numStripesInPattern) {
     
     if (stripePatterns[stripeNum].forwardOrBack) {
       if (stripePatterns[stripeNum].xOrY)
-        stripeBeatPos = 16384-stripeBeatPos+3840;  // Top to bottom
+        stripeBeatPos = 16384-stripeBeatPos+3740;  // Top to bottom
       else
         stripeBeatPos = 16384-stripeBeatPos+2560;  // Right to left 
     } else {

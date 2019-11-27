@@ -3,20 +3,21 @@
    / \/// _` \ \ / / _ \ '_ \ / _ \| __|  _____   / / | |/ _` | '_ \| __/ __|
   / _  \ (_| |\ V /  __/ |_) | (_) | |_  |_____| / /__| | (_| | | | | |_\__ \
   \/ \_/\__,_| \_/ \___|_.__/ \___/ \__|         \____/_|\__, |_| |_|\__|___/
-                                                       |___/                       */
+                                                         |___/                       */
 #include<Arduino.h>
 #include<Wire.h>
 #include<FastLED.h>
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
-const bool beatTestMode = false;
+const bool beatTestMode = true;
 const bool megaAttached = true;
 
 bool robotSwitchedOn = true;    // JR TODO - set to false when not testing
 bool robotManualMode = true;
 
-unsigned long timey;
+unsigned int timey;
 unsigned int lastBeatTime = 0;
+unsigned int lastEyeMoveTime = 0;
 unsigned int timeyInTime, twinkleTime; // This is like timey but in time, counting 16384 per beat
 int lastBeatLength = 1;
 int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
@@ -45,8 +46,8 @@ int currentTrack = 0;
 int dropCountdown = 0;
 
 bool robotTalking = false;
-unsigned long robotTalkingOnTime;
-unsigned long robotTalkingOffTime;
+unsigned int robotTalkingOnTime;
+unsigned int robotTalkingOffTime;
 
 const int numLeds = 1443;
 CRGB rgbwLeds[2440]; // 488 * 5

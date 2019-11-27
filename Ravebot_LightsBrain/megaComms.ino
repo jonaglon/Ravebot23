@@ -7,7 +7,7 @@ void receiveFromMega() {
     char strIn[4];
     int i=0;
     delay(2); //allows all serial sent to be received together
-    while(Serial1.available() && i<4) {   // JR - You changed this from 1 where it was working because there is a pin stuck in that hole
+    while(Serial1.available() && i<4) {
       strIn[i++] = Serial1.read();
     }
     strIn[i++]='\0';
@@ -26,26 +26,31 @@ void doSomethingWithPackageFromMega(int package) {
       Serial.println(message);
     }    
 
-  if (function == 1)
-  {
-    if (message < 2)
+  if (function == 1) {
+    if (message < 2) {
       doRobotTalkingLights(message);
-    else if (message < 4)
+    } else if (message < 4) {
+      lastEyeMoveTime = timey;
       winkLeftMessage(message % 2);
-    else if (message < 6)
+    } else if (message < 6) {
+      lastEyeMoveTime = timey;
       winkRightMessage(message % 2);
-    else if (message < 7)
+    } else if (message < 7) {
+      lastEyeMoveTime = timey;
       changeEyeType();
-    else if (message < 8)
+    } else if (message < 8) {
+      lastEyeMoveTime = timey;
       changePrimaryEyeColour();
-    else if (message < 9)
+    } else if (message < 9) {
+      lastEyeMoveTime = timey;
       changeSecondaryEyeColour();
-    else if (message < 11)
+    } else if (message < 11) {
       changeOnOff(message % 2);
-    else if (message < 13)
+    } else if (message < 13) {
       changeManualAutomatic(message % 2);
-    else if (message < 40)
+    } else if (message < 40) {
       setDanceNumber(message % 20);
+    }
   }
   else if (function == 2)
   {
@@ -63,9 +68,9 @@ void doSomethingWithPackageFromMega(int package) {
   }
   else if (function == 5 || function == 6 || function == 7 || function == 8)
   {
+    lastEyeMoveTime = timey;
     setEyeCoords(function, message);
   }
-
 }
 
 void setDanceNumber(int message) {
