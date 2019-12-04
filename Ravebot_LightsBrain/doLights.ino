@@ -19,9 +19,9 @@ void doLights() {
   }
   */
  
-  allOverRainbow1(); // - is AMaZing!
+  //allOverRainbow1(); // - is AMaZing!
   // doTwinkles();
-  //doPatternStripes();
+  doPatternStripes();
 
   // ***************************************************************************************
   // Bigger TODO listy:

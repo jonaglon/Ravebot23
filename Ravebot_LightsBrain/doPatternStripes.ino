@@ -34,22 +34,42 @@ stripies stripePattern1[16] = {
   {0, 0, 0, 0, 0, 256,15360, 16, false, true },
 };
 
+const byte numStripesPattern2 = 16;
+stripies stripePattern2[16] = {
+  {0, 0, 0, 0, 0, 256,    0, 16, false, false },      // Top to bottom
+  {0, 0, 0, 0, 0, 256, 1024, 16, false, false }, 
+  {0, 0, 0, 0, 0, 256, 2048, 16, false, false },
+  {0, 0, 0, 0, 4, 256, 3072, 32, true, true },
+  {0, 0, 0, 0, 0, 256, 4096, 16, false, false },
+  {0, 0, 0, 0, 0, 256, 5120, 16, false, false },
+  {0, 0, 0, 0, 0, 256, 6144, 16, false, false },
+  {0, 0, 0, 0, 4, 256, 7168, 32, true, true },
+  {0, 0, 0, 0, 0, 256, 8192, 16, false, false },
+  {0, 0, 0, 0, 0, 256, 9216, 16, false, false },
+  {0, 0, 0, 0, 0, 256,10240, 16, false, false },
+  {0, 0, 0, 0, 4, 256,11264, 32, true, true },
+  {0, 0, 0, 0, 0, 256,12288, 16, false, false },
+  {0, 0, 0, 0, 0, 256,13312, 16, false, false },
+  {0, 0, 0, 0, 0, 256,14336, 16, false, false },
+  {0, 0, 0, 0, 4, 256,15360, 32, true, true }
+};
+
 
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    stripesPattern(numStripesPattern1, );
+    stripesPattern(numStripesPattern1, stripePattern1);
   } else if (currentLightPattern == 15) {
-    stripesPattern(16);
+    stripesPattern(numStripesPattern2, stripePattern2);
   }
 }
 
  
-void stripesPattern(byte numStripesInPattern) {
+void stripesPattern(byte numStripesInPattern, struct stripies *stripePatterns) {
   for(int stripeNum = 0; stripeNum < numStripesInPattern; stripeNum++) {
     int stripeBeatPos = (((timeyInTime / stripePatterns[stripeNum].speedDivisor) + stripePatterns[stripeNum].offset) % 16384);
     
     if (beatCycle && stripeBeatPos > 14336) {
-      setNewColorForStripe(stripeNum);
+      setNewColorForStripe(stripeNum, stripePatterns);
     }
     
     if (stripePatterns[stripeNum].forwardOrBack) {
@@ -93,7 +113,7 @@ void stripesPattern(byte numStripesInPattern) {
 // 3 = 255 blue
 // 4 = 100 white
 // 5 = Red, gold and green? TODO!
-void setNewColorForStripe(byte stripeNum) {
+void setNewColorForStripe(byte stripeNum, struct stripies *stripePatterns) {
   if (stripePatterns[stripeNum].colorPattern == 0) {
     setGoodRandomColorVars();
     stripePatterns[stripeNum].stripeR = goodColR;
