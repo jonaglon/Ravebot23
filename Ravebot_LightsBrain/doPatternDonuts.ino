@@ -1,22 +1,4 @@
-
-
-void doPatternDonuts() {
-  //drawWhiteHexagons();
-
-  coOdrinTits();
-}
-
-void coOdrinTits() {
-  for (int j = 0; j < numLeds; j++) { 
-    int xCoord = getCoord(j,0);
-    int yCoord = getCoord(j,1);
-
-    if (xCoord < 490) {
-      setLedDirect(j, 0, 0, 255, 0, false);
-    }
-
-  }  
-}
+// TODO - may need to alter these now coords have 8192 added to them
 
 void drawRGBHexagons() {
   int yStripeBeatPos = (timeyInTime % 65536)/60; // 0-958

@@ -9,7 +9,7 @@
 #include<FastLED.h>
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
-const bool beatTestMode = true;
+const bool beatTestMode = false;
 const bool megaAttached = true;
 
 bool robotSwitchedOn = true;    // JR TODO - set to false when not testing
@@ -42,7 +42,7 @@ int tempMainVolume = 40; // 127 actual max but we won't exceed 100.
 int currentBar = 0;
 int mixCurrentBar = 0; // This counts from the start of a mix
 int currentGenre = 0;
-int currentTrack = 0;
+int currentTrack = 301;
 int dropCountdown = 0;
 
 bool robotTalking = false;
@@ -605,49 +605,26 @@ int numLedsInSection(int sectionNum) {
 }
 
 int ledPosOffset[19][2] = {
-  { 470, 490},    // 00 bottomRing
-  { 400, 1345},    // 01 bigHeart
-  { 550, 1624},    // 02 smallHeart
-  {1012, 1800},    // 03 underarm left
-  {1012, 1610},    // 04 overarm left
-  { 784, 1950},    // 05 eyeLeft
-  { 510, 1950},    // 06 rightEye
-  { 646, 1936},    // 07 mouth
-  { 650, 2000},    // 08 tape
-  { 639, 2110},    // 09 tuner
-  { 580, 2114},    // 10 indicator
-  { 401, 1800},    // 11 underArm right
-  { 401, 1640},    // 12 overArm right
-  { 715, 1200},    // 13 tubeBottomright
-  { 480, 1200},    // 14 tubeBottomleft
-  { 480, 1420},    // 15 tubeTopleft
-  { 715, 1420},    // 16 tubeTopright
-  { 450, 955},    // 17 port left
-  { 800, 955},    // 18 port right
+  { 8262, 8282},    // 00 bottomRing
+  { 8192, 9137},    // 01 bigHeart
+  { 8342, 9416},    // 02 smallHeart
+  { 8804, 9592},    // 03 underarm left
+  { 8804, 9402},    // 04 overarm left
+  { 8576, 9742},    // 05 eyeLeft
+  { 8302, 9742},    // 06 rightEye
+  { 8438, 9728},    // 07 mouth
+  { 8442, 9792},    // 08 tape
+  { 8431, 9902},    // 09 tuner
+  { 8372, 9906},    // 10 indicator
+  { 8193, 9592},    // 11 underArm right
+  { 8193, 9432},    // 12 overArm right
+  { 8507, 8992},    // 13 tubeBottomright
+  { 8272, 8992},    // 14 tubeBottomleft
+  { 8272, 9212},    // 15 tubeTopleft
+  { 8507, 9212},    // 16 tubeTopright
+  { 8242, 8747},    // 17 port left
+  { 8592, 8747},    // 18 port right
 };
-
-/*
-int ledPosOffset[19][2] = {
-  { 70, 90},    // 00 bottomRing
-  { 0, 945},    // 01 bigHeart
-  { 150, 1224},    // 02 smallHeart
-  { 612, 1400},    // 03 underarm left
-  { 612, 1210},    // 04 overarm left
-  { 384, 1550},    // 05 eyeLeft
-  { 110, 1550},    // 06 rightEye
-  { 246, 1536},    // 07 mouth
-  { 250, 1600},    // 08 tape
-  { 239, 1710},    // 09 tuner
-  { 180, 1714},    // 10 indicator
-  { 1, 1400},    // 11 underArm right
-  { 1, 1240},    // 12 overArm right
-  { 315, 800},    // 13 tubeBottomright
-  { 80, 800},    // 14 tubeBottomleft
-  { 80, 1020},    // 15 tubeTopleft
-  { 315, 1020},    // 16 tubeTopright
-  { 50, 555},    // 17 port left
-  { 400, 555},    // 18 port right
-};*/
 
 int eyeSmileyLeds[24] = {
   34, 35, 40, 41, 42, 43, 44, 45, 46,

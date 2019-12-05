@@ -19,9 +19,10 @@ void doLights() {
   }
   */
  
-  //allOverRainbow1(); // - is AMaZing!
+  // allOverRainbow1(); // - is AMaZing!
   // doTwinkles();
   doPatternStripes();
+  //doRainbowPatterns();
 
   // ***************************************************************************************
   // Bigger TODO listy:
@@ -60,7 +61,7 @@ void changeLightPattern() {
   }
 
   // JR TODO - this is the cheat setting the lights pattern ******************
-  newPattern = 15;
+  newPattern = 14;
   
   currentLightPattern = newPattern;
 

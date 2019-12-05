@@ -16,42 +16,54 @@ struct stripies {
 
 const byte numStripesPattern1 = 16;
 stripies stripePattern1[16] = {
-  {0, 0, 0, 0, 0, 256,    0, 16, true, true },      // Top to bottom
-  {0, 0, 0, 0, 0, 256, 1024, 16, true, true }, 
-  {0, 0, 0, 0, 0, 256, 2048, 16, true, true },
-  {0, 0, 0, 0, 0, 256, 3072, 16, true, true },
-  {0, 0, 0, 0, 0, 256, 4096, 16, false, false },    // Left to right
-  {0, 0, 0, 0, 0, 256, 5120, 16, false, false },
-  {0, 0, 0, 0, 0, 256, 6144, 16, false, false },
-  {0, 0, 0, 0, 0, 256, 7168, 16, false, false },
-  {0, 0, 0, 0, 0, 256, 8192, 16, true, false },     // Bottom to top
-  {0, 0, 0, 0, 0, 256, 9216, 16, true, false },
-  {0, 0, 0, 0, 0, 256,10240, 16, true, false },
-  {0, 0, 0, 0, 0, 256,11264, 16, true, false },
-  {0, 0, 0, 0, 0, 256,12288, 16, false, true },     // Right to left
-  {0, 0, 0, 0, 0, 256,13312, 16, false, true },
-  {0, 0, 0, 0, 0, 256,14336, 16, false, true },
-  {0, 0, 0, 0, 0, 256,15360, 16, false, true },
+  {0, 0, 0, 0, 0, 256,    0, 32, true, true },      // Top to bottom
+  {0, 0, 0, 0, 0, 256, 1024, 32, true, true }, 
+  {0, 0, 0, 0, 0, 256, 2048, 32, true, true },
+  {0, 0, 0, 0, 0, 256, 3072, 32, true, true },
+  {0, 0, 0, 0, 0, 256, 4096, 32, false, false },    // Left to right
+  {0, 0, 0, 0, 0, 256, 5120, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 6144, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 7168, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 8192, 32, true, false },     // Bottom to top
+  {0, 0, 0, 0, 0, 256, 9216, 32, true, false },
+  {0, 0, 0, 0, 0, 256,10240, 32, true, false },
+  {0, 0, 0, 0, 0, 256,11264, 32, true, false },
+  {0, 0, 0, 0, 0, 256,12288, 32, false, true },     // Right to left
+  {0, 0, 0, 0, 0, 256,13312, 32, false, true },
+  {0, 0, 0, 0, 0, 256,14336, 32, false, true },
+  {0, 0, 0, 0, 0, 256,15360, 32, false, true },
 };
 
 const byte numStripesPattern2 = 16;
 stripies stripePattern2[16] = {
-  {0, 0, 0, 0, 0, 256,    0, 16, false, false },      // Top to bottom
-  {0, 0, 0, 0, 0, 256, 1024, 16, false, false }, 
-  {0, 0, 0, 0, 0, 256, 2048, 16, false, false },
-  {0, 0, 0, 0, 4, 256, 3072, 32, true, true },
-  {0, 0, 0, 0, 0, 256, 4096, 16, false, false },
-  {0, 0, 0, 0, 0, 256, 5120, 16, false, false },
-  {0, 0, 0, 0, 0, 256, 6144, 16, false, false },
-  {0, 0, 0, 0, 4, 256, 7168, 32, true, true },
-  {0, 0, 0, 0, 0, 256, 8192, 16, false, false },
-  {0, 0, 0, 0, 0, 256, 9216, 16, false, false },
-  {0, 0, 0, 0, 0, 256,10240, 16, false, false },
-  {0, 0, 0, 0, 4, 256,11264, 32, true, true },
-  {0, 0, 0, 0, 0, 256,12288, 16, false, false },
-  {0, 0, 0, 0, 0, 256,13312, 16, false, false },
-  {0, 0, 0, 0, 0, 256,14336, 16, false, false },
-  {0, 0, 0, 0, 4, 256,15360, 32, true, true }
+  {0, 0, 0, 0, 0, 256,    0, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 1024, 32, false, false }, 
+  {0, 0, 0, 0, 0, 256, 2048, 32, false, false },
+  {0, 0, 0, 0, 1, 500, 3072, 64, true, true },
+  {0, 0, 0, 0, 0, 256, 4096, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 5120, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 6144, 32, false, false },
+  {0, 0, 0, 0, 2, 500, 7168, 64, true, true },
+  {0, 0, 0, 0, 0, 256, 8192, 32, false, false },
+  {0, 0, 0, 0, 0, 256, 9216, 32, false, false },
+  {0, 0, 0, 0, 0, 256,10240, 32, false, false },
+  {0, 0, 0, 0, 3, 500,11264, 64, true, true },
+  {0, 0, 0, 0, 0, 256,12288, 32, false, false },
+  {0, 0, 0, 0, 0, 256,13312, 32, false, false },
+  {0, 0, 0, 0, 0, 256,14336, 32, false, false },
+  {0, 0, 0, 0, 4, 500,15360, 64, true, true }
+};
+
+const byte numStripesPattern3 = 8;
+stripies stripePattern3[8] = {
+  {0, 0, 0, 0, 1, 3000,    0, 64, false, false },
+  {0, 0, 0, 0, 2, 3000, 2048, 64, true, false },
+  {0, 0, 0, 0, 3, 3000, 4096, 64, false, true },
+  {0, 0, 0, 0, 4, 3000, 6144, 64, true, true },
+  {0, 0, 0, 0, 1, 3000, 8192, 64, false, false },
+  {0, 0, 0, 0, 2, 3000,10240, 64, true, false },
+  {0, 0, 0, 0, 3, 3000,12288, 64, false, true },
+  {0, 0, 0, 0, 4, 3000,14336, 64, true, true }
 };
 
 
@@ -59,7 +71,8 @@ void doPatternStripes() {
   if (currentLightPattern == 14) {
     stripesPattern(numStripesPattern1, stripePattern1);
   } else if (currentLightPattern == 15) {
-    stripesPattern(numStripesPattern2, stripePattern2);
+    // stripesPattern(numStripesPattern2, stripePattern2);
+    stripesPattern(numStripesPattern3, stripePattern3);
   }
 }
 
@@ -74,14 +87,14 @@ void stripesPattern(byte numStripesInPattern, struct stripies *stripePatterns) {
     
     if (stripePatterns[stripeNum].forwardOrBack) {
       if (stripePatterns[stripeNum].xOrY)
-        stripeBeatPos = 16384-stripeBeatPos+3740;  // Top to bottom
+        stripeBeatPos = 15932-stripeBeatPos;      // Top to bottom
       else
-        stripeBeatPos = 16384-stripeBeatPos+2560;  // Right to left 
+        stripeBeatPos = 14752-stripeBeatPos;      // Right to left
     } else {
       if (stripePatterns[stripeNum].xOrY)
-        stripeBeatPos = stripeBeatPos+15360;       // Bottom to top
+        stripeBeatPos = stripeBeatPos+2068;       // Bottom to top
       else
-        stripeBeatPos = stripeBeatPos+15014;       // Left to right
+        stripeBeatPos = stripeBeatPos+1922;       // Left to right
     }
     
     stripeBeatPos = stripeBeatPos % 16384;
