@@ -1,20 +1,31 @@
+/*
+int8_t = -128 to 127
+uint8_t = 0 to 255
+int16_t = -32,768 to 32,767
+uint16_t = 0 to 65,535
+int32_t = -2,147,483,648 to 2,147,483,647
+uint32_t = 0 to 4,294,967,295
+int64_t = −9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+uint64_t = 0 to 18,446,744,073,709,551,615      */
+
 struct stripies {
-  byte stripeR;
-  byte stripeG;
-  byte stripeB;
-  byte stripeW;
-  byte colorPattern;
-  int width;
-  int offset;
-  int speedDivisor;
+  uint8_t stripeR;
+  uint8_t stripeG;
+  uint8_t stripeB;
+  uint8_t stripeW;
+  uint8_t colorPattern;
+  uint16_t width;
+  uint16_t offset;
+  uint8_t speedDivisor;
   bool xOrY;
   bool forwardOrBack;
-  stripies(byte aStripeR, byte aStripeG, byte aStripeB, byte aStripeW, byte aColorPattern, int aWidth, int aOffset, int aSpeedDivisor, bool aXOrY, bool aForwardOrBack) :
+  stripies(uint8_t aStripeR, uint8_t aStripeG, uint8_t aStripeB, uint8_t aStripeW, uint8_t aColorPattern, uint16_t aWidth, uint16_t aOffset, uint8_t aSpeedDivisor, bool aXOrY, bool aForwardOrBack) :
     stripeR(aStripeR), stripeG(aStripeG), stripeB(aStripeB), stripeW(aStripeW), colorPattern(aColorPattern), width(aWidth), offset(aOffset), speedDivisor(aSpeedDivisor), xOrY(aXOrY), forwardOrBack(aForwardOrBack) {
   }
 };
 
-const byte numStripesPattern1 = 16;
+const uint8_t numStripesPattern1 = 16;
+const int16_t animLengthStripes1 = 16384;
 stripies stripePattern1[16] = {
   {0, 0, 0, 0, 0, 256,    0, 32, true, true },      // Top to bottom
   {0, 0, 0, 0, 0, 256, 1024, 32, true, true }, 
@@ -34,7 +45,8 @@ stripies stripePattern1[16] = {
   {0, 0, 0, 0, 0, 256,15360, 32, false, true },
 };
 
-const byte numStripesPattern2 = 16;
+const uint8_t numStripesPattern2 = 16;
+int16_t animLengthStripes2 = 16384;
 stripies stripePattern2[16] = {
   {0, 0, 0, 0, 0, 256,    0, 32, false, false },
   {0, 0, 0, 0, 0, 256, 1024, 32, false, false }, 
@@ -54,34 +66,59 @@ stripies stripePattern2[16] = {
   {0, 0, 0, 0, 4, 500,15360, 64, true, true }
 };
 
-const byte numStripesPattern3 = 8;
+const uint8_t numStripesPattern3 = 8;
+int16_t animLengthStripes3 = 8192;
 stripies stripePattern3[8] = {
-  {0, 0, 0, 0, 1, 3000,    0, 64, false, false },
-  {0, 0, 0, 0, 2, 3000, 2048, 64, true, false },
-  {0, 0, 0, 0, 3, 3000, 4096, 64, false, true },
-  {0, 0, 0, 0, 4, 3000, 6144, 64, true, true },
-  {0, 0, 0, 0, 1, 3000, 8192, 64, false, false },
-  {0, 0, 0, 0, 2, 3000,10240, 64, true, false },
-  {0, 0, 0, 0, 3, 3000,12288, 64, false, true },
-  {0, 0, 0, 0, 4, 3000,14336, 64, true, true }
+  {0, 0, 0, 0, 0, 1024,    0, 64, false, false },
+  {0, 0, 0, 0, 0, 1024, 1024, 64, true, false },
+  {0, 0, 0, 0, 0, 1024, 2048, 64, false, true },
+  {0, 0, 0, 0, 0, 1024, 3072, 64, true, true },
+  {0, 0, 0, 0, 0, 1024, 4096, 64, false, false },
+  {0, 0, 0, 0, 0, 1024, 5120, 64, true, false },
+  {0, 0, 0, 0, 0, 1024, 6144, 64, false, true },
+  {0, 0, 0, 0, 0, 1024, 7168, 64, true, true }
+};
+
+const uint8_t numStripesPattern4 = 16;
+int16_t animLengthStripes4 = 8192;
+stripies stripePattern4[16] = {
+  {0, 0, 0, 0, 0,  522, 256, 64, false, false },
+  {0, 0, 0, 0, 0, 522,  768, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 1280, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 1792, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 2304, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 2816, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 3328, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 3840, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 4352, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 4864, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 5376, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 5888, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 6400, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 6912, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 7424, 64, false, false },
+  {0, 0, 0, 0, 0, 522, 7936, 64, false, false }
 };
 
 
 void doPatternStripes() {
   if (currentLightPattern == 14) {
-    stripesPattern(numStripesPattern1, stripePattern1);
+    stripesPattern(numStripesPattern1, stripePattern1, animLengthStripes1);
   } else if (currentLightPattern == 15) {
-    // stripesPattern(numStripesPattern2, stripePattern2);
-    stripesPattern(numStripesPattern3, stripePattern3);
+    stripesPattern(numStripesPattern2, stripePattern2, animLengthStripes2);
+  } else if (currentLightPattern == 16) {
+    stripesPattern(numStripesPattern3, stripePattern3, animLengthStripes3);
+  } else if (currentLightPattern == 17) {
+    stripesPattern(numStripesPattern4, stripePattern4, animLengthStripes4);
   }
 }
 
  
-void stripesPattern(byte numStripesInPattern, struct stripies *stripePatterns) {
+void stripesPattern(uint8_t numStripesInPattern, struct stripies *stripePatterns, int16_t animLength) {
   for(int stripeNum = 0; stripeNum < numStripesInPattern; stripeNum++) {
-    int stripeBeatPos = (((timeyInTime / stripePatterns[stripeNum].speedDivisor) + stripePatterns[stripeNum].offset) % 16384);
+    uint16_t stripeBeatPos = (((timeyInTime / stripePatterns[stripeNum].speedDivisor) + stripePatterns[stripeNum].offset) % animLength);
     
-    if (beatCycle && stripeBeatPos > 14336) {
+    if (beatCycle && stripeBeatPos > (animLength - 1500)) {
       setNewColorForStripe(stripeNum, stripePatterns);
     }
     
@@ -97,13 +134,13 @@ void stripesPattern(byte numStripesInPattern, struct stripies *stripePatterns) {
         stripeBeatPos = stripeBeatPos+1922;       // Left to right
     }
     
-    stripeBeatPos = stripeBeatPos % 16384;
+    stripeBeatPos = stripeBeatPos % animLength;
     
     for(int j = 0; j < numLeds; j++) {
-      byte xOrY = 0;
+      uint8_t xOrY = 0;
       if (stripePatterns[stripeNum].xOrY)
         xOrY = 1;
-      int coord = getCoord2(j,xOrY);
+      uint16_t coord = getCoord2(j,xOrY);
 
       if ((coord > stripeBeatPos) && (coord < stripeBeatPos+stripePatterns[stripeNum].width)) {
         setLedDirect(j, stripePatterns[stripeNum].stripeR, stripePatterns[stripeNum].stripeG, stripePatterns[stripeNum].stripeB, stripePatterns[stripeNum].stripeW, false);
@@ -119,7 +156,7 @@ void stripesPattern(byte numStripesInPattern, struct stripies *stripePatterns) {
 // 3 = 255 blue
 // 4 = 100 white
 // 5 = Red, gold and green? TODO!
-void setNewColorForStripe(byte stripeNum, struct stripies *stripePatterns) {
+void setNewColorForStripe(uint8_t stripeNum, struct stripies *stripePatterns) {
   if (stripePatterns[stripeNum].colorPattern == 0) {
     setGoodRandomColorVars();
     stripePatterns[stripeNum].stripeR = goodColR;

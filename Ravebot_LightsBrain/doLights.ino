@@ -3,26 +3,19 @@ void doLights() {
 
   allOff();
 
-  /*
   if (currentLightPattern < 14) {
     doTwinkles();
-  } else if (currentLightPattern < 16) {
+  } else if (currentLightPattern < 18) {
     doPatternStripes();
-  } else if (currentLightPattern < 20) {
-    doRainbowPatterns();
-  } else if (currentLightPattern < 21) {
-    doPatternBlobs();
   } else if (currentLightPattern < 22) {
-    doPatternTrains();
+    doRainbowPatterns();
   } else if (currentLightPattern < 23) {
-    doPatternDonuts();
+    doPatternBlobs();
+  } else if (currentLightPattern < 24) {
+    doPatternTrains();
+  } else if (currentLightPattern < 25) {
+    drawRGBHexagons();
   }
-  */
- 
-  // allOverRainbow1(); // - is AMaZing!
-  // doTwinkles();
-  doPatternStripes();
-  //doRainbowPatterns();
 
   // ***************************************************************************************
   // Bigger TODO listy:
@@ -39,7 +32,7 @@ void doLights() {
   // * ************************ Write a load of exciting extras!  ***************************
   // knigtRiderArms();
   // sectionsInTime();
-  // bodyCirclesInTime();
+  bodyCirclesInTime();
   // heartInTime();
   // turnOffTubes();
   // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
@@ -55,13 +48,14 @@ void doLights() {
 
 void changeLightPattern() {
   // choose a new pattern, different from the current one
-  int newPattern = currentLightPattern;
+  /*int newPattern = currentLightPattern;
   while (newPattern == currentLightPattern) {
     newPattern = random(numPatterns);
-  }
+  }*/
 
   // JR TODO - this is the cheat setting the lights pattern ******************
-  newPattern = 14;
+  // newPattern = 15;
+  int newPattern = (currentLightPattern+1)%numPatterns;
   
   currentLightPattern = newPattern;
 

@@ -1,12 +1,12 @@
 
 void doRainbowPatterns() {
-  if (currentLightPattern == 16) {
+  if (currentLightPattern == 18) {
     horizontalRainbow();
-  } else if (currentLightPattern == 17) {
-    horizontalRainbowJoin();
-  } else if (currentLightPattern == 18) {
-    allOverRainbow1();
   } else if (currentLightPattern == 19) {
+    horizontalRainbowJoin();
+  } else if (currentLightPattern == 20) {
+    allOverRainbow1();
+  } else if (currentLightPattern == 21) {
     allOverRainbow2();
   }  
 }
