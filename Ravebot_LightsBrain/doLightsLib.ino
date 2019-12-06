@@ -165,6 +165,10 @@ int getCoord(int ledNum, int xOrY) {
     return portRCoords[(ledNum-1302)%19][xOrY]+ledPosOffset[18][xOrY];
 }
 
+int getCoord2(int ledNum, int xOrY) {
+  return getCoord(ledNum, xOrY)+4096;
+}
+
 int quickAbsolute(int number) {
   if (number < 0)
     return number * (-1);

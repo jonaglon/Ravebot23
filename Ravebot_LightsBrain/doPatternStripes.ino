@@ -87,9 +87,9 @@ void stripesPattern(byte numStripesInPattern, struct stripies *stripePatterns) {
     
     if (stripePatterns[stripeNum].forwardOrBack) {
       if (stripePatterns[stripeNum].xOrY)
-        stripeBeatPos = 15932-stripeBeatPos;      // Top to bottom
+        stripeBeatPos = 7740-stripeBeatPos;      // Top to bottom
       else
-        stripeBeatPos = 14752-stripeBeatPos;      // Right to left
+        stripeBeatPos = 6560-stripeBeatPos;      // Right to left
     } else {
       if (stripePatterns[stripeNum].xOrY)
         stripeBeatPos = stripeBeatPos+2068;       // Bottom to top
@@ -103,16 +103,9 @@ void stripesPattern(byte numStripesInPattern, struct stripies *stripePatterns) {
       byte xOrY = 0;
       if (stripePatterns[stripeNum].xOrY)
         xOrY = 1;
-      int xCoord = getCoord(j,xOrY);
+      int coord = getCoord2(j,xOrY);
 
-      if (testMode && j == 0 && beatCycle) {
-        Serial.print("xCoord:");
-        Serial.print(xCoord);
-        Serial.print("   stripeBeatPos:");
-        Serial.println(stripeBeatPos);
-      }
-      
-      if ((xCoord > stripeBeatPos) && (xCoord < stripeBeatPos+stripePatterns[stripeNum].width)) {
+      if ((coord > stripeBeatPos) && (coord < stripeBeatPos+stripePatterns[stripeNum].width)) {
         setLedDirect(j, stripePatterns[stripeNum].stripeR, stripePatterns[stripeNum].stripeG, stripePatterns[stripeNum].stripeB, stripePatterns[stripeNum].stripeW, false);
       }
     }   

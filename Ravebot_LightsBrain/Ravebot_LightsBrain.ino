@@ -4,6 +4,18 @@
   / _  \ (_| |\ V /  __/ |_) | (_) | |_  |_____| / /__| | (_| | | | | |_\__ \
   \/ \_/\__,_| \_/ \___|_.__/ \___/ \__|         \____/_|\__, |_| |_|\__|___/
                                                          |___/                       */
+/*
+// TODO, starting to grind specially when stripes had a big array, consider using these types
+
+int8_t = -128 to 127
+uint8_t = 0 to 255
+int16_t = -32,768 to 32,767
+uint16_t = 0 to 65,535
+int32_t = -2,147,483,648 to 2,147,483,647
+uint32_t = 0 to 4,294,967,295
+int64_t = −9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+uint64_t = 0 to 18,446,744,073,709,551,615      */
+
 #include<Arduino.h>
 #include<Wire.h>
 #include<FastLED.h>
@@ -605,25 +617,25 @@ int numLedsInSection(int sectionNum) {
 }
 
 int ledPosOffset[19][2] = {
-  { 8262, 8282},    // 00 bottomRing
-  { 8192, 9137},    // 01 bigHeart
-  { 8342, 9416},    // 02 smallHeart
-  { 8804, 9592},    // 03 underarm left
-  { 8804, 9402},    // 04 overarm left
-  { 8576, 9742},    // 05 eyeLeft
-  { 8302, 9742},    // 06 rightEye
-  { 8438, 9728},    // 07 mouth
-  { 8442, 9792},    // 08 tape
-  { 8431, 9902},    // 09 tuner
-  { 8372, 9906},    // 10 indicator
-  { 8193, 9592},    // 11 underArm right
-  { 8193, 9432},    // 12 overArm right
-  { 8507, 8992},    // 13 tubeBottomright
-  { 8272, 8992},    // 14 tubeBottomleft
-  { 8272, 9212},    // 15 tubeTopleft
-  { 8507, 9212},    // 16 tubeTopright
-  { 8242, 8747},    // 17 port left
-  { 8592, 8747},    // 18 port right
+  { 70, 90},       // 00 bottomRing
+  { 0, 945},       // 01 bigHeart
+  { 150, 1224},    // 02 smallHeart
+  { 612, 1400},    // 03 underarm left
+  { 612, 1210},    // 04 overarm left
+  { 384, 1550},    // 05 eyeLeft
+  { 110, 1550},    // 06 rightEye
+  { 246, 1536},    // 07 mouth
+  { 250, 1600},    // 08 tape
+  { 239, 1710},    // 09 tuner
+  { 180, 1714},    // 10 indicator
+  { 1, 1400},      // 11 underArm right
+  { 1, 1240},      // 12 overArm right
+  { 315, 800},     // 13 tubeBottomright
+  { 80, 800},      // 14 tubeBottomleft
+  { 80, 1020},     // 15 tubeTopleft
+  { 315, 1020},    // 16 tubeTopright
+  { 50, 555},      // 17 port left
+  { 400, 555},     // 18 port right
 };
 
 int eyeSmileyLeds[24] = {
