@@ -41,6 +41,11 @@ const int animLength32th=16384;
 int currentDance = 1;
 int numPatterns = 23;
 int currentLightPattern = 0;
+bool overlayPatternActive = false;
+bool cutUpPatternActive = false;
+short overlayPatternNumber = 0;
+// short numOverlays = 4;
+short cutUpPatternNumber = 0;
 
 int fakeBeatLengh = 420;
 
@@ -342,8 +347,8 @@ tuneInfo tuneLibRockAndPop[28] = {
   {145,  0, 123,  1,  4,  8,  6, true},  //19 CallMe-Blondie
   {131,  0, 116,  8,  0,  8,  8, true},  //20 RockTheCasbah-TheClash
   {118,  0, 34,   0,  0,  8,  8, true},  //21 Minder
-  { 90,  0, 78,   2,  0,  8,  4, true},  //22 SummerDay-SoomT
-  { 94,  0, 56,   8,  0,  2,  2, true},  //23 Mutha'uckas-FlightOfTheChonchordes
+  { 90,  0, 78,   2,  0,  8,  4, true},  //22 SummerDay-SoomTn
+  { 94,  0, 57,   8,  0,  2,  2, true},  //23 Mutha'uckas-FlightOfTheChonchordes
   { 90,  0, 77,   8,  0,  8,  4, true},  //24 GetUrFreakOn-MissyElliot
   { 86,  0, 44,   4,  4,  8,  8, true},  //25 HitTheRoadJack - RayCharles
   { 86,  0, 44,   2,  1,  2,  2, false},  //26 Crash-ThePrimitives

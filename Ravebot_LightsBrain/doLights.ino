@@ -3,6 +3,21 @@ void doLights() {
 
   allOff();
 
+  doMainLightPattern();
+
+  doOverlayPattern();
+
+  doCutUpPattern();
+
+  doExtraPatterns();
+
+  doFace();
+  
+  LEDS.show();
+}
+
+
+void doMainLightPattern() {
   if (currentLightPattern < 14) {
     doTwinkles();
   } else if (currentLightPattern < 18) {
@@ -12,48 +27,56 @@ void doLights() {
   } else if (currentLightPattern < 23) {
     doPatternBlobs();
   } else if (currentLightPattern < 24) {
-    doPatternTrains();
+    doPatternTrains(); // TODO this isn't what it looks like!
   } else if (currentLightPattern < 25) {
     drawRGBHexagons();
   }
+}
 
-  // ***************************************************************************************
-  // Bigger TODO listy:
-  // Stipes as wipes
-  // Automatic Eye Patterns (described below)
-  // Ligths extras as (described below)
-  // LUT so you can do stripes in knight rider fashion
-  // Get some of the new eye stuff you've done and bring it here.
-  // 
-  // 
-  // JR TODO - find a way of deciding which light extras should be happening at the moment.
-  // Some should be for the whole duration of the song, say 1 in 10 that turnOffTubes, and randomly one of the 3 circleSquiggle for the whole tune
-  // Some should be every x bars do knightRiderArms for x bars for the duration of the tune
-  // * ************************ Write a load of exciting extras!  ***************************
+void doOverlayPattern() {
+  if (!overlayPatternActive)
+    return;
+
+  // TODO! Overlays can be either a second pattern OR a black out pattern
+
+  if (overlayPatternNumber == 0) {
+    cutRandomSection();
+  } else if (overlayPatternNumber == 1) {
+    lightRandomSection();
+  } else if (overlayPatternNumber == 2) {
+    lightWholeRobotBriefly();
+  } else if (overlayPatternNumber == 3) {
+    drawHexagonOverlay();
+  } else if (overlayPatternNumber == 4) {
+    doRainbowOverlay1();
+  }
+}
+
+void doCutUpPattern() {
+  // As above, if active then replace patterns with, different pattern, full colour, darkness for some / all of   
+}
+
+void doExtraPatterns() {
+
+  // * ************************ Write more exciting extras!  ***************************
   // knigtRiderArms();
   // sectionsInTime();
-  bodyCirclesInTime();
+  // bodyCirclesInTime();
   // heartInTime();
   // turnOffTubes();
   // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
+  // TODO - BeatFlash()
 
-  // Eye patterns need to kick in if manual eyes have not been touched in the last 20 seconds
-  // Eye patterns need
-  //    To change when the tune changes? Just every 64 bars?
-  //    To be able to co-ordinate with dances? Would be good.
-
-  doFace();
-  LEDS.show();
 }
 
 void changeLightPattern() {
   // choose a new pattern, different from the current one
-  /*int newPattern = currentLightPattern;
+  /* int newPattern = currentLightPattern;
   while (newPattern == currentLightPattern) {
     newPattern = random(numPatterns);
-  }*/
+  }  */
 
-  // JR TODO - this is the cheat setting the lights pattern ******************
+  // JR TODO - this is the cheat setting the lights pattern ****************** *********************************
   // newPattern = 15;
   int newPattern = (currentLightPattern+1)%numPatterns;
   
@@ -63,6 +86,21 @@ void changeLightPattern() {
   if (newPattern < 14) {
     setupNewTwinklePattern(currentLightPattern);
   }
+
+  /* ************************************************ */
+  short randomNo = random(3);
+  if (randomNo == 0) {
+    overlayPatternActive = true;
+    overlayPatternNumber = random(4); /* numOverlays */
+  } else {
+    overlayPatternActive = false;
+  }
+  // TODO test CODE *******************************************************
+  overlayPatternActive = true;
+  overlayPatternNumber = 4; 
+
+  /* ************************************************ */
+  
 }
 
 

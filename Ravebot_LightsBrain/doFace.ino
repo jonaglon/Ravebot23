@@ -24,6 +24,10 @@ void doDialRainbow() {
   }
 }
 
+  // Eye patterns TODO
+  //    To change when the tune changes? Just every 64 bars?
+  //    To be able to co-ordinate with dances? Would be good.
+  // Get some of the new eye stuff you've done and bring it here.
 bool eyesAutomatic = false;
 void eyeController() {
 
@@ -54,8 +58,11 @@ void eyeController() {
       case 1:
       case 2:
       case 3:
-        leftEyeX = (sixteenBeats * 10)-80;
-        rightEyeX = (sixteenBeats * 10)-80;
+        leftEyeX = 55;
+        leftEyeY = 65;
+        rightEyeX = 55;
+        rightEyeY = 65;
+        //rightEyeX = (sixteenBeats * 10)-80;
         break;
       case 4: 
         eyePrimaryR = 255;
@@ -85,10 +92,10 @@ void resetEyes() {
   eyeSecondaryR = 0;
   eyeSecondaryG = 0;
   eyeSecondaryB = 0;
-  leftEyeX = 0;
-  leftEyeY = 0;
-  rightEyeX = 0;
-  rightEyeY = 0;
+  leftEyeX = 55;
+  leftEyeY = 65;
+  rightEyeX = 55;
+  rightEyeY = 65;
 }
 
 int eyeRColours[9] = {255,  0,   0,  255, 255,   0, 110, 0, 255 };

@@ -1,8 +1,4 @@
 
-/* ************************************************************* */
-
-// TODO - if you use this one below with set rgbwWheelVars to set in time speeds
-/////////////////////////////////////////////  here:
 void rgbwRainbow(int speedFactor) {
   int ticky = (timeyInTime / speedFactor);
 
@@ -217,6 +213,81 @@ void setSectionLed(int section, int ledNum, int r, int g, int b, int w) {
   int j = ledSections[section] + ledNum;
   if (j < ledSections[section+1])
     setLedDirect(j, r, g, b, w, true);
+}
+
+byte sectionToCut1 = 0;
+byte sectionToCut2 = 0;
+void cutRandomSection() {
+  if (beatCycle) {
+    sectionToCut1 = random(18);
+    sectionToCut2 = random(18);
+  }
+  setSection(sectionToCut1, 0, 0, 0, 0);
+  setSection(sectionToCut2, 0, 0, 0, 0);
+}
+
+byte section1R = 0;
+byte section1G = 0;
+byte section1B = 0;
+byte section1W = 0;
+byte section2R = 0;
+byte section2G = 0;
+byte section2B = 0;
+byte section2W = 0;
+bool randomSectionSwitchedOn = false;
+void lightRandomSection() {
+
+  if (beatCycle) {
+    byte thisBeat = totalBeats % 8;
+    if (thisBeat == 0 || thisBeat == 1) {
+      randomSectionSwitchedOn = true;
+    } else {
+      randomSectionSwitchedOn = false;
+      return;
+    }
+    
+    sectionToCut1 = random(18);
+    sectionToCut2 = random(18);
+    setGoodRandomColorVars();
+    section1R = goodColR;
+    section1G = goodColG;
+    section1B = goodColB;
+    section1W = goodColW;
+    setGoodRandomColorVars();
+    section2R = goodColR;
+    section2G = goodColG;
+    section2B = goodColB;
+    section2W = goodColW;
+  }
+
+  if (randomSectionSwitchedOn) {
+    setSection(sectionToCut1, section1R, section1G, section1B, section1W);
+    setSection(sectionToCut2, section2R, section2G, section2B, section2W);
+  }
+}
+
+bool wholeRobotBrieflySwitchedOn = false;
+void lightWholeRobotBriefly() {
+
+  if (beatCycle) {
+    byte thisBeat = totalBeats % 16;
+    if (thisBeat == 14 || thisBeat == 15 || thisBeat == 0 || thisBeat == 1) {
+      wholeRobotBrieflySwitchedOn = true;
+    } else {
+      wholeRobotBrieflySwitchedOn = false;
+      return;
+    }
+    
+    setGoodRandomColorVars();
+    section1R = goodColR;
+    section1G = goodColG;
+    section1B = goodColB;
+    section1W = goodColW;
+  }
+
+  if (wholeRobotBrieflySwitchedOn) {
+    everySingleLight(section1R, section1G, section1B, section1W);
+  }
 }
 
 void everySingleLight(int r, int g, int b, int w) {

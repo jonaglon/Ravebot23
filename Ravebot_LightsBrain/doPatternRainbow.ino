@@ -1,3 +1,13 @@
+void doRainbowOverlay1() {
+  int stripeTop = (timeyInTime/1024) % 2048;
+  for(int j = 0; j < numLeds; j++) {
+    int xCoord = getCoord(j,0)+1024;
+    if ((xCoord > stripeTop) && (xCoord < stripeTop+300)) {
+      SetRgbwWheelVars(xCoord+stripeTop);
+      setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
+    }
+  }
+}
 
 void doRainbowPatterns() {
   if (currentLightPattern == 18) {
