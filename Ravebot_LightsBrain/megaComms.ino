@@ -19,12 +19,12 @@ void doSomethingWithPackageFromMega(int package) {
   int function = package / 1000;
   int message = package % 1000;
 
-    if (testMode) {
-      Serial.print("Message Received fn:");
-      Serial.print(function);
-      Serial.print("  msg:");
-      Serial.println(message);
-    }    
+  if (testMode) {
+    Serial.print("Message Received fn:");
+    Serial.print(function);
+    Serial.print("  msg:");
+    Serial.println(message);
+  }    
 
   if (function == 1) {
     if (message < 2) {
@@ -51,23 +51,16 @@ void doSomethingWithPackageFromMega(int package) {
     } else if (message < 40) {
       setDanceNumber(message % 20);
     }
-  }
-  else if (function == 2)
-  {
+  } else if (function == 2) {
     arcadeButtonPressed(message);
-  }
-  else if (function == 3)
-  {
+  } else if (function == 3) {
     ledIntensity=message;
-  }
-  else if (function == 4)
-  {
+    lastSentLedIntensity=message;
+  } else if (function == 4) {
     // specific track was chosen on the keypad, play the track
     stayWithinGenre = false;
     playTune((message / 100), (message % 100), true);
-  }
-  else if (function == 5 || function == 6 || function == 7 || function == 8)
-  {
+  } else if (function == 5 || function == 6 || function == 7 || function == 8) {
     lastEyeMoveTime = timey;
     setEyeCoords(function, message);
   }

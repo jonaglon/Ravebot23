@@ -65,23 +65,18 @@ void doExtraPatterns() {
   // heartInTime();
   // turnOffTubes();
   // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
-  //bigSpeakerInTime();
-  tubesInTime();
+  bigSpeakerInTime();
+  //tubesInTime();
   // TODO - BeatFlash()
 
 }
 
 void changeLightPattern() {
   // choose a new pattern, different from the current one
-  /* int newPattern = currentLightPattern;
+  int newPattern = currentLightPattern;
   while (newPattern == currentLightPattern) {
     newPattern = random(numPatterns);
-  }  */
-
-  // JR TODO - this is the cheat setting the lights pattern ****************** *********************************
-  // newPattern = 15;
-  int newPattern = (currentLightPattern+1)%numPatterns;
-  
+  }
   currentLightPattern = newPattern;
 
   // if it's a twinkle call the setup code

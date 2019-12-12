@@ -55,6 +55,7 @@ void playTune(int genre, int track, bool alterHistory) {
   // send stuff to ableton to start the new track  
   delay(80);
   playAbletonTrack(genre, track, true);
+  ledIntensity=lastSentLedIntensity;
   changeLightPattern();
   delay(20);
   startRobotVoiceTrack();

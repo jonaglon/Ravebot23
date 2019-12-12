@@ -5,7 +5,8 @@
   \/ \_/\__,_| \_/ \___|_.__/ \___/ \__|         \____/_|\__, |_| |_|\__|___/
                                                          |___/                       */
 /*
-// TODO, starting to grind specially when stripes had a big array, consider using these types
+// TODO, starting to grind specially when stripes had a big array, consider using these types, specially for the structs.
+Oh, man you might actually have to do this, maybe for the animation masks and big arrays.
 
 int8_t = -128 to 127
 uint8_t = 0 to 255
@@ -31,6 +32,7 @@ unsigned int timey;
 unsigned int lastBeatTime = 0;
 unsigned int lastEyeMoveTime = 0;
 unsigned int timeyInTime, twinkleTime; // This is like timey but in time, counting 16384 per beat
+
 int lastBeatLength = 1;
 int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
 unsigned long fakeBeatCount = 0;
@@ -70,6 +72,7 @@ const int numLeds = 1443;
 CRGB rgbwLeds[2440]; // 488 * 5
 
 // LED Intensity
+int lastSentLedIntensity = 10;
 int ledIntensity = 10;
 byte wheelR, wheelG, wheelB;
 byte goodColR, goodColG, goodColB, goodColW;

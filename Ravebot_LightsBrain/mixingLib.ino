@@ -1,6 +1,9 @@
 
 void doMixing() {
 
+  if (nextMixDuration < 8)
+    ledIntensity=ledIntensity+1;
+
   int bpmDifference = nextTune.bpm - currentTune.bpm;
   int newBpm = ((bpmDifference * percentThroughMix) / 256) + currentTune.bpm;
   setAbletonTempo(newBpm);
@@ -83,7 +86,6 @@ void startNewMix() {
 
   // send stuff to ableton to start the new track
   playAbletonTrack(nextGenre, nextTrack, !deckASelected);
-  changeLightPattern();
 
   // tell the other arduino what you're doing
   sendSerialToMega(2, (nextGenre * 100) + nextTrack);  
@@ -115,6 +117,10 @@ void endMixAndPickNewTune() {
   if (testMode) {
     Serial.println("EndingMixPickingNew");
   }
+
+  // Change the light pattern at the end of the mix.
+  ledIntensity=lastSentLedIntensity;
+  changeLightPattern();
 
   // finish the mix
   stopAbletonChannel(currentGenre, !deckASelected);

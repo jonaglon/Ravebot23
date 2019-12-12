@@ -24,7 +24,11 @@ void tubesInTime() {
 }
 
 void bigSpeakerInTime() {
-  int thisLed = (timeyInTime/512)%203;
+  // Not in time you drongo.
+  // int thisLed = (timeyInTime/811)%203;
+  // setSectionLed(0, thisLed, 255, 0, 0, 0);
+
+  int thisLed = percentThroughBeat / 81;
   setSectionLed(0, thisLed, 255, 0, 0, 0);
 }
 
