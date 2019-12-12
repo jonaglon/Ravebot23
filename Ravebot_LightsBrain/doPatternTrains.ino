@@ -23,9 +23,14 @@ void tubesInTime() {
   }
 }
 
+void bigSpeakerInTime() {
+  int thisLed = (timeyInTime/512)%203;
+  setSectionLed(0, thisLed, 255, 0, 0, 0);
+}
+
 int numLedsPerBeat2=51;
 int beatCompNum2 = 16384/numLedsPerBeat2; // this is the 16384 beat% / those 30 leds. (182/546 - for 30/90)
-void bigSpeakerInTime() {
+void bigSpeakerInTimeOLD() {
 
   int sixteenBeatPos = (sixteenBeats/2) % 4;
 
@@ -67,4 +72,28 @@ void bigSpeakerInTime() {
   // 15 tubeTopleft
   // 16 tubeTopright
   // 17 port left
-  // 18 port right */
+  // 18 port right 
+  
+int ledSections[20] = {
+  0,     // 0  bottom ring *
+  203,   // 1  big heart
+  378,   // 2  small heart
+  463,   // 3 underarm left
+  482,   // 4 overarm left
+  506,   // 5  eye left
+  599,   // 6  eye right
+  692,   // 7  mouth
+  710,   // 8  tape
+  744,   // 9  tuner *
+  770,   // 10 indiciator *
+  774,   // 11 underarm right
+  797,   // 12 overarm right
+  825,   // 13 tube bottomright *
+  911,   // 14 tube bottomleft *
+  1001,  // 15 tube topleft *
+  1090,  // 16 tube topright * starred sections are shifted and / or reversed
+  1180,  // 17 port left
+  1302,  // 18 port right
+  1442
+};  
+  */

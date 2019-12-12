@@ -125,8 +125,8 @@ void setup() {
   if (!robotSwitchedOn)
     changeOnOff(0);
     
-  // JR TODO remove me
-  playTune(0, 0, true);
+  // JR TODO remove me ******************************
+  playTune(4, 9, true);
 }
 
 void loop() {
@@ -367,7 +367,7 @@ tuneInfo tuneLibEasy[28] = {
   {156,  0, 144,  2,  2,  8,  6, true},   //7 MilkAndHoney-PrinceFatty
   {126,  0, 122,  2,  4,  4,  4, true},   //8 BackToBlack - Amy
   {132,  0, 166,  4,  4,  4,  4, true},   //9 MasterBlaster-StevieWonder
-  {109,  0, 116,  8,  0,  8,  8, true},   //10 AllNightLong - LionelRichie
+  {109,  0, 112,  8,  0,  8,  8, true},   //10 AllNightLong - LionelRichie
   { 96,  0,  96,  4,  0,  6,  6, true},   //11 INeedADollar-AloeBlacc
   {122,  0, 124,  4,  0,  8,  8, true},   //12 GotToGiveItUp-MarvinGaye
   {139, 37, 124,  4,  0,  8,  8, true},   //13 TheHumansAreDead-FOTC

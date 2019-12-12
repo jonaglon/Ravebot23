@@ -21,7 +21,6 @@ void doRainbowPatterns() {
   }  
 }
 
-
 void horizontalRainbow() {
   for(int j = 0; j < numLeds; j++) {
     int xCoord = 614-getCoord(j,0);

@@ -65,6 +65,8 @@ void doExtraPatterns() {
   // heartInTime();
   // turnOffTubes();
   // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
+  //bigSpeakerInTime();
+  tubesInTime();
   // TODO - BeatFlash()
 
 }
@@ -88,16 +90,16 @@ void changeLightPattern() {
   }
 
   /* ************************************************ */
-  short randomNo = random(3);
+  short randomNo = random(2);
   if (randomNo == 0) {
     overlayPatternActive = true;
-    overlayPatternNumber = random(4); /* numOverlays */
+    overlayPatternNumber = random(5); /* numOverlays */
   } else {
     overlayPatternActive = false;
   }
   // TODO test CODE *******************************************************
-  overlayPatternActive = true;
-  overlayPatternNumber = 4; 
+  //  overlayPatternActive = true;
+  // overlayPatternNumber = 4; 
 
   /* ************************************************ */
   
