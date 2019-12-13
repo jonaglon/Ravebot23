@@ -1,9 +1,6 @@
 // JR TODO - what the actual f is going on in here??! 
 
-void doPatternTrains() {
-  tubesInTime();
-  bigSpeakerInTime();
-}
+
 
 int16_t numLedsTube = 88;
 int16_t numLedsPerBeat=22;
@@ -23,81 +20,85 @@ void tubesInTime() {
   }
 }
 
-void bigSpeakerInTime() {
-  // Not in time you drongo.
-  // int thisLed = (timeyInTime/811)%203;
-  // setSectionLed(0, thisLed, 255, 0, 0, 0);
+void bigSpeakerThreeRevolvers() {
+  int16_t thisLed1 = ((timeyInTime/512)-12)%203;
+  int16_t thisLed2 = ((timeyInTime/512)+56)%203;
+  int16_t thisLed3 = ((timeyInTime/512)+113)%203;
 
-  int16_t thisLed = percentThroughBeat / 81;
-  setSectionLed(0, thisLed, 255, 0, 0, 0);
-}
-
-int16_t numLedsPerBeat2=51;
-int32_t beatCompNum2 = 16384/numLedsPerBeat2; // this is the 16384 beat% / those 30 leds. (182/546 - for 30/90)
-void bigSpeakerInTimeOLD() {
-
-  int16_t sixteenBeatPos = (sixteenBeats/2) % 4;
-
-  for(int16_t j = 0; j < 204; j++) {
-    int32_t distanceFromBeat = quickAbsolute(((j%numLedsPerBeat2)*beatCompNum2)-percentThroughBeat);
-
-    int16_t ledColour = 255 - (distanceFromBeat/10);
-    if (ledColour < 0)
-      ledColour = 0;
-    
-    if (sixteenBeatPos == 0) {
-      setSectionLed(0, j, ledColour, 0, 0, 0);
-    } else if (sixteenBeatPos == 1) {
-      setSectionLed(0, j, 0, ledColour, 0, 0);
-    } else if (sixteenBeatPos == 2) {
-      setSectionLed(0, j, 0, 0, ledColour, 0);
-    } else {
-      setSectionLed(0, j, 0, 0, 0, ledColour);
-    }
-  }  
-}
-
-/*
-  // 00 bottomRing
-  // 01 bigHeart
-  // 02 smallHeart
-  // 03 underarm left
-  // 04 overarm left
-  // 05 eyeLeft 
-  // 06 rightEye
-  // 07 mouth
-  // 08 tape
-  // 09 tuner 
-  // 10 indicator
-  // 11 underArm right
-  // 12 overArm right
-  // 13 tubeBottomright
-  // 14 tubeBottomleft
-  // 15 tubeTopleft
-  // 16 tubeTopright
-  // 17 port left
-  // 18 port right 
+  setSectionLed(0, thisLed1, 0, 0, 0, 20);
+  setSectionLed(0, thisLed1+1, 0, 0, 0, 40);
+  setSectionLed(0, thisLed1+2, 0, 0, 0, 80);
+  for(int8_t j = 3; j < 11; j++)
+    setSectionLed(0, thisLed1+j, 0, 0, 0, 255);
+  setSectionLed(0, thisLed1+11, 0, 0, 0, 80);
+  setSectionLed(0, thisLed1+12, 0, 0, 0, 40);
+  setSectionLed(0, thisLed1+13, 0, 0, 0, 20);
   
-int ledSections[20] = {
-  0,     // 0  bottom ring *
-  203,   // 1  big heart
-  378,   // 2  small heart
-  463,   // 3 underarm left
-  482,   // 4 overarm left
-  506,   // 5  eye left
-  599,   // 6  eye right
-  692,   // 7  mouth
-  710,   // 8  tape
-  744,   // 9  tuner *
-  770,   // 10 indiciator *
-  774,   // 11 underarm right
-  797,   // 12 overarm right
-  825,   // 13 tube bottomright *
-  911,   // 14 tube bottomleft *
-  1001,  // 15 tube topleft *
-  1090,  // 16 tube topright * starred sections are shifted and / or reversed
-  1180,  // 17 port left
-  1302,  // 18 port right
-  1442
-};  
-  */
+  setSectionLed(0, thisLed2, 0, 0, 0, 20);
+  setSectionLed(0, thisLed2+1, 0, 0, 0, 40);
+  setSectionLed(0, thisLed2+2, 0, 0, 0, 80);
+  for(int8_t j = 3; j < 11; j++)
+    setSectionLed(0, thisLed2+j, 0, 0, 0, 255);
+  setSectionLed(0, thisLed2+11, 0, 0, 0, 80);
+  setSectionLed(0, thisLed2+12, 0, 0, 0, 40);
+  setSectionLed(0, thisLed2+13, 0, 0, 0, 20);
+  
+  setSectionLed(0, thisLed3, 0, 0, 0, 20);
+  setSectionLed(0, thisLed3+1, 0, 0, 0, 40);
+  setSectionLed(0, thisLed3+2, 0, 0, 0, 80);
+  for(int8_t j = 3; j < 11; j++)
+    setSectionLed(0, thisLed3+j, 0, 0, 0, 255);
+  setSectionLed(0, thisLed3+11, 0, 0, 0, 80);
+  setSectionLed(0, thisLed3+12, 0, 0, 0, 40);
+  setSectionLed(0, thisLed3+13, 0, 0, 0, 20);
+  
+}
+
+uint8_t r1 = 0;
+uint8_t g1 = 0;
+uint8_t b1 = 0;
+uint8_t w1 = 0;
+uint8_t r2 = 0;
+uint8_t g2 = 0;
+uint8_t b2 = 0;
+uint8_t w2 = 0;
+uint8_t r3 = 0;
+uint8_t g3 = 0;
+uint8_t b3 = 0;
+uint8_t w3 = 0;
+uint8_t r4 = 0;
+uint8_t g4 = 0;
+uint8_t b4 = 0;
+uint8_t w4 = 0;
+void bigSpeakerInTimeFourTings() {
+  int16_t thisLed1 = ((timeyInTime/512)-12)%203;
+  int16_t thisLed2 = ((timeyInTime/512)+39)%203;
+  int16_t thisLed3 = ((timeyInTime/512)+89)%203;
+  int16_t thisLed4 = ((timeyInTime/512)+139)%203;
+
+  if (beatCycle) {
+    setGoodRandomColorVars();
+    r1 = goodColR; g1 = goodColG; b1 = goodColB; w1 = goodColW;
+    setGoodRandomColorVars();
+    r2 = goodColR; g2 = goodColG; b2 = goodColB; w2 = goodColW;
+    setGoodRandomColorVars();
+    r3 = goodColR; g3 = goodColG; b3 = goodColB; w3 = goodColW;
+    setGoodRandomColorVars();
+    r4 = goodColR; g4 = goodColG; b4 = goodColB; w4 = goodColW;
+  }
+
+  for(int8_t j = 0; j < 9; j++)
+    setSectionLed(0, thisLed1+j, r1, g1, b1, w1);
+  
+  for(int8_t j = 0; j < 9; j++)
+    setSectionLed(0, thisLed2+j, r2, g2, b2, w2);
+  
+  for(int8_t j = 0; j < 9; j++)
+    setSectionLed(0, thisLed3+j, r3, g3, b3, w3);
+  
+  for(int8_t j = 0; j < 9; j++)
+    setSectionLed(0, thisLed4+j, r4, g4, b4, w4);
+
+}
+
+

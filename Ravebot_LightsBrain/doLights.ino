@@ -27,7 +27,7 @@ void doMainLightPattern() {
   } else if (currentLightPattern < 23) {
     doPatternBlobs();
   } else if (currentLightPattern < 24) {
-    doPatternTrains(); // TODO this isn't what it looks like!
+    drawRGBHexagons(); // TODO this isn't what it looks like!
   } else if (currentLightPattern < 25) {
     drawRGBHexagons();
   }
@@ -65,7 +65,8 @@ void doExtraPatterns() {
   // heartInTime();
   // turnOffTubes();
   // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
-  bigSpeakerInTime();
+  // bigSpeakerThreeRevolvers();
+  bigSpeakerInTimeFourTings();
   //tubesInTime();
   // TODO - BeatFlash()
 

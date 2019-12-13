@@ -119,7 +119,7 @@ void setup() {
   LEDS.addLeds<WS2811_PORTD, 6>(rgbwLeds, 488); // Hardcoded to ports:25,26,27,28,14,15
   LEDS.setBrightness(128); // 128 good max, 255 actual /max
 
-  setMainVolume(mainVolume);
+ setMainVolume(mainVolume);
   
   if (currentLightPattern < 14)
     setupNewTwinklePattern(currentLightPattern);
