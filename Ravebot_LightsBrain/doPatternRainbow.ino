@@ -1,7 +1,7 @@
 void doRainbowOverlay1() {
-  int stripeTop = (timeyInTime/1024) % 2048;
-  for(int j = 0; j < numLeds; j++) {
-    int xCoord = getCoord(j,0)+1024;
+  int32_t stripeTop = (timeyInTime/1024) % 2048;
+  for(uint16_t j = 0; j < numLeds; j++) {
+    int32_t xCoord = getCoord(j,0)+1024;
     if ((xCoord > stripeTop) && (xCoord < stripeTop+300)) {
       SetRgbwWheelVars(xCoord+stripeTop);
       setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
@@ -22,16 +22,16 @@ void doRainbowPatterns() {
 }
 
 void horizontalRainbow() {
-  for(int j = 0; j < numLeds; j++) {
-    int xCoord = 614-getCoord(j,0);
+  for(uint16_t j = 0; j < numLeds; j++) {
+    int32_t xCoord = 614-getCoord(j,0);
     SetRgbwWheelVars((xCoord+(timeyInTime/512))%256);
     setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
   }
 }
 
 void horizontalRainbowJoin() {
-  for(int j = 0; j < numLeds; j++) {
-    int xCoord = getCoord(j,0);
+  for(uint16_t j = 0; j < numLeds; j++) {
+    int32_t xCoord = getCoord(j,0);
     if (xCoord < 307) {
       xCoord = 600-xCoord;
       SetRgbwWheelVars((xCoord+(timeyInTime/512))%256);
@@ -44,16 +44,16 @@ void horizontalRainbowJoin() {
 }
 
 void allOverRainbow1() {
-  for(int j = 0; j < numLeds; j++) {
-    int xCoord = 614-getCoord(j,0);
-    int yCoord = getCoord(j,1);
+  for(uint16_t j = 0; j < numLeds; j++) {
+    int32_t xCoord = 614-getCoord(j,0);
+    int32_t yCoord = getCoord(j,1);
     SetRgbwWheelVars((xCoord+yCoord+(timeyInTime/256))%256);
     setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
   }
 }
 
 void allOverRainbow2() {
-  for(int j = 0; j < numLeds; j++) {
+  for(uint16_t j = 0; j < numLeds; j++) {
     SetRgbwWheelVars((j*3)+(timeyInTime/512));
     setLedDirect(j, wheelR, wheelG, wheelB, 0, false);    
   }

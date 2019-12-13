@@ -28,83 +28,82 @@ const bool megaAttached = true;
 bool robotSwitchedOn = true;    // JR TODO - set to false when not testing
 bool robotManualMode = true;
 
-unsigned int timey;
-unsigned int lastBeatTime = 0;
-unsigned int lastEyeMoveTime = 0;
-unsigned int timeyInTime, twinkleTime; // This is like timey but in time, counting 16384 per beat
+uint32_t timey;
+uint32_t lastBeatTime = 0;
+uint32_t lastEyeMoveTime = 0;
+uint32_t timeyInTime, twinkleTime; // This is like timey but in time, counting 16384 per beat
 
-int lastBeatLength = 1;
-int percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
-unsigned long fakeBeatCount = 0;
+uint32_t lastBeatLength = 1;
+uint16_t percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
+uint32_t fakeBeatCount = 0;
 
-const int animLength=524288;
-const int animLength32th=16384;
+const uint32_t animLength=524288;
+const uint32_t animLength32th=16384;
 
-int currentDance = 1;
-int numPatterns = 23;
-int currentLightPattern = 0;
+uint8_t currentDance = 1;
+uint8_t numPatterns = 23;
+uint8_t currentLightPattern = 0;
 bool overlayPatternActive = false;
 bool cutUpPatternActive = false;
-short overlayPatternNumber = 0;
+uint8_t overlayPatternNumber = 0;
 // short numOverlays = 4;
-short cutUpPatternNumber = 0;
+uint8_t cutUpPatternNumber = 0;
 
-int fakeBeatLengh = 420;
+int32_t fakeBeatLengh = 420;
 
 // Set by midi in to be 1-16 with beat.
-int sixteenBeats = 0;
-int totalBeats = 0;
+uint8_t sixteenBeats = 0;
+uint32_t totalBeats = 0;
 bool beatCycle = false;
 
-int mainVolume = 40; // 127 actual max but we won't exceed 100.
-int tempMainVolume = 40; // 127 actual max but we won't exceed 100.
-int currentBar = 0;
-int mixCurrentBar = 0; // This counts from the start of a mix
-int currentGenre = 0;
-int currentTrack = 301;
-int dropCountdown = 0;
+uint8_t mainVolume = 40; // 127 actual max but we won't exceed 100.
+uint8_t tempMainVolume = 40; // 127 actual max but we won't exceed 100.
+uint16_t currentBar = 0;
+uint16_t mixCurrentBar = 0; // This counts from the start of a mix
+uint8_t currentGenre = 0;
+uint8_t currentTrack = 0;
+uint16_t dropCountdown = 0;
 
 bool robotTalking = false;
-unsigned int robotTalkingOnTime;
-unsigned int robotTalkingOffTime;
+int32_t robotTalkingOnTime;
+int32_t robotTalkingOffTime;
 
-const int numLeds = 1443;
+const uint16_t numLeds = 1443;
 CRGB rgbwLeds[2440]; // 488 * 5
 
 // LED Intensity
-int lastSentLedIntensity = 10;
-int ledIntensity = 10;
-byte wheelR, wheelG, wheelB;
-byte goodColR, goodColG, goodColB, goodColW;
+uint8_t lastSentLedIntensity = 10;
+uint8_t ledIntensity = 10;
+uint8_t wheelR, wheelG, wheelB;
+uint8_t goodColR, goodColG, goodColB, goodColW;
 
 
-int leftEyeX = 0;
-int leftEyeY = 0;
-int rightEyeX = 0;
-int rightEyeY = 0;
-int eyePrimaryR = 110;
-int eyePrimaryG = 150;
-int eyePrimaryB = 150;
-int eyeSecondaryR = 0;
-int eyeSecondaryG = 0;
-int eyeSecondaryB = 0;
+int16_t leftEyeX = 0;
+int16_t leftEyeY = 0;
+int16_t rightEyeX = 0;
+int16_t rightEyeY = 0;
+uint8_t eyePrimaryR = 110;
+uint8_t eyePrimaryG = 150;
+uint8_t eyePrimaryB = 150;
+uint8_t eyeSecondaryR = 0;
+uint8_t eyeSecondaryG = 0;
+uint8_t eyeSecondaryB = 0;
 
 // MIXING VARS
-int nextTrack = 0;
-int nextGenre = 0;
-int nextMixDuration = 0;
-int nextMixStart = 0;
-int abletonBpm = 0;
+uint8_t nextTrack = 0;
+uint8_t nextGenre = 0;
+int16_t nextMixDuration = 0;
+int16_t nextMixStart = 0;
+int16_t abletonBpm = 0;
 bool stayWithinGenre = true;
 bool currentlyMixing = false;
 bool deckASelected = true;
-int currentMixerPosition = 0;
-int percentThroughMix = 0;  // not really % through, it's 0-256
-int last20Genres[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-int last20Tracks[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+int16_t currentMixerPosition = 0;
+uint8_t percentThroughMix = 0;  // not really % through, it's 0-256
+uint8_t last20Genres[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+uint8_t last20Tracks[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 void setup() {
-
   delay(500);
 
   // Talk to Ableton using midi over USB, or debug.
@@ -177,45 +176,45 @@ void setTimes() {
 }
 
 struct twinkle {
-  short ledNum;
-  byte rCol;
-  byte gCol;
-  byte bCol;
-  byte wCol;
-  byte rToCol;
-  byte gToCol;
-  byte bToCol;
-  byte wToCol;
-  int start;
-  int lengthy;
-  short widthy;
-  int fadeIn;
-  int fadeOut;
-  short speedy;
-  short sideFade;
+  uint16_t ledNum;
+  uint8_t rCol;
+  uint8_t gCol;
+  uint8_t bCol;
+  uint8_t wCol;
+  uint8_t rToCol;
+  uint8_t gToCol;
+  uint8_t bToCol;
+  uint8_t wToCol;
+  int32_t start;
+  int32_t lengthy;
+  uint16_t widthy;
+  int32_t fadeIn;
+  int32_t fadeOut;
+  uint16_t speedy;
+  uint16_t sideFade;
   bool hasTwinked;
 
-  twinkle(short aLedNum, byte aRCol, byte aGCol, byte aBCol, byte aWCol, byte aToRCol, byte aToGCol, byte aToBCol, byte aToWCol, int aStart, int aLengthy, short aWidthy, int aFadeIn, int aFadeOut, short aSpeedy, short aSideFade, bool aHasTwinked) :
+  twinkle(uint16_t aLedNum, uint8_t aRCol, uint8_t aGCol, uint8_t aBCol, uint8_t aWCol, uint8_t aToRCol, uint8_t aToGCol, uint8_t aToBCol, uint8_t aToWCol, int32_t aStart, int32_t aLengthy, uint16_t aWidthy, int32_t aFadeIn, int32_t aFadeOut, uint16_t aSpeedy, uint16_t aSideFade, bool aHasTwinked) :
     ledNum(aLedNum), rCol(aRCol), gCol(aGCol), bCol(aBCol), wCol(aWCol), rToCol(aToRCol), gToCol(aToGCol), bToCol(aToBCol), wToCol(aToWCol), start(aStart), lengthy(aLengthy), widthy(aWidthy), fadeIn(aFadeIn), fadeOut(aFadeOut), speedy(aSpeedy), sideFade(aSideFade), hasTwinked(aHasTwinked) {  }
 
   twinkle() : ledNum(0), rCol(0), gCol(0), bCol(0), wCol(0), rToCol(0), gToCol(0), bToCol(0), wToCol(0), start(0), lengthy(0), widthy(0), fadeIn(0), fadeOut(0), speedy(0), sideFade(0), hasTwinked(0) { }
 };
 
-const int numTwinks = 1024;
+const uint16_t numTwinks = 1024;
 twinkle myTwinkles[numTwinks];
-const int usedTwinkleCount[14] = {1024, 512, 750, 1024, 1024, 512, 750, 600, 256, 512, 512, 300, 20, 1024};
+const uint16_t usedTwinkleCount[14] = {1024, 512, 750, 1024, 1024, 512, 750, 600, 256, 512, 512, 300, 20, 1024};
 
 
 struct tuneInfo {
-  byte bpm;
-  byte drop;
-  byte tuneLength;
-  byte maxFadeIn;
-  byte minFadeOut;
-  byte maxFadeOut;
-  byte shortMixEnd; // Tune best end is where the tune should finish if the mix length is less than 8 bars.
+  uint8_t bpm;
+  uint8_t drop;
+  uint8_t tuneLength;
+  uint8_t maxFadeIn;
+  uint8_t minFadeOut;
+  uint8_t maxFadeOut;
+  uint8_t shortMixEnd; // Tune best end is where the tune should finish if the mix length is less than 8 bars.
   bool playOut;
-  tuneInfo(byte aBpm, byte aDrop, byte aTuneLength, byte aMaxFadeIn, byte aMinFadeOut, byte aMaxFadeOut, byte aShortMixEnd, bool aPlayOut) :
+  tuneInfo(uint8_t aBpm, uint8_t aDrop, uint8_t aTuneLength, uint8_t aMaxFadeIn, uint8_t aMinFadeOut, uint8_t aMaxFadeOut, uint8_t aShortMixEnd, bool aPlayOut) :
     bpm(aBpm), drop(aDrop), tuneLength(aTuneLength), maxFadeIn(aMaxFadeIn), minFadeOut(aMinFadeOut), maxFadeOut(aMaxFadeOut), shortMixEnd(aShortMixEnd), playOut(aPlayOut) {
   }
 };
@@ -494,7 +493,7 @@ tuneInfo currentTune = tuneLibHipHop[0];
 tuneInfo nextTune = tuneLibHipHop[0];
 
 
-int eyeCoords[93][2] = {
+uint16_t eyeCoords[93][2] = {
   { 55, 107}, { 64, 106}, { 75, 104}, { 84, 98}, { 92, 93}, { 98, 85}, {103, 76}, {107, 66}, {108, 56}, {107, 45},
   {103, 35}, { 98, 27}, { 92, 18}, { 84, 12}, { 75,  7}, { 64,  3}, { 55,  2}, { 45,  3}, { 35,  7}, { 26, 12},
   { 18, 18}, { 12, 27}, {  7, 35}, {  4, 45}, {  3, 56}, {  4, 66}, {  7, 76}, { 12, 85}, { 18, 93}, { 26, 98},
@@ -506,23 +505,23 @@ int eyeCoords[93][2] = {
   { 36, 44}, { 33, 55}, { 35, 67}, { 43, 75}, { 55, 68}, { 64, 64}, { 67, 55}, { 64, 47}, { 55, 43}, { 46, 47},
   { 43, 55}, { 46, 64}, { 55, 55}
 };   //
-int armCoords[24][2] = {
+uint16_t armCoords[24][2] = {
   { 0,  6}, { 0, 13}, { 0, 19}, { 0, 25}, { 0, 31}, { 0, 38}, { 0, 44}, { 0, 50}, { 0, 57}, { 0, 62},
   { 0, 69}, { 0, 75}, { 0, 82}, { 0, 88}, { 0, 94}, { 0, 100}, { 0, 106}, { 0, 113}, { 0, 119}, { 0, 125},
   { 0, 131}, { 0, 138}, { 0, 144}, { 0, 150}
 };
-int horizCoords[26][2] = {
+uint16_t horizCoords[26][2] = {
   {  7, 0}, { 13, 0}, { 20, 0}, { 27, 0}, { 33, 0}, { 40, 0}, { 47, 0}, { 53, 0}, { 60, 0}, { 67, 0},
   { 73, 0}, { 80, 0}, { 87, 0}, { 93, 0}, {100, 0}, {107, 0}, {113, 0}, {120, 0}, {127, 0}, {133, 0},
   {140, 0}, {147, 0}, {153, 0}, {160, 0}, {167, 0}, {173, 0}
 };
-int tapeCoords[34][2] = {
+uint16_t tapeCoords[34][2] = {
   { 00,  7}, { 00, 13}, { 00, 20}, { 00, 27}, { 00, 33}, { 00, 40}, { 00, 47}, { 00, 53}, { 00, 60}, {  4, 60},
   { 10, 60}, { 17, 60}, { 24, 60}, { 30, 60}, { 36, 60}, { 44, 60}, { 50, 60}, { 57, 60}, { 64, 60}, { 70, 60},
   { 77, 60}, { 84, 60}, { 90, 60}, { 97, 60}, {104, 60}, {104, 60}, {104, 53}, {104, 47}, {104, 40}, {104, 33},
   {104, 27}, {104, 20}, {104, 13}, {104,  7}
 };
-int tubeCoords[90][2] = {
+uint16_t tubeCoords[90][2] = {
   {100, 197}, {108, 197}, {113, 196}, {122, 194}, {129, 191}, {137, 188}, {143, 186}, {150, 181}, {157, 178}, {162, 172},
   {167, 168}, {172, 163}, {177, 158}, {183, 152}, {187, 145}, {190, 138}, {193, 131}, {195, 124}, {197, 118}, {198, 111},
   {198, 105}, {198, 98}, {197, 92}, {196, 84}, {195, 78}, {194, 72}, {193, 65}, {190, 59}, {188, 52}, {183, 46},
@@ -533,7 +532,7 @@ int tubeCoords[90][2] = {
   {  3, 119}, {  5, 127}, {  6, 134}, {  8, 140}, { 12, 146}, { 15, 154}, { 19, 158}, { 23, 162}, { 27, 166}, { 30, 170},
   { 37, 175}, { 42, 179}, { 48, 182}, { 55, 185}, { 62, 189}, { 69, 193}, { 77, 194}, { 83, 196}, { 88, 197}, { 95, 198}
 };
-int binCoords[203][2] = {  // 3               // 5                             // 8                  // 0
+uint16_t binCoords[203][2] = {  // 3               // 5                             // 8                  // 0
   {230, 460}, {238, 459}, {245, 459}, {251, 458}, {258, 458}, {266, 458}, {272, 457}, {277, 455}, {285, 453}, {292, 450},
   {299, 447}, {305, 444}, {324, 439}, {329, 436}, {335, 432}, {340, 430}, {347, 425}, {352, 421}, {357, 416}, {360, 410}, // 20
   {365, 406}, {370, 402}, {375, 400}, {380, 394}, {385, 386}, {390, 382}, {394, 378}, {398, 373}, {402, 396}, {406, 363},
@@ -556,7 +555,7 @@ int binCoords[203][2] = {  // 3               // 5                             /
   {144, 440}, {151, 442}, {156, 445}, {162, 447}, {168, 450}, {175, 452}, {182, 454}, {188, 456}, {195, 457}, {204, 458}, // 200
   {212, 459}, {217, 460}, {222, 460}
 };
-int bigHeartCoords[175][2] = {      // 3        // 4                             // 7                  // 9
+uint16_t bigHeartCoords[175][2] = {      // 3        // 4                             // 7                  // 9
   { 48, 267}, { 45, 273}, { 42, 280}, { 37, 287}, { 33, 295}, { 28, 303}, { 26, 309}, { 23, 317}, { 20, 325}, { 17, 333},
   { 15, 338}, { 14, 344}, { 12, 352}, { 10, 359}, {  9, 365}, {  8, 372}, {  7, 378}, {  6, 385}, {  8, 392}, {  9, 401},
   { 10, 409}, { 12, 416}, { 15, 423}, { 18, 430}, { 21, 438}, { 23, 443}, { 27, 451}, { 30, 456}, { 34, 463}, { 40, 469},
@@ -576,7 +575,7 @@ int bigHeartCoords[175][2] = {      // 3        // 4                            
   {309,  6}, {300,  8}, {294, 12}, {289, 14}, {283, 18}, {278, 22}, {272, 26}, {268, 30}, {263, 35}, {258, 40}, // 169
   {251, 45}, {246, 49}, {239, 54}, {232, 60}, {228, 65}
 };
-int smHeartCoords[85][2] = {        // 3        // 4                             // 7                  // 9
+uint16_t smHeartCoords[85][2] = {        // 3        // 4                             // 7                  // 9
   { 00, 00}, { 00, 00}, { 00, 00}, { 24,  6}, { 22, 12}, { 19, 18}, { 17, 26}, { 14, 32}, { 11, 38}, {  9, 44},
   {  8, 49}, {  7, 56}, {  4, 62}, {  3, 68}, {  3, 76}, {  4, 85}, {  5, 92}, {  5, 98}, {  6, 104}, {  9, 112},
   { 12, 120}, { 14, 125}, { 18, 128}, { 20, 134}, { 24, 139}, { 29, 144}, { 36, 148}, { 40, 153}, { 48, 158}, { 57, 162},
@@ -587,17 +586,17 @@ int smHeartCoords[85][2] = {        // 3        // 4                            
   {297, 98}, {298, 92}, {298, 85}, {295, 78}, {294, 70}, {294, 65}, {293, 60}, {292, 54}, {290, 48}, {288, 42},
   {286, 37}, {282, 28}, {278, 21}, {273, 15}, {269,  9}
 };
-int portRCoords[19][2] = {          // 3        // 4                             // 7                  // 9
+uint16_t portRCoords[19][2] = {          // 3        // 4                             // 7                  // 9
   { 12, 80}, { 22, 90}, { 38, 96}, { 54, 96}, { 70, 95}, { 82, 87}, { 92, 75}, { 98, 62}, { 98, 48}, { 95, 32},
   { 88, 20}, { 75, 10}, { 60,  3}, { 40,  3}, { 26,  8}, { 12, 18}, {  5, 32}, {  2, 50}, {  5, 65}
 };
-int portLCoords[19][2] = {          // 3        // 4                             // 7                  // 9
+uint16_t portLCoords[19][2] = {          // 3        // 4                             // 7                  // 9
   { 82, 87}, { 70, 95}, { 54, 96}, { 38, 96}, { 22, 90}, { 12, 80}, {  5, 65}, {  2, 50}, {  5, 32}, { 12, 18},
   { 26,  8}, { 40,  3}, { 60,  3}, { 75, 10}, { 88, 20}, { 95, 32}, { 98, 48}, { 98, 62}, { 92, 75}
 };
 
 
-int ledSections[20] = {
+uint16_t ledSections[20] = {
   0,     // 0  bottom ring *
   203,   // 1  big heart
   378,   // 2  small heart
@@ -620,11 +619,11 @@ int ledSections[20] = {
   1442
 };
 
-int numLedsInSection(int sectionNum) {
+uint16_t numLedsInSection(uint16_t sectionNum) {
   return ledSections[sectionNum + 1] - ledSections[sectionNum];
 }
 
-int ledPosOffset[19][2] = {
+uint16_t ledPosOffset[19][2] = {
   { 70, 90},       // 00 bottomRing
   { 0, 945},       // 01 bigHeart
   { 150, 1224},    // 02 smallHeart
@@ -646,12 +645,12 @@ int ledPosOffset[19][2] = {
   { 400, 555},     // 18 port right
 };
 
-int eyeSmileyLeds[24] = {
+uint16_t eyeSmileyLeds[24] = {
   34, 35, 40, 41, 42, 43, 44, 45, 46,
   47, 48, 53, 54, 57, 58, 61, 62, 63,
   64, 65, 66, 67, 70, 71
 };
-int eyeHeartLeds[56] = {
+uint16_t eyeHeartLeds[56] = {
   4,  5,  6, 16, 26, 27, 28, 34, 35, 36,
   37, 38, 43, 44, 45, 50, 51, 52, 53, 54,
   57, 58, 59, 60, 61, 62, 63, 64, 65, 66,

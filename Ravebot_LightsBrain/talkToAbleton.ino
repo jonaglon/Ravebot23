@@ -6,7 +6,7 @@ void playRandomTune() {
  playRandomTune(currentGenre);
 }
 
-void playRandomTune(int genre) {
+void playRandomTune(int16_t genre) {
   int track = 0;
 
   do {
@@ -17,7 +17,7 @@ void playRandomTune(int genre) {
   playTune(genre, track, true);
 }
 
-void playTune(int genre, int track, bool alterHistory) {
+void playTune(int16_t genre, int16_t track, bool alterHistory) {
   setCurrentTune(genre, track);
   setAbletonTempo(currentTune.bpm-1);
   sendFullStop();
@@ -72,9 +72,9 @@ void playTune(int genre, int track, bool alterHistory) {
 
 }
 
-void updateGenreAndTrackHistory(int genre, int track) {
+void updateGenreAndTrackHistory(int16_t genre, int16_t track) {
 
-  for (int x = 19; x > 0; x--)
+  for (int16_t x = 19; x > 0; x--)
     last20Genres[x] = last20Genres[x-1];  
   last20Genres[0] = genre;
 
@@ -83,7 +83,7 @@ void updateGenreAndTrackHistory(int genre, int track) {
   last20Tracks[0] = track;
 }
 
-void playAbletonTrack(int channel, int trackNumber, bool playSideA) {
+void playAbletonTrack(int16_t channel, int16_t trackNumber, bool playSideA) {
   int abletonChannel = channel*2;
   if (!playSideA)
     abletonChannel++;
@@ -91,7 +91,7 @@ void playAbletonTrack(int channel, int trackNumber, bool playSideA) {
   sendMidi(abletonChannel+176, trackNumber+1, 127);
 }
 
-void stopAbletonChannel(int channel, bool stopSideA) {
+void stopAbletonChannel(int16_t channel, bool stopSideA) {
   int abletonChannel = channel*2;
   if (stopSideA)
     abletonChannel++;
@@ -112,7 +112,7 @@ void start16BeatAbletonTrack() {
   sendMidi(176, 126, 127); // channel 1, track 126, value 127.
 }
 
-void setMainVolume(int newVolume) {
+void setMainVolume(int16_t newVolume) {
 
   if (newVolume < 0)
     newVolume = 0;
@@ -125,7 +125,7 @@ void setMainVolume(int newVolume) {
   sendMidi(176, 127, mainVolume);
 }
 
-void setAbletonTempo(int tempo) { // 80 - 207 bpm only
+void setAbletonTempo(int16_t tempo) { // 80 - 207 bpm only
   if (abletonBpm == tempo)
     return;
   
@@ -134,7 +134,7 @@ void setAbletonTempo(int tempo) { // 80 - 207 bpm only
   abletonBpm = tempo;
 }
 
-void setRobotVoiceVolume(int volume) { // 0 - 127
+void setRobotVoiceVolume(int16_t volume) { // 0 - 127
   sendMidi(177, 126, volume);
 }
 
@@ -148,7 +148,7 @@ void setCrossfader(int value) { // 0 - 127     176
 
 //  plays a MIDI note.
 // 176 is channel=1, 190 channel=15
-void sendMidi(int channel, int trackNumber, int velocity) {
+void sendMidi(int16_t channel, int16_t trackNumber, int16_t velocity) {
   if (testMode) {
     sendMidiTest(channel, trackNumber, velocity);
     return;
@@ -166,7 +166,7 @@ void sendMidi(int channel, int trackNumber, int velocity) {
   Serial.write(velocity);
 }
 
-void sendMidiTest(int channel, int trackNumber, int velocity) {
+void sendMidiTest(int16_t channel, int16_t trackNumber, int16_t velocity) {
   // (176, 126, 127); // channel 1, track 126, value 127.
   
   Serial.print("Channel:");

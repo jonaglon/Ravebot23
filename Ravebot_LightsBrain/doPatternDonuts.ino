@@ -1,26 +1,26 @@
 
 void drawRGBHexagons() {
-  int yStripeBeatPos = (timeyInTime % 65536)/64; // 0-958
+  int32_t yStripeBeatPos = (timeyInTime % 65536)/64; // 0-958
   drawHexagon(yStripeBeatPos+500, 0, 255, 0, 0);
   drawHexagon(yStripeBeatPos, 255, 0, 0, 0);
   drawHexagon(yStripeBeatPos-500, 0, 0, 255, 0);
 }
 
 void drawWhiteHexagons() {
-  int yStripeBeatPos = (timeyInTime % 32768)/32;
+  int32_t yStripeBeatPos = (timeyInTime % 32768)/32;
   drawHexagon(yStripeBeatPos+50, 0, 0, 0, 255);
   drawHexagon(yStripeBeatPos, 0, 0, 0, 255);
   drawHexagon(yStripeBeatPos-50, 0, 0, 0, 0);
 }
 
-byte hex1R = 0;
-byte hex1G = 0;
-byte hex1B = 0;
-byte hex1W = 0;
+uint8_t hex1R = 0;
+uint8_t hex1G = 0;
+uint8_t hex1B = 0;
+uint8_t hex1W = 0;
 bool hexagonOverlayOn = false;
 void drawHexagonOverlay() {
   if (beatCycle) {
-    byte thisBeat = totalBeats % 32;
+    uint8_t thisBeat = totalBeats % 32;
     if (thisBeat == 26) {
       setGoodRandomColorVars();
       hex1R = goodColR;
@@ -38,20 +38,20 @@ void drawHexagonOverlay() {
   }
 
   if (hexagonOverlayOn) {
-    int yStripeBeatPos = ((timeyInTime+32768  ) % 65536)/64;
+    int32_t yStripeBeatPos = ((timeyInTime+32768  ) % 65536)/64;
     drawHexagon(yStripeBeatPos, hex1R, hex1G, hex1B, hex1W);
   }
 }
 
-void drawHexagon(int squareRadius, int r, int g, int b, int w) {
-  int xCoord = 307;
-  int yCoord = 758;
-  int diamondRadius=(squareRadius*4)/3;
-  for (int j = 0; j < numLeds; j++) { 
+void drawHexagon(int32_t squareRadius, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  int32_t xCoord = 307;
+  int32_t yCoord = 758;
+  int32_t diamondRadius=(squareRadius*4)/3;
+  for (int16_t j = 0; j < numLeds; j++) { 
     if (getCoord(j,0) < (xCoord+(squareRadius/2)) && (getCoord(j,1) < (yCoord+squareRadius))) {
       if (getCoord(j,0) > (xCoord-(squareRadius/2)) && (getCoord(j,1) > (yCoord-squareRadius))) {
-        int x = quickAbsolute(xCoord-getCoord(j,0));
-        int y = quickAbsolute(yCoord-getCoord(j,1));
+        int32_t x = quickAbsolute(xCoord-getCoord(j,0));
+        int32_t y = quickAbsolute(yCoord-getCoord(j,1));
         if ((x/2) + y < diamondRadius) {
           setLedDirect(j, r, g, b, w, false);
         }

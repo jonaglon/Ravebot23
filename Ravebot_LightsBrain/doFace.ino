@@ -2,7 +2,7 @@
 /* ******************************* EYES & MOUTH ********************************** */
 
 // Eye types are used when the robot is in manual mode, in auto eye dances are used
-int currentEyeType = 0;
+uint8_t currentEyeType = 0;
 void changeEyeType() {
   resetEyes();
   currentEyeType = (currentEyeType+1)%6;
@@ -15,10 +15,10 @@ void doFace() {
 }
 
 void doDialRainbow() {
-  int percentThroughPattern = timeyInTime/1024;     // 0-255 over 2 bars
+  uint32_t percentThroughPattern = timeyInTime/1024;     // 0-255 over 2 bars
   
   // 26 ligths in the dial
-  for(int j = 0; j < 26; j++) {
+  for(uint8_t j = 0; j < 26; j++) {
     SetRgbwWheelVars((percentThroughPattern+(j*6))%256);
     setSectionLed(9, 26-j, wheelR, wheelG, wheelB, 0);   
   }
@@ -98,12 +98,12 @@ void resetEyes() {
   rightEyeY = 65;
 }
 
-int eyeRColours[9] = {255,  0,   0,  255, 255,   0, 110, 0, 255 };
-int eyeGColours[9] = {0,  255,   0,  255,   0, 255, 150, 0,   6 };
-int eyeBColours[9] = {0,    0, 255,    0, 255, 255, 150, 0,  80 };
-int numEyeColors = 9;
+uint8_t eyeRColours[9] = {255,  0,   0,  255, 255,   0, 110, 0, 255 };
+uint8_t eyeGColours[9] = {0,  255,   0,  255,   0, 255, 150, 0,   6 };
+uint8_t eyeBColours[9] = {0,    0, 255,    0, 255, 255, 150, 0,  80 };
+uint8_t numEyeColors = 9;
 
-int currentEyePrimaryPos = 3;
+uint8_t currentEyePrimaryPos = 3;
 void changePrimaryEyeColour() {
   currentEyePrimaryPos = (currentEyePrimaryPos+1)%numEyeColors;
   eyePrimaryR = eyeRColours[currentEyePrimaryPos];
@@ -111,7 +111,7 @@ void changePrimaryEyeColour() {
   eyePrimaryB = eyeBColours[currentEyePrimaryPos];
 }
 
-int currentEyeSecondaryPos = 4;
+uint8_t currentEyeSecondaryPos = 4;
 void changeSecondaryEyeColour() {
   currentEyeSecondaryPos = (currentEyeSecondaryPos+1)%numEyeColors;
   eyeSecondaryR = eyeRColours[currentEyeSecondaryPos];
@@ -121,7 +121,7 @@ void changeSecondaryEyeColour() {
 
 void doNormalEyes() {
 
-  for(int j = 0; j < 93; j++) {
+  for(uint8_t j = 0; j < 93; j++) {
     setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   }
@@ -141,7 +141,7 @@ void doNormalEyes() {
 
 void doStonerEyes() {
 
-  for(int j = 0; j < 93; j++) {
+  for(uint8_t j = 0; j < 93; j++) {
     if (eyeCoords[j][1] < 56) {
       setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
       setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
@@ -165,12 +165,12 @@ void doStonerEyes() {
 
 void heartEyes() {
 
-  for(int j = 0; j < 93; j++) {
+  for(uint8_t j = 0; j < 93; j++) {
     setSectionLed(5, j, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
     setSectionLed(6, j, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
   }
 
-  for(int j = 0; j < 56; j++) {
+  for(uint8_t j = 0; j < 56; j++) {
     setSectionLed(5, eyeHeartLeds[j], eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     setSectionLed(6, eyeHeartLeds[j], eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   }
@@ -180,10 +180,10 @@ void pacManEyes() {
   // 16384 is a beat length  1365 is an 12th-ish
   //int animationStep = percentThroughBeat / 1365;
   
-  int animationStep1 = (timeyInTime / 2048)%8;
-  int animationStep2 = (timeyInTime / 1024)%16;
+  uint32_t animationStep1 = (timeyInTime / 2048)%8;
+  uint32_t animationStep2 = (timeyInTime / 1024)%16;
   
-  for(int j = 0; j < 93; j++) {
+  for(uint8_t j = 0; j < 93; j++) {
     if (pacManAnimationMask[(animationStep2)%16][j]) {
       setSectionLed(6, j, 120, 120, 0, 0);
     } else if (pacManAnimationMask2[(animationStep1+4)%8][j]) {
@@ -192,7 +192,7 @@ void pacManEyes() {
       setSectionLed(6, j, 255, 255, 255, 0);
     }
   }
-  for(int j = 0; j < 93; j++) {
+  for(uint8_t j = 0; j < 93; j++) {
     if (pacManAnimationMask2[animationStep1][j]) {
       setSectionLed(5, j, 0, 0, 0, 0);
     } else {
@@ -202,22 +202,22 @@ void pacManEyes() {
 }
 
 void smileyEyes() {
-  for(int j = 0; j < 93; j++) {
+  for(uint8_t j = 0; j < 93; j++) {
     setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   }
-  for(int j = 0; j < 24; j++) {
+  for(uint8_t j = 0; j < 24; j++) {
     setSectionLed(5, eyeSmileyLeds[j], eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
     setSectionLed(6, eyeSmileyLeds[j], eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
   }
 }
 
 unsigned long blinkStart=4000;
-const int blinkLength=240;
+const uint32_t blinkLength=240;
 void doBlinking() {
-  int drawTo = 0;
-  //int drawTo2 = 0;
-  int blinkHeight = 60;
+  uint32_t drawTo = 0;
+  //uint32_t drawTo2 = 0;
+  uint32_t blinkHeight = 60;
   
   if (timey > (blinkStart + blinkLength)) {
     // blink over, reset
@@ -227,7 +227,7 @@ void doBlinking() {
       blinkStart = timey + random(4000,9000);
     }
   } else if (timey > blinkStart) {
-    int percIntoBlink = ((timey - blinkStart)*100)/(blinkLength/2);
+    uint32_t percIntoBlink = ((timey - blinkStart)*100)/(blinkLength/2);
     if (timey > (blinkStart + (blinkLength/2))) {
       // on way up
       drawTo = ((blinkHeight * percIntoBlink)/100)-blinkHeight+50;
@@ -235,7 +235,7 @@ void doBlinking() {
       // on way down
       drawTo = blinkHeight+50-((blinkHeight * percIntoBlink)/100);
     }
-    for(int j = 0; j < 93; j++) {
+    for(uint8_t j = 0; j < 93; j++) {
       if (eyeCoords[j][1] < 110 - drawTo) {
           setSectionLed(5, j, 0, 0, 0, 0);
       }
@@ -252,20 +252,20 @@ void doBlinking() {
   }
 }
 
-unsigned long lWinkStart=0;
-unsigned long rWinkStart=0;
-unsigned long lWinkEnd=0;
-unsigned long rWinkEnd=0;
+uint32_t lWinkStart=0;
+uint32_t rWinkStart=0;
+uint32_t lWinkEnd=0;
+uint32_t rWinkEnd=0;
 bool lWinking = false;
 bool rWinking = false;
-const int winkLength=350;
+const uint16_t winkLength=350;
 
 // Note, left and right winks are copied and pasted, change both the same.
 void doLeftWink() {
   if (!lWinking)
     return;
 
-  int drawTo = 0;  
+  uint16_t drawTo = 0;  
   if (lWinkEnd!=0 && (timey > (lWinkEnd + (winkLength/2)))) {
     // blink over, reset
     lWinking = false;
@@ -273,15 +273,15 @@ void doLeftWink() {
     drawTo = 110;
   } else if (lWinkEnd==0 && timey < (lWinkStart + (winkLength/2))) {
     // on way down
-    int percIntoBlink = ((timey - lWinkStart)*100)/(winkLength/2);
+    uint32_t percIntoBlink = ((timey - lWinkStart)*100)/(winkLength/2);
     drawTo = 110-((60 * percIntoBlink)/100);
   } else if (lWinkEnd!=0) {
     // on way up
-    int percIntoBlink = ((timey - lWinkEnd)*100)/(winkLength/2);
+    uint32_t percIntoBlink = ((timey - lWinkEnd)*100)/(winkLength/2);
     drawTo = 50+((60 * percIntoBlink)/100);
   } else {
     // in the middle
-    for(int j = 0; j < 93; j++) {
+    for(uint16_t j = 0; j < 93; j++) {
       setSectionLed(6, j, 0, 0, 0, 0);
     }
     setSectionLed(6, 24, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
@@ -297,7 +297,7 @@ void doLeftWink() {
     setSectionLed(6,  8, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     return;
   }
-  for(int j = 0; j < 93; j++) {
+  for(uint16_t j = 0; j < 93; j++) {
     if (eyeCoords[j][1] < 110 - drawTo) {
         setSectionLed(6, j, 0, 0, 0, 0);
     }
@@ -311,7 +311,7 @@ void doRightWink() {
   if (!rWinking)
     return;
 
-  int drawTo = 0;  
+  uint16_t drawTo = 0;  
   if (rWinkEnd!=0 && (timey > (rWinkEnd + (winkLength/2)))) {
     // blink over, reset
     rWinking = false;
@@ -319,15 +319,15 @@ void doRightWink() {
     drawTo = 110;
   } else if (rWinkEnd==0 && timey < (rWinkStart + (winkLength/2))) {
     // on way down
-    int percIntoBlink = ((timey - rWinkStart)*100)/(winkLength/2);
+    uint32_t percIntoBlink = ((timey - rWinkStart)*100)/(winkLength/2);
     drawTo = 110-((60 * percIntoBlink)/100);
   } else if (rWinkEnd!=0) {
     // on way up
-    int percIntoBlink = ((timey - rWinkEnd)*100)/(winkLength/2);
+    uint32_t percIntoBlink = ((timey - rWinkEnd)*100)/(winkLength/2);
     drawTo = 50+((60 * percIntoBlink)/100);
   } else {
     // in the middle
-    for(int j = 0; j < 93; j++) {
+    for(uint16_t j = 0; j < 93; j++) {
       setSectionLed(5, j, 0, 0, 0, 0);
     }
     setSectionLed(5, 24, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
@@ -343,7 +343,7 @@ void doRightWink() {
     setSectionLed(5,  8, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     return;
   }
-  for(int j = 0; j < 93; j++) {
+  for(uint16_t j = 0; j < 93; j++) {
     if (eyeCoords[j][1] < 110 - drawTo) {
         setSectionLed(5, j, 0, 0, 0, 0);
     }
@@ -353,7 +353,7 @@ void doRightWink() {
   }
 }
 
-void winkLeftMessage(int blinkOnOffMessage) {
+void winkLeftMessage(uint16_t blinkOnOffMessage) {
   if (blinkOnOffMessage == 0) {
     // start new wink
     lWinkStart=timey;
@@ -367,7 +367,7 @@ void winkLeftMessage(int blinkOnOffMessage) {
   }
 }
 
-void winkRightMessage(int blinkOnOffMessage) {
+void winkRightMessage(uint16_t blinkOnOffMessage) {
   if (blinkOnOffMessage == 0) {
     // start new wink
     rWinkStart=timey;
@@ -384,7 +384,7 @@ void winkRightMessage(int blinkOnOffMessage) {
 
 void doTalkingLights() {
 
-  for(int j = 0; j < numLedsInSection(7); j++) {
+  for(uint16_t j = 0; j < numLedsInSection(7); j++) {
     setSectionLed(7, j, 0, 0, 0, 0);
   }
   

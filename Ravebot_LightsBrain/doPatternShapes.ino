@@ -2,13 +2,13 @@
 // TODO - moving shapes, diamonds and hexagons. Enabling patterns like color fade from middle on beat and martix lines.
 
 // 0-x, 1-y, 2-radius, 3-r, 4-g, 5-b, 6-w, 7-fadeSpeed
-int colorBlobs[16][8] = {
+uint16_t colorBlobs[16][8] = {
    {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0},
    {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0},
    {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0},
    {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0} };
 
-int currentBeat = 0;
+uint16_t currentBeat = 0;
 void doPatternBlobs() {
 
   if (sixteenBeats != currentBeat) {
@@ -16,9 +16,9 @@ void doPatternBlobs() {
     setNewBlob(currentBeat);
   }
 
-  for(int j = 0; j < 16; j++) { 
+  for(uint16_t j = 0; j < 16; j++) { 
 
-    for(int k = 0; k < 4; k++) { 
+    for(uint16_t k = 0; k < 4; k++) { 
       if (colorBlobs[j][3+k] > 0) {
         colorBlobs[j][3+k] = colorBlobs[j][3+k]-colorBlobs[j][7];
       }
@@ -29,8 +29,8 @@ void doPatternBlobs() {
 }
 
 
-void drawSquare(int xCoord, int  yCoord, int radius, int r, int g, int b, int w) {
-  for(int j = 0; j < numLeds; j++) { 
+void drawSquare(int32_t xCoord, int32_t  yCoord, int32_t radius, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for(int16_t j = 0; j < numLeds; j++) { 
     if (getCoord(j,0) < (xCoord+radius) && getCoord(j,1) < (yCoord+radius)) {
       if (getCoord(j,0) > (xCoord-radius) && getCoord(j,1) > (yCoord-radius)) {
         setLedDirect(j, r, g, b, w, false);
@@ -39,7 +39,7 @@ void drawSquare(int xCoord, int  yCoord, int radius, int r, int g, int b, int w)
   }
 }
 
-void setNewBlob(int blobNumber) {
+void setNewBlob(int16_t blobNumber) {
 
   // todo - make this! - setGoodBlobCoords
 

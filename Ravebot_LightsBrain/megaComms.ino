@@ -5,7 +5,7 @@
 void receiveFromMega() {
   while (Serial1.available()) {
     char strIn[4];
-    int i=0;
+    int16_t i=0;
     delay(2); //allows all serial sent to be received together
     while(Serial1.available() && i<4) {
       strIn[i++] = Serial1.read();
@@ -15,9 +15,9 @@ void receiveFromMega() {
   }
 }
 
-void doSomethingWithPackageFromMega(int package) {  
-  int function = package / 1000;
-  int message = package % 1000;
+void doSomethingWithPackageFromMega(int16_t package) {  
+  int16_t function = package / 1000;
+  int16_t message = package % 1000;
 
   if (testMode) {
     Serial.print("Message Received fn:");
@@ -66,11 +66,11 @@ void doSomethingWithPackageFromMega(int package) {
   }
 }
 
-void setDanceNumber(int message) {
+void setDanceNumber(int16_t message) {
   currentDance = message; 
 }
 
-void changeOnOff(int message) {
+void changeOnOff(int16_t message) {
   allOffBySection();
   if (message == 0) {
     robotSwitchedOn = false;
@@ -116,7 +116,7 @@ void changeOnOff(int message) {
   delay(200);
 }
 
-void changeManualAutomatic(int message) {
+void changeManualAutomatic(int16_t message) {
   allOffBySection();
   if (message == 0) {
     robotManualMode = false;
@@ -137,7 +137,7 @@ void changeManualAutomatic(int message) {
 
 int leftEyeXIn = 0;
 int leftEyeYIn = 0;
-void setEyeCoords(int function, int message) {
+void setEyeCoords(int16_t function, int16_t message) {
   if (function == 5) {
     leftEyeX = message-43;
     leftEyeXIn = message-43;
@@ -155,7 +155,7 @@ void setEyeCoords(int function, int message) {
   }
 }
 
-void arcadeButtonPressed(int buttonNumber) {
+void arcadeButtonPressed(int16_t buttonNumber) {
 
   // Genre arcade button pressed
   if (buttonNumber < 8) {
@@ -202,7 +202,7 @@ void arcadeButtonPressed(int buttonNumber) {
 }
 
 bool mutedVoice = false;
-void doRobotTalkingLights(int btnOnOffMessage) {
+void doRobotTalkingLights(int16_t btnOnOffMessage) {
     if (btnOnOffMessage == 0)
     {
       robotTalking = true;
@@ -241,7 +241,7 @@ void sendBeatToMega() {
   sendSerialToMega(1, sixteenBeats);
 }
 
-void sendSerialToMega(int function, int message) {
+void sendSerialToMega(int16_t function, int16_t message) {
   if (testMode) {
     Serial.print("* * SENDING TO MEGA FN:");
     Serial.print(function);

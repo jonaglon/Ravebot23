@@ -73,7 +73,7 @@ void doExtraPatterns() {
 
 void changeLightPattern() {
   // choose a new pattern, different from the current one
-  int newPattern = currentLightPattern;
+  uint8_t newPattern = currentLightPattern;
   while (newPattern == currentLightPattern) {
     newPattern = random(numPatterns);
   }

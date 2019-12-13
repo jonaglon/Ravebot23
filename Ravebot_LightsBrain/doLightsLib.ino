@@ -1,14 +1,14 @@
 
-void rgbwRainbow(int speedFactor) {
-  int ticky = (timeyInTime / speedFactor);
+void rgbwRainbow(uint16_t speedFactor) {
+  uint32_t ticky = (timeyInTime / speedFactor);
 
   // forward
-  for (int pixNum = 0; pixNum < numLeds; pixNum++) {
+  for (uint16_t pixNum = 0; pixNum < numLeds; pixNum++) {
     SetRgbwWheelVars((pixNum + ticky) % 255);
   }
 }
   
-void SetRgbwWheel(int pixNum, byte WheelPos, short whiteVal) {
+void SetRgbwWheel(uint16_t pixNum, uint8_t WheelPos, uint8_t whiteVal) {
   WheelPos = 255 - WheelPos;
   if(WheelPos < 85) {
     setLedDirect(pixNum, 255 - WheelPos * 3, 0, WheelPos * 3, whiteVal, false);
@@ -25,7 +25,7 @@ void SetRgbwWheel(int pixNum, byte WheelPos, short whiteVal) {
 }
 
 
-void SetRgbwWheelVars(byte WheelPos) {
+void SetRgbwWheelVars(uint8_t WheelPos) {
   WheelPos = 255 - WheelPos;
   if(WheelPos < 85) {
     wheelR = 255 - WheelPos * 3;
@@ -48,7 +48,7 @@ void SetRgbwWheelVars(byte WheelPos) {
 }
 
 void setGoodRandomColorVars() {
-  int randomNum = random(20);
+  uint16_t randomNum = random(20);
   switch (randomNum) {
     case 0: 
       goodColR = 255;
@@ -120,7 +120,7 @@ void setGoodRandomColorVars() {
   }
 }
 
-int getCoord(int ledNum, int xOrY) {
+uint16_t getCoord(uint16_t ledNum, uint16_t xOrY) {
   if (ledNum < 203)
      return binCoords[ledNum][xOrY]+ledPosOffset[0][xOrY];
   else if (ledNum < 378)
@@ -161,19 +161,19 @@ int getCoord(int ledNum, int xOrY) {
     return portRCoords[(ledNum-1302)%19][xOrY]+ledPosOffset[18][xOrY];
 }
 
-int getCoord2(int ledNum, int xOrY) {
+uint16_t getCoord2(uint16_t ledNum, uint16_t xOrY) {
   return getCoord(ledNum, xOrY)+4096;
 }
 
-int quickAbsolute(int number) {
+uint32_t quickAbsolute(int32_t number) {
   if (number < 0)
     return number * (-1);
   else
     return number;
 }
 
-void drawEyeSquare(int offSet, int xCoord, int  yCoord, int radius, int r, int g, int b, int w) {
-  for(int j = 0; j < 93; j++) { 
+void drawEyeSquare(int32_t offSet, int32_t xCoord, int32_t  yCoord, int32_t radius, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for(uint16_t j = 0; j < 93; j++) { 
     if ((eyeCoords[j][0] < (xCoord+radius)) && (eyeCoords[j][1] < (yCoord+radius))) {
       if ((eyeCoords[j][0] > (xCoord-radius)) && (eyeCoords[j][1] > (yCoord-radius))) {
         setLedDirect(offSet+j, r, g, b, w, false);
@@ -184,12 +184,12 @@ void drawEyeSquare(int offSet, int xCoord, int  yCoord, int radius, int r, int g
 
 //const int pupilRadius=26;
 //const int maxRadius=42;
-void drawEyeHexagon(int ledNumOffSet, int xCoord, int  yCoord, int pupilRadius, int maxRadius, int r, int g, int b, int w) {
-  for (int j = 0; j < 93; j++) { 
+void drawEyeHexagon(int32_t ledNumOffSet, int32_t xCoord, int32_t  yCoord, int32_t pupilRadius, int32_t maxRadius, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for (uint16_t j = 0; j < 93; j++) { 
     if ((eyeCoords[j][0] < (xCoord+pupilRadius)) && (eyeCoords[j][1] < (yCoord+pupilRadius))) {
       if ((eyeCoords[j][0] > (xCoord-pupilRadius)) && (eyeCoords[j][1] > (yCoord-pupilRadius))) {
-        int x = quickAbsolute(xCoord-eyeCoords[j][0]);
-        int y = quickAbsolute(yCoord-eyeCoords[j][1]);
+        uint32_t x = quickAbsolute(xCoord-eyeCoords[j][0]);
+        uint32_t y = quickAbsolute(yCoord-eyeCoords[j][1]);
         if (x + y < maxRadius) {
           setLedDirect(ledNumOffSet+j, r, g, b, w, false);
         }
@@ -200,23 +200,23 @@ void drawEyeHexagon(int ledNumOffSet, int xCoord, int  yCoord, int pupilRadius, 
 
 
 // ledSections[17] needs 1 adding to it
-void setSection(int section, int r, int g, int b, int w) {
-  for(int j = ledSections[section]; j < ledSections[section+1]; j++) { 
+void setSection(uint16_t section, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for(int16_t j = ledSections[section]; j < ledSections[section+1]; j++) { 
     setLedDirect(j, r, g, b, w, true);
   }
 }
 
-void setSectionLed(int section, int ledNum, int r, int g, int b, int w) {
+void setSectionLed(uint16_t section, uint16_t ledNum, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
   if (ledNum < 0)
     return;
     
-  int j = ledSections[section] + ledNum;
+  uint16_t j = ledSections[section] + ledNum;
   if (j < ledSections[section+1])
     setLedDirect(j, r, g, b, w, true);
 }
 
-byte sectionToCut1 = 0;
-byte sectionToCut2 = 0;
+uint8_t sectionToCut1 = 0;
+uint8_t sectionToCut2 = 0;
 void cutRandomSection() {
   if (beatCycle) {
     sectionToCut1 = random(18);
@@ -226,19 +226,19 @@ void cutRandomSection() {
   setSection(sectionToCut2, 0, 0, 0, 0);
 }
 
-byte section1R = 0;
-byte section1G = 0;
-byte section1B = 0;
-byte section1W = 0;
-byte section2R = 0;
-byte section2G = 0;
-byte section2B = 0;
-byte section2W = 0;
+uint8_t section1R = 0;
+uint8_t section1G = 0;
+uint8_t section1B = 0;
+uint8_t section1W = 0;
+uint8_t section2R = 0;
+uint8_t section2G = 0;
+uint8_t section2B = 0;
+uint8_t section2W = 0;
 bool randomSectionSwitchedOn = false;
 void lightRandomSection() {
 
   if (beatCycle) {
-    byte thisBeat = totalBeats % 8;
+    uint8_t thisBeat = totalBeats % 8;
     if (thisBeat == 0 || thisBeat == 1) {
       randomSectionSwitchedOn = true;
     } else {
@@ -270,7 +270,7 @@ bool wholeRobotBrieflySwitchedOn = false;
 void lightWholeRobotBriefly() {
 
   if (beatCycle) {
-    byte thisBeat = totalBeats % 16;
+    uint8_t thisBeat = totalBeats % 16;
     if (thisBeat == 14 || thisBeat == 15 || thisBeat == 0 || thisBeat == 1) {
       wholeRobotBrieflySwitchedOn = true;
     } else {
@@ -290,26 +290,26 @@ void lightWholeRobotBriefly() {
   }
 }
 
-void everySingleLight(int r, int g, int b, int w) {
-  for(int j = 0; j < numLeds; j++) { 
+void everySingleLight(uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for(uint16_t j = 0; j < numLeds; j++) { 
     setLedDirect(j, r, g, b, w, false);
   }
 }
 
-void lightEyes(int r, int g, int b, int w) {
-  for(int j = 506; j < 693; j++) { 
+void lightEyes(uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for(uint16_t j = 506; j < 693; j++) { 
     setLedDirect(j, r, g, b, w, false);
   }
 }
 
 void allOff() {
-  for(int j = 0; j < numLeds; j++) {
+  for(uint16_t j = 0; j < numLeds; j++) {
     setLedDirect(j, 0, 0, 0, 0, true);
   }
 }
 
 void allOffBySection() {
-  for(int j = 0; j < 19; j++) {
+  for(uint16_t j = 0; j < 19; j++) {
     setSection(j, 0, 0, 0, 0);
   }
 }
@@ -321,7 +321,7 @@ void turnOffTubes() {
   setSection(16, 0, 0, 0, 0);
 }
 
-void setLedDirect(int ledNum, int rVal, int gVal, int bVal, int wVal, bool showMouth) {
+void setLedDirect(uint16_t ledNum, uint8_t rVal, uint8_t gVal, uint8_t bVal, uint8_t wVal, bool showMouth) {
   if (ledNum < 0)
     return;
 
@@ -396,9 +396,9 @@ void setLedDirect(int ledNum, int rVal, int gVal, int bVal, int wVal, bool showM
   }
 }
 
-void setRgbwLed(int ledNumber, int rVal, int gVal, int bVal, int wVal) {
-  int newNumber = (ledNumber * 4) / 3;
-  short mod = ledNumber % 3;
+void setRgbwLed(uint16_t ledNumber, uint8_t rVal, uint8_t gVal, uint8_t bVal, uint8_t wVal) {
+  uint16_t newNumber = (ledNumber * 4) / 3;
+  int8_t mod = ledNumber % 3;
 
   rVal = rVal/ledIntensity > 255 ? 255 : rVal/ledIntensity;
   gVal = gVal/ledIntensity > 255 ? 255 : gVal/ledIntensity;
@@ -428,7 +428,7 @@ void setRgbwLed(int ledNumber, int rVal, int gVal, int bVal, int wVal) {
   }
 }
 
-void setRgbwLedAfterEyes(int ledNumber, int rVal, int gVal, int bVal, int wVal) {
+void setRgbwLedAfterEyes(uint16_t ledNumber, uint8_t rVal, uint8_t gVal, uint8_t bVal, uint8_t wVal) {
   if (rVal < 0)
     rVal = 0;
   if (gVal < 0)
@@ -438,8 +438,8 @@ void setRgbwLedAfterEyes(int ledNumber, int rVal, int gVal, int bVal, int wVal) 
   if (wVal < 0)
     wVal = 0;
   
-  int newNumber = (ledNumber * 4) / 3;
-  short mod = ledNumber % 3;
+  int32_t newNumber = (ledNumber * 4) / 3;
+  int8_t mod = ledNumber % 3;
   
   rVal = rVal/ledIntensity > 255 ? 255 : rVal/ledIntensity;
   gVal = gVal/ledIntensity > 255 ? 255 : gVal/ledIntensity;

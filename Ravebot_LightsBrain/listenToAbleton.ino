@@ -1,9 +1,9 @@
-byte incomingByte;
-byte note;
-byte velocity;
-int channel = 1;
-int noteDown = LOW;
-int state=0;  // state machine variable 0 = command waiting : 1 = note waitin : 2 = velocity waiting
+uint8_t incomingByte;
+uint8_t note;
+uint8_t velocity;
+int16_t channel = 1;
+int16_t noteDown = LOW;
+int16_t state=0;  // state machine variable 0 = command waiting : 1 = note waitin : 2 = velocity waiting
 
 // Receive midi from ableton
 void listenToAbleton() {
@@ -65,7 +65,7 @@ void sixteenBeatWatchFn() {
   sixteenBeatWatch = sixteenBeats;
 }   */
 
-void processMessageFromAbleton(byte note, byte velocity, int down) {
+void processMessageFromAbleton(uint8_t note, uint8_t velocity, int16_t down) {
   if ((note>=24 && note<88) && (velocity == 100)) {
     sixteenBeats = note - 24; // from 0 to 63 
 
@@ -125,7 +125,7 @@ void checkForDropCountdownStart() {
 
 
 /* Below is the fake beat control code */
-unsigned long nextBeat = 0;
+uint32_t nextBeat = 0;
 
 void doFakeBeatMessageFromAbleton() {
   if (timey > nextBeat) {

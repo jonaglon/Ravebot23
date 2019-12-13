@@ -1,13 +1,3 @@
-/*
-int8_t = -128 to 127
-uint8_t = 0 to 255
-int16_t = -32,768 to 32,767
-uint16_t = 0 to 65,535
-int32_t = -2,147,483,648 to 2,147,483,647
-uint32_t = 0 to 4,294,967,295
-int64_t = −9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
-uint64_t = 0 to 18,446,744,073,709,551,615      */
-
 struct stripies {
   uint8_t stripeR;
   uint8_t stripeG;
@@ -136,7 +126,7 @@ void stripesPattern(uint8_t numStripesInPattern, struct stripies *stripePatterns
     
     stripeBeatPos = stripeBeatPos % animLength;
     
-    for(int j = 0; j < numLeds; j++) {
+    for(int16_t j = 0; j < numLeds; j++) {
       uint8_t xOrY = 0;
       if (stripePatterns[stripeNum].xOrY)
         xOrY = 1;

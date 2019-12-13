@@ -1,11 +1,11 @@
 
 void doMixing() {
 
-  if (nextMixDuration < 8)
+  if (nextMixDuration < 11)
     ledIntensity=ledIntensity+1;
 
-  int bpmDifference = nextTune.bpm - currentTune.bpm;
-  int newBpm = ((bpmDifference * percentThroughMix) / 256) + currentTune.bpm;
+  int16_t bpmDifference = nextTune.bpm - currentTune.bpm;
+  int16_t newBpm = ((bpmDifference * percentThroughMix) / 256) + currentTune.bpm;
   setAbletonTempo(newBpm);
 
   // Now do the actual mixing
@@ -22,9 +22,9 @@ void doMixing() {
 
 // Percent through mix is actually 0-255.
 void setPercentThroughMix() {
-  int percentThroughCalc = 0;
+  int16_t percentThroughCalc = 0;
 
-  int beatsIntoMix = ((currentBar - nextMixStart + 1) * 4) + (sixteenBeats % 4) - 3;
+  int16_t beatsIntoMix = ((currentBar - nextMixStart + 1) * 4) + (sixteenBeats % 4) - 3;
 
   if (nextMixDuration < 12) {
     // straight mix if less than 12 bars
@@ -159,7 +159,7 @@ void calculateMixDurationAndStart() {
     printMixDurationAndStartDebug(nextMixDuration, nextMixStart, currentTune.tuneLength);
 }
 
-void printMixDurationAndStartDebug(int nextMixDuration, int nextMixStart, int tuneLength) {
+void printMixDurationAndStartDebug(int16_t nextMixDuration, int16_t nextMixStart, int16_t tuneLength) {
   Serial.print("Picking MixDurationAndStart nextMixDuration:");
   Serial.print(nextMixDuration);
   Serial.print("  nextMixStart:");
@@ -170,7 +170,7 @@ void printMixDurationAndStartDebug(int nextMixDuration, int nextMixStart, int tu
 
 void chooseNextTrack() {
   bool nextTrackPicked = false;
-  int genre, track;
+  int16_t genre, track;
 
   // Also pick next lights pattern here
 
@@ -182,7 +182,8 @@ void chooseNextTrack() {
       genre = currentGenre;
 
     // pick next track
-    track = random(numberOfTunesInGenre(genre));
+    int16_t numTunes = numberOfTunesInGenre(genre);
+    track = random(numTunes);
 
     // check it's not in the last 10 tunes played
     if (playedTuneHistoryContainsTrack(genre, track))
@@ -198,15 +199,13 @@ void chooseNextTrack() {
 }
 
 
-bool playedTuneHistoryContainsTrack(int genre, int track) {
-  bool trackExistsInHistory = false;
-  for (int x = 0; x < 19; x++) {
+bool playedTuneHistoryContainsTrack(uint8_t genre, uint8_t track) {
+  for (int x = 0; x < 20; x++) {
     if ((last20Genres[x] == genre) && (last20Tracks[x] == track)) {
-      trackExistsInHistory = true;
-      break;
+      return true;
     }
   }
-  return trackExistsInHistory;
+  return false;
 }
 
 void setNextTune(int genre, int track) {
