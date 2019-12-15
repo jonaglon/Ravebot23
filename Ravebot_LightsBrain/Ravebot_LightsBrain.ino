@@ -128,7 +128,7 @@ void setup() {
     changeOnOff(0);
     
   // JR TODO remove me ******************************
-  playTune(4, 9, true);
+  playTune(4, 10, true);
 }
 
 void loop() {
@@ -485,7 +485,7 @@ tuneInfo tuneLibHipHop[28] = {
   { 95,  0,  86,  4,  0,  8,  8, true},   //24 XGonGiveItToYa-DMX
   {134,  0, 124,  8,  0,  8,  8, true},   //25 ForgotAboutDre-DreEminem
   { 93,  0, 104,  8,  0,  8,  8, false},  //26 StillDRE-DrDre
-  { 98,  0, 102,  4,  0,  8,  8, true},   //27 X-Xzibit
+  { 98,  0, 102,  4,  0,  8,  8, true},   //27 X-Xzibit X Go
   { 98,  0, 100,  4,  0,  8,  8, true},   //2x X-Xzibit
 };
 

@@ -65,8 +65,8 @@ void doExtraPatterns() {
   // heartInTime();
   // turnOffTubes();
   // circleSquiggleController(); // three patterns here, different ones better with different backgrounds.
-  // bigSpeakerThreeRevolvers();
-  bigSpeakerInTimeFourTings();
+  bigSpeakerThreeRevolvers();
+  //bigSpeakerInTimeFourTings();
   //tubesInTime();
   // TODO - BeatFlash()
 
@@ -79,6 +79,8 @@ void changeLightPattern() {
     newPattern = random(numPatterns);
   }
   currentLightPattern = newPattern;
+  // JR TODO - CHEAT ********************************************************  CHEAT * * 
+  currentLightPattern = 14;
 
   // if it's a twinkle call the setup code
   if (newPattern < 14) {
