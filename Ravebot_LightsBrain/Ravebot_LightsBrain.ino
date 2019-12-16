@@ -3,12 +3,7 @@
    / \/// _` \ \ / / _ \ '_ \ / _ \| __|  _____   / / | |/ _` | '_ \| __/ __|
   / _  \ (_| |\ V /  __/ |_) | (_) | |_  |_____| / /__| | (_| | | | | |_\__ \
   \/ \_/\__,_| \_/ \___|_.__/ \___/ \__|         \____/_|\__, |_| |_|\__|___/
-                                                         |___/                       */
-/*
-// TODO, starting to grind specially when stripes had a big array, consider using these types, specially for the structs.
-Oh, man you might actually have to do this, maybe for the animation masks and big arrays.
-
-int8_t = -128 to 127
+int8_t = -128 to 127                                     |___/         
 uint8_t = 0 to 255
 int16_t = -32,768 to 32,767
 uint16_t = 0 to 65,535
@@ -596,6 +591,28 @@ uint16_t portLCoords[19][2] = {          // 3        // 4                       
 };
 
 
+uint16_t ledPosOffset[19][2] = {
+  { 70, 90},       // 00 bottomRing
+  { 0, 945},       // 01 bigHeart
+  { 150, 1224},    // 02 smallHeart
+  { 612, 1400},    // 03 underarm left
+  { 612, 1210},    // 04 overarm left
+  { 384, 1550},    // 05 eyeLeft
+  { 110, 1550},    // 06 rightEye
+  { 246, 1536},    // 07 mouth
+  { 250, 1600},    // 08 tape
+  { 239, 1710},    // 09 tuner
+  { 180, 1714},    // 10 indicator
+  { 1, 1400},      // 11 underArm right
+  { 1, 1240},      // 12 overArm right
+  { 315, 800},     // 13 tubeBottomright
+  { 80, 800},      // 14 tubeBottomleft
+  { 80, 1020},     // 15 tubeTopleft
+  { 315, 1020},    // 16 tubeTopright
+  { 50, 555},      // 17 port left
+  { 400, 555},     // 18 port right
+};
+
 uint16_t ledSections[20] = {
   0,     // 0  bottom ring *
   203,   // 1  big heart
@@ -622,28 +639,6 @@ uint16_t ledSections[20] = {
 uint16_t numLedsInSection(uint16_t sectionNum) {
   return ledSections[sectionNum + 1] - ledSections[sectionNum];
 }
-
-uint16_t ledPosOffset[19][2] = {
-  { 70, 90},       // 00 bottomRing
-  { 0, 945},       // 01 bigHeart
-  { 150, 1224},    // 02 smallHeart
-  { 612, 1400},    // 03 underarm left
-  { 612, 1210},    // 04 overarm left
-  { 384, 1550},    // 05 eyeLeft
-  { 110, 1550},    // 06 rightEye
-  { 246, 1536},    // 07 mouth
-  { 250, 1600},    // 08 tape
-  { 239, 1710},    // 09 tuner
-  { 180, 1714},    // 10 indicator
-  { 1, 1400},      // 11 underArm right
-  { 1, 1240},      // 12 overArm right
-  { 315, 800},     // 13 tubeBottomright
-  { 80, 800},      // 14 tubeBottomleft
-  { 80, 1020},     // 15 tubeTopleft
-  { 315, 1020},    // 16 tubeTopright
-  { 50, 555},      // 17 port left
-  { 400, 555},     // 18 port right
-};
 
 uint16_t eyeSmileyLeds[24] = {
   34, 35, 40, 41, 42, 43, 44, 45, 46,
