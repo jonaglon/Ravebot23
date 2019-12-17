@@ -2,6 +2,14 @@ uint8_t stripe1r = 255;
 uint8_t stripe1g = 0;
 uint8_t stripe1b = 0;
 uint8_t stripe1w = 0;
+uint8_t stripe2r = 0;
+uint8_t stripe2g = 255;
+uint8_t stripe2b = 0;
+uint8_t stripe2w = 0;
+uint8_t stripe3r = 0;
+uint8_t stripe3g = 0;
+uint8_t stripe3b = 255;
+uint8_t stripe3w = 0;
 
 void doPatternStripes() {
   // StripeSpeed is 0=fast,1=med,2=slow. Fast is 1 per beat
@@ -20,7 +28,7 @@ void doUDStripe(uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
   } else if (stripeSpeed == 1) {
     offset=1150;
     stripeBeatPos = ((timeyInTime/32)+offset)%2048;
-    if (beatCycle && stripeBeatPos > 1400) {
+    if (beatCycle && ((sixteenBeats%2) == 0) && stripeBeatPos > 800) {
       setNewColorForStripey(stripeCol);
     }
   } else {
@@ -56,7 +64,7 @@ void doLRStripe(uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
   for(int16_t j = 0; j < numLeds; j++) {
     uint16_t coord = getCoord(j,0)+stripeLength;
     if ((coord > stripeBeatPos) && (coord < stripeBeatPos+stripeLength)) {
-        setLedDirect(j, stripe1r, stripe1g, stripe1b, stripe1w, false);
+      setLedDirect(j, stripe1r, stripe1g, stripe1b, stripe1w, false);
     }
   }
 }
@@ -79,7 +87,7 @@ void doRLStripe(uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
   for(int16_t j = 0; j < numLeds; j++) {
     uint16_t coord = getCoord(j,0)+stripeLength;
     if ((coord > stripeBeatPos) && (coord < stripeBeatPos+stripeLength)) {
-        setLedDirect(j, stripe1r, stripe1g, stripe1b, stripe1w, false);
+      setLedDirect(j, stripe1r, stripe1g, stripe1b, stripe1w, false);
     }
   }
 }
