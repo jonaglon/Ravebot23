@@ -13,7 +13,7 @@ uint8_t stripe3w = 0;
 
 void doPatternStripes() {
   // StripeSpeed is 0=fast,1=med,2=slow. Fast is 1 per beat
-  doUDStripe(1200, 1, 1);
+  doUDStripe(1200, 2, 1);
 }
 
 void doUDStripe(uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
@@ -28,7 +28,7 @@ void doUDStripe(uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
   } else if (stripeSpeed == 1) {
     offset=1150;
     stripeBeatPos = ((timeyInTime/32)+offset)%2048;
-    if (beatCycle && ((sixteenBeats%2) == 0) && stripeBeatPos > 800) {
+    if (beatCycle && ((sixteenBeats%4) == 1)) {
       setNewColorForStripey(stripeCol);
     }
   } else {
