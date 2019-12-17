@@ -72,7 +72,7 @@ void setGoodRandomColorVars() {
       goodColR = 0;
       goodColG = 0;
       goodColB = 0;
-      goodColW = 255;
+      goodColW = 100;
       break;
     case 4: 
       goodColR = 245;
@@ -96,7 +96,7 @@ void setGoodRandomColorVars() {
       goodColR = 0;
       goodColG = 40;
       goodColB = 160;
-      goodColW = 255;
+      goodColW = 80;
       break;
     case 8: 
       goodColR = 82;

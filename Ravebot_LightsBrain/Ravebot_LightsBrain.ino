@@ -123,7 +123,7 @@ void setup() {
     changeOnOff(0);
     
   // JR TODO remove me ******************************
-  playTune(4, 10, true);
+  playTune(4, 22, true);
 }
 
 void loop() {
@@ -376,7 +376,7 @@ tuneInfo tuneLibEasy[28] = {
   {102,  0, 136,  8,  0,  8,  8, false},  //19 Ageopolis-AphexTwin
   {103,  0, 110,  8,  0,  8,  8, false},  //20 ICouldNeverBeYourMan-WhiteTown
   {154,  0, 140,  8,  0, 16,  0, true},   //21 Bigger than hip hop-DedPrez
-  { 95,  0, 140,  8,  4,  8,  8, false},  //22 PutItOn-Danger Mouse/BigL
+  { 95,  0,  72,  8,  4,  8,  8, false},  //22 PutItOn-Danger Mouse/BigL
   {118,  0,  74,  8,  0,  8,  8, false},  //23 Air-Remember
   { 86, 10,  76, 10,  0,  8,  8, true},   //24 Somersault-DangerMouse/Zero7/MFDoom
   { 93,  0,  96,  8,  0,  8,  8, false},  //25 MySound-SkarraMucci
