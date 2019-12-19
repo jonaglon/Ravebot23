@@ -123,7 +123,7 @@ void setup() {
     changeOnOff(0);
     
   // JR TODO remove me ******************************
-  playTune(4, 12, true);
+  playTune(4, 14, true);
 }
 
 void loop() {

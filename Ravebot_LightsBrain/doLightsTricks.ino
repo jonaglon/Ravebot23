@@ -106,12 +106,7 @@ uint8_t squigglePattern[10][17][2] {
     {{15, 22}, {14, 67}, {14, 44}, {14, 22}, {14,  0}, {14, 67}, {14, 44}, {14, 22}, {13, 67}, {13,  0}, {13, 22}, {13, 44}, {13, 67}, {16, 22}, {16,  0}, {16, 66}, {15, 22}}
 };
 
-// bool moveForwards = true;
 uint16_t squiggleLedDistance[17] {0, 728, 1456, 2185, 2913, 3641, 4369, 5097, 5825, 6554, 7282, 8010, 8738, 9466, 10194, 10923, 11651};
-
-void circleSquiggleController() {
-  circleSquiggleGood();
-}
 
 void circleSquiggleRainbow1() {
   for (int16_t arrayNum=0; arrayNum < 11; arrayNum++) {
@@ -223,18 +218,6 @@ void circleSquiggle(int32_t offset, uint8_t r, uint8_t g, uint8_t b, uint8_t w) 
 }
 
 
-///////////////////// Big Circle //////////////////
-void circleInTime() {
-  int32_t numToLight = percentThroughBeat / 182;
-
-  for(int16_t j = 0; j < 90; j++) {
-    setSectionLed(14, j, 0, 0, 0, 0);
-  }
-  for(int16_t j = 0; j < numToLight; j++) {
-    setSectionLed(14, j, 0, 0, 255, 0);
-  }
-  
-}
 
 //////////////////////////// Me Hearties /////////////////
 
