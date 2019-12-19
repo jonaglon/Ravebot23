@@ -11,7 +11,7 @@ void doLights() {
   doCutUpPattern();
 
   doExtraPatterns();  */
-  doPatternStripes();
+  doPatternStripes(2);
 
   doFace();
   
@@ -23,7 +23,13 @@ void doMainLightPattern() {
   if (currentLightPattern < 14) {
     doTwinkles();
   } else if (currentLightPattern < 18) {
-    doPatternStripes();
+    doPatternStripes(1);
+  } else if (currentLightPattern < 19) {
+    doPatternStripes(2);
+  } else if (currentLightPattern < 20) {
+    doPatternStripes(3);
+  } else if (currentLightPattern < 21) {
+    doPatternStripes(4);
   } else if (currentLightPattern < 22) {
     doRainbowPatterns();
   } else if (currentLightPattern < 23) {
