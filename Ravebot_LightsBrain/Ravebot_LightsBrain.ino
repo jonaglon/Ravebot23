@@ -609,7 +609,7 @@ uint16_t ledPosOffset[19][2] = {
   { 80, 800},      // 14 tubeBottomleft
   { 80, 1020},     // 15 tubeTopleft
   { 315, 1020},    // 16 tubeTopright
-  { 50, 555},      // 17 port left
+  { 100, 555},      // 17 port left // 50 change to 100 to try to move tube left a little
   { 400, 555},     // 18 port right
 };
 
