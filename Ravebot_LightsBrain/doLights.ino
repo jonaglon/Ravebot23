@@ -3,15 +3,14 @@ void doLights() {
 
   allOff();
 
-/*
   doMainLightPattern();
 
   doOverlayPattern();
 
   doCutUpPattern();
 
-  doExtraPatterns();  */
-  doPatternStripes(1);
+  doExtraPatterns();
+  // doPatternStripes(1);
 
   doFace();
   
@@ -88,7 +87,7 @@ void changeLightPattern() {
   }
   currentLightPattern = newPattern;
   // JR TODO - CHEAT ********************************************************  CHEAT * * 
-  currentLightPattern = 14;
+  // currentLightPattern = 14;
 
   // if it's a twinkle call the setup code
   if (newPattern < 14) {

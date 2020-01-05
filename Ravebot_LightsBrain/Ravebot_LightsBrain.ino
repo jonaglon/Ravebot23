@@ -216,7 +216,7 @@ struct tuneInfo {
 
 // Genre 0, RAVE!
 tuneInfo tuneLibRave[31] = {
-  {149, 68, 144, 16,  0, 16,  0, false }, //1  TripToTheMoonPt2-Acen.
+  {149, 68, 144, 16,  0, 16,  0, false}, //1  TripToTheMoonPt2-Acen.
   {136, 80, 104, 16,  0, 16, 16, false},  //2  Bombscare-2BadMice.
   {126,  0, 118,  8,  0, 16,  8, false},  //3  LFO-LFO.
   {131,  0, 128,  8,  0, 16, 16, true},   //4  Infiltrate202-Altern8.
@@ -244,9 +244,9 @@ tuneInfo tuneLibRave[31] = {
   {126, 88, 112, 16,  0, 16, 16, false},  //26 Anthem-NJoi
   {122, 64, 104,  8,  0, 16, 16, true},   //27 RhythmIsAMystery-KKlass
   {121, 60,  96, 16,  0, 16, 16, false},  //28 Chime-Orbital
-  {130, 92, 121, 0,  16, 12,  0, false }, //29 High-HyperGoGo
-  {135, 92, 144,  8,  0, 16,  0, false }, //30 FarOut-SonzOfALoopDeLoopEra
-  {126, 34, 133, 2,  16, 16,  8, false }, //31 TakeMeAway-FinalCut
+  {130, 92, 121,  0, 16, 12,  0, false}, //29 High-HyperGoGo
+  {135, 92, 144,  8,  0, 16,  0, false}, //30 FarOut-SonzOfALoopDeLoopEra
+  {126, 34, 133,  2, 16, 16,  8, false}, //31 TakeMeAway-FinalCut
 };
 
 /* tuneInfo tuneLibRave[4] = {
