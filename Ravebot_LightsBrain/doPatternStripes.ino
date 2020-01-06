@@ -10,8 +10,8 @@ void doPatternStripes(uint8_t stripePattern) {
     doLRStripe(0, 1080, 2, 3);
     doRLStripe(1,  810, 2, 0);
     doLRStripe(1,  810, 2, 3);
-    doRLStripe(2,  540, 1, 0);
-    doLRStripe(2,  540, 1, 3);
+    doRLStripe(2,  540, 2, 0);
+    doLRStripe(2,  540, 2, 3);
     doRLStripe(3,  270, 2, 0);
     doLRStripe(3,  270, 2, 3);
   } else if (stripePattern == 2) {
@@ -19,10 +19,40 @@ void doPatternStripes(uint8_t stripePattern) {
       doLRStripe(1, 100, 0, 3);
     else
       doRLStripe(2, 100, 0, 2);
-    doUDStripe(3, 800, 2, 3, false);
+    doUDStripe(3, 800, 2, 3);
     doDUStripe(0, 800, 2, 3);
-  } else  if (stripePattern == 2) {
-    doUDStripe(3, 500, 2, 3, true);
+  } else if (stripePattern == 3) {
+    doUDStripe(0, 512, 2, 3);
+    doLRStripe(2, 540, 2, 3);
+  }
+}
+
+void doUDStripe(uint8_t stripeNum, uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
+  int32_t stripeBeatPos = 0;
+  if (stripeSpeed == 0) {
+    stripeBeatPos = ((timeyInTime/16)+1000)%2048;
+    if (beatCycle && stripeBeatPos > 1000) {
+      setNewColorForStripey(stripeNum, stripeCol);
+    }
+  } else if (stripeSpeed == 1) {
+    stripeBeatPos = ((timeyInTime/32)+1500)%2048;
+    if (beatCycle && ((sixteenBeats%8) == 7)) {
+      setNewColorForStripey(stripeNum, stripeCol);
+    }
+  } else {
+    stripeBeatPos = ((timeyInTime/64)+800)%2048;
+    if  (beatCycle && ((sixteenBeats%8) == 4)) {
+      setNewColorForStripey(stripeNum, stripeCol);
+    }
+  }
+
+  stripeBeatPos = 2048-stripeBeatPos;
+
+  for(int16_t j = 0; j < numLeds; j++) {
+    uint16_t coord = getCoord(j,1)+624;
+    if ((coord > stripeBeatPos) && (coord < stripeBeatPos+stripeLength)) {
+      setStripeLed(j, stripeNum);
+    }
   }
 }
 
@@ -72,41 +102,6 @@ void doLRStripe(uint8_t stripeNum, uint16_t stripeLength, uint8_t stripeSpeed, u
     }
   }
 }
-
-
-
-
-void doUDStripe(uint8_t stripeNum, uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol, bool colChange) {
-  int32_t stripeBeatPos = 0;
-  if (stripeSpeed == 0) {
-    stripeBeatPos = ((timeyInTime/16)+1000)%2048;
-    if (beatCycle && stripeBeatPos > 1000) {
-      setNewColorForStripey(stripeNum, stripeCol);
-    }
-  } else if (stripeSpeed == 1) {
-    stripeBeatPos = ((timeyInTime/32)+1150)%2048;
-    if (beatCycle && ((sixteenBeats%4) == 1)) {
-      setNewColorForStripey(stripeNum, stripeCol);
-    }
-  } else {
-    stripeBeatPos = ((timeyInTime/64)+910)%2048;
-    if (beatCycle && colChange && ((sixteenBeats%4) == 1)) {
-      setNewColorForStripey(stripeNum, stripeCol);
-    } else if (beatCycle && ((sixteenBeats%8) == 5)) {
-      setNewColorForStripey(stripeNum, stripeCol);
-    }
-  }
-
-  stripeBeatPos = 2048-stripeBeatPos;
-
-  for(int16_t j = 0; j < numLeds; j++) {
-    uint16_t coord = (getCoord(j,1)/2)+stripeLength;
-    if ((coord > stripeBeatPos) && (coord < stripeBeatPos+stripeLength)) {
-      setStripeLed(j, stripeNum);
-    }
-  }
-}
-
 
 void doDUStripe(uint8_t stripeNum, uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
   int32_t stripeBeatPos = 0; 

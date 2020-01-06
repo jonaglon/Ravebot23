@@ -9,14 +9,14 @@ void doRainbowOverlay1() {
   }
 }
 
-void doRainbowPatterns() {
-  if (currentLightPattern == 18) {
+void doRainbowPattern(uint8_t rainbowPattern) {
+  if (rainbowPattern == 1) {
     horizontalRainbow();
-  } else if (currentLightPattern == 19) {
+  } else if (rainbowPattern == 2) {
     horizontalRainbowJoin();
-  } else if (currentLightPattern == 20) {
+  } else if (rainbowPattern == 3) {
     allOverRainbow1();
-  } else if (currentLightPattern == 21) {
+  } else if (rainbowPattern == 4) {
     allOverRainbow2();
   }  
 }
