@@ -3,14 +3,15 @@ void doLights() {
 
   allOff();
 
+  /*
   doMainLightPattern();
 
   doOverlayPattern();
 
   doCutUpPattern();
 
-  doExtraPatterns();
-  // doPatternStripes(1);
+  doExtraPatterns(); */
+  doPatternStripes(1);
 
   doFace();
   
