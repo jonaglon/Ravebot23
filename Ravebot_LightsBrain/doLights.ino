@@ -11,7 +11,7 @@ void doLights() {
   doCutUpPattern();
 
   doExtraPatterns(); */
-  doPatternStripes(4);
+  doPatternStripes(1);
 
   doFace();
   

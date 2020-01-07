@@ -6,14 +6,21 @@ void doPatternStripes(uint8_t stripePattern) {
   // StripeSpeed is 0=fast,1=med,2=slow. Fast is 1 per beat
 
   if (stripePattern == 1) {    
-    doRLStripe(0, 1024, 2, 0);
-    doLRStripe(0, 1024, 2, 3);
-    doRLStripe(1,  768, 2, 0);
-    doLRStripe(1,  768, 2, 3);
-    doRLStripe(2,  512, 2, 0);
-    doLRStripe(2,  512, 2, 3);
-    doRLStripe(3,  256, 2, 0);
-    doLRStripe(3,  256, 2, 3);
+    if ((sixteenBeats > 3) && (sixteenBeats < 12)) {
+      doRLStripe(0, 1024, 2, 3);
+      doLRStripe(1, 1024, 1, 3);
+      doLRStripe(2,  768, 2, 0);
+      doRLStripe(3,  768, 2, 3);
+      doRLStripe(4,  512, 2, 3);
+      doLRStripe(5,  512, 1, 3);
+      doLRStripe(6,  256, 2, 3);
+      doRLStripe(7,  256, 2, 3);
+    }
+    if ((sixteenBeats < 1) || (sixteenBeats > 10)) {
+      doUDStripe(1,  768, 0, 3);
+      doUDStripe(2,  512, 0, 1);
+      doUDStripe(3,  256, 1, 3);
+    }
   } else if (stripePattern == 2) {
     if (sixteenBeats < 8)
       doLRStripe(1, 100, 0, 3);
@@ -23,8 +30,9 @@ void doPatternStripes(uint8_t stripePattern) {
     doDUStripe(0, 800, 2, 3);
   } else if (stripePattern == 3) {
     doUDStripe(0, 512, 2, 3);
-    if ((sixteenBeats > 4) && (sixteenBeats < 10))
+    if ((sixteenBeats > 4) && (sixteenBeats < 10)) {
        doLRStripe(1, 540, 2, 3);
+    }
     doUDStripe(1, 768, 1, 3);
     doUDStripe(2, 512, 1, 1);
     doUDStripe(3, 256, 1, 3);
