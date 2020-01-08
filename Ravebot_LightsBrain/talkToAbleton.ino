@@ -55,8 +55,8 @@ void playTune(int16_t genre, int16_t track, bool alterHistory) {
   // send stuff to ableton to start the new track  
   delay(80);
   playAbletonTrack(genre, track, true);
-  delay(10);
   start16BeatAbletonTrack(); // start the midi track in ableton which sends midi time codes back here
+  delay(10);
   ledIntensity=lastSentLedIntensity;
   changeLightPattern();
   delay(10);

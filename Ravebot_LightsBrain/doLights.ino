@@ -3,16 +3,14 @@ void doLights() {
 
   allOff();
 
-  /*
   doMainLightPattern();
 
-  doOverlayPattern();
+  // doOverlayPattern();
 
-  doCutUpPattern();
+  // doCutUpPattern();
 
-  doExtraPatterns(); */
-  doPatternStripes(1);
-
+  // doExtraPatterns();
+  
   doFace();
   
   LEDS.show();
@@ -67,7 +65,7 @@ void doOverlayPattern() {
 }
 
 void doCutUpPattern() {
-  // As above, if active then replace patterns with, different pattern, full colour, darkness for some / all of   
+  // As above, if active then replace patterns with, different pattern, full colour, darkness for some / all of 64 beats or something.
 }
 
 void doExtraPatterns() {
@@ -93,11 +91,13 @@ void changeLightPattern() {
     newPattern = random(numPatterns);
   }
   currentLightPattern = newPattern;
-  // JR TODO - CHEAT ********************************************************  CHEAT * * 
+
+  // Cheats 
   // currentLightPattern = 14;
+  // currentLightPattern = (currentLightPattern+1)%numPatterns;
 
   // if it's a twinkle call the setup code
-  if (newPattern < 14) {
+  if (currentLightPattern < 14) {
     setupNewTwinklePattern(currentLightPattern);
   }
 

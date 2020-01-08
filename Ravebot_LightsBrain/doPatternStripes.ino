@@ -22,12 +22,15 @@ void doPatternStripes(uint8_t stripePattern) {
       doUDStripe(3,  256, 1, 3);
     }
   } else if (stripePattern == 2) {
-    if (sixteenBeats < 8)
-      doLRStripe(1, 100, 0, 3);
-    else
-      doRLStripe(2, 100, 0, 2);
-    doUDStripe(3, 800, 2, 3);
-    doDUStripe(0, 800, 2, 3);
+    doUDStripe(0, 512, 2, 3);
+    doDUStripe(1, 256, 1, 3);
+    doDUStripe(2, 256, 2, 3);
+    if (sixteenBeats < 8) {
+      doLRStripe(3, 128, 2, 3);
+      doDUStripe(4, 128, 1, 3);
+    } else {
+      doRLStripe(5, 128, 2, 3);
+    }
   } else if (stripePattern == 3) {
     doUDStripe(0, 512, 2, 3);
     if ((sixteenBeats > 4) && (sixteenBeats < 10)) {
