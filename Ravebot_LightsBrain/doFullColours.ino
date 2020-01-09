@@ -3,24 +3,30 @@ uint8_t fullColor1g = 0;
 uint8_t fullColor1b = 0;
 uint8_t fullColor1w = 0;
 
-void doWholeColours(uint8_t wholePattern) {
+void doFullColours(uint8_t wholePattern) {
   if (wholePattern == 1) {
     doFullColour(8);
   } else if (wholePattern == 2) {
-    if (currentBar < 32)
+    uint8_t speedyo = currentBar%128;
+    if (speedyo < 16)
       doFullColour(16);
-    else if (currentBar < 64)
+    else if (speedyo < 32)
       doFullColour(8);
-    else if (currentBar < 32)
+    else if (speedyo < 48)
       doFullColour(4);
-    else if (currentBar < 96)
+    else if (speedyo < 64)
       doFullColour(2);
-    else if (currentBar < 128)
+    else if (speedyo < 80)
       doFullColour(1);
-    else
+    else if (speedyo < 96)
+      doFullColour(2);
+    else if (speedyo < 112)
       doFullColour(4);
+    else
+      doFullColour(8);
   }
 }
+
 
 void doFullColour(uint8_t changeSpeed) {
   if (beatCycle && (((sixteenBeats+15)%changeSpeed) == 0)) {
@@ -35,3 +41,4 @@ void doFullColour(uint8_t changeSpeed) {
     setLedDirect(j, fullColor1r, fullColor1g, fullColor1b, fullColor1w, false);
   }
  }
+

@@ -1,4 +1,4 @@
-void doRainbowOverlay1() {
+void doRainbowOverlay(uint16_t width, uint16_t speedDivisor) {
   int32_t stripeTop = (timeyInTime/1024) % 2048;
   for(uint16_t j = 0; j < numLeds; j++) {
     int32_t xCoord = getCoord(j,0)+1024;

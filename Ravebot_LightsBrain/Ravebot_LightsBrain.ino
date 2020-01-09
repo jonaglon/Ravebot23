@@ -36,7 +36,7 @@ const uint32_t animLength=524288;
 const uint32_t animLength32th=16384;
 
 uint8_t currentDance = 1;
-uint8_t numPatterns = 23;
+uint8_t numPatterns = 25;
 uint8_t currentLightPattern = 0;
 bool overlayPatternActive = false;
 bool cutUpPatternActive = false;
