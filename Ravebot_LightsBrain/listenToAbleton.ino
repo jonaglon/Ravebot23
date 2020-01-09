@@ -55,16 +55,6 @@ void setBeatTimes() {
   totalBeats++;
 }
 
-/* int sixteenBeatWatch = 0;
-void sixteenBeatWatchFn() {
-  if (sixteenBeats < sixteenBeatWatch) {
-    eyePrimaryR = 255;
-  } else {
-    eyePrimaryR = 0;
-  }  
-  sixteenBeatWatch = sixteenBeats;
-}   */
-
 void processMessageFromAbleton(uint8_t note, uint8_t velocity, int16_t down) {
   if ((note>=24 && note<88) && (velocity == 100)) {
     sixteenBeats = note - 24; // from 0 to 63 

@@ -52,6 +52,33 @@ void doPatternStripes(uint8_t stripePattern) {
   }
 }
 
+void doStripeOverlay(uint8_t stripeOverlay) {
+  // StripeSpeed is 0=fast,1=med,2=slow. Fast is 1 per beat
+
+  if (stripeOverlay == 1) {    
+    if ((sixteenBeats < 2) || (sixteenBeats > 10)) {
+      doUDStripe(7, 256, 1, 0);
+      doLRStripe(7, 256, 2, 3);
+    }
+  } else if (stripeOverlay == 2) {
+    if (sixteenBeats > 9) {
+      doRLStripe(6, 256, 2, 3);
+      doLRStripe(7, 256, 2, 3);
+    }
+  } else if (stripeOverlay == 3) {
+    if ((sixteenBeats < 2) || (sixteenBeats > 9)) {
+      doUDStripe(6, 512, 1, 3);
+      doUDStripe(7, 256, 1, 3);
+    }
+  } else if (stripeOverlay == 4) {
+    if ((sixteenBeats < 2) || (sixteenBeats > 10)) {
+      doUDStripe(7, 256, 1, 1);
+      doLRStripe(7, 256, 2, 1);
+    }
+  }
+}
+
+
 void doDUStripe(uint8_t stripeNum, uint16_t stripeLength, uint8_t stripeSpeed, uint8_t stripeCol) {
   int32_t stripeBeatPos = 0; 
   if (stripeSpeed == 0) {

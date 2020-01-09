@@ -270,8 +270,7 @@ bool wholeRobotBrieflySwitchedOn = false;
 void lightWholeRobotBriefly() {
 
   if (beatCycle) {
-    uint8_t thisBeat = totalBeats % 16;
-    if (thisBeat == 14 || thisBeat == 15 || thisBeat == 0 || thisBeat == 1) {
+    if (sixteenBeats == 13 || sixteenBeats == 14 || sixteenBeats == 15 || sixteenBeats == 0) {
       wholeRobotBrieflySwitchedOn = true;
     } else {
       wholeRobotBrieflySwitchedOn = false;

@@ -1,6 +1,4 @@
 
-// TODO - moving shapes, diamonds and hexagons. Enabling patterns like color fade from middle on beat and martix lines.
-
 // 0-x, 1-y, 2-radius, 3-r, 4-g, 5-b, 6-w, 7-fadeSpeed
 uint16_t colorBlobs[16][8] = {
    {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0}, {300,800,150,255,0,0,0,0},
@@ -40,8 +38,6 @@ void drawSquare(int32_t xCoord, int32_t  yCoord, int32_t radius, uint8_t r, uint
 }
 
 void setNewBlob(int16_t blobNumber) {
-
-  // todo - make this! - setGoodBlobCoords
 
   setGoodRandomColorVars();
 

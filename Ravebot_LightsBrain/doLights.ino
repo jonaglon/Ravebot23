@@ -3,9 +3,10 @@ void doLights() {
 
   allOff();
 
-  doMainLightPattern();
+  doWholeColours(2);
+  //doMainLightPattern();
 
-  // doOverlayPattern();
+  //doOverlayPattern();
 
   // doCutUpPattern();
 
@@ -39,9 +40,10 @@ void doMainLightPattern() {
   } else if (currentLightPattern < 23) {
     doPatternBlobs();
   } else if (currentLightPattern < 24) {
-    drawRGBHexagons(); // TODO this isn't what it looks like!
+    // drawRGBHexagons(); // TODO this isn't what it looks like!
+    doWholeColours(1);
   } else if (currentLightPattern < 25) {
-    drawRGBHexagons();
+    // drawRGBHexagons();
   }
 }
 
@@ -58,8 +60,14 @@ void doOverlayPattern() {
   } else if (overlayPatternNumber == 2) {
     lightWholeRobotBriefly();
   } else if (overlayPatternNumber == 3) {
-    drawHexagonOverlay();
+    doStripeOverlay(1);
   } else if (overlayPatternNumber == 4) {
+    doStripeOverlay(2);
+  } else if (overlayPatternNumber == 5) {
+    doStripeOverlay(3);
+  } else if (overlayPatternNumber == 6) {
+    doStripeOverlay(4);
+  } else if (overlayPatternNumber == 7) {
     doRainbowOverlay1();
   }
 }
@@ -110,8 +118,8 @@ void changeLightPattern() {
     overlayPatternActive = false;
   }
   // TODO test CODE *******************************************************
-  //  overlayPatternActive = true;
-  // overlayPatternNumber = 4; 
+  overlayPatternActive = true;
+  overlayPatternNumber = 6; 
 
   /* ************************************************ */
   
