@@ -5,7 +5,7 @@ uint8_t stripeCols[8][4] = {{255, 0, 0, 0}, {0, 255, 0, 0}, {0, 0, 255, 0}, {0, 
 void doPatternStripes(uint8_t stripePattern) {
   // StripeSpeed is 0=fast,1=med,2=slow. Fast is 1 per beat
 
-  if (stripePattern == 1) {    
+  if (stripePattern == 0) {    
     if ((sixteenBeats > 3) && (sixteenBeats < 12)) {
       doRLStripe(0, 1024, 2, 3);
       doLRStripe(1, 1024, 1, 3);
@@ -21,7 +21,7 @@ void doPatternStripes(uint8_t stripePattern) {
       doUDStripe(2,  512, 0, 1);
       doUDStripe(3,  256, 1, 3);
     }
-  } else if (stripePattern == 2) {
+  } else if (stripePattern == 1) {
     doUDStripe(0, 512, 2, 3);
     doDUStripe(1, 256, 1, 3);
     doDUStripe(2, 256, 2, 3);
@@ -31,7 +31,7 @@ void doPatternStripes(uint8_t stripePattern) {
     } else {
       doRLStripe(5, 128, 2, 3);
     }
-  } else if (stripePattern == 3) {
+  } else if (stripePattern == 2) {
     doUDStripe(0, 512, 2, 3);
     if ((sixteenBeats > 4) && (sixteenBeats < 10)) {
        doLRStripe(1, 540, 2, 3);
@@ -39,7 +39,7 @@ void doPatternStripes(uint8_t stripePattern) {
     doUDStripe(1, 768, 1, 3);
     doUDStripe(2, 512, 1, 1);
     doUDStripe(3, 256, 1, 3);
-  } else if (stripePattern == 4) {
+  } else if (stripePattern == 3) {
     doUDStripe(1,  768, 2, 3);
     doUDStripe(2,  512, 2, 1);
     doUDStripe(3,  256, 2, 3);
@@ -55,22 +55,22 @@ void doPatternStripes(uint8_t stripePattern) {
 void doStripeOverlay(uint8_t stripeOverlay) {
   // StripeSpeed is 0=fast,1=med,2=slow. Fast is 1 per beat
 
-  if (stripeOverlay == 1) {    
+  if (stripeOverlay == 0) {    
     if ((sixteenBeats < 2) || (sixteenBeats > 10)) {
       doUDStripe(7, 256, 1, 0);
       doLRStripe(7, 256, 2, 3);
     }
-  } else if (stripeOverlay == 2) {
+  } else if (stripeOverlay == 1) {
     if (sixteenBeats > 9) {
       doRLStripe(6, 256, 2, 3);
       doLRStripe(7, 256, 2, 3);
     }
-  } else if (stripeOverlay == 3) {
+  } else if (stripeOverlay == 2) {
     if ((sixteenBeats < 2) || (sixteenBeats > 9)) {
       doUDStripe(6, 512, 1, 3);
       doUDStripe(7, 256, 1, 3);
     }
-  } else if (stripeOverlay == 4) {
+  } else if (stripeOverlay == 3) {
     if ((sixteenBeats < 2) || (sixteenBeats > 10)) {
       doUDStripe(7, 256, 1, 1);
       doLRStripe(7, 256, 2, 1);

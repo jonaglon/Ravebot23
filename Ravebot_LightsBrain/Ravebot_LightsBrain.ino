@@ -31,6 +31,9 @@ uint32_t timeyInTime, twinkleTime; // This is like timey but in time, counting 1
 uint32_t lastBeatLength = 1;
 uint16_t percentThroughBeat = 0;  // Not really a percent, beat divides into 16384 parts
 uint32_t fakeBeatCount = 0;
+uint8_t thisBeat32 = 0;
+uint8_t thisBeat16 = 0;
+uint8_t thisBeat8 = 0;
 
 const uint32_t animLength=524288;
 const uint32_t animLength32th=16384;
@@ -40,9 +43,10 @@ uint8_t numPatterns = 25;
 uint8_t currentLightPattern = 0;
 bool overlayPatternActive = false;
 bool cutUpPatternActive = false;
+bool extraPatternActive = false;
 uint8_t overlayPatternNumber = 0;
-// short numOverlays = 4;
 uint8_t cutUpPatternNumber = 0;
+uint8_t extraPatternNumber = 0;
 
 int32_t fakeBeatLengh = 420;
 
@@ -123,7 +127,7 @@ void setup() {
     changeOnOff(0);
     
   // JR TODO remove me ******************************
-  playTune(4, 15, true);
+  playTune(4, 16, true);
 }
 
 void loop() {
@@ -154,20 +158,13 @@ void setTimes() {
 
   // this is a number to be used in animations, it counts up from the start of a tune, 16384 per beat.
   timeyInTime = (totalBeats * 16384) + percentThroughBeat;
-
   twinkleTime = timeyInTime % animLength;
 
-  /*
-  if (testMode) {
-    Serial.print("tit:");
-    Serial.print(timeyInTime);
-    Serial.print("  16b:");
-    Serial.print(sixteenBeats);
-    Serial.print("  percentThroughBeat:");
-    Serial.print(percentThroughBeat);
-    Serial.print("  currentBar:");
-    Serial.println(currentBar);
-  }  */
+  if (beatCycle) {
+    thisBeat32 = totalBeats%32;
+    thisBeat16 = (sixteenBeats+15)%16;
+    thisBeat8 = (sixteenBeats+15)%8;
+  }
 }
 
 struct twinkle {

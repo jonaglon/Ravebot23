@@ -4,9 +4,9 @@ uint8_t fullColor1b = 0;
 uint8_t fullColor1w = 0;
 
 void doFullColours(uint8_t wholePattern) {
-  if (wholePattern == 1) {
+  if (wholePattern == 0) {
     doFullColour(8);
-  } else if (wholePattern == 2) {
+  } else if (wholePattern == 1) {
     uint8_t speedyo = currentBar%128;
     if (speedyo < 16)
       doFullColour(16);
@@ -24,6 +24,8 @@ void doFullColours(uint8_t wholePattern) {
       doFullColour(4);
     else
       doFullColour(8);
+  } else if (wholePattern == 2) {
+    doFullColour(1);
   }
 }
 

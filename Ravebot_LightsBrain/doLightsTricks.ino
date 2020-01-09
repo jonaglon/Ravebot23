@@ -235,6 +235,9 @@ void heartInTime() {
 
 //////////////// Sections in time, BORING //////////////////
 void sectionsInTime() {
+  if (thisBeat32 > 4)
+    return;
+  
   int16_t beat4 = sixteenBeats % 4;  
   if (beat4 == 0) {
     setSection(13, 255, 0, 0, 0);
@@ -262,7 +265,7 @@ void sectionsInTime() {
 int16_t numLedsTube = 88;
 int16_t numLedsPerBeat=22;
 int16_t beatCompNum = 16384/numLedsPerBeat; // this is the 16384 beat% / those 30 leds. (182/546 - for 30/90)
-void tubesInTime() {
+void tubesInTime() {  
   for(int16_t j = 0; j < numLedsTube; j++) {
     int32_t distanceFromBeat = quickAbsolute(((j%numLedsPerBeat)*beatCompNum)-percentThroughBeat);
 
