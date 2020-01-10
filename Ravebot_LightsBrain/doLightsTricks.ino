@@ -1,6 +1,8 @@
 
 ///////////////// Circles in time //////////////////////////////
 void bodyCirclesInTime() {
+  if (thisBeat32 > 7)
+    return;  
 
   uint32_t percentThroughPattern = (timeyInTime % 32768)/364;     // 0-90 over 2 bars
 
@@ -191,29 +193,30 @@ void circleSquiggle(int32_t offset, uint8_t r, uint8_t g, uint8_t b, uint8_t w) 
 //////////////////////////// Me Hearties /////////////////
 
 void heartInTime() {
-  uint32_t percentThroughPattern = ((timeyInTime+24576) % 32768);
-  if (percentThroughPattern > 0 && percentThroughPattern < 6000) {
-    setSection(1, 255 - (percentThroughPattern/23), 0, 0, 0);
-    setSection(2, 255 - (percentThroughPattern/23), 0, 0, 0);
-  } else if (percentThroughPattern > 8192 && percentThroughPattern < 14192) {
-    setSection(1, 255 - (percentThroughPattern/23), 0, 0, 0);
-    setSection(2, 255 - (percentThroughPattern/23), 0, 0, 0);
-  } 
+  if (thisBeat8 == 0) {
+    setSection(2, 128, 0, 0, 0);
+  } else if (thisBeat8 == 1) {
+    setSection(1, 128, 0, 0, 0);
+  } else if (thisBeat8 == 2) {
+    setSection(2, 255, 0, 0, 0);
+  } else if (thisBeat8 == 3) {
+    setSection(1, 255, 0, 0, 0);
+  }
 }
 
 
 //////////////// Sections in time, BORING //////////////////
 void sectionsInTime() {
-  if (thisBeat32 > 4)
+  if (thisBeat32 > 3)
     return;
   
-  if (thisBeat4 == 0) {
+  if (thisBeat32 == 0) {
     setSection(15, 255, 0, 0, 0);
-  } else if (thisBeat4 == 1) {
+  } else if (thisBeat32 == 1) {
     setSection(16, 0, 255, 0, 0);
-  } else if (thisBeat4 == 2) {
+  } else if (thisBeat32 == 2) {
     setSection(13, 0, 0, 255, 0);
-  } else if (thisBeat4 == 3) {
+  } else if (thisBeat32 == 3) {
     setSection(14, 0, 0, 0, 255);
   };
 }

@@ -219,8 +219,8 @@ uint8_t sectionToCut1 = 0;
 uint8_t sectionToCut2 = 0;
 void cutRandomSection() {
   if (beatCycle) {
-    sectionToCut1 = random(18);
-    sectionToCut2 = random(18);
+    sectionToCut1 = getNonEyeSectionNumber();
+    sectionToCut2 = getNonEyeSectionNumber();
   }
   setSection(sectionToCut1, 0, 0, 0, 0);
   setSection(sectionToCut2, 0, 0, 0, 0);
@@ -235,19 +235,18 @@ uint8_t section2G = 0;
 uint8_t section2B = 0;
 uint8_t section2W = 0;
 bool randomSectionSwitchedOn = false;
-void lightRandomSection() {
+void lightRandomSection(uint8_t offset) {
 
   if (beatCycle) {
-    uint8_t thisBeat = totalBeats % 8;
-    if (thisBeat == 0 || thisBeat == 1) {
+    if (thisBeat8+offset == 6 || thisBeat8+offset == 7) {
       randomSectionSwitchedOn = true;
     } else {
       randomSectionSwitchedOn = false;
       return;
     }
     
-    sectionToCut1 = random(18);
-    sectionToCut2 = random(18);
+    sectionToCut1 = getNonEyeSectionNumber();
+    sectionToCut2 = getNonEyeSectionNumber();
     setGoodRandomColorVars();
     section1R = goodColR;
     section1G = goodColG;
@@ -264,6 +263,14 @@ void lightRandomSection() {
     setSection(sectionToCut1, section1R, section1G, section1B, section1W);
     setSection(sectionToCut2, section2R, section2G, section2B, section2W);
   }
+}
+
+uint8_t getNonEyeSectionNumber() {
+  uint8_t sectionNumber = 5;
+  while (sectionNumber == 5 || sectionNumber == 6) {
+    sectionNumber = random(18);
+  }
+  return sectionNumber;
 }
 
 bool wholeRobotBrieflySwitchedOn = false;
@@ -315,13 +322,6 @@ void allOffBySection() {
   for(uint16_t j = 0; j < 19; j++) {
     setSection(j, 0, 0, 0, 0);
   }
-}
-
-void turnOffTubes() {
-  setSection(13, 0, 0, 0, 0);
-  setSection(14, 0, 0, 0, 0);
-  setSection(15, 0, 0, 0, 0);
-  setSection(16, 0, 0, 0, 0);
 }
 
 void setLedDirect(uint16_t ledNum, uint8_t rVal, uint8_t gVal, uint8_t bVal, uint8_t wVal, bool showMouth) {

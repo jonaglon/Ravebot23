@@ -54,7 +54,7 @@ void doOverlayPattern() {
   if (overlayPatternNumber == 0) {
     cutRandomSection();
   } else if (overlayPatternNumber == 1) {
-    lightRandomSection();
+    lightRandomSection(0);
   } else if (overlayPatternNumber == 2) {
     lightWholeRobotBriefly();
   } else if (overlayPatternNumber == 3) {
@@ -117,7 +117,7 @@ void doExtraPatterns() {
   } else if (extraPatternNumber == 3) {    
     heartInTime();
   } else if (extraPatternNumber == 4) {    
-    turnOffTubes();
+    lightRandomSection(4);
   } else if (extraPatternNumber == 5) {    
     circleSquiggleRainbow1();
   } else if (extraPatternNumber == 6) {    
