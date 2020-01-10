@@ -34,6 +34,7 @@ uint32_t fakeBeatCount = 0;
 uint8_t thisBeat32 = 0;
 uint8_t thisBeat16 = 0;
 uint8_t thisBeat8 = 0;
+uint8_t thisBeat4 = 0;
 
 const uint32_t animLength=524288;
 const uint32_t animLength32th=16384;
@@ -164,6 +165,7 @@ void setTimes() {
     thisBeat32 = totalBeats%32;
     thisBeat16 = (sixteenBeats+15)%16;
     thisBeat8 = (sixteenBeats+15)%8;
+    thisBeat4 = (sixteenBeats+15)%4;
   }
 }
 

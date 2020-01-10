@@ -306,6 +306,10 @@ void allOff() {
     setLedDirect(j, 0, 0, 0, 0, true);
   }
 }
+void eyeBackground() {
+  setSection(5, 20, 20, 20, 0);
+  setSection(6, 20, 20, 20, 0);
+}
 
 void allOffBySection() {
   for(uint16_t j = 0; j < 19; j++) {

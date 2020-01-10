@@ -1,35 +1,4 @@
 
-///////////////////// Knight Rider Armies //////////////////
-const int16_t knigtRiderLightTimes[24] = {80, 112, 140, 182, 216, 256, 304, 370, 440, 526, 660, 810,
-                                      810, 660, 526, 440, 370, 304, 256, 216, 182, 140, 112, 80};
-void knigtRiderArms() {
-  int16_t pixNum = 0;
-  uint32_t currTime = 0;
-  for (pixNum = 0; pixNum < 24; pixNum++) {
-    currTime = currTime + (knigtRiderLightTimes[pixNum] * 2);
-    if (currTime > percentThroughBeat) {
-      break;
-    }
-  }
-
-  if ((sixteenBeats % 2) == 0) {
-    pixNum = 24-pixNum;
-  }
-  
-  for (int16_t pixSum = -5; pixSum < 6; pixSum++) {
-    if (pixNum+pixSum < 0)
-      pixSum = 0;
-    if (pixNum+pixSum > 24)
-      pixSum = 24;
-
-   int16_t brightness = 255-(quickAbsolute(pixSum)*50);
-    setSectionLed(3,  pixNum+pixSum, brightness, 0, 0, brightness);
-    setSectionLed(4,  pixNum+pixSum, brightness, 0, 0, brightness);
-    setSectionLed(11, pixNum+pixSum, brightness, 0, 0, brightness);
-    setSectionLed(12, pixNum+pixSum, brightness, 0, 0, brightness);
-  }
-}
-
 ///////////////// Circles in time //////////////////////////////
 void bodyCirclesInTime() {
 
@@ -238,45 +207,59 @@ void sectionsInTime() {
   if (thisBeat32 > 4)
     return;
   
-  int16_t beat4 = sixteenBeats % 4;  
-  if (beat4 == 0) {
-    setSection(13, 255, 0, 0, 0);
-    setSection(14, 0, 255, 0, 0);
-    setSection(15, 0, 0, 255, 0);
-    setSection(16, 0, 0, 0, 255);
-  } else if (beat4 == 1) {
-    setSection(14, 255, 0, 0, 0);
-    setSection(15, 0, 255, 0, 0);
-    setSection(16, 0, 0, 255, 0);
-    setSection(13, 0, 0, 0, 255);
-  } else if (beat4 == 2) {
+  if (thisBeat4 == 0) {
     setSection(15, 255, 0, 0, 0);
+  } else if (thisBeat4 == 1) {
     setSection(16, 0, 255, 0, 0);
+  } else if (thisBeat4 == 2) {
     setSection(13, 0, 0, 255, 0);
+  } else if (thisBeat4 == 3) {
     setSection(14, 0, 0, 0, 255);
-  } else if (beat4 == 3) {
-    setSection(16, 255, 0, 0, 0);
-    setSection(13, 0, 255, 0, 0);
-    setSection(14, 0, 0, 255, 0);
-    setSection(15, 0, 0, 0, 255);
   };
 }
 
 int16_t numLedsTube = 88;
 int16_t numLedsPerBeat=22;
 int16_t beatCompNum = 16384/numLedsPerBeat; // this is the 16384 beat% / those 30 leds. (182/546 - for 30/90)
+uint8_t tuber1, tubeg1, tubeb1, tubew1, tuber2, tubeg2, tubeb2, tubew2, tuber3, tubeg3, tubeb3, tubew3, tuber4, tubeg4, tubeb4, tubew4; 
 void tubesInTime() {  
   for(int16_t j = 0; j < numLedsTube; j++) {
     int32_t distanceFromBeat = quickAbsolute(((j%numLedsPerBeat)*beatCompNum)-percentThroughBeat);
 
     int16_t ledColour = 255 - (distanceFromBeat/10);
-    if (ledColour < 0)
-      ledColour = 0;
+    if (ledColour <= 0)
+      continue;
+      
+    if (beatCycle && thisBeat4 == 0) {
+      setGoodRandomColorVars();
+      tuber1 = goodColR;
+      tubeg1 = goodColG;
+      tubeb1 = goodColB;
+      tubew1 = goodColW;
+    } else if (beatCycle && thisBeat4 == 1) {
+      setGoodRandomColorVars();
+      tuber2 = goodColR;
+      tubeg2 = goodColG;
+      tubeb2 = goodColB;
+      tubew2 = goodColW;
+    } else if (beatCycle && thisBeat4 == 2) {
+      setGoodRandomColorVars();
+      tuber3 = goodColR;
+      tubeg3 = goodColG;
+      tubeb3 = goodColB;
+      tubew3 = goodColW;
+    } else if (beatCycle) {
+      setGoodRandomColorVars();
+      tuber4 = goodColR;
+      tubeg4 = goodColG;
+      tubeb4 = goodColB;
+      tubew4 = goodColW;
+    }
 
-    setSectionLed(13, j, ledColour, 0, 0, 0);
-    setSectionLed(14, j, 0, ledColour, 0, 0);
-    setSectionLed(15, j, 0, 0, ledColour, 0);
-    setSectionLed(16, j, 0, 0, 0, ledColour);
+    setSectionLed(13, j, tuber1, tubeg1, tubeb1, tubew1);
+    setSectionLed(14, j, tuber2, tubeg2, tubeb2, tubew2);
+    setSectionLed(15, j, tuber3, tubeg3, tubeb3, tubew3);
+    setSectionLed(16, j, tuber4, tubeg4, tubeb4, tubew4);
   }
 }
 

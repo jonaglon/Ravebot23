@@ -3,6 +3,8 @@ void doLights() {
 
   allOff();
 
+  eyeBackground();
+
   doMainLightPattern();
 
   doOverlayPattern();
@@ -102,11 +104,12 @@ void doCutUpPattern() {
 }
 
 void doExtraPatterns() {
+  
   if (!extraPatternActive)
     return;
 
   if (extraPatternNumber == 0) {    
-    knigtRiderArms();
+    tubesInTime();
   } else if (extraPatternNumber == 1) {    
     sectionsInTime();
   } else if (extraPatternNumber == 2) {    
@@ -125,8 +128,6 @@ void doExtraPatterns() {
     bigSpeakerThreeRevolvers();
   } else if (extraPatternNumber == 9) {    
     bigSpeakerInTimeFourTings();
-  } else if (extraPatternNumber == 10) {    
-    tubesInTime();
   }
 }
 
@@ -162,7 +163,7 @@ void changeLightPattern() {
   randomNo = random(2);
   if (randomNo == 0) {
     extraPatternActive = true;
-    extraPatternNumber = random(11);
+    extraPatternNumber = random(10);
   } else {
     extraPatternActive = false;
   }  
