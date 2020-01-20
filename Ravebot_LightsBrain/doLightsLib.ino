@@ -172,16 +172,6 @@ uint32_t quickAbsolute(int32_t number) {
     return number;
 }
 
-void drawEyeSquare(int32_t offSet, int32_t xCoord, int32_t  yCoord, int32_t radius, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
-  for(uint16_t j = 0; j < 93; j++) { 
-    if ((eyeCoords[j][0] < (xCoord+radius)) && (eyeCoords[j][1] < (yCoord+radius))) {
-      if ((eyeCoords[j][0] > (xCoord-radius)) && (eyeCoords[j][1] > (yCoord-radius))) {
-        setLedDirect(offSet+j, r, g, b, w, false);
-      }
-    }
-  }
-}
-
 //const int pupilRadius=26;
 //const int maxRadius=42;
 void drawEyeHexagon(int32_t ledNumOffSet, int32_t xCoord, int32_t  yCoord, int32_t pupilRadius, int32_t maxRadius, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
@@ -198,6 +188,36 @@ void drawEyeHexagon(int32_t ledNumOffSet, int32_t xCoord, int32_t  yCoord, int32
   }
 }
 
+void drawEyeSquare(int32_t offSet, int32_t xCoord, int32_t  yCoord, int32_t radius, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for(uint16_t j = 0; j < 93; j++) { 
+    if ((eyeCoords[j][0] < (xCoord+radius)) && (eyeCoords[j][1] < (yCoord+radius))) {
+      if ((eyeCoords[j][0] > (xCoord-radius)) && (eyeCoords[j][1] > (yCoord-radius))) {
+        setLedDirect(offSet+j, r, g, b, w, false);
+      }
+    }
+  }
+}
+
+void drawEyeIrisNoPupil(int32_t ledNumOffSet, int32_t xCoord, int32_t  yCoord, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+  for (uint16_t j = 0; j < 93; j++) { 
+    uint16_t eyeX = eyeCoords[j][0];
+    uint16_t eyeY = eyeCoords[j][1];
+    if ((eyeX < (xCoord+7)) && (eyeY < (yCoord+7))) {
+      if ((eyeX > (xCoord-7)) && (eyeY > (yCoord-7))) {
+        continue;
+      }
+    }    
+    if ((eyeX < (xCoord+26)) && (eyeY < (yCoord+26))) {
+      if ((eyeX > (xCoord-26)) && (eyeY > (yCoord-26))) {
+        uint16_t x = quickAbsolute(xCoord-eyeX);
+        uint16_t y = quickAbsolute(yCoord-eyeY);
+        if (x + y < 42) {
+          setLedDirect(ledNumOffSet+j, r, g, b, w, false);
+        }
+      }
+    }
+  }
+}
 
 // ledSections[17] needs 1 adding to it
 void setSection(uint16_t section, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {

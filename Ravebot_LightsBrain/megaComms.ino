@@ -37,13 +37,13 @@ void doSomethingWithPackageFromMega(int16_t package) {
       winkRightMessage(message % 2);
     } else if (message < 7) {
       lastEyeMoveTime = timey;
-      changeEyeType();
+      // changeEyeType();  // Eye functionality reduced.
     } else if (message < 8) {
       lastEyeMoveTime = timey;
-      changePrimaryEyeColour();
+      // changePrimaryEyeColour();   // Eye functionality reduced.
     } else if (message < 9) {
       lastEyeMoveTime = timey;
-      changeSecondaryEyeColour();
+      // changeSecondaryEyeColour();     // Eye functionality reduced.
     } else if (message < 11) {
       changeOnOff(message % 2);
     } else if (message < 13) {

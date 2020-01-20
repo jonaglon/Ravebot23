@@ -1,12 +1,4 @@
-
 /* ******************************* EYES & MOUTH ********************************** */
-
-// Eye types are used when the robot is in manual mode, in auto eye dances are used
-uint8_t currentEyeType = 0;
-void changeEyeType() {
-  resetEyes();
-  currentEyeType = (currentEyeType+1)%6;
-}
 
 void doFace() {
   eyeController();
@@ -24,63 +16,24 @@ void doDialRainbow() {
   }
 }
 
-  // Eye patterns TODO
-  //    To change when the tune changes? Just every 64 bars?
-  //    To be able to co-ordinate with dances? Would be good.
-  // Get some of the new eye stuff you've done and bring it here.
 bool eyesAutomatic = false;
 void eyeController() {
 
-  if (lastEyeMoveTime+20000 > timey) {
+  if (lastEyeMoveTime+1000 > timey) {   // TODO - should be 20000
     if (eyesAutomatic) {
       resetEyes();
       eyesAutomatic = false;
     }
-    switch (currentEyeType) {
-      case 0:
-        doNormalEyes();
-        break;
-      case 1: doStonerEyes();
-        break;
-      case 2: heartEyes();
-        break;
-      case 3: pacManEyes();
-        break;
-      case 4: smileyEyes();
-        break;
-    }
+    doNormalEyes();
   } else {
-    eyesAutomatic = true;
-    // JR TODO - This is where the eyes are on automatic and is too simple.
-    // I think maybe remove the code below and trigger these animations 
-    switch (currentBar%8) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-        leftEyeX = 55;
-        leftEyeY = 65;
-        rightEyeX = 55;
-        rightEyeY = 65;
-        //rightEyeX = (sixteenBeats * 10)-80;
-        break;
-      case 4: 
-        eyePrimaryR = 255;
-        eyePrimaryG = 0;
-        eyePrimaryB = 0;
-        heartEyes();
-        break;
-      case 5:
-        eyePrimaryR = 0;
-        eyePrimaryG = 255;
-        eyePrimaryB = 0;
-        doNormalEyes();
-        break;
-      case 6:
-      case 7:
-        pacManEyes();
-        break;
+    if (!eyesAutomatic) {
+      resetEyes();
+      eyesAutomatic = true;
     }
+    drawEyeIrisNoPupil(ledSections[5], 55+leftEyeX, 55-leftEyeY, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+    drawEyeIrisNoPupil(ledSections[6], 55+rightEyeX, 55-rightEyeY, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+    doBlinking();
+    // TODO - next we have to 
   }
   
 }
@@ -92,10 +45,10 @@ void resetEyes() {
   eyeSecondaryR = 0;
   eyeSecondaryG = 0;
   eyeSecondaryB = 0;
-  leftEyeX = 55;
-  leftEyeY = 65;
-  rightEyeX = 55;
-  rightEyeY = 65;
+  leftEyeX = 0;
+  leftEyeY = 0;
+  rightEyeX = 0;
+  rightEyeY = 0;
 }
 
 uint8_t eyeRColours[9] = {255,  0,   0,  255, 255,   0, 110, 0, 255 };
@@ -103,6 +56,7 @@ uint8_t eyeGColours[9] = {0,  255,   0,  255,   0, 255, 150, 0,   6 };
 uint8_t eyeBColours[9] = {0,    0, 255,    0, 255, 255, 150, 0,  80 };
 uint8_t numEyeColors = 9;
 
+/*
 uint8_t currentEyePrimaryPos = 3;
 void changePrimaryEyeColour() {
   currentEyePrimaryPos = (currentEyePrimaryPos+1)%numEyeColors;
@@ -118,7 +72,7 @@ void changeSecondaryEyeColour() {
   eyeSecondaryG = eyeGColours[currentEyeSecondaryPos];
   eyeSecondaryB = eyeBColours[currentEyeSecondaryPos];
 }
-
+*/
 void doNormalEyes() {
 
   for(uint8_t j = 0; j < 93; j++) {
@@ -126,6 +80,13 @@ void doNormalEyes() {
     setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   }
 
+  drawIrisAndPupil();
+  doBlinking();
+  doLeftWink();
+  doRightWink();
+}
+
+void drawIrisAndPupil() {
   // iris
   drawEyeHexagon(ledSections[5], 55+leftEyeX, 55-leftEyeY, 26, 42, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
   drawEyeHexagon(ledSections[6], 55+rightEyeX, 55-rightEyeY, 26, 42, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
@@ -133,10 +94,6 @@ void doNormalEyes() {
   // pupil
   drawEyeSquare(ledSections[5], 55+leftEyeX, 55-leftEyeY, 7, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   drawEyeSquare(ledSections[6], 55+rightEyeX, 55-rightEyeY, 7, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
-
-  doBlinking();
-  doLeftWink();
-  doRightWink();
 }
 
 void doStonerEyes() {
