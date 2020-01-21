@@ -368,9 +368,10 @@ void setLedDirect(uint16_t ledNum, uint8_t rVal, uint8_t gVal, uint8_t bVal, uin
     rVal = rVal/ledIntensity;
     gVal = gVal/ledIntensity;
     bVal = bVal/ledIntensity;
-    rgbwLeds[ledNum+536].b = gVal % 256;
-    rgbwLeds[ledNum+537].g = rVal % 256;
-    rgbwLeds[ledNum+537].r = bVal % 256;
+    wVal = wVal/ledIntensity;
+    rgbwLeds[ledNum+536].b = gVal+(wVal/2) % 256;
+    rgbwLeds[ledNum+537].g = rVal+wVal % 256;
+    rgbwLeds[ledNum+537].r = bVal+wVal % 256;
   }
   else if (ledNum < 825) {
     if (!showMouth && ledNum < 710) {

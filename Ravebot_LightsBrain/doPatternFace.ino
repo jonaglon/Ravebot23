@@ -30,8 +30,8 @@ void eyeController() {
       resetEyes();
       eyesAutomatic = true;
     }
-    drawEyeIrisNoPupil(ledSections[5], 55+leftEyeX, 55-leftEyeY, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
-    drawEyeIrisNoPupil(ledSections[6], 55+rightEyeX, 55-rightEyeY, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+    drawEyeIrisNoPupil(ledSections[5], 55+leftEyeX, 55-leftEyeY, 0, 0, 0, 0);
+    drawEyeIrisNoPupil(ledSections[6], 55+rightEyeX, 55-rightEyeY, 0, 0, 0, 0);
     doBlinking();
     // TODO - next we have to 
   }
