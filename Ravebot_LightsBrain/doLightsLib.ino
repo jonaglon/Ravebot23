@@ -1,29 +1,4 @@
-
-void rgbwRainbow(uint16_t speedFactor) {
-  uint32_t ticky = (timeyInTime / speedFactor);
-
-  // forward
-  for (uint16_t pixNum = 0; pixNum < numLeds; pixNum++) {
-    SetRgbwWheelVars((pixNum + ticky) % 255);
-  }
-}
   
-void SetRgbwWheel(uint16_t pixNum, uint8_t WheelPos, uint8_t whiteVal) {
-  WheelPos = 255 - WheelPos;
-  if(WheelPos < 85) {
-    setLedDirect(pixNum, 255 - WheelPos * 3, 0, WheelPos * 3, whiteVal, false);
-    return;
-  }
-  if(WheelPos < 170) {
-    WheelPos -= 85;
-    setLedDirect(pixNum, 0, WheelPos * 3, 255 - WheelPos * 3, whiteVal, false);
-    return;
-  }
-  WheelPos -= 170;
-  setLedDirect(pixNum, WheelPos * 3, 255 - WheelPos * 3, 0, whiteVal, false);
-  return;
-}
-
 
 void SetRgbwWheelVars(uint8_t WheelPos) {
   WheelPos = 255 - WheelPos;
@@ -155,14 +130,11 @@ uint16_t getCoord(uint16_t ledNum, uint16_t xOrY) {
     return tubeCoords[ledNum-1001][xOrY]+ledPosOffset[15][xOrY];
   else if (ledNum < 1180)
     return tubeCoords[ledNum-1090][xOrY]+ledPosOffset[16][xOrY];
-  else if (ledNum < 1302)
+  else if (ledNum < 1302) {
     return portLCoords[(ledNum-1180)%19][xOrY]+ledPosOffset[17][xOrY];
-  else if (ledNum < 1442)
+  } else if (ledNum < 1442) {
     return portRCoords[(ledNum-1302)%19][xOrY]+ledPosOffset[18][xOrY];
-}
-
-uint16_t getCoord2(uint16_t ledNum, uint16_t xOrY) {
-  return getCoord(ledNum, xOrY)+4096;
+  }
 }
 
 uint32_t quickAbsolute(int32_t number) {

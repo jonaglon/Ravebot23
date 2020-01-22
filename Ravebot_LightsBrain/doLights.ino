@@ -39,6 +39,7 @@ void doMainLightPattern() {
   } else if (currentLightPattern < 22) {
     doRainbowPattern(3);
   } else if (currentLightPattern < 23) {
+    // TODO - this pattern is SLOW i think
     doPatternBlobs();
   } else if (currentLightPattern < 24) {
     doFullColours(0);
@@ -82,7 +83,7 @@ void doCutUpPattern() {
     } else if (thisBeat16 < 8) {
       doPatternStripes(3);
     } else if (thisBeat16 < 12) {
-      doPatternBlobs();
+      doFullColours(2);
     }
   } else if (cutUpPatternNumber == 1) {    
     if (thisBeat16 < 4) {
@@ -98,7 +99,7 @@ void doCutUpPattern() {
     } else if (thisBeat8 < 4) {
       doPatternStripes(2);
     } else if (thisBeat8 < 8) {
-      doPatternBlobs();
+      doRainbowPattern(1);
     }
   }
 }

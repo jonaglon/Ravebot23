@@ -1,4 +1,6 @@
 /* ******************************* EYES & MOUTH ********************************** */
+bool eyesAutomatic = false;
+bool whiteEyeBackground = false;
 
 void doFace() {
   eyeController();
@@ -16,9 +18,7 @@ void doDialRainbow() {
   }
 }
 
-bool eyesAutomatic = false;
 void eyeController() {
-
   if (lastEyeMoveTime+1000 > timey) {   // TODO - should be 20000
     if (eyesAutomatic) {
       resetEyes();
@@ -30,56 +30,44 @@ void eyeController() {
       resetEyes();
       eyesAutomatic = true;
     }
-    drawEyeIrisNoPupil(ledSections[5], 55+leftEyeX, 55-leftEyeY, 0, 0, 0, 0);
-    drawEyeIrisNoPupil(ledSections[6], 55+rightEyeX, 55-rightEyeY, 0, 0, 0, 0);
-    doBlinking();
-    // TODO - next we have to 
+    doAutomaticEyes();
   }
-  
 }
 
 void resetEyes() {
   eyePrimaryR = 110;
   eyePrimaryG = 150;
   eyePrimaryB = 150;
-  eyeSecondaryR = 0;
-  eyeSecondaryG = 0;
-  eyeSecondaryB = 0;
   leftEyeX = 0;
   leftEyeY = 0;
   rightEyeX = 0;
   rightEyeY = 0;
 }
 
-uint8_t eyeRColours[9] = {255,  0,   0,  255, 255,   0, 110, 0, 255 };
-uint8_t eyeGColours[9] = {0,  255,   0,  255,   0, 255, 150, 0,   6 };
-uint8_t eyeBColours[9] = {0,    0, 255,    0, 255, 255, 150, 0,  80 };
-uint8_t numEyeColors = 9;
 
-/*
-uint8_t currentEyePrimaryPos = 3;
-void changePrimaryEyeColour() {
-  currentEyePrimaryPos = (currentEyePrimaryPos+1)%numEyeColors;
-  eyePrimaryR = eyeRColours[currentEyePrimaryPos];
-  eyePrimaryG = eyeGColours[currentEyePrimaryPos];
-  eyePrimaryB = eyeBColours[currentEyePrimaryPos];
-}
-
-uint8_t currentEyeSecondaryPos = 4;
-void changeSecondaryEyeColour() {
-  currentEyeSecondaryPos = (currentEyeSecondaryPos+1)%numEyeColors;
-  eyeSecondaryR = eyeRColours[currentEyeSecondaryPos];
-  eyeSecondaryG = eyeGColours[currentEyeSecondaryPos];
-  eyeSecondaryB = eyeBColours[currentEyeSecondaryPos];
-}
-*/
-void doNormalEyes() {
-
-  for(uint8_t j = 0; j < 93; j++) {
-    setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
-    setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
+void doAutomaticEyes() {
+  //  if (beatCycle && ((sixteenBeats%8) == 4)) {
+  
+  if (whiteEyeBackground) {
+    for(uint8_t j = 0; j < 93; j++) {
+      setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
+      setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
+    }
   }
+  drawEyeIrisNoPupil(ledSections[5], 55+leftEyeX, 55-leftEyeY, 0, 0, 0, 0);
+  drawEyeIrisNoPupil(ledSections[6], 55+rightEyeX, 55-rightEyeY, 0, 0, 0, 0);
+  doBlinking();
+  doLeftWink();
+  doRightWink();
+}
 
+void doNormalEyes() {
+  if (whiteEyeBackground) {
+    for(uint8_t j = 0; j < 93; j++) {
+      setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
+      setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
+    }
+  }
   drawIrisAndPupil();
   doBlinking();
   doLeftWink();
@@ -88,14 +76,20 @@ void doNormalEyes() {
 
 void drawIrisAndPupil() {
   // iris
-  drawEyeHexagon(ledSections[5], 55+leftEyeX, 55-leftEyeY, 26, 42, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
-  drawEyeHexagon(ledSections[6], 55+rightEyeX, 55-rightEyeY, 26, 42, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+  drawEyeHexagon(ledSections[5], 55+leftEyeX, 55-leftEyeY, 26, 42, 0, 0, 0, 0);
+  drawEyeHexagon(ledSections[6], 55+rightEyeX, 55-rightEyeY, 26, 42, 0, 0, 0, 0);
 
   // pupil
   drawEyeSquare(ledSections[5], 55+leftEyeX, 55-leftEyeY, 7, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   drawEyeSquare(ledSections[6], 55+rightEyeX, 55-rightEyeY, 7, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
 }
 
+void changeEyeType() {
+  whiteEyeBackground = !whiteEyeBackground;
+}
+
+
+// Eye patterns
 void doStonerEyes() {
 
   for(uint8_t j = 0; j < 93; j++) {
@@ -103,18 +97,18 @@ void doStonerEyes() {
       setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
       setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     } else {
-      setSectionLed(5, j, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
-      setSectionLed(6, j, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+      setSectionLed(5, j, 0, 0, 0, 0);
+      setSectionLed(6, j, 0, 0, 0, 0);
     }
   }
 
   // dark eye squares
-  drawEyeHexagon(ledSections[5], 55+leftEyeX, 29-leftEyeY, 20, 35, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
-  drawEyeHexagon(ledSections[6], 55+rightEyeX, 29-rightEyeY, 20, 35, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+  drawEyeHexagon(ledSections[5], 55+leftEyeX, 29-leftEyeY, 20, 35, 0, 0, 0, 0);
+  drawEyeHexagon(ledSections[6], 55+rightEyeX, 29-rightEyeY, 20, 35, 0, 0, 0, 0);
 
   // pupil
-  drawEyeSquare(ledSections[5], 55+leftEyeX, 29-leftEyeY, 7, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
-  drawEyeSquare(ledSections[6], 55+rightEyeX, 29-rightEyeY, 7, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
+  drawEyeSquare(ledSections[5], 55+leftEyeX, 29-leftEyeY, 8, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
+  drawEyeSquare(ledSections[6], 55+rightEyeX, 29-rightEyeY, 8, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
 
   doLeftWink();
   doRightWink();
@@ -123,8 +117,8 @@ void doStonerEyes() {
 void heartEyes() {
 
   for(uint8_t j = 0; j < 93; j++) {
-    setSectionLed(5, j, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
-    setSectionLed(6, j, eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+    setSectionLed(5, j, 0, 0, 0, 0);
+    setSectionLed(6, j, 0, 0, 0, 0);
   }
 
   for(uint8_t j = 0; j < 56; j++) {
@@ -164,8 +158,8 @@ void smileyEyes() {
     setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
   }
   for(uint8_t j = 0; j < 24; j++) {
-    setSectionLed(5, eyeSmileyLeds[j], eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
-    setSectionLed(6, eyeSmileyLeds[j], eyeSecondaryR, eyeSecondaryG, eyeSecondaryB, 0);
+    setSectionLed(5, eyeSmileyLeds[j], 0, 0, 0, 0);
+    setSectionLed(6, eyeSmileyLeds[j], 0, 0, 0, 0);
   }
 }
 

@@ -30,20 +30,16 @@ void doSomethingWithPackageFromMega(int16_t package) {
     if (message < 2) {
       doRobotTalkingLights(message);
     } else if (message < 4) {
-      lastEyeMoveTime = timey;
       winkLeftMessage(message % 2);
     } else if (message < 6) {
-      lastEyeMoveTime = timey;
       winkRightMessage(message % 2);
     } else if (message < 7) {
       lastEyeMoveTime = timey;
-      // changeEyeType();  // Eye functionality reduced.
+      changeEyeType();
     } else if (message < 8) {
-      lastEyeMoveTime = timey;
-      // changePrimaryEyeColour();   // Eye functionality reduced.
+      changeLightPattern();
     } else if (message < 9) {
-      lastEyeMoveTime = timey;
-      // changeSecondaryEyeColour();     // Eye functionality reduced.
+      playRandomTune();
     } else if (message < 11) {
       changeOnOff(message % 2);
     } else if (message < 13) {

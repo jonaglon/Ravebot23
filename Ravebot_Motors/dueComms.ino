@@ -13,7 +13,7 @@ void talkToLights() {
     checkAnalogsForEyeMovements();
 
   if (ps2.readButton(PS2_RIGHT_1) == 0)
-    checkButtonsForEyeColorAnimChange();
+    checkButtonsForEyeAndPatternChange();
 
   checkButtonsSendInfoToLights();
 }
@@ -165,7 +165,7 @@ bool ps2TriangleOn=false;
 bool ps2SquareOn=false;
 bool ps2CircleOn=false;
 bool ps2CrossOn=false;
-void checkButtonsForEyeColorAnimChange() {
+void checkButtonsForEyeAndPatternChange() {
       // BUTTONS FOR EYE ANIMAITON AND COLOUR CHANGE
     if (!ps2TriangleOn && ps2.readButton(PS2_TRIANGLE)==0) {
       ps2TriangleOn = true;

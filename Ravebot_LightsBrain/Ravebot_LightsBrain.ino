@@ -20,7 +20,7 @@ const bool testMode = false;                                                    
 const bool beatTestMode = false;
 const bool megaAttached = true;
 
-bool robotSwitchedOn = true;    // JR TODO - set to false when not testing
+bool robotSwitchedOn = false;
 bool robotManualMode = true;
 
 uint32_t timey;
@@ -85,9 +85,6 @@ int16_t rightEyeY = 0;
 uint8_t eyePrimaryR = 110;
 uint8_t eyePrimaryG = 150;
 uint8_t eyePrimaryB = 150;
-uint8_t eyeSecondaryR = 0;
-uint8_t eyeSecondaryG = 0;
-uint8_t eyeSecondaryB = 0;
 
 // MIXING VARS
 uint8_t nextTrack = 0;
@@ -620,7 +617,7 @@ uint16_t ledSections[20] = {
   482,   // 4 overarm left
   506,   // 5  eye left
   599,   // 6  eye right
-  692,   // 7  mouth
+  692,   // 7  mouth                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
   710,   // 8  tape
   744,   // 9  tuner *
   770,   // 10 indiciator *
