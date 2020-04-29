@@ -14,6 +14,7 @@
 #include<SabertoothSimplified.h>
 #include<Cytron_PS2Shield.h>
 #include<avr/wdt.h>
+#include<utility/twi.h>
 
 const bool testoMode = false;
 
@@ -32,6 +33,11 @@ int currentSegmentNum;
 // switches in arcade buttons
 int switchPins[14] = { 27, 29, 31, 33, 35, 37, 39, 41, 45, 43, 53, 51, 49, 47 };
 
+#define TCAADDR 0x70  // i2c splitter so we can use 2 gyros at same i2c address
+const int MPU=0x68;   // gyroscope, there are 2 at this address.
+int16_t AcXLeft,AcYLeft,AcZLeft,GyXLeft,GyYLeft,GyZLeft;
+int16_t AcXRight,AcYRight,AcZRight,GyXRight,GyYRight,GyZRight;
+
 // Big main motor driver
 SoftwareSerial SabretoothSerial(NOT_A_PIN, 9); // RX on no pin (unused), TX on pin 9 (to S1).
 SoftwareSerial SabretoothSerial2(NOT_A_PIN, A9); // RX on no pin (unused), TX on pin 9 (to S1).
@@ -47,8 +53,10 @@ Adafruit_LEDBackpack matrix = Adafruit_LEDBackpack();
 // PCA9685 Led driver for arcade buttons
 Adafruit_PWMServoDriver ledPwm = Adafruit_PWMServoDriver(0x40);
 
-// PCA9685 Servo driver for arms, you can't do much if you got no arms.
-Adafruit_PWMServoDriver servoPwm = Adafruit_PWMServoDriver(0x41);
+// PCA9685 Servo driver for arms and head. You can't do much if you got no arms.
+Adafruit_PWMServoDriver servoPwm1 = Adafruit_PWMServoDriver(0x41);
+Adafruit_PWMServoDriver servoPwm2 = Adafruit_PWMServoDriver(0x43);
+
 
 // Keypad setup
 char keys[4][3] = { {'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}, {'*', '0', '#'}};
@@ -71,6 +79,8 @@ void setup() {
   // make random more random?!
   randomSeed(analogRead(0));
 
+  Wire.begin();
+  gyroscpeSetup();
   ps2.begin(57600);
 
   SabretoothSerial.begin(9600); // Set the same as the baud pins on the sabretooth.
@@ -81,8 +91,10 @@ void setup() {
   matrix.setBrightness(255);
 
   // servo
-  servoPwm.begin();
-  servoPwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+  servoPwm1.begin();
+  servoPwm2.begin();
+  servoPwm1.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+  servoPwm2.setPWMFreq(60);
   initServos();
 
   ledPwm.begin();
@@ -132,6 +144,7 @@ void loop()
 
   checkForOnOffChange();
   checkForManualAutoChange();
+  setGyroscopeValues();
   talkToLights();
 
   doMyArms();
@@ -206,21 +219,24 @@ struct servoInfo {
   }
 };
 
-servoInfo servos[13] = {
+servoInfo servos[16] = {
   // 20 kg red servos - 150-500 / 325 mid
-  { 130, 530, 3, 330, 330, 0, 0, 0, 0, 0 }, // 0 - Unused
-  { 360, 485, 2, 450, 450, 0, 0, 0, 0, 0 }, // 1 - Unused
-  { 290, 446, 5, 350, 350, 290, 320, 400, 440, 0 }, // 2 - L claw **************************
+  { 200, 400, 1, 300, 300, 0, 0, 0, 0, 0 }, // 0 - Unused
+  { 200, 400, 1, 300, 300, 0, 0, 0, 0, 0 }, // 1 - Unused
+  { 290, 446, 5, 350, 350, 290, 320, 400, 440, 0 }, // 2 - L claw
   { 200, 480, 2, 350, 350, 210, 280, 410, 470, 0 }, // 3 - l wrist ud
   { 170, 530, 3, 350, 350, 470, 410, 290, 180, 0 }, // 4 - R elbow
   { 200, 480, 3, 350, 350, 210, 280, 410, 470, 0 }, // 5 - R wrist lr
   { 290, 446, 5, 350, 350, 290, 320, 400, 440, 0 }, // 6 - R claw increase to grab
   { 200, 480, 2, 350, 350, 210, 280, 410, 470, 0 }, // 7 - r wrist ud
-  { 170, 530, 3, 350, 350, 180, 290, 410, 480, 0 }, // 8 - l elbow
-  { 170, 520, 3, 350, 350, 210, 280, 410, 470, 0 }, // 9 - l wrist lr
-  { 202, 330, 2, 330, 330, 202, 240, 300, 330, 0 }, // 10 - new nod
-  { 376, 456, 1, 400, 400, 376, 388, 426, 450, 0 }, // 11 - new tilt
-  { 200, 500, 3, 350, 350, 200, 240, 410, 496, 0 }  // 12 - new shake
+  { 200, 400, 1, 300, 300, 0, 0, 0, 0, 0 }, // 8  - Unused
+  { 200, 400, 1, 300, 300, 0, 0, 0, 0, 0 }, // 9  - Unused
+  { 200, 400, 1, 300, 300, 0, 0, 0, 0, 0 }, // 10 - Unused
+  { 170, 530, 3, 350, 350, 180, 290, 410, 480, 0 }, // 11 - l elbow
+  { 170, 520, 3, 350, 350, 210, 280, 410, 470, 0 }, // 12 - l wrist lr
+  { 202, 330, 2, 330, 330, 202, 240, 300, 330, 0 }, // 13 - new nod
+  { 376, 456, 1, 400, 400, 376, 388, 426, 450, 0 }, // 14 - new tilt
+  { 200, 500, 3, 350, 350, 200, 240, 410, 496, 0 }  // 15 - new shake
 };
 
 int arcadeButtonDance0[16][14] = {
@@ -393,4 +409,3 @@ int arcadeButtonDance8[16][14] = {
   { 0, 256, 0, 256, 0, 256, 0, 256, 0, 256, 0, 256, 0, 256 },
   { 256, 0, 256, 0, 256, 0, 256, 0, 256, 0, 256, 256, 0, 256 },
 };
-

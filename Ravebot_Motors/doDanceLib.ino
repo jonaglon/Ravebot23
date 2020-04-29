@@ -200,19 +200,19 @@ void rightWristLRPer2Beat() {
 void leftWristPos (int ServoPos) {
   switch (ServoPos) {
   case 0:
-    moveServoToPosSoft(9, servos[9].rightDancePos2);
+    moveServoToPosSoft(12, servos[12].rightDancePos2);
     break;
   case 1:
-    moveServoToPosSoft(9, servos[9].rightDancePos);
+    moveServoToPosSoft(12, servos[12].rightDancePos);
     break;
   case 2:
-    moveServoToPosSoft(9, servos[9].servoCenter);
+    moveServoToPosSoft(12, servos[12].servoCenter);
     break;
   case 3:
-    moveServoToPosSoft(9, servos[9].leftDancePos);
+    moveServoToPosSoft(12, servos[12].leftDancePos);
     break;
   default:
-    moveServoToPosSoft(9, servos[9].leftDancePos2);
+    moveServoToPosSoft(12, servos[12].leftDancePos2);
     break;
   }
 }
@@ -276,19 +276,19 @@ void rightElbowPos (int ServoPos) {
 void leftElbowPos(byte ServoPos) {
   switch (ServoPos) {
   case 0:
-    moveServoToPosSoft(8, servos[8].leftDancePos2);
+    moveServoToPosSoft(11, servos[11].leftDancePos2);
     break;
   case 1:
-    moveServoToPosSoft(8, servos[8].leftDancePos);
+    moveServoToPosSoft(11, servos[11].leftDancePos);
     break;
   case 2:
-    moveServoToPosSoft(8, servos[8].servoCenter);
+    moveServoToPosSoft(11, servos[11].servoCenter);
     break;
   case 3:
-    moveServoToPosSoft(8, servos[8].rightDancePos);
+    moveServoToPosSoft(11, servos[11].rightDancePos);
     break;
   default:
-    moveServoToPosSoft(8, servos[8].rightDancePos2);
+    moveServoToPosSoft(11, servos[11].rightDancePos2);
     break;
   }
 }
@@ -296,17 +296,17 @@ void leftElbowPos(byte ServoPos) {
 
 void beatShake (bool moveLeft, int delayo) {
   if (moveLeft)
-    moveServoToPosSoft(12, servos[12].leftDancePos);
+    moveServoToPosSoft(15, servos[15].leftDancePos);
   else
-    moveServoToPosSoft(12, servos[12].rightDancePos);
+    moveServoToPosSoft(15, servos[15].rightDancePos);
 }
 
 
 void nodHead(bool headUp) {
   if (headUp) {
-    moveServoToPosSoft(10, servos[10].rightDancePos);
+    moveServoToPosSoft(13, servos[13].rightDancePos);
   } else {
-    moveServoToPosSoft(10, servos[10].leftDancePos);
+    moveServoToPosSoft(13, servos[13].leftDancePos);
   }
 }
 
@@ -314,7 +314,7 @@ void moveWristsToCenter() {
   moveServoToPosSoft(3, servos[3].servoCenter);
   moveServoToPosSoft(5, servos[5].servoCenter);
   moveServoToPosSoft(7, servos[7].servoCenter);
-  moveServoToPosSoft(9, servos[9].servoCenter);
+  moveServoToPosSoft(12, servos[12].servoCenter);
 }
 
 // Right Arm / Elbow positions
@@ -352,33 +352,31 @@ void rightArmDownRightElbowDown() {
 
 // Left Arm / Elbow positions
 void leftArmUpLeftElbowUp() {
-  moveServoToPosSoft(8, 290);
+  moveServoToPosSoft(11, 290);
 }
 void leftArmUpLeftElbowMiddle() {
-  moveServoToPosSoft(8, 430);
+  moveServoToPosSoft(11, 430);
 }
 void leftArmUpLeftElbowDown() {
-  moveServoToPosSoft(8, 510);
+  moveServoToPosSoft(11, 510);
 }
 
 void leftArmMiddleLeftElbowUp() {
-  moveServoToPosSoft(8, 210);
+  moveServoToPosSoft(11, 210);
 }
 void leftArmMiddleLeftElbowMiddle() {
-  moveServoToPosSoft(8, 340);
+  moveServoToPosSoft(11, 340);
 }
 void leftArmMiddleLeftElbowDown() {
-  moveServoToPosSoft(8, 496);
+  moveServoToPosSoft(11, 496);
 }
 
 void leftArmDownLeftElbowUp() {
-  moveServoToPosSoft(8, 180);
+  moveServoToPosSoft(11, 180);
 }
 void leftArmDownLeftElbowMiddle() {
-  moveServoToPosSoft(8, 266);
+  moveServoToPosSoft(11, 266);
 }
 void leftArmDownLeftElbowDown() {
-  moveServoToPosSoft(8, 430);
+  moveServoToPosSoft(11, 430);
 }
-
-
