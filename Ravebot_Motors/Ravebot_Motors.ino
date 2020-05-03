@@ -18,8 +18,9 @@
 
 const bool testoMode = false;
 
-bool robotSwitchedOn = false;
+bool robotSwitchedOn = true;
 bool robotManualMode = true;
+bool dueAttached = true;
 
 unsigned long timey;
 unsigned long nextAnalogRead;
@@ -130,6 +131,8 @@ void setup() {
 
   nextAnalogRead = timey + 500;
 
+  tcaSelect(5);
+
   ST1.motor(1, 0);
   ST1.motor(2, 0);
   ST2.motor(1, 0);
@@ -138,20 +141,41 @@ void setup() {
 
 void loop()
 {
+  if (testoMode)
+    Serial.print("...1!");    
+
   wdt_reset(); // this checks if the board crashed and resets
 
   timey = millis();
 
+  if (testoMode)
+    Serial.print("...2!");    
   checkForOnOffChange();
+  if (testoMode)
+    Serial.print("...3!");    
   checkForManualAutoChange();
-  setGyroscopeValues();
+  if (testoMode)
+    Serial.print("...4!");    
+  // setGyroscopeValues();
+  if (testoMode)
+    Serial.println("...5!");    
   talkToLights();
+  if (testoMode)
+    Serial.print("...6!");    
 
   doMyArms();
+  if (testoMode)
+    Serial.print("...7!");    
   doMyWheels();
+  if (testoMode)
+    Serial.print("...8!");    
 
   if (robotSwitchedOn) {
+    if (testoMode)
+      Serial.print("...9!");    
     if (robotManualMode) {
+      if (testoMode)
+        Serial.println("...10!");    
       doServos();
     } else {
       if (currentBar != 0) {
@@ -159,8 +183,14 @@ void loop()
         doDancing();
       }
     }
+    if (testoMode)
+      Serial.print("...11!");    
     doKeypad();
+    if (testoMode)
+      Serial.print("...12!");    
     doArcadeBtn();
+    if (testoMode)
+      Serial.println("...13!");    
   }
 }
 
@@ -171,6 +201,10 @@ void checkForOnOffChange() {
     robotSwitchedOn = !robotSwitchedOn;
     int numToSend = 9 + (robotSwitchedOn ? 0 : 1);
     sendSerialToLights(1, numToSend);
+    if (testoMode) {
+      Serial.print("Robot On:");
+      Serial.println(robotSwitchedOn);
+    }
     if (!robotSwitchedOn) {
       switchOffArcadeButtons();
       switchOffDisplay();

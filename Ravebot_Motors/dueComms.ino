@@ -19,16 +19,17 @@ void talkToLights() {
 }
 
 void receiveSerialFromLights() {
-
-  while (Serial3.available()) {
-    int i=0;
-    delay(5); //allows all serial sent to be received together
-    while(Serial3.available() && i<4) {
-      strIn[i++] = Serial3.read();
+  if (dueAttached) {
+    while (Serial3.available()) {
+      int i=0;
+      delay(5); //allows all serial sent to be received together
+      while(Serial3.available() && i<4) {
+        strIn[i++] = Serial3.read();
+      }
+      strIn[i++]='\0';
+      int lightsMessage = atoi(strIn);
+      doSomethingWithMessageFromLights(lightsMessage);
     }
-    strIn[i++]='\0';
-    int lightsMessage = atoi(strIn);
-    doSomethingWithMessageFromLights(lightsMessage);
   }
 }
 
@@ -36,12 +37,12 @@ void doSomethingWithMessageFromLights(int messageFromLights) {
   int requestFunction = messageFromLights / 1000;
   int requestMessage = messageFromLights % 1000;
   
-  /*if (testoMode) {
+  if (testoMode) {
     Serial.print("Received Serial 2 Func:");
     Serial.print(requestFunction);
     Serial.print("   Received message:");
     Serial.println(requestMessage);
-  }*/
+  }
 
   if (requestFunction == 1) // this is a beat message
   {
@@ -213,13 +214,18 @@ void sendDanceNumberToLights(int danceNumber) {
 void sendSerialToLights(int function, int message) {
 
   if (testoMode) {
-    Serial.println("Sending to Serial 2");
+    Serial.print("Sending Serial 2 fn:");
+    Serial.print(function);
+    Serial.print("  msg:");
+    Serial.println(message);
   }
 
   int value = (function * 1000) + message;
   //Serial.println(message);
-  
-  itoa(value, strOut, 10); //Turn value into a character array
-  Serial1.write(strOut, 4);
+
+  if (dueAttached) {
+    itoa(value, strOut, 10); //Turn value into a character array
+    Serial1.write(strOut, 4);
+  }
 
 }
