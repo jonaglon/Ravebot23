@@ -9,6 +9,7 @@ void gyroscpeSetup() {
   Wire.write(0x6B); 
   Wire.write(0);    
   Wire.endTransmission(true);
+  tcaSelect(5);
 }
 
 void tcaSelect(uint8_t i) {
@@ -28,8 +29,8 @@ void setGyroscopeValues() {
   AcYLeft=Wire.read()<<8|Wire.read();  
   AcZLeft=Wire.read()<<8|Wire.read();  
   GyXLeft=Wire.read()<<8|Wire.read();  
-  GyYLeft=Wire.read()<<8|Wire.read();  
-  GyZLeft=Wire.read()<<8|Wire.read();  
+  GyYLeft=Wire.read()<<8|Wire.read();
+  GyZLeft=Wire.read()<<8|Wire.read();
   Wire.endTransmission();
   tcaSelect(7);
   Wire.beginTransmission(MPU);

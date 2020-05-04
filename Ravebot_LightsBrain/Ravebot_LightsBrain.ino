@@ -18,9 +18,9 @@ uint64_t = 0 to 18,446,744,073,709,551,615      */
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
 const bool beatTestMode = true;
-const bool megaAttached = false;
+const bool megaAttached = true;
 
-bool robotSwitchedOn = true;
+bool robotSwitchedOn = false;
 bool robotManualMode = true;
 
 uint32_t timey;
