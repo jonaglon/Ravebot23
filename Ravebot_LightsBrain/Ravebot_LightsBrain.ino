@@ -17,10 +17,10 @@ uint64_t = 0 to 18,446,744,073,709,551,615      */
 #include<FastLED.h>
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
-const bool beatTestMode = false;
-const bool megaAttached = true;
+const bool beatTestMode = true;
+const bool megaAttached = false;
 
-bool robotSwitchedOn = false;
+bool robotSwitchedOn = true;
 bool robotManualMode = true;
 
 uint32_t timey;
