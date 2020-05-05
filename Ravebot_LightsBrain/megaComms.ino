@@ -35,7 +35,7 @@ void doSomethingWithPackageFromMega(int16_t package) {
       winkRightMessage(message % 2);
     } else if (message < 7) {
       lastEyeMoveTime = timey;
-      changeEyeType();
+      changeEyeBackground(!whiteEyeBackground);
     } else if (message < 8) {
       changeLightPattern();
     } else if (message < 9) {
@@ -251,4 +251,3 @@ void sendSerialToMega(int16_t function, int16_t message) {
     Serial1.write(strOut, 4);
   }
 }
-

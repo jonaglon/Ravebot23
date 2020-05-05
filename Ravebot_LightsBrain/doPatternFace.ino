@@ -44,40 +44,28 @@ void resetEyes() {
   rightEyeY = 0;
 }
 
+uint8_t selectedAnim=0;
 unsigned long eyeAnimStart=2000;
-const uint32_t eyePatternLength=1000;
+uint32_t eyePatternLength=1000;
 void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
+   selectedAnim = random(3);
    eyeAnimStart = timey + random(1000,2000);
+   eyePatternLength = random(2000,10000);
   } else if (timey > eyeAnimStart) {
     uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
-
-    for(uint8_t j = 0; j < 93; j++) {
-      setSectionLed(5, j, 200, 0, 0, 0);
-      setSectionLed(6, j, 0, 200, 0, 0);
+    switch (newTwinklePattern) {
+      case 0:
+        heartEyes();
+        break;
+      case 1:
+        pacManEyes();
+        break;
+      case 2:
+        smileyEyes();
+        break;
     }
-    /*if (timey > (blinkStart + (blinkLength/2))) {
-      // on way up
-      drawTo = ((blinkHeight * percIntoBlink)/100)-blinkHeight+50;
-    } else {
-      // on way down
-      drawTo = blinkHeight+50-((blinkHeight * percIntoBlink)/100);
-    }
-    for(uint8_t j = 0; j < 93; j++) {
-      if (eyeCoords[j][1] < 110 - drawTo) {
-        setSectionLed(5, j, 0, 0, 0, 0);
-      }
-      if (eyeCoords[j][1] > drawTo) {
-        setSectionLed(5, j, 0, 0, 0, 0);
-      }
-      if (eyeCoords[j][1] < 110 - drawTo) {
-        setSectionLed(6, j, 0, 0, 0, 0);
-      }
-      if (eyeCoords[j][1] > drawTo) {
-        setSectionLed(6, j, 0, 0, 0, 0);
-      }
-    } */
   } else {
     doAutomaticEyes();
   }
@@ -123,8 +111,8 @@ void drawIrisAndPupil() {
   drawEyeSquare(ledSections[6], 55+rightEyeX, 55-rightEyeY, 7, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
 }
 
-void changeEyeType() {
-  whiteEyeBackground = !whiteEyeBackground;
+void changeEyeBackground(bool eyeBackgroundToWhite) {
+  whiteEyeBackground = eyeBackgroundToWhite;
 }
 
 
@@ -201,9 +189,6 @@ void smileyEyes() {
     setSectionLed(6, eyeSmileyLeds[j], 0, 0, 0, 0);
   }
 }
-
-// TODO next, implement something like this blinky blink blink but if it's in automatic mode do a fing for an amount 
-// of time then reset and choose a new thing to do after an amount of time, like below.
 
 unsigned long blinkStart=4000;
 const uint32_t blinkLength=240;
