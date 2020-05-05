@@ -34,25 +34,23 @@ void eyeController() {
   }
 }
 
-void resetEyes() {
-  eyePrimaryR = 110;
-  eyePrimaryG = 150;
-  eyePrimaryB = 150;
-  leftEyeX = 0;
-  leftEyeY = 0;
-  rightEyeX = 0;
-  rightEyeY = 0;
-}
-
-uint8_t selectedAnim=0;
-unsigned long eyeAnimStart=2000;
+uint8_t selectedAnim = 0;
+unsigned long eyeAnimStart=5000;
 uint32_t eyePatternLength=1000;
 void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
-   selectedAnim = random(3);
-   eyeAnimStart = timey + random(1000,2000);
-   eyePatternLength = random(2000,10000);
+    selectedAnim = random(3);
+    uint8_t oneInThree= random(3);
+    if (selectedAnim == 0) {
+      oneInThree == 0 ? setEyeColour(0) : setEyeColour(1);
+    } else if (selectedAnim == 2) {
+      oneInThree == 0 ? setEyeColour(0) : setEyeColour(2);
+    } else {
+      setEyeColour(0);
+    }
+    eyeAnimStart = timey + random(10000,30000);
+    eyePatternLength = random(4000,10000);
   } else if (timey > eyeAnimStart) {
     uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
     switch (selectedAnim) {
@@ -64,6 +62,12 @@ void doAutomaticEyesWithPatterns() {
         break;
       case 2:
         smileyEyes();
+        break;
+      case 3:
+        doStonerEyes();
+        break;
+      default:
+        doAutomaticEyes();
         break;
     }
   } else {
@@ -395,4 +399,33 @@ void doTalkingLights() {
       setLedDirect(ledSections[7]+14, 255, 60, 60, 100, true);
     }
   }  
+}
+
+void resetEyes() {
+  eyePrimaryR = 110;
+  eyePrimaryG = 150;
+  eyePrimaryB = 150;
+  leftEyeX = 0;
+  leftEyeY = 0;
+  rightEyeX = 0;
+  rightEyeY = 0;
+}
+
+// 0=random, 1=red, 2=yellow
+void setEyeColour(uint8_t colourSet) {
+  switch (colourSet) {
+    case 0:
+      setGoodRandomColorVars();
+      eyePrimaryR = goodColR; eyePrimaryG = goodColG; eyePrimaryB = goodColB;
+      break;
+    case 1:
+      eyePrimaryR = 250; eyePrimaryG = 0; eyePrimaryB = 0;
+      break;
+    case 2:
+      eyePrimaryR = 140; eyePrimaryG = 160; eyePrimaryB = 0;
+      break;
+    case 3:
+      smileyEyes();
+      break;
+  }
 }
