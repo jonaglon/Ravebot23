@@ -40,7 +40,7 @@ uint32_t eyePatternLength=1000;
 void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
-    selectedAnim = random(6);
+    selectedAnim = random(8);
     eyeAnimStart = timey +  random(2000,3000); // random(10000,30000);
     eyePatternLength =  random(1000,3000); // random(4000,10000);
     resetEyes();
@@ -61,6 +61,9 @@ void doAutomaticEyesWithPatterns() {
         break;
       case 4:
         hypnotEyes();
+        break;
+      case 5:
+        flashingEyes();
         break;
       default:
         doAutomaticEyes();
@@ -117,6 +120,7 @@ void changeEyeBackground(bool eyeBackgroundToWhite) {
 
 // Eye patterns
 void doStonerEyes() {
+  changeEyeCol(0);
 
   for(uint8_t j = 0; j < 93; j++) {
     if (eyeCoords[j][1] < 56) {
@@ -140,22 +144,8 @@ void doStonerEyes() {
   doRightWink();
 }
 
-void changeEyeCol() {
-    uint8_t oneInThree= random(3);
-    if (selectedAnim == 0) {
-      setEyeColour(1); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(1);
-    } else if (selectedAnim == 2) {
-      setEyeColour(2); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(2);
-    } else {
-      setEyeColour(0);
-    }
-}
-
 void heartEyes() {
-  // TODO!!!!
-  if () {
-    
-  }
+  changeEyeCol(1);
 
   for(uint8_t j = 0; j < 93; j++) {
     setSectionLed(5, j, 0, 0, 0, 0);
@@ -194,6 +184,7 @@ void pacManEyes() {
 }
 
 void smileyEyes() {
+  changeEyeCol(2);
   for(uint8_t j = 0; j < 93; j++) {
     setSectionLed(5, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
     setSectionLed(6, j, eyePrimaryR, eyePrimaryG, eyePrimaryB, 0);
@@ -216,9 +207,10 @@ void hypnotEyes() {
   for (int j = 1; j < 7; j++) {
     int ledToLightFrom = circleFirstLeds[j-1];
     int ledToLightTo = circleFirstLeds[j];
+    uint8_t lightyModMod = (myCycle+j)%16;
     for (int led = ledToLightFrom; led < ledToLightTo; led++) {
-      setSectionLed(5, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
-      setSectionLed(6, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
+      setSectionLed(5, led, circleFirstR[lightyModMod], circleFirstG[lightyModMod], circleFirstB[lightyModMod], 0);
+      setSectionLed(6, led, circleFirstR[lightyModMod], circleFirstG[lightyModMod], circleFirstB[lightyModMod], 0);
     }
   }
 }
@@ -428,7 +420,6 @@ void doTalkingLights() {
       setLedDirect(ledSections[7]+12, 255, 60, 60, 100, true);
     }
     
-    
     if (timey > (robotTalkingOnTime + 135)) {
       setLedDirect(ledSections[7]+4, 255, 60, 60, 100, true);
       setLedDirect(ledSections[7]+13, 255, 60, 60, 100, true);
@@ -458,17 +449,34 @@ void resetEyes() {
 }
 
 // 0=random, 1=red, 2=yellow
-void setEyeColour(uint8_t colourSet) {
+uint8_t currentColourSet = 0;
+void changeEyeCol(uint8_t colourSet) {
+  if (colourSet == currentColourSet) {
+    return;
+  }
+  uint8_t oneInThree= random(3);
+
   switch (colourSet) {
     case 0:
       setGoodRandomColorVars();
       eyePrimaryR = goodColR; eyePrimaryG = goodColG; eyePrimaryB = goodColB;
       break;
     case 1:
-      eyePrimaryR = 250; eyePrimaryG = 0; eyePrimaryB = 0;
+      if (oneInThree == 0) {
+        setGoodRandomColorVars();
+        eyePrimaryR = goodColR; eyePrimaryG = goodColG; eyePrimaryB = goodColB;
+      } else {
+        eyePrimaryR = 250; eyePrimaryG = 0; eyePrimaryB = 0;
+      }
       break;
     case 2:
-      eyePrimaryR = 140; eyePrimaryG = 160; eyePrimaryB = 0;
+      if (oneInThree == 0) {
+        setGoodRandomColorVars();
+        eyePrimaryR = goodColR; eyePrimaryG = goodColG; eyePrimaryB = goodColB;
+      } else {
+        eyePrimaryR = 140; eyePrimaryG = 160; eyePrimaryB = 0;
+      }
       break;
   }
+  currentColourSet = colourSet;
 }
