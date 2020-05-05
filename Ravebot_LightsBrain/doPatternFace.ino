@@ -30,7 +30,7 @@ void eyeController() {
       resetEyes();
       eyesAutomatic = true;
     }
-    doAutomaticEyes();
+    doAutomaticEyesWithPatterns();
   }
 }
 
@@ -42,6 +42,45 @@ void resetEyes() {
   leftEyeY = 0;
   rightEyeX = 0;
   rightEyeY = 0;
+}
+
+unsigned long eyeAnimStart=2000;
+const uint32_t eyePatternLength=1000;
+void doAutomaticEyesWithPatterns() {
+  if (timey > (eyeAnimStart + blinkLength)) {
+    // animation over, reset
+   eyeAnimStart = timey + random(1000,2000);
+  } else if (timey > eyeAnimStart) {
+    uint32_t percIntoAnim = ((timey - blinkStart)*100)/(blinkLength/2);
+
+    for(uint8_t j = 0; j < 93; j++) {
+      setSectionLed(5, j, 200, 0, 0, 0);
+      setSectionLed(6, j, 0, 200, 0, 0);
+    }
+    /*if (timey > (blinkStart + (blinkLength/2))) {
+      // on way up
+      drawTo = ((blinkHeight * percIntoBlink)/100)-blinkHeight+50;
+    } else {
+      // on way down
+      drawTo = blinkHeight+50-((blinkHeight * percIntoBlink)/100);
+    }
+    for(uint8_t j = 0; j < 93; j++) {
+      if (eyeCoords[j][1] < 110 - drawTo) {
+        setSectionLed(5, j, 0, 0, 0, 0);
+      }
+      if (eyeCoords[j][1] > drawTo) {
+        setSectionLed(5, j, 0, 0, 0, 0);
+      }
+      if (eyeCoords[j][1] < 110 - drawTo) {
+        setSectionLed(6, j, 0, 0, 0, 0);
+      }
+      if (eyeCoords[j][1] > drawTo) {
+        setSectionLed(6, j, 0, 0, 0, 0);
+      }
+    } */
+  } else {
+    doAutomaticEyes();
+  }
 }
 
 
@@ -163,6 +202,9 @@ void smileyEyes() {
   }
 }
 
+// TODO next, implement something like this blinky blink blink but if it's in automatic mode do a fing for an amount 
+// of time then reset and choose a new thing to do after an amount of time, like below.
+
 unsigned long blinkStart=4000;
 const uint32_t blinkLength=240;
 void doBlinking() {
@@ -188,16 +230,16 @@ void doBlinking() {
     }
     for(uint8_t j = 0; j < 93; j++) {
       if (eyeCoords[j][1] < 110 - drawTo) {
-          setSectionLed(5, j, 0, 0, 0, 0);
+        setSectionLed(5, j, 0, 0, 0, 0);
       }
       if (eyeCoords[j][1] > drawTo) {
-          setSectionLed(5, j, 0, 0, 0, 0);
+        setSectionLed(5, j, 0, 0, 0, 0);
       }
       if (eyeCoords[j][1] < 110 - drawTo) {
-          setSectionLed(6, j, 0, 0, 0, 0);
+        setSectionLed(6, j, 0, 0, 0, 0);
       }
       if (eyeCoords[j][1] > drawTo) {
-          setSectionLed(6, j, 0, 0, 0, 0);
+        setSectionLed(6, j, 0, 0, 0, 0);
       }
     }
   }
