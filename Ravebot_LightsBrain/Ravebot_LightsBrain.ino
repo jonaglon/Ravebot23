@@ -211,7 +211,7 @@ struct tuneInfo {
 };
 
 // Genre 0, RAVE!
-tuneInfo tuneLibRave[34] = {
+const tuneInfo tuneLibRave[34] = {
   {149, 68, 144, 16,  0, 16,  0, false},  // 1  TripToTheMoonPt2-Acen
   {136, 80, 104, 16,  0, 16, 16, false},  // 2  Bombscare-2BadMice
   {126,  0, 118,  8,  0, 16,  8, false},  // 3  LFO-LFO

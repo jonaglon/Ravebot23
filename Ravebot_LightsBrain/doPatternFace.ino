@@ -40,7 +40,7 @@ uint32_t eyePatternLength=1000;
 void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
-    selectedAnim = random(3);
+    selectedAnim = random(5);
     uint8_t oneInThree= random(3);
     if (selectedAnim == 0) {
       oneInThree == 0 ? setEyeColour(0) : setEyeColour(1);
@@ -49,8 +49,9 @@ void doAutomaticEyesWithPatterns() {
     } else {
       setEyeColour(0);
     }
-    eyeAnimStart = timey + random(10000,30000);
-    eyePatternLength = random(4000,10000);
+    eyeAnimStart = timey +  random(100,3000); // random(10000,30000);
+    eyePatternLength =  random(500,3000); // random(4000,10000);
+    resetEyes();
   } else if (timey > eyeAnimStart) {
     uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
     switch (selectedAnim) {
@@ -66,6 +67,9 @@ void doAutomaticEyesWithPatterns() {
       case 3:
         doStonerEyes();
         break;
+      case 4:
+        hypnotEyes();
+        break;
       default:
         doAutomaticEyes();
         break;
@@ -77,7 +81,6 @@ void doAutomaticEyesWithPatterns() {
 
 
 void doAutomaticEyes() {
-  //  if (beatCycle && ((sixteenBeats%8) == 4)) {
   
   if (whiteEyeBackground) {
     for(uint8_t j = 0; j < 93; j++) {
@@ -191,6 +194,26 @@ void smileyEyes() {
   for(uint8_t j = 0; j < 24; j++) {
     setSectionLed(5, eyeSmileyLeds[j], 0, 0, 0, 0);
     setSectionLed(6, eyeSmileyLeds[j], 0, 0, 0, 0);
+  }
+}
+
+
+
+const byte circleFirstLeds[9] = {0,32,56,72,84,92,93};
+const byte circleFirstR[16] = {245, 0,  10, 0, 255, 0,   0, 0,  90, 0,   0, 0, 100, 0, 245, 0};
+const byte circleFirstG[16] = {140, 0, 140, 0,   0, 0,  40, 0, 100, 0,   0, 0, 130, 0, 150, 0};
+const byte circleFirstB[16] = { 10, 0, 160, 0,   0, 0, 160, 0,  10, 0, 255, 0,  20, 0,  10, 0};
+
+void hypnotEyes() {
+  uint32_t myCycle = (timeyInTime / 1024)%16;
+
+  for (int j = 1; j < 7; j++) {
+    int ledToLightFrom = circleFirstLeds[j-1];
+    int ledToLightTo = circleFirstLeds[j];
+    for (int led = ledToLightFrom; led < ledToLightTo; led++) {
+      setSectionLed(5, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
+      setSectionLed(6, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
+    }
   }
 }
 
@@ -409,6 +432,12 @@ void resetEyes() {
   leftEyeY = 0;
   rightEyeX = 0;
   rightEyeY = 0;
+  uint8_t oneInThree= random(3);
+  if (oneInThree == 0) {
+    changeEyeBackground(true);
+  } else {
+    changeEyeBackground(false);
+  }  
 }
 
 // 0=random, 1=red, 2=yellow
