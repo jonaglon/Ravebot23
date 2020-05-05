@@ -47,11 +47,11 @@ void resetEyes() {
 unsigned long eyeAnimStart=2000;
 const uint32_t eyePatternLength=1000;
 void doAutomaticEyesWithPatterns() {
-  if (timey > (eyeAnimStart + blinkLength)) {
+  if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
    eyeAnimStart = timey + random(1000,2000);
   } else if (timey > eyeAnimStart) {
-    uint32_t percIntoAnim = ((timey - blinkStart)*100)/(blinkLength/2);
+    uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
 
     for(uint8_t j = 0; j < 93; j++) {
       setSectionLed(5, j, 200, 0, 0, 0);

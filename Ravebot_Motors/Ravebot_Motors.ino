@@ -18,7 +18,7 @@
 
 const bool testoMode = false;
 
-bool robotSwitchedOn = true;
+bool robotSwitchedOn = false;
 bool robotManualMode = true;
 bool dueAttached = true;
 
