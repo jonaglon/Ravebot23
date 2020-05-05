@@ -41,19 +41,11 @@ void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
     selectedAnim = random(6);
-    uint8_t oneInThree= random(3);
-    if (selectedAnim == 0) {
-      setEyeColour(1); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(1);
-    } else if (selectedAnim == 2) {
-      setEyeColour(2); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(2);
-    } else {
-      setEyeColour(0);
-    }
     eyeAnimStart = timey +  random(2000,3000); // random(10000,30000);
     eyePatternLength =  random(1000,3000); // random(4000,10000);
     resetEyes();
   } else if (timey > eyeAnimStart) {
-    uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
+    // uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
     switch (selectedAnim) {
       case 0:
         heartEyes();
@@ -148,7 +140,22 @@ void doStonerEyes() {
   doRightWink();
 }
 
+void changeEyeCol() {
+    uint8_t oneInThree= random(3);
+    if (selectedAnim == 0) {
+      setEyeColour(1); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(1);
+    } else if (selectedAnim == 2) {
+      setEyeColour(2); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(2);
+    } else {
+      setEyeColour(0);
+    }
+}
+
 void heartEyes() {
+  // TODO!!!!
+  if () {
+    
+  }
 
   for(uint8_t j = 0; j < 93; j++) {
     setSectionLed(5, j, 0, 0, 0, 0);
@@ -219,7 +226,7 @@ void hypnotEyes() {
 // TODO - add me!
 void flashingEyes() {
   uint32_t myCycle = (timeyInTime / 2048)%16;
-  for (int led = ledToLightFrom; led < 93; led++) {
+  for (int led = 0; led < 93; led++) {
     setSectionLed(5, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
     setSectionLed(6, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
   }
