@@ -40,17 +40,17 @@ uint32_t eyePatternLength=1000;
 void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
-    selectedAnim = random(5);
+    selectedAnim = random(6);
     uint8_t oneInThree= random(3);
     if (selectedAnim == 0) {
-      oneInThree == 0 ? setEyeColour(0) : setEyeColour(1);
+      setEyeColour(1); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(1);
     } else if (selectedAnim == 2) {
-      oneInThree == 0 ? setEyeColour(0) : setEyeColour(2);
+      setEyeColour(2); // TODO - uncomment me - oneInThree == 0 ? setEyeColour(0) : setEyeColour(2);
     } else {
       setEyeColour(0);
     }
-    eyeAnimStart = timey +  random(100,3000); // random(10000,30000);
-    eyePatternLength =  random(500,3000); // random(4000,10000);
+    eyeAnimStart = timey +  random(2000,3000); // random(10000,30000);
+    eyePatternLength =  random(1000,3000); // random(4000,10000);
     resetEyes();
   } else if (timey > eyeAnimStart) {
     uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
@@ -198,14 +198,13 @@ void smileyEyes() {
 }
 
 
-
 const byte circleFirstLeds[9] = {0,32,56,72,84,92,93};
 const byte circleFirstR[16] = {245, 0,  10, 0, 255, 0,   0, 0,  90, 0,   0, 0, 100, 0, 245, 0};
 const byte circleFirstG[16] = {140, 0, 140, 0,   0, 0,  40, 0, 100, 0,   0, 0, 130, 0, 150, 0};
 const byte circleFirstB[16] = { 10, 0, 160, 0,   0, 0, 160, 0,  10, 0, 255, 0,  20, 0,  10, 0};
 
 void hypnotEyes() {
-  uint32_t myCycle = (timeyInTime / 1024)%16;
+  uint32_t myCycle = (timeyInTime / 4096)%16;
 
   for (int j = 1; j < 7; j++) {
     int ledToLightFrom = circleFirstLeds[j-1];
@@ -215,6 +214,16 @@ void hypnotEyes() {
       setSectionLed(6, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
     }
   }
+}
+
+// TODO - add me!
+void flashingEyes() {
+  uint32_t myCycle = (timeyInTime / 2048)%16;
+  for (int led = ledToLightFrom; led < 93; led++) {
+    setSectionLed(5, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
+    setSectionLed(6, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
+  }
+  drawIrisAndPupil();
 }
 
 unsigned long blinkStart=4000;
@@ -412,6 +421,7 @@ void doTalkingLights() {
       setLedDirect(ledSections[7]+12, 255, 60, 60, 100, true);
     }
     
+    
     if (timey > (robotTalkingOnTime + 135)) {
       setLedDirect(ledSections[7]+4, 255, 60, 60, 100, true);
       setLedDirect(ledSections[7]+13, 255, 60, 60, 100, true);
@@ -452,9 +462,6 @@ void setEyeColour(uint8_t colourSet) {
       break;
     case 2:
       eyePrimaryR = 140; eyePrimaryG = 160; eyePrimaryB = 0;
-      break;
-    case 3:
-      smileyEyes();
       break;
   }
 }
