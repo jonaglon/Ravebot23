@@ -55,7 +55,7 @@ void doAutomaticEyesWithPatterns() {
    eyePatternLength = random(2000,10000);
   } else if (timey > eyeAnimStart) {
     uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
-    switch (newTwinklePattern) {
+    switch (selectedAnim) {
       case 0:
         heartEyes();
         break;
