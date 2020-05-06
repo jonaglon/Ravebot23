@@ -41,8 +41,12 @@ void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
     selectedAnim = random(8);
-    eyeAnimStart = timey +  random(2000,3000); // random(10000,30000);
-    eyePatternLength =  random(1000,3000); // random(4000,10000);
+    if (selectedAnim == 5) {
+      eyePatternLength = random(1000,2000); // random(1000,2000);     
+    } else {
+      eyePatternLength = random(1000,3000); // random(4000,10000);
+    }
+    eyeAnimStart = timey + random(2000,3000); // random(10000,30000);
     resetEyes();
   } else if (timey > eyeAnimStart) {
     // uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
@@ -64,6 +68,9 @@ void doAutomaticEyesWithPatterns() {
         break;
       case 5:
         flashingEyes();
+        break;
+      case 6:
+        rollEyes();
         break;
       default:
         doAutomaticEyes();
@@ -197,17 +204,17 @@ void smileyEyes() {
 
 
 const byte circleFirstLeds[9] = {0,32,56,72,84,92,93};
-const byte circleFirstR[16] = {245, 0,  10, 0, 255, 0,   0, 0,  90, 0,   0, 0, 100, 0, 245, 0};
-const byte circleFirstG[16] = {140, 0, 140, 0,   0, 0,  40, 0, 100, 0,   0, 0, 130, 0, 150, 0};
-const byte circleFirstB[16] = { 10, 0, 160, 0,   0, 0, 160, 0,  10, 0, 255, 0,  20, 0,  10, 0};
+const byte circleFirstR[24] = {245, 0, 0,  10, 0, 0, 255, 0, 0,   0, 0, 0, 100, 0, 0,   0, 0, 0, 200, 0, 0,   0, 0, 0};
+const byte circleFirstG[24] = {140, 0, 0, 140, 0, 0,   0, 0, 0,  60, 0, 0, 100, 0, 0,   0, 0, 0,  80, 0, 0, 255, 0, 0};
+const byte circleFirstB[24] = { 10, 0, 0, 160, 0, 0,   0, 0, 0, 200, 0, 0,  40, 0, 0, 255, 0, 0,  50, 0, 0,   0, 0, 0};
 
 void hypnotEyes() {
-  uint32_t myCycle = (timeyInTime / 4096)%16;
+  uint32_t myCycle = timeyInTime/16384;
 
   for (int j = 1; j < 7; j++) {
     int ledToLightFrom = circleFirstLeds[j-1];
     int ledToLightTo = circleFirstLeds[j];
-    uint8_t lightyModMod = (myCycle+j)%16;
+    uint8_t lightyModMod = (myCycle+j)%24;
     for (int led = ledToLightFrom; led < ledToLightTo; led++) {
       setSectionLed(5, led, circleFirstR[lightyModMod], circleFirstG[lightyModMod], circleFirstB[lightyModMod], 0);
       setSectionLed(6, led, circleFirstR[lightyModMod], circleFirstG[lightyModMod], circleFirstB[lightyModMod], 0);
@@ -215,13 +222,37 @@ void hypnotEyes() {
   }
 }
 
-// TODO - add me!
 void flashingEyes() {
   uint32_t myCycle = (timeyInTime / 2048)%16;
   for (int led = 0; led < 93; led++) {
     setSectionLed(5, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
     setSectionLed(6, led, circleFirstR[myCycle], circleFirstG[myCycle], circleFirstB[myCycle], 0);
   }
+  drawIrisAndPupil();
+}
+
+bool leftEyeClockwise = true;
+bool rightEyeClockwise = true;
+void rollEyes() {
+  uint32_t pupilLedForward = (((16384/24)*683)%24)+32;
+  uint32_t pupilLedBackward = 56-((((16384/24)*683)%24)+32);
+
+  if (leftEyeClockwise) {
+    leftEyeX = eyeCoords[pupilLedForward][0];
+    leftEyeY = eyeCoords[pupilLedForward][1];
+  } else {
+    leftEyeX = eyeCoords[pupilLedBackward][0];
+    leftEyeY = eyeCoords[pupilLedBackward][1];
+  }
+
+  if (rightEyeClockwise) {
+    rightEyeX = eyeCoords[pupilLedForward][0];
+    rightEyeY = eyeCoords[pupilLedForward][1];
+  } else {
+    rightEyeX = eyeCoords[pupilLedBackward][0];
+    rightEyeY = eyeCoords[pupilLedBackward][1];
+  }
+
   drawIrisAndPupil();
 }
 
