@@ -234,38 +234,36 @@ void flashingEyes() {
   drawIrisAndPupil();
 }
 
-void rollEyes(uint32_t percentIntoAnim) {
-  // uint32_t myCycle = (timeyInTime/2048)%128;
-  uint32_t myCycle = percentIntoAnim;
+void rollEyes(uint8_t percentIntoAnim) {
   
-  if (myCycle > 93)
-    myCycle = 92;
-  leftEyeX = eyeCoords[myCycle][1]-55;
-  leftEyeY = eyeCoords[myCycle][0]-55;
-  rightEyeX = eyeCoords[myCycle][1]-55;
-  rightEyeY = eyeCoords[myCycle][0]-55;
+  if (percentIntoAnim > 93)
+    percentIntoAnim = 92;
+  leftEyeX = eyeCoords[percentIntoAnim][1]-55;
+  leftEyeY = eyeCoords[percentIntoAnim][0]-55;
+  rightEyeX = eyeCoords[percentIntoAnim][1]-55;
+  rightEyeY = eyeCoords[percentIntoAnim][0]-55;
   drawIrisAndPupil();
 }
 
-uint8_t sineLUT[128] = { 5,5,5,6,6,6,6,7,
-7,7,7,8,8,8,8,8,
-9,9,9,9,9,9,9,10,
-10,10,10,10,10,10,10,10,
-10,10,10,10,10,10,10,10,
-10,10,9,9,9,9,9,9,
-9,8,8,8,8,8,7,7,
-7,7,6,6,6,6,5,5,
-5,5,5,4,4,4,4,3,
-3,3,3,2,2,2,2,2,
-1,1,1,1,1,1,1,0,
-0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,
-0,0,1,1,1,1,1,1,
-1,2,2,2,2,2,3,3,
-3,3,4,4,4,4,5,5, }
+uint8_t sineLUT[128] = { 
+  92,92,92,86,86,86,86,75,75,75,75,60,60,60,60,60,
+  38,38,38,38,38,38,38,8,8,8,8,8,8,8,8,8,
+  8,8,8,8,8,8,8,8,8,8,38,38,38,38,38,38,
+  38,60,60,60,60,60,75,75,75,75,86,86,86,86,92,92,
+  92,92,92,90,90,90,90,81,81,81,81,68,68,68,68,68,
+  50,50,50,50,50,50,50,24,24,24,24,24,24,24,24,24,
+  24,24,24,24,24,24,24,24,24,24,50,50,50,50,50,50,
+  50,68,68,68,68,68,81,81,81,81,90,90,90,90,92,92 };
 
-void lookLeftAndRight() {
-  
+void lookLeftAndRight(uint8_t percentIntoAnim) {
+  if (percentIntoAnim > 127)
+    percentIntoAnim = 127;
+
+  leftEyeX = eyeCoords[sineLUT[percentIntoAnim]][1]-55;
+  leftEyeY = eyeCoords[sineLUT[percentIntoAnim]][0]-55;
+  rightEyeX = eyeCoords[sineLUT[percentIntoAnim]][1]-55;
+  rightEyeY = eyeCoords[sineLUT[percentIntoAnim]][0]-55;
+  drawIrisAndPupil();
 }
 
 unsigned long blinkStart=4000;

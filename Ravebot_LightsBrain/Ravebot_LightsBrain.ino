@@ -256,7 +256,7 @@ tuneInfo tuneLibDisco[28] = {
   {110,  0, 128,  8,  4, 16, 16, true},   // 2 LastNightADjSavedMyLife-Indeep
   {134,  0, 149,  8,  0, 16, 16, true},   // 3 LayAllYourLoveOnMe-Abba
   {121,  0, 157,  8,  4, 16, 14, false},  // 4 HotStuff-DonnaSummer
-  {128,  0, 110,  8,  4,  8, 14, true},   // 5 RingMyBell-AnitaWard
+  {128,  0, 110,  8,  4,  8,  8, true},   // 5 RingMyBell-AnitaWard
   {128,  0, 209, 16,  0, 16, 16, true},   // 6 EverybodyDance-Chic
   {111,  0, 100,  8,  0, 16, 16, true},   // 7 GoodTimes-Chic
   {102,  0, 112,  8,  4,  8,  8, true},   // 8 ThinkingOfYou-SisSledge
@@ -316,7 +316,7 @@ tuneInfo tuneLibReggae[28] = {
 };
 
 //  Genre 3, Rock&Pop
-tuneInfo tuneLibRockAndPop[29] = {
+tuneInfo tuneLibRockAndPop[31] = {
   { 82,  0,  66,  8,  0,  4,  4, true},  // 1 KidsInAmerica-KimWilde
   {130,  0, 120, 16,  0, 16,  8, false}, // 2 CantGetYouOut-Kylie
   {112,  0, 102,  8,  0,  8,  8, true},  // 3 ICantGoForThat-Hall&Oates
@@ -324,7 +324,7 @@ tuneInfo tuneLibRockAndPop[29] = {
   {122, 44, 102,  4,  4, 12,  8, true},  // 5 GrooveIsInTheHeart-DeeLite
   {128,  0, 110,  4,  0,  8,  8, true},  // 6 SweetDreams-Euritmics
   {126, 37, 100,  4,  0,  8,  8, true},  // 7 StuckInTheMiddle-SteelersWheel
-  { 82,  0,  68,  4,  0,  4,  8, true},  // 8 Martha&Muffins Echo Beach
+  { 82,  0,  68,  4,  0,  4,  4, true},  // 8 Martha&Muffins Echo Beach
   {103,  0,  58,  2,  0,  2,  2, true},  // 9 DreamingOfYou-TheCoral
   {100,  0,  58,  0,  0,  2,  2, true},  // 10 BlisterInTheSun-VoilentFemmes
   {116,  0,  99,  4,  4,  8,  4, true},  // 11 ALittleRespect-Erasure
@@ -345,7 +345,9 @@ tuneInfo tuneLibRockAndPop[29] = {
   { 86,  0,  44,  2,  1,  2,  2, false}, // 26 Crash-ThePrimitives
   {119,  0, 124,  8,  4,  8,  8, true},  // 27 OnceInALifetime-TalkingHeads
   { 85,  0,  54,  2,  0,  2,  2, true},  // 28 BoysDontCry-TheCure
-  {125,  0, 108,  4,  0,  2,  8, false}, // 29 PumpUpTheJam-Technotronic
+  {125,  0, 108,  4,  0,  2,  2, false}, // 29 PumpUpTheJam-Technotronic
+  {130,  0, 144,  8,  2, 16,  0, false}, // 30 GraceJones_Libertango
+  {110,  0,  86,  4,  2,  8,  8, true},  // 31 Queen_IWantToBreakFree
 };
 
 //  Genre 4, Easy
@@ -383,7 +385,7 @@ tuneInfo tuneLibEasy[29] = {
 
 //  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 //  Genre 5, Dance
-tuneInfo tuneLibDance[29] = {
+tuneInfo tuneLibDance[30] = {
   {134, 30, 124,  8 , 0, 16,  8, false},  // 1 A rinky dinky
   {110, 58,  88,  8,  0, 16, 16 , true},  // 2 Kelis - Trick Me
   {150,  0, 132, 16,  0,  4,  4, false},  // 3 Dubbleedge - Lips to the floor
@@ -413,10 +415,11 @@ tuneInfo tuneLibDance[29] = {
   {137,  0, 114,  0,  1,  1,  1, true},   // 27 DaftPunkIsPlayingAtMyHouse-LCDSoundSystem
   {114,  0, 116, 16,  4, 16, 16, false},  // 28 DaFunk-DaftPunk
   {150,  0, 152, 16,  4,  8, 16, false},  // 29 I3USo-SkreamCassius
+  {136,  0,  84,  8,  2,  8, 16, false},  // 30 BillieEilish_BadGuy  
 };
 
 //  Genre 6, Drum&Bass
-tuneInfo tuneLibDrumAndBass[27] = {
+tuneInfo tuneLibDrumAndBass[29] = {
   {176,  0, 208, 32,  2, 32, 32, false},  // 1 Girls-DJHypeAndPotential
   {176,  0, 192, 32,  2, 32, 32, false},  // 2 DuppyMan-ChaseAndStatusCapleton
   {180,  0, 204, 32,  2, 32, 32, false},  //3 PullUp-ResonatGenLevy
@@ -444,6 +447,8 @@ tuneInfo tuneLibDrumAndBass[27] = {
   {174,  0, 168, 32,  2, 32, 32, false},  //25 PassOutDCBreaks-TinyTempah
   {170,  0, 136, 16,  2, 32, 32, false},  //26 OriginalNuttah-ShyFX
   {180,  0, 128, 32,  2, 32, 32, false},  //27 HandsUp-DjHype
+  {174,  0, 176, 32,  2, 32, 32, false},  //28 Pendulum_Tarantula
+  {176,  0, 176, 32,  2, 32, 32, false},  //29 WalkAndSkank-SerialKillaz
 };
 
 // Genre 7, HipHop
