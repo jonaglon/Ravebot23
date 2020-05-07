@@ -95,6 +95,64 @@ void setGoodRandomColorVars() {
   }
 }
 
+void setGoodRGBRandomColorVars() {
+  uint16_t randomNum = random(16);
+  switch (randomNum) {
+    case 0: 
+      goodColR = 255;
+      goodColG = 0;
+      goodColB = 0;
+      break;
+    case 1: 
+      goodColR = 0;
+      goodColG = 255;
+      goodColB = 0;
+      break;
+    case 2: 
+      goodColR = 0;
+      goodColG = 0;
+      goodColB = 255;
+      break;
+    case 3: 
+      goodColR = 245;
+      goodColG = 7;
+      goodColB = 225;
+      break;
+    case 4: 
+      goodColR = 245;
+      goodColG = 140;
+      goodColB = 7;
+      break;
+    case 5: 
+      goodColR = 2;
+      goodColG = 133;
+      goodColB = 142;
+      break;
+    case 6: 
+      goodColR = 0;
+      goodColG = 40;
+      goodColB = 160;
+      break;
+    case 7: 
+      goodColR = 82;
+      goodColG = 104;
+      goodColB = 4;
+      break;
+    case 8: 
+      goodColR = 120;
+      goodColG = 50;
+      goodColB = 130;
+      break;
+    default: 
+      SetRgbwWheelVars(random(255));
+      goodColR = wheelR;
+      goodColG = wheelG;
+      goodColB = wheelB;
+      goodColW = 0;
+      break;
+  }
+}
+
 uint16_t getCoord(uint16_t ledNum, uint16_t xOrY) {
   if (ledNum < 203)
      return binCoords[ledNum][xOrY]+ledPosOffset[0][xOrY];

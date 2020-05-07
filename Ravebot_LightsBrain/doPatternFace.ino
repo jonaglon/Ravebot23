@@ -19,7 +19,7 @@ void doDialRainbow() {
 }
 
 void eyeController() {
-  if (lastEyeMoveTime+1000 > timey) {   // TODO - should be 20000
+  if (lastEyeMoveTime+10000 > timey) {
     if (eyesAutomatic) {
       resetEyes();
       eyesAutomatic = false;
@@ -34,6 +34,8 @@ void eyeController() {
   }
 }
 
+// TODO - write speciL get good randomc colour for eyes
+
 uint8_t selectedAnim = 0;
 unsigned long eyeAnimStart=5000;
 uint32_t eyePatternLength=1000;
@@ -41,15 +43,16 @@ void doAutomaticEyesWithPatterns() {
   if (timey > (eyeAnimStart + eyePatternLength)) {
     // animation over, reset
     selectedAnim = random(8);
-    if (selectedAnim == 5) {
-      eyePatternLength = random(1000,2000); // random(1000,2000);     
+    if ((selectedAnim == 4) || (selectedAnim == 5)) {
+      eyePatternLength = random(1000,3000);     
     } else {
-      eyePatternLength = random(1000,3000); // random(4000,10000);
+      eyePatternLength = random(4000,10000);
     }
-    eyeAnimStart = timey + random(2000,3000); // random(10000,30000);
+    eyeAnimStart = timey + random(10000,30000);
     resetEyes();
+    doNormalEyes();
   } else if (timey > eyeAnimStart) {
-    // uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
+    uint32_t percIntoAnim = ((timey - eyeAnimStart)*100)/(eyePatternLength/2);
     switch (selectedAnim) {
       case 0:
         heartEyes();
@@ -70,7 +73,7 @@ void doAutomaticEyesWithPatterns() {
         flashingEyes();
         break;
       case 6:
-        rollEyes();
+        rollEyes(percIntoAnim);
         break;
       default:
         doAutomaticEyes();
@@ -214,7 +217,7 @@ void hypnotEyes() {
   for (int j = 1; j < 7; j++) {
     int ledToLightFrom = circleFirstLeds[j-1];
     int ledToLightTo = circleFirstLeds[j];
-    uint8_t lightyModMod = (myCycle+j)%24;
+    uint8_t lightyModMod = (myCycle-j)%24;
     for (int led = ledToLightFrom; led < ledToLightTo; led++) {
       setSectionLed(5, led, circleFirstR[lightyModMod], circleFirstG[lightyModMod], circleFirstB[lightyModMod], 0);
       setSectionLed(6, led, circleFirstR[lightyModMod], circleFirstG[lightyModMod], circleFirstB[lightyModMod], 0);
@@ -231,29 +234,38 @@ void flashingEyes() {
   drawIrisAndPupil();
 }
 
-bool leftEyeClockwise = true;
-bool rightEyeClockwise = true;
-void rollEyes() {
-  uint32_t pupilLedForward = (((16384/24)*683)%24)+32;
-  uint32_t pupilLedBackward = 56-((((16384/24)*683)%24)+32);
-
-  if (leftEyeClockwise) {
-    leftEyeX = eyeCoords[pupilLedForward][0];
-    leftEyeY = eyeCoords[pupilLedForward][1];
-  } else {
-    leftEyeX = eyeCoords[pupilLedBackward][0];
-    leftEyeY = eyeCoords[pupilLedBackward][1];
-  }
-
-  if (rightEyeClockwise) {
-    rightEyeX = eyeCoords[pupilLedForward][0];
-    rightEyeY = eyeCoords[pupilLedForward][1];
-  } else {
-    rightEyeX = eyeCoords[pupilLedBackward][0];
-    rightEyeY = eyeCoords[pupilLedBackward][1];
-  }
-
+void rollEyes(uint32_t percentIntoAnim) {
+  // uint32_t myCycle = (timeyInTime/2048)%128;
+  uint32_t myCycle = percentIntoAnim;
+  
+  if (myCycle > 93)
+    myCycle = 92;
+  leftEyeX = eyeCoords[myCycle][1]-55;
+  leftEyeY = eyeCoords[myCycle][0]-55;
+  rightEyeX = eyeCoords[myCycle][1]-55;
+  rightEyeY = eyeCoords[myCycle][0]-55;
   drawIrisAndPupil();
+}
+
+uint8_t sineLUT[128] = { 5,5,5,6,6,6,6,7,
+7,7,7,8,8,8,8,8,
+9,9,9,9,9,9,9,10,
+10,10,10,10,10,10,10,10,
+10,10,10,10,10,10,10,10,
+10,10,9,9,9,9,9,9,
+9,8,8,8,8,8,7,7,
+7,7,6,6,6,6,5,5,
+5,5,5,4,4,4,4,3,
+3,3,3,2,2,2,2,2,
+1,1,1,1,1,1,1,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,1,1,1,1,1,1,
+1,2,2,2,2,2,3,3,
+3,3,4,4,4,4,5,5, }
+
+void lookLeftAndRight() {
+  
 }
 
 unsigned long blinkStart=4000;
@@ -489,12 +501,12 @@ void changeEyeCol(uint8_t colourSet) {
 
   switch (colourSet) {
     case 0:
-      setGoodRandomColorVars();
+      setGoodRGBRandomColorVars();
       eyePrimaryR = goodColR; eyePrimaryG = goodColG; eyePrimaryB = goodColB;
       break;
     case 1:
       if (oneInThree == 0) {
-        setGoodRandomColorVars();
+        setGoodRGBRandomColorVars();
         eyePrimaryR = goodColR; eyePrimaryG = goodColG; eyePrimaryB = goodColB;
       } else {
         eyePrimaryR = 250; eyePrimaryG = 0; eyePrimaryB = 0;
@@ -502,7 +514,7 @@ void changeEyeCol(uint8_t colourSet) {
       break;
     case 2:
       if (oneInThree == 0) {
-        setGoodRandomColorVars();
+        setGoodRGBRandomColorVars();
         eyePrimaryR = goodColR; eyePrimaryG = goodColG; eyePrimaryB = goodColB;
       } else {
         eyePrimaryR = 140; eyePrimaryG = 160; eyePrimaryB = 0;

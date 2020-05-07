@@ -67,6 +67,8 @@ uint16_t dropCountdown = 0;
 bool robotTalking = false;
 int32_t robotTalkingOnTime;
 int32_t robotTalkingOffTime;
+bool leftEyeClockwise = true;
+bool rightEyeClockwise = true;
 
 const uint16_t numLeds = 1443;
 CRGB rgbwLeds[2440]; // 488 * 5
