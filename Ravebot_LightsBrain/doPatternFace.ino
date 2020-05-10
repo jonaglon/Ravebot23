@@ -75,6 +75,9 @@ void doAutomaticEyesWithPatterns() {
       case 6:
         rollEyes(percIntoAnim);
         break;
+      case 7:
+        lookLeftAndRight(percIntoAnim);
+        break;
       default:
         doAutomaticEyes();
         break;
