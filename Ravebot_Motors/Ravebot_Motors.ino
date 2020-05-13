@@ -16,14 +16,16 @@
 #include<avr/wdt.h>
 #include<utility/twi.h>
 
-const bool testoMode = false;
+const bool testoMode = true;
+const bool dueAttached = true;
 
 bool robotSwitchedOn = false;
 bool robotManualMode = true;
-bool dueAttached = true;
 
 unsigned long timey;
 unsigned long nextAnalogRead;
+unsigned long nextGyroCheck;
+bool currentlySkipping = false;
 
 int currentBeat;
 int currentBar;
@@ -141,56 +143,32 @@ void setup() {
 
 void loop()
 {
-  if (testoMode)
-    Serial.print("...1!");    
-
   wdt_reset(); // this checks if the board crashed and resets
 
   timey = millis();
 
-  if (testoMode)
-    Serial.print("...2!");    
   checkForOnOffChange();
-  if (testoMode)
-    Serial.print("...3!");    
+
   checkForManualAutoChange();
-  if (testoMode)
-    Serial.print("...4!");    
-  // setGyroscopeValues();
-  if (testoMode)
-    Serial.println("...5!");    
+
+  doGyroscpoes();
+
   talkToLights();
-  if (testoMode)
-    Serial.print("...6!");    
 
   doMyArms();
-  if (testoMode)
-    Serial.print("...7!");    
+
   doMyWheels();
-  if (testoMode)
-    Serial.print("...8!");    
 
   if (robotSwitchedOn) {
-    if (testoMode)
-      Serial.print("...9!");    
     if (robotManualMode) {
-      if (testoMode)
-        Serial.println("...10!");    
       doServos();
     } else {
       if (currentBar != 0) {
-        // JR TODO - this disables the constant dance moves, put me back
         doDancing();
       }
     }
-    if (testoMode)
-      Serial.print("...11!");    
     doKeypad();
-    if (testoMode)
-      Serial.print("...12!");    
     doArcadeBtn();
-    if (testoMode)
-      Serial.println("...13!");    
   }
 }
 
