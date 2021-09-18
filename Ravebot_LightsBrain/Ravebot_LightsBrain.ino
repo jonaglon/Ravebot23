@@ -451,6 +451,7 @@ tuneInfo tuneLibDrumAndBass[29] = {
   {180,  0, 128, 32,  2, 32, 32, false},  //27 HandsUp-DjHype
   {174,  0, 176, 32,  2, 32, 32, false},  //28 Pendulum_Tarantula
   {176,  0, 176, 32,  2, 32, 32, false},  //29 WalkAndSkank-SerialKillaz
+  {177,  0, 184, 32,  2, 32, 32, false},  //30 AintNoStoppinUs-OraclesDjLuckMcNeat
 };
 
 // Genre 7, HipHop
