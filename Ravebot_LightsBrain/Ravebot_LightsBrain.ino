@@ -118,7 +118,7 @@ void setup() {
   LEDS.addLeds<WS2811_PORTD, 6>(rgbwLeds, 488); // Hardcoded to ports:25,26,27,28,14,15
   LEDS.setBrightness(128); // 128 good max, 255 actual /max
 
- setMainVolume(mainVolume);
+  setMainVolume(mainVolume);
   
   if (currentLightPattern < 14)
     setupNewTwinklePattern(currentLightPattern);
@@ -248,6 +248,7 @@ const tuneInfo tuneLibRave[34] = {
   {128, 44, 104, 12,  8, 16, 16, false},  // 32 Kinetic-GoldenGirls
   {132, 56, 144, 16,  8, 16, 16, false},  // 33 Activ8-Altern8
   {145, 96, 160, 16,  8, 16, 16, false},  // 34 NoGoodStartTheDance-TheProdigy
+  {135, 61, 180, 16,  8, 16, 16, false},  // 35 ALittleBitOfLuck_OraclesMix
 };
 
 // Genre 1, Disco
@@ -416,6 +417,7 @@ tuneInfo tuneLibDance[30] = {
   {114,  0, 116, 16,  4, 16, 16, false},  // 28 DaFunk-DaftPunk
   {150,  0, 152, 16,  4,  8, 16, false},  // 29 I3USo-SkreamCassius
   {136,  0,  84,  8,  2,  8, 16, false},  // 30 BillieEilish_BadGuy  
+  {138,  0, 192, 16, 16, 16, 16, false},    // 31 DidIt_FyrusLarraineCatoSticky
 };
 
 //  Genre 6, Drum&Bass
