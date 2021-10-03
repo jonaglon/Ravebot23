@@ -18,9 +18,9 @@ uint64_t = 0 to 18,446,744,073,709,551,615      */
 
 const bool testMode = false;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
 const bool beatTestMode = true;
-const bool megaAttached = true;
+const bool megaAttached = false;
 
-bool robotSwitchedOn = false;
+bool robotSwitchedOn = true;
 bool robotManualMode = true;
 
 uint32_t timey;
@@ -127,7 +127,7 @@ void setup() {
     changeOnOff(0);
     
   // JR TODO remove me ******************************
-  playTune(4, 16, true);
+  playTune(5, 2, true);
 }
 
 void loop() {
@@ -213,7 +213,7 @@ struct tuneInfo {
 };
 
 // Genre 0, RAVE!
-const tuneInfo tuneLibRave[34] = {
+const tuneInfo tuneLibRave[35] = {
   {149, 68, 144, 16,  0, 16,  0, false},  // 1  TripToTheMoonPt2-Acen
   {136, 80, 104, 16,  0, 16, 16, false},  // 2  Bombscare-2BadMice
   {126,  0, 118,  8,  0, 16,  8, false},  // 3  LFO-LFO
@@ -252,7 +252,7 @@ const tuneInfo tuneLibRave[34] = {
 };
 
 // Genre 1, Disco
-tuneInfo tuneLibDisco[28] = {
+tuneInfo tuneLibDisco[30] = {
   {125,  0, 101,  8,  4,  8,  8, false},  // 1 ILoveTheNightlife - Alecia Bridges
   {110,  0, 128,  8,  4, 16, 16, true},   // 2 LastNightADjSavedMyLife-Indeep
   {134,  0, 149,  8,  0, 16, 16, true},   // 3 LayAllYourLoveOnMe-Abba
@@ -280,12 +280,14 @@ tuneInfo tuneLibDisco[28] = {
   {118,  0, 112, 16,  4, 16, 16, true},   // 25 LeFreak-Chic
   {118,  0, 141,  8,  0,  8,  8, true},   // 26 BoogieWonderland-EarthWindAndFire
   {132,  0, 154, 16,  4,  8,  4, false},  // 27 Shame-EvelynChampageKing
-  {123,  0,  98,  8,  4 ,  8,  8, false}, // 28 DISCO-Ottowan
+  {123,  0,  98,  8,  4 , 8,  8, false},  // 28 DISCO-Ottowan
+  {106,  0, 104,  4,  4 , 8,  8, true},   // 29 ShameShameShame-ShirleyAndCo
+  {114,  0, 124,  4,  4 , 8,  8, false},   // 30 LetTheBeatHitEm-LisaLisa_CultJam
 };
 
 
 // Genre 2, Reggae
-tuneInfo tuneLibReggae[28] = {
+tuneInfo tuneLibReggae[29] = {
   {170,  0, 132,  8,  0, 16, 16, false},  // 1 RingTheAlarm-TenorSaw
   {102,  0, 118,  8,  0,  8,  8, false},  // 2 FunkyKingston-Toots
   {164,  0, 164,  8,  0, 16, 16, false},  // 3 UnderMeSlengTeng-WayneSmith
@@ -314,10 +316,12 @@ tuneInfo tuneLibReggae[28] = {
   {143,  0, 116,  8,  4,  8,  8, true},   // 26 ThatVeryNight-HollieCook
   {144,  0, 126,  4,  4,  8,  8, true},   // 27 PoliceInHelicopter-JohnHolt
   {142,  0, 132,  4,  4,  8,  8, true},   // 28 GanjaSmuggling-EekAMouse
+  { 96,  0,  96,  4,  4,  8,  8, false},  // 29 MurderSheWrote_ChakaDemus_Pliers
 };
 
+//  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 //  Genre 3, Rock&Pop
-tuneInfo tuneLibRockAndPop[31] = {
+tuneInfo tuneLibRockAndPop[33] = {
   { 82,  0,  66,  8,  0,  4,  4, true},  // 1 KidsInAmerica-KimWilde
   {130,  0, 120, 16,  0, 16,  8, false}, // 2 CantGetYouOut-Kylie
   {112,  0, 102,  8,  0,  8,  8, true},  // 3 ICantGoForThat-Hall&Oates
@@ -349,10 +353,12 @@ tuneInfo tuneLibRockAndPop[31] = {
   {125,  0, 108,  4,  0,  2,  2, false}, // 29 PumpUpTheJam-Technotronic
   {130,  0, 144,  8,  2, 16,  0, false}, // 30 GraceJones_Libertango
   {110,  0,  86,  4,  2,  8,  8, true},  // 31 Queen_IWantToBreakFree
+  { 90,  0, 113,  6,  0,  6,  0, false}, // 32 WhatIdSayParts1And2-RayCharles
+  {108,  0, 104,  8,  0, 16,  0, true},  // 33 LadiesFirst_QueenLatifah
 };
 
 //  Genre 4, Easy
-tuneInfo tuneLibEasy[29] = {
+tuneInfo tuneLibEasy[33] = {
   {122,  0, 134,  8,  2,  4,  4, false},  // 1 BackToMyRoots - RichieHavens
   {104,  0,  59,  4,  0,  4,  4, true},   // 2 Think - Aretha
   {100,  0, 182,  8,  4,  8,  8, false},  // 3 As - Wonder
@@ -370,7 +376,7 @@ tuneInfo tuneLibEasy[29] = {
   {116,  0, 134,  8,  0,  6,  6, true},   // 15 JamacianBoy-LoneRanger
   {171,  0, 186,  8,  0,  8,  8, true},   // 16 TheLook-Metronomy
   {129,  0, 124,  4,  0,  8,  8, false},  // 17 ReadyForTheFloor-HotChip
-  {170,  0, 104, 16,  0,  8,  4, true},   // 18 Rogbiv-Boa   rdsOfCanada
+  {170,  0,  96, 16,  0,  8,  4, true},   // 18 Roygbiv-BoardsOfCanada
   {102,  0, 136,  8,  0,  8,  8, false},  // 19 Ageopolis-AphexTwin
   {103,  0, 110,  8,  0,  8,  8, false},  // 20 ICouldNeverBeYourMan-WhiteTown
   {154,  0, 140,  8,  0, 16,  0, true},   // 21 Bigger than hip hop-DedPrez
@@ -382,11 +388,24 @@ tuneInfo tuneLibEasy[29] = {
   {102,  0,  74,  8,  2,  6,  6, true},   // 27 IfYouWantMeToStay-SlyAndTheFamilyStone
   {102,  0,  82,  8,  4,  8,  8, true},   // 28 Rocksteady-Aretha
   { 98,  0, 100,  8,  4,  8,  8, false},  // 29 SoManyGirls-Nextmen
+  {112,  0, 148,  8,  4,  8,  8, true},   // 30 Candy-Cameo
+  { 86,  0,  92, 16,  0,  8,  0, false},  // 31 PureGold_Calyx_TeeBee_Kemo
+  {132,  0, 152, 16,  4, 16, 16, false},  // 32 SomethingInYourEyes-KWarrenEdCaseShelleyNelson
+  {124,  0, 128,  8,  0, 16, 16, false},  // 33 Mondo77-Looper
 };
 
-//  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 //  Genre 5, Dance
-tuneInfo tuneLibDance[30] = {
+tuneInfo tuneLibDance[5] = {
+  {134, 0,  16,  4, 0, 4,  0, false},  // 1 A rinky dinky
+  {110, 0,  16,  4,  0, 4, 0 , true},  // 2 Kelis - Trick Me
+  {150,  0, 16,  4,  0,  4, 0, false},  // 3 Dubbleedge - Lips to the floor
+  {134, 0, 16,  4,  0, 4, 0, false},  // 4 Zero Emit Collect
+  {126, 0,  16,  4,  0, 4, 0, false},  // 5 Dizee Bonkers
+};
+/*
+//  bpm drp len mxIn mnOut mxOut bestEnd playOut 
+//  Genre 5, Dance
+tuneInfo tuneLibDance[41] = {
   {134, 30, 124,  8 , 0, 16,  8, false},  // 1 A rinky dinky
   {110, 58,  88,  8,  0, 16, 16 , true},  // 2 Kelis - Trick Me
   {150,  0, 132, 16,  0,  4,  4, false},  // 3 Dubbleedge - Lips to the floor
@@ -395,14 +414,14 @@ tuneInfo tuneLibDance[30] = {
   {118,  0,  88,  8,  0,  8,  8, true},   // 6 DownWithTheTrumpets-RizzleKicks
   {112, 85, 104,  8,  0,  8,  8, true},   // 7 PraiseYou-FatBoySlim
   {132,  0, 162, 16,  0,  8,  8, true},   // 8 WileOut - DJ Zinc - DownWithTheTrumpets
-  {146,  0, 170, 16,  0, 12, 10, false},  // 9 Aphex - Polynomial C - ????????????????????
+  {146,  0, 170, 16,  0, 12, 10, false},  // 9 Aphex - Polynomial C
   {124,  0, 189,  2,  2,  8,  8, false},  // 10 Aphex WindowLicker
   {122,  0, 155,  8,  4, 16,  8, false},  // 11 OverAndOver-HotChip
   {142,  0, 124,  4,  4, 16, 16, false},  // 12 Omen - Prodigy
   {128,  0, 108,  8,  0, 16, 16, false},  // 13 DibbyDibbySound-MajorLazer
   {132,  0, 120,  8,  0, 16, 16, false},  // 14 ClintEastwood-EdCaseGorillaz
   {128,  0, 104,  8,  0,  8,  8, true},   // 15 AllAboutThatBass-MeganTrainor -- move to rock pop
-  {126,  0, 109,  8,  0,  9,  8, false},  // 16 WeDontCare-AudioBullys - ????????????????????
+  {126,  0, 109,  8,  0,  9,  8, false},  // 16 WeDontCare-AudioBullys
   {128,  0, 108,  8,  0, 12, 12, false},  // 17 TooOriginal-MajorLazer
   {140,  0, 117, 16,  0, 16, 12, true},   // 18 BasslineJunkie-DizzeeRascal
   {140,  0, 161, 16,  0, 16, 16, false},  // 19 FeelLikeJumping-KraftyKuts
@@ -417,45 +436,63 @@ tuneInfo tuneLibDance[30] = {
   {114,  0, 116, 16,  4, 16, 16, false},  // 28 DaFunk-DaftPunk
   {150,  0, 152, 16,  4,  8, 16, false},  // 29 I3USo-SkreamCassius
   {136,  0,  84,  8,  2,  8, 16, false},  // 30 BillieEilish_BadGuy  
-  {138,  0, 192, 16, 16, 16, 16, false},    // 31 DidIt_FyrusLarraineCatoSticky
-};
+  {138,  0, 192, 16, 16, 16, 16, false},  // 31 DidIt_FyrusLarraineCatoSticky
+  {136,  0, 144, 16,  8, 16, 16, false},  // 32 BumpNGrind-MDubsLadySaw
+  {135,  0, 176, 16,  4, 16,  8, false},  // 33 AintNoStoppinUs-OraclesDjLuckMcNeat  
+  {135,  0, 180, 16,  4, 16, 16, false},  // 34 Boooo_StickyMsDynamiteJasonKaye
+  {132,  0, 156, 16,  4, 16, 16, false},  // 35 BodyGroove-Architechs_NayNay
+  {128,  0, 112, 16,  4, 16, 16, false},  // 36 ItsALondonThing-ScottGarcia
+  {130,  0, 144, 16,  0, 16, 16, false},  // 37 NeighbourhoodBioSonic_ZedBias_MCRumpusMickyPrince
+  { 96,  0, 112,  8,  0, 16, 16, false},  // 38 Gasolina-PitbullDaddyYankeeLilJon
+  {128,  0, 128,  8,  0, 16, 16, false},  // 39 ClubAction-YoMajesty
+  {128,  0, 122,  8,  0, 16, 16, false},  // 40 GetDown_GrooveArmadaStushRedRat
+  {128,  0, 120, 16,  0, 16, 16, false},  // 41 Low-TPain_FloRider
+};*/
 
+//  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 //  Genre 6, Drum&Bass
-tuneInfo tuneLibDrumAndBass[29] = {
+tuneInfo tuneLibDrumAndBass[36] = {
   {176,  0, 208, 32,  2, 32, 32, false},  // 1 Girls-DJHypeAndPotential
   {176,  0, 192, 32,  2, 32, 32, false},  // 2 DuppyMan-ChaseAndStatusCapleton
-  {180,  0, 204, 32,  2, 32, 32, false},  //3 PullUp-ResonatGenLevy
-  {176,  0, 196, 32,  2, 32, 32, false},  //4 GoldDigger-HighContrast
-  {177,  0, 192, 32,  2, 32, 32, false},  //5 ShakeUrBody-ShyFX
-  {174,  0, 144, 32,  2, 32, 32, false},  //6 KingOfTheBeats2016-Aphrodite
-  {180,  0, 184, 32,  2, 32, 32, false},  //7 LastNight-BennyPage
-  {176,  0, 208, 32,  2, 32, 16, false},  //8 TurnDownTheLights-BennyPage
-  {175,  0, 152, 32,  2, 32, 32, false},  //9 PassTheKutchie-BennyPage
-  {175,  0, 184, 32,  2, 32, 32, false},  //10 PassMeTheRizla-Deekline
-  {176,  0, 192, 32,  2, 32, 32, false},  //11 CryingOut-BennyPageSerialKillazMix
-  {176,  0, 160, 32,  2, 32, 32, false},  //12 ProfessionalGangaSmoker-GenLevy
-  {175,  0, 160, 32,  2, 32, 32, false},  //13 TopRankSkank-BennyPage
-  {176,  0, 200, 32,  2, 32, 32, false},  //14 BamBam-SerialKillaz
-  {176,  0, 184, 32,  2, 32, 32, false},  //15 NoNoNo-SerialKillaz
-  {175,  0, 176, 32,  2, 32, 32, false},  //16 RaggaTip-EdSolo
-  {174,  0, 192, 32,  2, 32, 32, false},  //17 KissKissBangBang-HighContrast
-  {174,  0, 192, 32,  2, 32, 16, false},  //18 Deep-TC
-  {177,  0, 132, 24,  2, 32, 32, false},  //19 GoldDust-ShyFXMix
-  {177,  0, 184, 32,  2, 32,  8, false},  //20 BlazingFire-BennyPage
-  {175,  0, 176, 32,  2, 32, 32, false},  //21 HitTheRoadJack-DeeklineEdSoloGala
-  {176,  0, 160, 32,  2, 32, 32, false},  //22 Incredible-MBeat
-  {174,  0, 176, 32,  2, 32, 32, false},  //23 Workout-AndyC
-  {174,  0, 168, 32,  2, 32, 32, false},  //24 RemindMe-HighContrast
-  {174,  0, 168, 32,  2, 32, 32, false},  //25 PassOutDCBreaks-TinyTempah
-  {170,  0, 136, 16,  2, 32, 32, false},  //26 OriginalNuttah-ShyFX
-  {180,  0, 128, 32,  2, 32, 32, false},  //27 HandsUp-DjHype
-  {174,  0, 176, 32,  2, 32, 32, false},  //28 Pendulum_Tarantula
-  {176,  0, 176, 32,  2, 32, 32, false},  //29 WalkAndSkank-SerialKillaz
-  {177,  0, 184, 32,  2, 32, 32, false},  //30 AintNoStoppinUs-OraclesDjLuckMcNeat
+  {180,  0, 204, 32,  2, 32, 32, false},  // 3 PullUp-ResonatGenLevy
+  {176,  0, 196, 32,  2, 32, 32, false},  // 4 GoldDigger-HighContrast
+  {177,  0, 192, 32,  2, 32, 32, false},  // 5 ShakeUrBody-ShyFX
+  {174,  0, 144, 32,  2, 32, 32, false},  // 6 KingOfTheBeats2016-Aphrodite
+  {180,  0, 184, 32,  2, 32, 32, false},  // 7 LastNight-BennyPage
+  {176,  0, 208, 32,  2, 32, 16, false},  // 8 TurnDownTheLights-BennyPage
+  {175,  0, 152, 32,  2, 32, 32, false},  // 9 PassTheKutchie-BennyPage
+  {175,  0, 184, 32,  2, 32, 32, false},  // 10 PassMeTheRizla-Deekline
+  {176,  0, 192, 32,  2, 32, 32, false},  // 11 CryingOut-BennyPageSerialKillazMix
+  {176,  0, 160, 32,  2, 32, 32, false},  // 12 ProfessionalGangaSmoker-GenLevy
+  {175,  0, 160, 32,  2, 32, 32, false},  // 13 TopRankSkank-BennyPage
+  {176,  0, 200, 32,  2, 32, 32, false},  // 14 BamBam-SerialKillaz
+  {176,  0, 184, 32,  2, 32, 32, false},  // 15 NoNoNo-SerialKillaz
+  {175,  0, 176, 32,  2, 32, 32, false},  // 16 RaggaTip-EdSolo
+  {174,  0, 192, 32,  2, 32, 32, false},  // 17 KissKissBangBang-HighContrast
+  {174,  0, 192, 32,  2, 32, 16, false},  // 18 Deep-TC
+  {177,  0, 132, 24,  2, 32, 32, false},  // 19 GoldDust-ShyFXMix
+  {177,  0, 184, 32,  2, 32,  8, false},  // 20 BlazingFire-BennyPage
+  {175,  0, 176, 32,  2, 32, 32, false},  // 21 HitTheRoadJack-DeeklineEdSoloGala
+  {176,  0, 160, 32,  2, 32, 32, false},  // 22 Incredible-MBeat
+  {174,  0, 176, 32,  2, 32, 32, false},  // 23 Workout-AndyC
+  {174,  0, 168, 32,  2, 32, 32, false},  // 24 RemindMe-HighContrast
+  {174,  0, 168, 32,  2, 32, 32, false},  // 25 PassOutDCBreaks-TinyTempah
+  {170,  0, 136, 16,  2, 32, 32, false},  // 26 OriginalNuttah-ShyFX
+  {180,  0, 128, 32,  2, 32, 32, false},  // 27 HandsUp-DjHype
+  {174,  0, 176, 32,  2, 32, 32, false},  // 28 Pendulum_Tarantula
+  {176,  0, 176, 32,  2, 32, 32, false},  // 29 WalkAndSkank-SerialKillaz
+  {176,  0, 208, 32,  2, 32, 32, false},  // 30 IllBehaviour-DannyBirdIKay
+  {178,  0, 192, 32,  2, 32, 32, false},  // 31 GetReady-CongoNatty
+  {176,  0, 208, 32,  2, 32, 32, false},  // 32 SeeTheVibe-EdSoloFardnaTiffJuno
+  {178,  0, 216, 32,  2, 32, 32, false},  // 33 BlowThemAway-SerumInja
+  {178,  0, 176, 16,  2, 32, 32, false},  // 34 Jump+Move+Rock-BennyPageWrongtom
+  {176,  0, 160, 16,  2, 32, 32, false},  // 35 Solar_Metrik
+  {176,  0, 144, 16,  2, 32, 32, false},  // 36 Fire-Hamilton
 };
 
+//  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 // Genre 7, HipHop
-tuneInfo tuneLibHipHop[28] = {
+tuneInfo tuneLibHipHop[30] = {
   {101,  0,  80,  4,  0, 16, 16, false},  //1 Lets get ill
   { 90,  0, 108,  4,  0, 16,  8, false},  //2 No Diggidy
   { 97,  0,  66,  8,  4, 16, 16, true},   //3 ShimmyShimmyYa-ODB
@@ -482,8 +519,10 @@ tuneInfo tuneLibHipHop[28] = {
   { 95,  0,  86,  4,  0,  8,  8, true},   //24 XGonGiveItToYa-DMX
   {134,  0, 124,  8,  0,  8,  8, true},   //25 ForgotAboutDre-DreEminem
   { 93,  0, 104,  8,  0,  8,  8, false},  //26 StillDRE-DrDre
-  { 98,  0, 102,  4,  0,  8,  8, true},   //27 X-Xzibit X Go
-  { 98,  0, 100,  4,  0,  8,  8, true},   //2x X-Xzibit
+  { 98,  0, 100,  8,  0,  8,  0, true},   //27 X-Xzibit X Go
+  { 93,  0, 100,  4,  0,  8,  8, true},   //28 ExpressYourself-NWA
+  {108,  0,  96,  8,  0,  8,  8, false},  // 29 GotYourMoney-ODB
+  { 92,  0, 100,  8,  0,  8,  8, false},  // 30 KeepOnKeepinOn_MCLyteXscape
 };
 
 tuneInfo currentTune = tuneLibHipHop[0];
