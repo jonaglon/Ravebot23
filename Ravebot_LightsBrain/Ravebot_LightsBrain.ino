@@ -396,10 +396,10 @@ tuneInfo tuneLibEasy[33] = {
 
 //  Genre 5, Dance
 tuneInfo tuneLibDance[5] = {
-  {134, 0,  16,  4, 0, 4,  0, false},  // 1 A rinky dinky
-  {110, 0,  16,  4,  0, 4, 0 , true},  // 2 Kelis - Trick Me
-  {150,  0, 16,  4,  0,  4, 0, false},  // 3 Dubbleedge - Lips to the floor
-  {134, 0, 16,  4,  0, 4, 0, false},  // 4 Zero Emit Collect
+  {134, 0,  16,  4,  0, 4, 0, false},  // 1 A rinky dinky
+  {110, 0,  16,  4,  0, 4, 0, false},  // 2 Kelis - Trick Me
+  {150, 0,  16,  4,  0, 4, 0, false},  // 3 Dubbleedge - Lips to the floor
+  {134, 0,  16,  4,  0, 4, 0, false},  // 4 Zero Emit Collect
   {126, 0,  16,  4,  0, 4, 0, false},  // 5 Dizee Bonkers
 };
 /*

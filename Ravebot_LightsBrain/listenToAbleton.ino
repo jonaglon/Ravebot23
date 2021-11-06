@@ -80,26 +80,26 @@ void processMessageFromAbleton(uint8_t note, uint8_t velocity, int16_t down) {
       mixCurrentBar++;
       percentThroughBeat=0;
       checkForDropCountdownStart();
-      checkForMixEnd();
     }
+    if ((sixteenBeats % 4) == 2) {
+      checkForMixStart();
+      checkForMixEnd();
+    }    
     if (currentlyMixing) {
       setPercentThroughMix();
       doMixing();
-    }
-    if (sixteenBeats % 4 == 3) {
-      checkForMixStart();
     }
   }
 }
 
 void checkForMixStart() {
-  if (currentBar+1 == nextMixStart) {
+  if (currentBar == nextMixStart) {
       startNewMix();
   }
 }
 
 void checkForMixEnd() {
-  if (currentBar == nextMixStart + nextMixDuration)
+  if (currentBar == nextMixStart + nextMixDuration + 1)
   {
     endMixAndPickNewTune();
   }
@@ -108,11 +108,7 @@ void checkForMixEnd() {
 void checkForDropCountdownStart() {
   if (currentBar+4 == currentTune.drop)
     dropCountdown = 16;
-  
-  if (currentBar+2 == currentTune.drop)
-    dropCountdown = 8;
 }
-
 
 /* Below is the fake beat control code */
 uint32_t nextBeat = 0;
@@ -124,5 +120,3 @@ void doFakeBeatMessageFromAbleton() {
     fakeBeatCount++;
   }
 }
-
-

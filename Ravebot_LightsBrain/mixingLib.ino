@@ -102,14 +102,14 @@ void startNewMix() {
   // change the current track in this program
   mixCurrentBar = -1;
   currentlyMixing = true;
-  sixteenBeats = 0;
-  totalBeats = 0;
-  lastBeatTime = 0;
-  timeyInTime = 0;
+  // sixteenBeats = 0;
+  // totalBeats = 0;
+  // lastBeatTime = 0;
+  // timeyInTime = 0;
 
-  if (nextMixDuration == 0) {      
-    setCrossfader(63);
-  }
+  //if (nextMixDuration == 0) {      
+  //  setCrossfader(63);
+  //}
 
 }
 
@@ -149,11 +149,11 @@ void calculateMixDurationAndStart() {
 
   nextMixDuration = (currentTune.maxFadeOut > nextTune.maxFadeIn) ? nextTune.maxFadeIn : currentTune.maxFadeOut;
 
-  if (nextMixDuration < 8) {
-    nextMixStart = currentTune.tuneLength - currentTune.maxFadeOut + currentTune.shortMixEnd - nextMixDuration;
-  } else {
+  //if (nextMixDuration < 8) {
+  //  nextMixStart = currentTune.tuneLength - currentTune.maxFadeOut + currentTune.shortMixEnd - nextMixDuration;
+  //} else {
     nextMixStart = currentTune.tuneLength - nextMixDuration;
-  }
+  //}
 
   if (testMode)
     printMixDurationAndStartDebug(nextMixDuration, nextMixStart, currentTune.tuneLength);
@@ -200,6 +200,9 @@ void chooseNextTrack() {
 
 
 bool playedTuneHistoryContainsTrack(uint8_t genre, uint8_t track) {
+  // TODO ************************************************************************************** TODO - put me back...
+  return false;
+  
   for (int x = 0; x < 20; x++) {
     if ((last20Genres[x] == genre) && (last20Tracks[x] == track)) {
       return true;
@@ -304,5 +307,3 @@ int numberOfTunesInGenre(int genre) {
   else
     return sizeof(tuneLibHipHop) / sizeof(tuneInfo);
 }
-
-

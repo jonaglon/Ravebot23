@@ -179,6 +179,3 @@ void sendMidiTest(int16_t channel, int16_t trackNumber, int16_t velocity) {
   Serial.print(" Value:");
   Serial.println(velocity);
 }
-
-
-
