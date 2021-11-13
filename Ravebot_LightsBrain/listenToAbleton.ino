@@ -94,7 +94,7 @@ void processMessageFromAbleton(uint8_t note, uint8_t velocity, int16_t down) {
 }
 
 void checkForMixStart() {
-  if (currentBar == nextMixStart-2) {
+  if (currentBar == nextMixStart-1) {
       startNewMix();
   }
 }

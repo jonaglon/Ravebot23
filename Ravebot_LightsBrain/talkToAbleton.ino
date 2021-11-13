@@ -32,7 +32,7 @@ void playTune(int16_t genre, int16_t track, bool alterHistory) {
   deckASelected = true;
 
   // change the current track in this program
-  currentBar = -1;
+  currentBar = -2;
   fakeBeatCount = 0;
   sixteenBeats = 0;
   totalBeats = 0;
