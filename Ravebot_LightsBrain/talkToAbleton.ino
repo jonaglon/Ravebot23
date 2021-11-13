@@ -19,7 +19,7 @@ void playRandomTune(int16_t genre) {
 
 void playTune(int16_t genre, int16_t track, bool alterHistory) {
   setCurrentTune(genre, track);
-  setAbletonTempo(currentTune.bpm-1);
+  // setAbletonTempo(currentTune.bpm-1);
   sendFullStop();
   stopAllAbletonClips(); 
   delay(20);
@@ -32,7 +32,7 @@ void playTune(int16_t genre, int16_t track, bool alterHistory) {
   deckASelected = true;
 
   // change the current track in this program
-  currentBar = 0;
+  currentBar = -1;
   fakeBeatCount = 0;
   sixteenBeats = 0;
   totalBeats = 0;

@@ -81,7 +81,8 @@ void processMessageFromAbleton(uint8_t note, uint8_t velocity, int16_t down) {
       percentThroughBeat=0;
       checkForDropCountdownStart();
     }
-    if ((sixteenBeats % 4) == 2) {
+    else if ((sixteenBeats % 4) == 2) 
+    {
       checkForMixStart();
       checkForMixEnd();
     }    
@@ -93,13 +94,13 @@ void processMessageFromAbleton(uint8_t note, uint8_t velocity, int16_t down) {
 }
 
 void checkForMixStart() {
-  if (currentBar == nextMixStart) {
+  if (currentBar == nextMixStart-2) {
       startNewMix();
   }
 }
 
 void checkForMixEnd() {
-  if (currentBar == nextMixStart + nextMixDuration + 1)
+  if (currentBar == nextMixStart + nextMixDuration)
   {
     endMixAndPickNewTune();
   }

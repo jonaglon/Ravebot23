@@ -24,7 +24,7 @@ void doMixing() {
 void setPercentThroughMix() {
   int16_t percentThroughCalc = 0;
 
-  int16_t beatsIntoMix = ((currentBar - nextMixStart + 1) * 4) + (sixteenBeats % 4) - 3;
+  int16_t beatsIntoMix = ((currentBar - nextMixStart + 1) * 4) + (sixteenBeats % 4);
 
   if (nextMixDuration < 12) {
     // straight mix if less than 12 bars
