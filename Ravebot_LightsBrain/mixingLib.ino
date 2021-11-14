@@ -24,7 +24,7 @@ void doMixing() {
 void setPercentThroughMix() {
   int16_t percentThroughCalc = 0;
 
-  int16_t beatsIntoMix = ((currentBar - nextMixStart + 1) * 4) + (sixteenBeats % 4);
+  int16_t beatsIntoMix = ((currentBar - nextMixStart + 1) * 4) + (sixteenBeats % 4) - 4;
 
   if (nextMixDuration < 12) {
     // straight mix if less than 12 bars
@@ -102,14 +102,12 @@ void startNewMix() {
   // change the current track in this program
   mixCurrentBar = -1;
   currentlyMixing = true;
-  // sixteenBeats = 0;
-  // totalBeats = 0;
-  // lastBeatTime = 0;
-  // timeyInTime = 0;
 
-  //if (nextMixDuration == 0) {      
-  //  setCrossfader(63);
-  //}
+  totalBeats = 0;
+
+  if (nextMixDuration == 0) {      
+    setCrossfader(63);
+  }
 
 }
 
