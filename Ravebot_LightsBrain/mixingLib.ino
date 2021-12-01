@@ -147,11 +147,7 @@ void calculateMixDurationAndStart() {
 
   nextMixDuration = (currentTune.maxFadeOut > nextTune.maxFadeIn) ? nextTune.maxFadeIn : currentTune.maxFadeOut;
 
-  //if (nextMixDuration < 8) {
-  //  nextMixStart = currentTune.tuneLength - currentTune.maxFadeOut + currentTune.shortMixEnd - nextMixDuration;
-  //} else {
-    nextMixStart = currentTune.tuneLength - nextMixDuration;
-  //}
+  nextMixStart = currentTune.tuneLength - nextMixDuration;
 
   if (testMode)
     printMixDurationAndStartDebug(nextMixDuration, nextMixStart, currentTune.tuneLength);
@@ -198,9 +194,6 @@ void chooseNextTrack() {
 
 
 bool playedTuneHistoryContainsTrack(uint8_t genre, uint8_t track) {
-  // TODO ************************************************************************************** TODO - put me back...
-  return false;
-  
   for (int x = 0; x < 20; x++) {
     if ((last20Genres[x] == genre) && (last20Tracks[x] == track)) {
       return true;

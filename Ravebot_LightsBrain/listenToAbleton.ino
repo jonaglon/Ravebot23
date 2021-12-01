@@ -83,6 +83,9 @@ void processMessageFromAbleton(uint8_t note, uint8_t velocity, int16_t down) {
     else if ((sixteenBeats % 4) == 2) 
     {
       checkForMixStart();
+    }    
+    else if ((sixteenBeats % 4) == 3) 
+    {
       checkForMixEnd();
     }    
     if (currentlyMixing) {
