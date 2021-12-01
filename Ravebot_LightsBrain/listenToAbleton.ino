@@ -42,7 +42,6 @@ void listenToAbleton() {
       // get the velocity
       if (incomingByte < 128) {
         processMessageFromAbleton(note, incomingByte, noteDown);
-        //sixteenBeatWatchFn();
       }
       state = 0;  // reset state machine to start            
     }
@@ -100,7 +99,7 @@ void checkForMixStart() {
 }
 
 void checkForMixEnd() {
-  if (currentBar == nextMixStart + nextMixDuration)
+  if (currentBar == nextMixStart + nextMixDuration -1)
   {
     endMixAndPickNewTune();
   }

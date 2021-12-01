@@ -1,4 +1,4 @@
-/*   __                 _           _               __ _       _     _
+  /*   __                 _           _               __ _       _     _
     /__\ __ ___   _____| |__   ___ | |_            / /(_) __ _| |__ | |_ ___
    / \/// _` \ \ / / _ \ '_ \ / _ \| __|  _____   / / | |/ _` | '_ \| __/ __|
   / _  \ (_| |\ V /  __/ |_) | (_) | |_  |_____| / /__| | (_| | | | | |_\__ \
@@ -125,12 +125,8 @@ void setup() {
 
   if (!robotSwitchedOn)
     changeOnOff(0);
-    
-  // JR TODO remove me ******************************
-
-
-  
-  playTune(5, 2, true);
+      
+  playTune(4, 5, false);
 }
 
 void loop() {
@@ -397,27 +393,18 @@ tuneInfo tuneLibEasy[33] = {
   {124,  0, 128,  8,  0, 16, 16, false},  // 33 Mondo77-Looper
 };
 
-//  Genre 5, Dance
-tuneInfo tuneLibDance[5] = {
-  {134, 0,  16,  4,  0, 4, 0, false},  // 1 A rinky dinky
-  {110, 0,  16,  4,  0, 4, 0, false},  // 2 Kelis - Trick Me
-  {150, 0,  16,  4,  0, 4, 0, false},  // 3 Dubbleedge - Lips to the floor
-  {134, 0,  16,  4,  0, 4, 0, false},  // 4 Zero Emit Collect
-  {126, 0,  16,  4,  0, 4, 0, false},  // 5 Dizee Bonkers
-};
-/*
 //  bpm drp len mxIn mnOut mxOut bestEnd playOut 
 //  Genre 5, Dance
 tuneInfo tuneLibDance[41] = {
   {134, 30, 124,  8 , 0, 16,  8, false},  // 1 A rinky dinky
-  {110, 58,  88,  8,  0, 16, 16 , true},  // 2 Kelis - Trick Me
-  {150,  0, 132, 16,  0,  4,  4, false},  // 3 Dubbleedge - Lips to the floor
-  {134,106, 168, 16,  0, 16, 12, false},  // 4 Zero Emit Collect
+  {110, 58,  88, 16,  0, 16, 16, true},   // 2 Kelis - Trick Me
+  {153,  0, 128, 16,  0, 16, 16, false},  // 3 Dubbleedge - Lips to the floor  // TODO fix this in ableton & here{153,  0, 128, 16,  0, 16, 16, false},  /
+  {134,106, 168, 16,  0, 16, 16, false},  // 4 Zero Emit Collect
   {126, 72,  92,  0,  2, 10, 10, false},  // 5 Dizee Bonkers
   {118,  0,  88,  8,  0,  8,  8, true},   // 6 DownWithTheTrumpets-RizzleKicks
   {112, 85, 104,  8,  0,  8,  8, true},   // 7 PraiseYou-FatBoySlim
   {132,  0, 162, 16,  0,  8,  8, true},   // 8 WileOut - DJ Zinc - DownWithTheTrumpets
-  {146,  0, 170, 16,  0, 12, 10, false},  // 9 Aphex - Polynomial C
+  {146,  0, 128, 16,  0, 12, 10, false},  // 9 Aphex - Polynomial C
   {124,  0, 189,  2,  2,  8,  8, false},  // 10 Aphex WindowLicker
   {122,  0, 155,  8,  4, 16,  8, false},  // 11 OverAndOver-HotChip
   {142,  0, 124,  4,  4, 16, 16, false},  // 12 Omen - Prodigy
@@ -432,9 +419,9 @@ tuneInfo tuneLibDance[41] = {
   {152,  0, 150,  8,  0,  4,  4, true},   // 21 TheRockerfellerSkank-FatboySlim
   {152,  0, 136,  8,  0,  8,  8, true},   // 22 InForTheKill-LaRoux
   {130,  0, 144,  8,  0,  8,  8, true},   // 23 HeyBoyHeyGirl-ChemicalBrothers
-  {126,  0, 112,  8,  0,  8,  4, false},  // 24 LikeAG6-FarEastMovement
-  {124,  0, 112, 16,  0, 16,  0, false},  // 25 ButIFeelGood-GrooveArmada
-  {116,  0, 128,  8,  0,  8,  8, false},  // 26 UptownFunk-MarkRonson
+  {126,  0, 112, 16,  0,  8,  4, false},  // 24 LikeAG6-FarEastMovement
+  {124,  0, 120, 16,  0, 16,  0, false},  // 25 ButIFeelGood-GrooveArmada
+  {116,  0, 128,  8,  0, 16,  8, false},  // 26 UptownFunk-MarkRonson 
   {137,  0, 114,  0,  1,  1,  1, true},   // 27 DaftPunkIsPlayingAtMyHouse-LCDSoundSystem
   {114,  0, 116, 16,  4, 16, 16, false},  // 28 DaFunk-DaftPunk
   {150,  0, 152, 16,  4,  8, 16, false},  // 29 I3USo-SkreamCassius
@@ -448,9 +435,9 @@ tuneInfo tuneLibDance[41] = {
   {130,  0, 144, 16,  0, 16, 16, false},  // 37 NeighbourhoodBioSonic_ZedBias_MCRumpusMickyPrince
   { 96,  0, 112,  8,  0, 16, 16, false},  // 38 Gasolina-PitbullDaddyYankeeLilJon
   {128,  0, 128,  8,  0, 16, 16, false},  // 39 ClubAction-YoMajesty
-  {128,  0, 122,  8,  0, 16, 16, false},  // 40 GetDown_GrooveArmadaStushRedRat
+  {128,  0,  88,  6,  0, 12, 12, false},  // 40 GetDown_GrooveArmadaStushRedRat
   {128,  0, 120, 16,  0, 16, 16, false},  // 41 Low-TPain_FloRider
-};*/
+};
 
 //  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 //  Genre 6, Drum&Bass
