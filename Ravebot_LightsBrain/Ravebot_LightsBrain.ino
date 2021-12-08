@@ -126,7 +126,7 @@ void setup() {
   if (!robotSwitchedOn)
     changeOnOff(0);
       
-  playTune(0, 2, false);
+  playTune(6, 3, true);
 }
 
 void loop() {
@@ -250,7 +250,7 @@ const tuneInfo tuneLibRave[35] = {
 };
 
 // Genre 1, Disco
-tuneInfo tuneLibDisco[30] = {
+tuneInfo tuneLibDisco[34] = {
   {125,  0, 101,  8,  4,  8, false},  // 1 ILoveTheNightlife - Alecia Bridges
   {110,  0, 128,  8,  4, 16, true},   // 2 LastNightADjSavedMyLife-Indeep
   {134,  0, 149,  8,  0, 16, true},   // 3 LayAllYourLoveOnMe-Abba
@@ -289,7 +289,7 @@ tuneInfo tuneLibDisco[30] = {
 
 
 // Genre 2, Reggae
-tuneInfo tuneLibReggae[29] = {
+tuneInfo tuneLibReggae[31] = {
   {170,  0, 132,  8,  0, 16, false},  // 1 RingTheAlarm-TenorSaw
   {102,  0, 118,  8,  0,  8, false},  // 2 FunkyKingston-Toots
   {164,  0, 164,  8,  0, 16, false},  // 3 UnderMeSlengTeng-WayneSmith
@@ -320,12 +320,12 @@ tuneInfo tuneLibReggae[29] = {
   {142,  0, 132,  4,  4,  8, true},   // 28 GanjaSmuggling-EekAMouse
   { 96,  0,  96,  4,  4,  8, false},  // 29 MurderSheWrote_ChakaDemus_Pliers
   {130,  0, 104,  8,  0,  8, false},  // 30 Party Start
-  { 95, 16,  64,  8,  0,  8, false},  // 30 My Yout (feat Irah)
+  { 95, 16,  64,  8,  0,  8, false},  // 31 My Yout (feat Irah)
 };
 
 //  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 //  Genre 3, Rock&Pop
-tuneInfo tuneLibRockAndPop[33] = {
+tuneInfo tuneLibRockAndPop[34] = {
   { 82,  0,  66,  8,  0,  4, true},  // 1 KidsInAmerica-KimWilde
   {130,  0, 120, 16,  0, 16, false}, // 2 CantGetYouOut-Kylie
   {112,  0, 102,  8,  0,  8, true},  // 3 ICantGoForThat-Hall&Oates
@@ -363,7 +363,7 @@ tuneInfo tuneLibRockAndPop[33] = {
 };
 
 //  Genre 4, Easy
-tuneInfo tuneLibEasy[33] = {
+tuneInfo tuneLibEasy[36] = {
   {122,  0, 134,  8,  2,  4, false},  // 1 BackToMyRoots - RichieHavens
   {104,  0,  59,  4,  0,  4, true},   // 2 Think - Aretha
   {100,  0, 182,  8,  4,  8, false},  // 3 As - Wonder
@@ -404,7 +404,7 @@ tuneInfo tuneLibEasy[33] = {
 
 //  bpm drp len mxIn mnOut mxOut bestEnd playOut 
 //  Genre 5, Dance
-tuneInfo tuneLibDance[41] = {
+tuneInfo tuneLibDance[49] = {
   {134, 30, 124,  8 , 0, 16, false},  // 1 A rinky dinky
   {110, 58,  88, 16,  0, 16, true},   // 2 Kelis - Trick Me
   {153,  0, 128, 16,  0, 16, false},  // 3 Dubbleedge - Lips to the floor
@@ -457,16 +457,16 @@ tuneInfo tuneLibDance[41] = {
 };
 
 //  bpm drp len mxIn mnOut mxOut bestEnd playOut */
-//  Genre 6, Drum&Bass
-tuneInfo tuneLibDrumAndBass[36] = {
+//  Genre 6, Drum&Bass 
+tuneInfo tuneLibDrumAndBass[37] = {
   {176,  0, 208, 32,  2, 32, false},  // 1 Girls-DJHypeAndPotential
   {176,  0, 192, 32,  2, 32, false},  // 2 DuppyMan-ChaseAndStatusCapleton
   {180,  0, 204, 32,  2, 32, false},  // 3 PullUp-ResonatGenLevy
   {176,  0, 196, 32,  2, 32, false},  // 4 GoldDigger-HighContrast
   {177,  0, 192, 32,  2, 32, false},  // 5 ShakeUrBody-ShyFX
   {174,  0, 144, 32,  2, 32, false},  // 6 KingOfTheBeats2016-Aphrodite
-  {180,  0, 184, 32,  2, 32, false},  // 7 LastNight-BennyPage
-  {176,  0, 208, 32,  2, 32, false},  // 8 TurnDownTheLights-BennyPage
+  {180,  0, 176, 32,  2, 32, false},  // 7 LastNight-BennyPage
+  {176,  0, 176, 32,  2, 32, false},  // 8 TurnDownTheLights-BennyPage
   {175,  0, 152, 32,  2, 32, false},  // 9 PassTheKutchie-BennyPage
   {175,  0, 184, 32,  2, 32, false},  // 10 PassMeTheRizla-Deekline
   {176,  0, 192, 32,  2, 32, false},  // 11 CryingOut-BennyPageSerialKillazMix
@@ -476,7 +476,7 @@ tuneInfo tuneLibDrumAndBass[36] = {
   {176,  0, 184, 32,  2, 32, false},  // 15 NoNoNo-SerialKillaz
   {175,  0, 176, 32,  2, 32, false},  // 16 RaggaTip-EdSolo
   {174,  0, 192, 32,  2, 32, false},  // 17 KissKissBangBang-HighContrast
-  {174,  0, 192, 32,  2, 32, false},  // 18 Deep-TC
+  {174,  0, 160, 32,  2, 32, false},  // 18 Deep-TC
   {177,  0, 132, 24,  2, 32, false},  // 19 GoldDust-ShyFXMix
   {177,  0, 184, 32,  2, 32, false},  // 20 BlazingFire-BennyPage
   {175,  0, 176, 32,  2, 32, false},  // 21 HitTheRoadJack-DeeklineEdSoloGala
@@ -495,12 +495,12 @@ tuneInfo tuneLibDrumAndBass[36] = {
   {178,  0, 176, 16,  2, 32, false},  // 34 Jump+Move+Rock-BennyPageWrongtom
   {176,  0, 160, 16,  2, 32, false},  // 35 Solar_Metrik
   {176,  0, 144, 16,  2, 32, false},  // 36 Fire-Hamilton
-  {172,  0, 152  , 32,  2, 32, false},  // 36 NastySporMix-Prodigy
+  {172,  0, 152, 32,  2, 32, false},  // 37 NastySporMix-Prodigy
 };
 
 //  bpm drp len mxIn mnOut mxOut bestEnd playOut */
 // Genre 7, HipHop
-tuneInfo tuneLibHipHop[30] = {
+tuneInfo tuneLibHipHop[32] = {
   {101,  0,  80,  4,  0, 16, false},  //1 Lets get ill
   { 90,  0, 108,  4,  0, 16, false},  //2 No Diggidy
   { 97,  0,  66,  8,  4, 16, true},   //3 ShimmyShimmyYa-ODB
